@@ -95,10 +95,9 @@
                     <a href="https://github.com/KostadinDev/gonext" target="_blank" class="icon brands fa-github">
                         <span class="label">Github</span>
                     </a>&nbsp;&nbsp;
-                    <a href="https://github.com/KostadinDev/gonext-ml" target="_blank" class="icon brands fa-github">
+                    <!-- <a href="https://github.com/KostadinDev/gonext-ml" target="_blank" class="icon brands fa-github">
                         <span class="label">Github</span>
-                    </a>&nbsp;&nbsp;
-                    <!-- <a href="https://gonext.lol" style="margin-left: 10px;">https://gonext.lol</a> -->
+                    </a>&nbsp;&nbsp; -->
                 </h3>
                 <p>
                     An AI-powered analytics tool for League of Legends that provides real-time, personalized strategies, matchups, synergies, and builds. Utilizing the Riot API, it gathers live game data, including insights on both allied and enemy players. This information is then processed by advanced language models to deliver tailored, game-specific, and personalized guidance to players.
@@ -224,51 +223,62 @@
     <script src="./static/assets/js/breakpoints.min.js"></script>
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
-    <script>
-      // On page load, set the initial styles for an open chatbot panel.
-window.addEventListener("DOMContentLoaded", function() {
-  var chatbot = document.getElementById('chatbot-container');
-  var main = document.getElementById('main');
-  var toggle = document.getElementById('chatbot-toggle');
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+    var chatbot = document.getElementById('chatbot-container');
+    var main = document.getElementById('main');
+    var toggle = document.getElementById('chatbot-toggle');
 
-  // Check if we are on a mobile device (adjust the breakpoint as needed)
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    // On mobile: keep the chatbot off by default.
-    chatbot.classList.remove('expanded');
-    // main.style.width = "calc(100% - 30%)"; // full width without the chatbot panel
-    toggle.style.right = "0"; // button stays at the far right
-    toggle.textContent = "Open";
-  } else {
-    // On desktop: chatbot is on (expanded) by default.
-    chatbot.classList.add('expanded');
-    main.style.width = "calc(100% - 30% - 320px)";
-    toggle.style.right = "320px"; // button moves to the left with the panel
-    toggle.textContent = "Close";
-  }
-});
+    // Retrieve toggle state from local storage. Possible values: "open" or "closed".
+    var toggleState = localStorage.getItem('chatbotToggleState');
 
-      // Toggle the chatbot panel and slide the toggle button with it.
-      // Also update the button text depending on the state.
-      document.getElementById('chatbot-toggle').addEventListener('click', function(){
-        var chatbot = document.getElementById('chatbot-container');
-        var main = document.getElementById('main');
-        var toggle = document.getElementById('chatbot-toggle');
-        if(chatbot.classList.contains('expanded')) {
-          chatbot.classList.remove('expanded');
-          if (window.matchMedia("(max-width: 768px)").matches) {
-            main.style.width = "calc(100%)"; // revert to original width
-          } else {
-            main.style.width = "calc(100% - 30%)"; // revert to original width
-          }
-          toggle.style.right = "0"; // button back to far right
-          toggle.textContent = "Open";
-        } else {
-          chatbot.classList.add('expanded');
-          main.style.width = "calc(100% - 30% - 320px)"; // shrink main content accordingly
-          toggle.style.right = "320px"; // button slides to left with panel
-          toggle.textContent = "Close";
-        }
-      });
-    </script>
+    // If there's no saved state, set default based on device size.
+    if (toggleState === null) {
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        toggleState = "closed";
+      } else {
+        toggleState = "open";
+      }
+    }
+
+    // Set initial state based on toggleState.
+    if (toggleState === "open") {
+      chatbot.classList.add('expanded');
+      main.style.width = "calc(100% - 30% - 320px)";
+      toggle.style.right = "320px";
+      toggle.textContent = "Close";
+    } else {
+      chatbot.classList.remove('expanded');
+      main.style.width = "calc(100% - 30%)";
+      toggle.style.right = "0";
+      toggle.textContent = "Open";
+    }
+  });
+
+  // Toggle the chatbot panel and update local storage accordingly.
+  document.getElementById('chatbot-toggle').addEventListener('click', function() {
+    var chatbot = document.getElementById('chatbot-container');
+    var main = document.getElementById('main');
+    var toggle = document.getElementById('chatbot-toggle');
+
+    if (chatbot.classList.contains('expanded')) {
+      chatbot.classList.remove('expanded');
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        main.style.width = "calc(100%)";
+      } else {
+        main.style.width = "calc(100% - 30%)";
+      }
+      toggle.style.right = "0";
+      toggle.textContent = "Open";
+      localStorage.setItem('chatbotToggleState', 'closed');
+    } else {
+      chatbot.classList.add('expanded');
+      main.style.width = "calc(100% - 30% - 320px)";
+      toggle.style.right = "320px";
+      toggle.textContent = "Close";
+      localStorage.setItem('chatbotToggleState', 'open');
+    }
+  });
+</script>
   </body>
 </html>
