@@ -253,12 +253,16 @@ window.addEventListener("DOMContentLoaded", function() {
         var toggle = document.getElementById('chatbot-toggle');
         if(chatbot.classList.contains('expanded')) {
           chatbot.classList.remove('expanded');
-          main.style.width = "calc(100% - 35%)"; // revert to original width
+          if (window.matchMedia("(max-width: 768px)").matches) {
+            main.style.width = "calc(100%)"; // revert to original width
+          } else {
+            main.style.width = "calc(100% - 30%)"; // revert to original width
+          }
           toggle.style.right = "0"; // button back to far right
           toggle.textContent = "Open";
         } else {
           chatbot.classList.add('expanded');
-          main.style.width = "calc(100% - 35% - 320px)"; // shrink main content accordingly
+          main.style.width = "calc(100% - 30% - 320px)"; // shrink main content accordingly
           toggle.style.right = "320px"; // button slides to left with panel
           toggle.textContent = "Close";
         }
