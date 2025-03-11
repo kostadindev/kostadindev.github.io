@@ -1,51 +1,86 @@
 <!DOCTYPE HTML>
-<!--
-	Strata by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-<head>
+  <head>
     <title>Home</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="./static/assets/css/main.css"/>
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
-</head>
-<body class="is-preload">
-
-<!-- Header -->
-<header id="header">
-    <div class="inner">
+    <!-- Extra styles for chatbot and transition -->
+    <style>
+      /* Smooth transition for the main content width */
+      #main {
+        transition: width 0.3s ease;
+      }
+      /* Chatbot container: hidden by default (width 0), fixed to the right */
+      #chatbot-container {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        z-index: 1000;
+      }
+      /* When expanded, the chatbot container becomes 320px wide */
+      #chatbot-container.expanded {
+        width: 320px;
+      }
+      /* Iframe fills the chatbot container */
+      #chatbot-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      /* Toggle button: fixed on the right edge and slides with the panel */
+      #chatbot-toggle {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1001;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        transition: right 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
         <a href="#" class="image avatar"><img src="./static/images/headshot.jpg" alt=""/></a>
         <span style="text-align: center;">
-            <h1><strong>Kostadin Devedzhiev</strong></h1>
-            <i><h5>kostadin.g.devedzhiev@gmail.com</h5></i>
-            <span>Software Engineer @ Stellar Cyber</span>
-            <br>
-            <span>NLP for Human-Inspired AI</span>
-            <h6>
-                <a href="./static/documents/cv.pdf" target="_blank">CV</a>,
-                <a href="./static/documents/sbu_transcript.pdf" target="_blank">transcript</a>
-            </h6>
+          <h1><strong>Kostadin Devedzhiev</strong></h1>
+          <i><h5>kostadin.g.devedzhiev@gmail.com</h5></i>
+          <span>Software Engineer @ Stellar Cyber</span>
+          <br>
+          <span>NLP for Human-Inspired AI</span>
+          <h6>
+            <a href="./static/documents/cv.pdf" target="_blank">CV</a>,
+            <a href="./static/documents/sbu_transcript.pdf" target="_blank">transcript</a>
+          </h6>
         </span>
-    </div>
-</header>
+      </div>
+    </header>
 
-<!-- Main -->
-<div id="main">
-
-    <!-- Interests -->
-    <section id="one">
+    <!-- Main content area -->
+    <div id="main">
+      <!-- Interests Section -->
+      <section id="one">
         <header class="major">
-            <h2>Interests</h2>
+          <h2>Interests</h2>
         </header>
         <span>
-            Software Engineer specializing in Natural Language Processing and User Interface Design, with a passion for developing intelligent interactive systems. Dedicated to creating human-inspired AI and enhancing human-machine interaction through language, speech, vision, and innovative interfaces.
+          Software Engineer specializing in Natural Language Processing and User Interface Design, with a passion for developing intelligent interactive systems. Dedicated to creating human-inspired AI and enhancing human-machine interaction through language, speech, vision, and innovative interfaces.
         </span>
-    </section>
+      </section>
 
-    <!-- Projects -->
+        <!-- Projects -->
     <section id="two">
         <h2>Projects</h2>
         <div class="row">
@@ -147,30 +182,37 @@
                 </a>
             </article>
         </div>
-    </section>
+      </section>
 
-    <!-- Footer -->
-    <footer id="footer">
+      <!-- Footer -->
+      <footer id="footer">
         <div class="inner">
-            <ul class="icons">
-                <li>
-                    <a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin">
-                        <span class="label">LinkedIn</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/KostadinDev" class="icon brands fa-github">
-                        <span class="label">Github</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0?si=a22c66e820ea4ed8" class="icon brands alt fa-spotify">
-                        <span class="label">Spotify</span>
-                    </a>
-                </li>
-            </ul>
+          <ul class="icons">
+            <li>
+              <a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin">
+                <span class="label">LinkedIn</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/KostadinDev" class="icon brands fa-github">
+                <span class="label">Github</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0?si=a22c66e820ea4ed8" class="icon brands alt fa-spotify">
+                <span class="label">Spotify</span>
+              </a>
+            </li>
+          </ul>
         </div>
-    </footer>
+      </footer>
+    </div>
+
+    <!-- Chatbot container and toggle button (toggle is open by default) -->
+    <div id="chatbot-container" class="expanded">
+      <iframe id="chatbot-iframe" src="https://gonext.lol"></iframe>
+    </div>
+    <button id="chatbot-toggle">Close</button>
 
     <!-- Scripts -->
     <script src="./static/assets/js/jquery.min.js"></script>
@@ -179,6 +221,36 @@
     <script src="./static/assets/js/breakpoints.min.js"></script>
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
-</div>
-</body>
+    <script>
+      // On page load, set the initial styles for an open chatbot panel.
+      window.addEventListener("DOMContentLoaded", function() {
+        var chatbot = document.getElementById('chatbot-container');
+        var main = document.getElementById('main');
+        var toggle = document.getElementById('chatbot-toggle');
+        // Since the chatbot is open by default, adjust the main content width and toggle button position/text.
+        main.style.width = "calc(100% - 35% - 320px)";
+        toggle.style.right = "320px";
+        toggle.textContent = "Close";
+      });
+
+      // Toggle the chatbot panel and slide the toggle button with it.
+      // Also update the button text depending on the state.
+      document.getElementById('chatbot-toggle').addEventListener('click', function(){
+        var chatbot = document.getElementById('chatbot-container');
+        var main = document.getElementById('main');
+        var toggle = document.getElementById('chatbot-toggle');
+        if(chatbot.classList.contains('expanded')) {
+          chatbot.classList.remove('expanded');
+          main.style.width = "calc(100% - 35%)"; // revert to original width
+          toggle.style.right = "0"; // button back to far right
+          toggle.textContent = "Open";
+        } else {
+          chatbot.classList.add('expanded');
+          main.style.width = "calc(100% - 35% - 320px)"; // shrink main content accordingly
+          toggle.style.right = "320px"; // button slides to left with panel
+          toggle.textContent = "Close";
+        }
+      });
+    </script>
+  </body>
 </html>
