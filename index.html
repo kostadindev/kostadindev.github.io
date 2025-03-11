@@ -233,13 +233,13 @@ window.addEventListener("DOMContentLoaded", function() {
   if (window.matchMedia("(max-width: 768px)").matches) {
     // On mobile: keep the chatbot off by default.
     chatbot.classList.remove('expanded');
-    main.style.width = "calc(100% - 35%)"; // full width without the chatbot panel
+    // main.style.width = "calc(100% - 30%)"; // full width without the chatbot panel
     toggle.style.right = "0"; // button stays at the far right
     toggle.textContent = "Open";
   } else {
     // On desktop: chatbot is on (expanded) by default.
     chatbot.classList.add('expanded');
-    main.style.width = "calc(100% - 35% - 320px)";
+    main.style.width = "calc(100% - 30% - 320px)";
     toggle.style.right = "320px"; // button moves to the left with the panel
     toggle.textContent = "Close";
   }

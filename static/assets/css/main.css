@@ -2693,7 +2693,7 @@ input, select, textarea {
     width: calc(100% - 30%);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     #main {
         max-width: 54em;
     }
