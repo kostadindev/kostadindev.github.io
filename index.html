@@ -47,6 +47,35 @@
         cursor: pointer;
         transition: right 0.3s ease;
       }
+
+      /* #chatbot-toggle {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+  background: #49bf9d; /* linear-gradient(135deg, #6a11cb 0%, #49bf9d 100%); */
+  color: #fff;
+  border: none;
+  border-radius: 50px 0 0 50px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  /* transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; */
+}
+
+#chatbot-toggle:hover {
+  background: #49bf9d;
+  transform: translateY(-50%) scale(1.05);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+#chatbot-toggle:active {
+  transform: translateY(-50%) scale(0.98);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+} */
     </style>
   </head>
   <body class="is-preload">
@@ -223,15 +252,26 @@
     <script src="./static/assets/js/main.js"></script>
     <script>
       // On page load, set the initial styles for an open chatbot panel.
-      window.addEventListener("DOMContentLoaded", function() {
-        var chatbot = document.getElementById('chatbot-container');
-        var main = document.getElementById('main');
-        var toggle = document.getElementById('chatbot-toggle');
-        // Since the chatbot is open by default, adjust the main content width and toggle button position/text.
-        main.style.width = "calc(100% - 35% - 320px)";
-        toggle.style.right = "320px";
-        toggle.textContent = "Close";
-      });
+window.addEventListener("DOMContentLoaded", function() {
+  var chatbot = document.getElementById('chatbot-container');
+  var main = document.getElementById('main');
+  var toggle = document.getElementById('chatbot-toggle');
+
+  // Check if we are on a mobile device (adjust the breakpoint as needed)
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    // On mobile: keep the chatbot off by default.
+    chatbot.classList.remove('expanded');
+    main.style.width = "calc(100% - 35%)"; // full width without the chatbot panel
+    toggle.style.right = "0"; // button stays at the far right
+    toggle.textContent = "Open";
+  } else {
+    // On desktop: chatbot is on (expanded) by default.
+    chatbot.classList.add('expanded');
+    main.style.width = "calc(100% - 35% - 320px)";
+    toggle.style.right = "320px"; // button moves to the left with the panel
+    toggle.textContent = "Close";
+  }
+});
 
       // Toggle the chatbot panel and slide the toggle button with it.
       // Also update the button text depending on the state.
