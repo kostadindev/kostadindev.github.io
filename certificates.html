@@ -13,6 +13,16 @@
       #chatbot-container.expanded { width: 320px; }
       #chatbot-iframe { width: 100%; height: 100%; border: none; }
       #chatbot-toggle { position: fixed; right: 0; top: 50%; transform: translateY(-50%); z-index: 500; background-color: #333; color: #fff; border: none; padding: 10px; cursor: pointer; transition: right 0.3s ease; }
+      
+      /* Optional additional styling for education items */
+      .education-item {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .education-item img {
+        display: block;
+        margin: 0 auto;
+      }
     </style>
   </head>
   <body class="is-preload">
@@ -27,32 +37,62 @@
           <i><h5>kostadin.devedzhiev@columbia.edu</h5></i>
           <span>Software Engineer @ Stellar Cyber</span>
           <br>
-          <span>NLP for Human-Inspired AI</span>
+          <span>Human-inspired AI | NLP | UI</span>
           <h6>
-            <a href="./static/documents/cv.pdf" target="_blank">CV</a>,
-            <a href="./static/documents/sbu_transcript.pdf" target="_blank">Transcript</a>
+            <a href="./static/documents/cv.pdf" target="_blank">Curriculum Vitae</a>
           </h6>
           <nav id="main-nav">
             <div class="nav-link"><a href="index.html">Home</a></div>
             <div class="nav-link"><a href="projects.html">Projects</a></div>
             <div class="nav-link"><a href="publications.html">Publications</a></div>
-            <div class="nav-link"><a href="certificates.html">Certificates</a></div>
+            <div class="nav-link"><a href="certificates.html">Education</a></div>
           </nav>
         </span>
       </div>
     </header>
 
     <!-- Main content area -->
-    <div id="main">
-      <!-- Certificates Section -->
-      <section id="certificates">
-        <h2>Certificates</h2>
+    <div id="main">      
+      <!-- Education Section -->
+      <section id="education">
+        <h2>Education</h2>
         <div class="row">
-          <article class="col-12 work-item">
-            <p>Certificates will be listed here. (Add certificate details as needed.)</p>
+          <article class="col-6 education-item">
+            <img src="https://www.bestchoiceschools.com/wp-content/uploads/2018/11/columbia-university.png" alt="Columbia University" style="width:auto; height:150px; margin-bottom:10px;">
+            <h5>Master of Science in Computer Science</h5>
+            <h6>Natural Language Processing Track</h6>
+            <h6>Expected Graduation: Dec 2026</h6>
+          </article>
+          <article class="col-6 education-item">
+            <img src="https://images.credly.com/images/24977e6c-4f52-4579-b04f-0a39ae6cb39e/blob.png" alt="Stony Brook University" style="width:auto; height:150px; margin-bottom:10px;">
+            <h5>Bachelor of Science in Computer Science and Applied Mathematics</h5>
+             <h6>Computer Science Honors Program</h6>
+            <h6>Artificial Intelligence & Data Science Specialzation</h6>
+            <h6>Summa Cum Laude</h6>
           </article>
         </div>
       </section>
+<section id="certificates">
+  <h2>Certificates</h2>
+  <!-- New row with 3 certificates -->
+  <div class="row">
+    <article class="col-4 certificate-item">
+      <img src="https://images.credly.com/size/340x340/images/954a697e-66c0-45c3-8681-ced968dfa73e/blob" alt="Certificate 1" style="width:auto; height:150px; margin-bottom:10px;">
+    </article>
+    <article class="col-4 certificate-item">
+      <img src="https://images.credly.com/size/340x340/images/91de936a-1322-446d-9ea6-949d78c57428/image.png" alt="Certificate 2" style="width:auto; height:150px; margin-bottom:10px;">
+    </article>
+    <article class="col-4 certificate-item">
+      <img src="https://images.credly.com/size/340x340/images/56c60565-e945-4bcd-b8a6-9b2f43e1b0d9/Coursera_20Machine_20Learning_20with_20Python_20V2.png" alt="Certificate 3" style="width:auto; height:150px; margin-bottom:10px;">
+    </article>
+  </div>
+  <!-- Existing row with the link -->
+  <div class="row">
+    <article class="col-12 work-item">
+      <a href="https://www.credly.com/users/kostadin-devedzhiev.e059b079" target="_blank">View all certificates on Credly</a>
+    </article>
+  </div>
+</section>
 
       <!-- Footer -->
       <footer id="footer">

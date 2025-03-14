@@ -3255,3 +3255,23 @@ input, select, textarea {
   font-size: 0.9em; /* Matches the project paragraph size */
   margin-bottom: 0.5em; /* Adjust spacing as needed */
 }
+
+/* Remove extra line spacing and enforce consistent font for education texts */
+.education-item h5,
+.education-item h6 {
+  margin: 0.2em;            /* Removes extra top and bottom spacing */
+  padding: 0;
+  line-height: 1.2;     /* Adjusts the space between lines */
+  font-family: "Source Sans Pro", Helvetica, sans-serif; /* Ensures a consistent font */
+}
+
+@media screen and (max-width: 768px) {
+  /* Ensure rows wrap if they haven't already */
+  .row {
+    flex-wrap: wrap;
+  }
+  /* Make all column classes take full width on small screens */
+  .row > [class^="col-"] {
+    width: 100%;
+  }
+}
