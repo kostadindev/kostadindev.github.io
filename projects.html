@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Home</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="./static/assets/css/main.css"/>
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
+    <!-- Extra styles for chatbot and transition -->
+    <style>
+      /* Smooth transition for the main content width */
+      #main {
+        transition: width 0.3s ease;
+      }
+      /* Chatbot container: hidden by default (width 0), fixed to the right */
+      #chatbot-container {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        z-index: 1000;
+      }
+      /* When expanded, the chatbot container becomes 320px wide */
+      #chatbot-container.expanded {
+        width: 320px;
+      }
+      /* Iframe fills the chatbot container */
+      #chatbot-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      /* Toggle button: fixed on the right edge and slides with the panel */
+      #chatbot-toggle {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 500;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        transition: right 0.3s ease;
+      }
+
+    </style>
+  </head>
+  <body class="is-preload">
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <a href="index.html" class="image avatar">
+          <img src="./static/images/headshot.jpg" alt=""/>
+        </a>
+        <span style="text-align: center;">
+          <h1><strong>Kostadin Devedzhiev</strong></h1>
+          <i><h5>kostadin.devedzhiev@columbia.edu</h5></i>
+          <span>Software Engineer @ Stellar Cyber</span>
+          <br>
+          <span>NLP for Human-Inspired AI</span>
+          <h6>
+            <a href="./static/documents/cv.pdf" target="_blank">CV</a>,
+            <a href="./static/documents/sbu_transcript.pdf" target="_blank">Transcript</a>
+          </h6>
+          <nav id="main-nav">
+            <div class="nav-link"><a href="index.html">Home</a></div>
+            <div class="nav-link"><a href="projects.html">Projects</a></div>
+            <div class="nav-link"><a href="publications.html">Publications</a></div>
+            <div class="nav-link"><a href="certificates.html">Certificates</a></div>
+          </nav>
+        </span>
+      </div>
+    </header>
+
+    <!-- Main content area -->
+    <div id="main">
+
+
+        <!-- Projects -->
+    <section id="two">
+        <h2>Projects</h2>
+        <div class="row">
+            <!-- First 3 projects: full width -->
+            <!-- Project 1: GONEXT -->
+            <article class="col-12 work-item">
+                <h3>
+                    <a href="https://gonext.lol">GONEXT.lol</a> &nbsp;&nbsp;
+                                        <a href="https://gonext.lol" target="_blank" class="fa fa-link">
+                    </a>&nbsp;&nbsp;
+                    <a href="https://github.com/KostadinDev/gonext" target="_blank" class="icon brands fa-github">
+                        <span class="label">Github</span>
+                    </a>&nbsp;&nbsp;
+                    <!-- <a href="https://github.com/KostadinDev/gonext-ml" target="_blank" class="icon brands fa-github">
+                        <span class="label">Github</span>
+                    </a>&nbsp;&nbsp; -->
+                </h3>
+                <p>
+                    An AI-powered analytics tool for League of Legends that provides real-time, personalized strategies, matchups, synergies, and builds. Utilizing the Riot API, it gathers live game data, including insights on both allied and enemy players. This information is then processed by advanced language models to deliver tailored, game-specific, and personalized guidance to players.
+                </p>
+                <a href="./static/images/gonext-cover-chat.png" class="image fit thumb">
+                    <img src="./static/images/gonext-cover-chat.png" alt="GONEXT screenshot"/>
+                </a>
+            </article>
+
+            <!-- Project 2: Recursive QA -->
+            <article class="col-12 work-item">
+                <h3>
+                    Recursive QA &nbsp;&nbsp;
+                    <a href="https://github.com/KostadinDev/Recursive-QA" target="_blank" class="icon brands fa-github">
+                        <span class="label">Github</span>
+                    </a>
+                </h3>
+                <p>
+                    NLP annotation framework that replaces traditional labeling methods with a question-answering approach. By leveraging the constituency parse tree of a sentence, it guides the annotator through selecting from generated question-answer pairs. The system also integrates features like visualizations, user management, and history tracking to streamline annotation quality control.
+                </p>
+                <a href="./static/images/recursiveqa-cover.jpg" class="image fit thumb">
+                    <img src="./static/images/recursiveqa-cover.jpg" alt="Recursive QA screenshot"/>
+                </a>
+            </article>
+
+            <!-- Project 3: I Want to Redistrict -->
+            <article class="col-12 work-item">
+                <h3>I Want to Redistrict</h3>
+                <p>
+                    A political science tool designed to create and analyze state districting plans using statistical measures. Its primary goal is to expose gerrymandering and generate fair districting plans under human oversight, leveraging data from the 2020 Census. The application is powered by Stony Brook University's powerful SeaWulf supercomputer.
+                </p>
+                <a href="./static/images/redistrict.png" class="image fit thumb">
+                    <img src="./static/images/redistrict.png" alt="Redistrict tool screenshot"/>
+                </a>
+            </article>
+
+            <!-- Next 3 projects: half width -->
+            <!-- Project 4: Deep Gestures -->
+            <article class="col-12 work-item">
+                <h3>
+                    Deep Gestures &nbsp;&nbsp;
+                    <a href="https://github.com/KostadinDev/deep-gestures" target="_blank" class="icon brands fa-github">
+                        <span class="label">Github</span>
+                    </a>
+                </h3>
+                <p>
+                    A complete pipeline from data collection and preparation to model training, optimization, and deployment, designed to implement an optimized gesture recognition CNN on an Arduino Nano 33 BLE Sense microcontroller, utilizing its 3-axis accelerometer.
+                </p>
+                <a href="./static/images/deep-gestures-image.jpg" class="image fit thumb">
+                    <img src="./static/images/deep-gestures-image.jpg" alt="Deep Gestures screenshot"/>
+                </a>
+            </article>
+
+            <!-- Project 5: Symbiotic Learning -->
+            <article class="col-12 work-item">
+                <h3>Symbiotic Learning</h3>
+                <p>
+                    A human-in-the-loop image annotation tool designed to detect and classify invasive species in aerial drone images, playing a vital role in preserving Hawaii's ecosystems. As the tool's accuracy improves during real-time training, it progressively provides more suggestions to assist the annotator.
+                </p>
+                <a href="./static/images/interactive-annotator.png" class="image fit thumb">
+                    <img src="./static/images/interactive-annotator-copy.png" alt="Symbiotic Learning screenshot"/>
+                </a>
+            </article>
+
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+              <a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin">
+                <span class="label">LinkedIn</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/KostadinDev" class="icon brands fa-github">
+                <span class="label">Github</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0?si=a22c66e820ea4ed8" class="icon brands alt fa-spotify">
+                <span class="label">Spotify</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Chatbot container and toggle button (toggle is open by default) -->
+    <!-- <div id="chatbot-container" class="expanded">
+      <iframe id="chatbot-iframe" src="http://localhost:5173"></iframe>
+    </div> -->
+    <!-- <button id="chatbot-toggle">Close</button> -->
+
+    <!-- Scripts -->
+    <script src="./static/assets/js/jquery.min.js"></script>
+    <script src="./static/assets/js/jquery.poptrox.min.js"></script>
+    <script src="./static/assets/js/browser.min.js"></script>
+    <script src="./static/assets/js/breakpoints.min.js"></script>
+    <script src="./static/assets/js/util.js"></script>
+    <script src="./static/assets/js/main.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", function() {
+    var chatbot = document.getElementById('chatbot-container');
+    var main = document.getElementById('main');
+    var toggle = document.getElementById('chatbot-toggle');
+
+    // Retrieve toggle state from local storage. Possible values: "open" or "closed".
+    var toggleState = localStorage.getItem('chatbotToggleState');
+
+    // If there's no saved state, set default based on device size.
+    if (toggleState === null) {
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        toggleState = "closed";
+      } else {
+        toggleState = "open";
+      }
+    }
+
+    // Set initial state based on toggleState.
+    if (toggleState === "open") {
+      chatbot.classList.add('expanded');
+      main.style.width = "calc(100% - 30% - 320px)";
+      toggle.style.right = "320px";
+      toggle.textContent = "Close";
+    } else {
+      chatbot.classList.remove('expanded');
+      main.style.width = "calc(100% - 30%)";
+      toggle.style.right = "0";
+      toggle.textContent = "Open";
+    }
+  });
+
+  // Toggle the chatbot panel and update local storage accordingly.
+  document.getElementById('chatbot-toggle').addEventListener('click', function() {
+    var chatbot = document.getElementById('chatbot-container');
+    var main = document.getElementById('main');
+    var toggle = document.getElementById('chatbot-toggle');
+
+    if (chatbot.classList.contains('expanded')) {
+      chatbot.classList.remove('expanded');
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        main.style.width = "calc(100%)";
+      } else {
+        main.style.width = "calc(100% - 30%)";
+      }
+      toggle.style.right = "0";
+      toggle.textContent = "Open";
+      localStorage.setItem('chatbotToggleState', 'closed');
+    } else {
+      chatbot.classList.add('expanded');
+      main.style.width = "calc(100% - 30% - 320px)";
+      toggle.style.right = "320px";
+      toggle.textContent = "Close";
+      localStorage.setItem('chatbotToggleState', 'open');
+    }
+  });
+</script>
+  </body>
+</html>
