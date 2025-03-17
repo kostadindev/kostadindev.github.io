@@ -3275,3 +3275,8 @@ input, select, textarea {
     width: 100%;
   }
 }
+
+.transcript-link {
+  color: #e89a3c; /* Primary color */
+  text-decoration: underline;
+}

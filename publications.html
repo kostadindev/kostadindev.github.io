@@ -60,7 +60,7 @@
         <span style="text-align: center;">
           <h1><strong>Kostadin Devedzhiev</strong></h1>
           <i><h5>kostadin.devedzhiev@columbia.edu</h5></i>
-          <span>Software Engineer @ Stellar Cyber</span>
+          <span>Software Engineer at Stellar Cyber</span>
           <br>
           <span>Human-inspired AI | NLP | UI</span>
           <h6>
@@ -78,8 +78,8 @@
 
     <!-- Main content area -->
     <div id="main">
-      <!-- Interests Section -->
-        <!-- Projects -->
+
+
     <section id="two">
         <h2>Publications</h2>
         <div class="row">
@@ -201,5 +201,22 @@
     }
   });
 </script>
+
+<script>
+$(document).ready(function() {
+  $('.image.fit.thumb').poptrox({
+    onPopupOpen: function() {
+      // Disable pointer events on the chatbot container so clicks won't go to the iframe
+      $('#chatbot-container').css('pointer-events', 'none');
+    },
+    onPopupClose: function() {
+      // Re-enable pointer events when the lightbox closes
+      $('#chatbot-container').css('pointer-events', 'auto');
+    }
+  });
+});
+
+</script>
+
   </body>
 </html>
