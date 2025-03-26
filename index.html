@@ -47,24 +47,30 @@
         cursor: pointer;
         transition: right 0.3s ease;
       }
-
     </style>
   </head>
   <body class="is-preload">
     <!-- Header -->
     <header id="header">
       <div class="inner">
-        <a href="#" class="image avatar"><img src="./static/images/headshot.jpg" alt=""/></a>
+        <a href="index.html" class="image avatar">
+          <img src="./static/images/headshot.jpg" alt=""/>
+        </a>
         <span style="text-align: center;">
           <h1><strong>Kostadin Devedzhiev</strong></h1>
-          <i><h5>kostadin.g.devedzhiev@gmail.com</h5></i>
-          <span>Software Engineer @ Stellar Cyber</span>
+          <i><h5>kostadin.g.devedzhiev@gmail.edu</h5></i>
+          <span>Software Engineer at Stellar Cyber</span>
           <br>
-          <span>NLP for Human-Inspired AI</span>
+          <span>Human-inspired AI | NLP | UI</span>
           <h6>
-            <a href="./static/documents/cv.pdf" target="_blank">CV</a>,
-            <a href="./static/documents/sbu_transcript.pdf" target="_blank">transcript</a>
+            <a href="./static/documents/cv.pdf" target="_blank">Curriculum Vitae</a>
           </h6>
+          <nav id="main-nav">
+            <div class="nav-link"><a href="index.html">Home</a></div>
+            <div class="nav-link"><a href="projects.html">Projects</a></div>
+            <div class="nav-link"><a href="publications.html">Publications</a></div>
+            <div class="nav-link"><a href="certificates.html">Education</a></div>
+          </nav>
         </span>
       </div>
     </header>
@@ -72,117 +78,47 @@
     <!-- Main content area -->
     <div id="main">
       <!-- Interests Section -->
-      <section id="one">
-        <header class="major">
-          <h2>Interests</h2>
-        </header>
-        <span>
-          Software Engineer specializing in Natural Language Processing and User Interface Design, with a passion for developing intelligent interactive systems. Dedicated to creating human-inspired AI and enhancing human-machine interaction through language, speech, vision, and innovative interfaces.
-        </span>
-      </section>
+    <section id="one">
+      <header class="major">
+        <h2>Bio</h2>
+      </header>
+      <div>
+        <p>
+          I am a software engineer passionate about human-inspired artificial intelligence, specializing in natural language processing (NLP) and user interface (UI) design. My work centers around creating interactive experiences powered by intelligent systems.
+        </p>
+        <p>
+          Currently, I am a software engineer at Stellar Cyber where I work on AI-powered interfaces for threat hunting and autonomous SOC. Additionally, I'm developing GONEXT, a GenAI tool that delivers personalized, game-specific analytics for League of Legends.
+        </p>
+        <p>
+          This fall, I will begin my Master of Philosophy in Human-Inspired Artificial Intelligence at the University of Cambridge. I hold a bachelor's degree from Stony Brook University, where I double-majored in Computer Science and Applied Mathematics &amp; Statistics.
+        </p>
+      </div>
+    </section>
 
-        <!-- Projects -->
-    <section id="two">
-        <h2>Projects</h2>
+      <!-- Projects Section -->
+      <section id="two">
+        <h2>Current Work</h2>
         <div class="row">
-            <!-- First 3 projects: full width -->
-            <!-- Project 1: GONEXT -->
-            <article class="col-12 work-item">
-                <h3>
-                    <a href="https://gonext.lol">GONEXT.lol</a> &nbsp;&nbsp;
-                                        <a href="https://gonext.lol" target="_blank" class="fa fa-link">
-                    </a>&nbsp;&nbsp;
-                    <a href="https://github.com/KostadinDev/gonext" target="_blank" class="icon brands fa-github">
-                        <span class="label">Github</span>
-                    </a>&nbsp;&nbsp;
-                    <!-- <a href="https://github.com/KostadinDev/gonext-ml" target="_blank" class="icon brands fa-github">
-                        <span class="label">Github</span>
-                    </a>&nbsp;&nbsp; -->
-                </h3>
-                <p>
-                    An AI-powered analytics tool for League of Legends that provides real-time, personalized strategies, matchups, synergies, and builds. Utilizing the Riot API, it gathers live game data, including insights on both allied and enemy players. This information is then processed by advanced language models to deliver tailored, game-specific, and personalized guidance to players.
-                </p>
-                <a href="./static/images/gonext-cover-chat.png" class="image fit thumb">
-                    <img src="./static/images/gonext-cover-chat.png" alt="GONEXT screenshot"/>
-                </a>
-            </article>
-
-            <!-- Project 2: Recursive QA -->
-            <article class="col-12 work-item">
-                <h3>
-                    Recursive QA &nbsp;&nbsp;
-                    <a href="https://github.com/KostadinDev/Recursive-QA" target="_blank" class="icon brands fa-github">
-                        <span class="label">Github</span>
-                    </a>
-                </h3>
-                <p>
-                    NLP annotation framework that replaces traditional labeling methods with a question-answering approach. By leveraging the constituency parse tree of a sentence, it guides the annotator through selecting from generated question-answer pairs. The system also integrates features like visualizations, user management, and history tracking to streamline annotation quality control.
-                </p>
-                <a href="./static/images/recursiveqa-cover.jpg" class="image fit thumb">
-                    <img src="./static/images/recursiveqa-cover.jpg" alt="Recursive QA screenshot"/>
-                </a>
-            </article>
-
-            <!-- Project 3: I Want to Redistrict -->
-            <article class="col-12 work-item">
-                <h3>I Want to Redistrict</h3>
-                <p>
-                    A political science tool designed to create and analyze state districting plans using statistical measures. Its primary goal is to expose gerrymandering and generate fair districting plans under human oversight, leveraging data from the 2020 Census. The application is powered by Stony Brook University's powerful SeaWulf supercomputer.
-                </p>
-                <a href="./static/images/redistrict.png" class="image fit thumb">
-                    <img src="./static/images/redistrict.png" alt="Redistrict tool screenshot"/>
-                </a>
-            </article>
-
-            <!-- Next 3 projects: half width -->
-            <!-- Project 4: Deep Gestures -->
-            <article class="col-12 work-item">
-                <h3>
-                    Deep Gestures &nbsp;&nbsp;
-                    <a href="https://github.com/KostadinDev/deep-gestures" target="_blank" class="icon brands fa-github">
-                        <span class="label">Github</span>
-                    </a>
-                </h3>
-                <p>
-                    A complete pipeline from data collection and preparation to model training, optimization, and deployment, designed to implement an optimized gesture recognition CNN on an Arduino Nano 33 BLE Sense microcontroller, utilizing its 3-axis accelerometer.
-                </p>
-                <a href="./static/images/deep-gestures-image.jpg" class="image fit thumb">
-                    <img src="./static/images/deep-gestures-image.jpg" alt="Deep Gestures screenshot"/>
-                </a>
-            </article>
-
-            <!-- Project 5: Symbiotic Learning -->
-            <article class="col-12 work-item">
-                <h3>Symbiotic Learning</h3>
-                <p>
-                    A human-in-the-loop image annotation tool designed to detect and classify invasive species in aerial drone images, playing a vital role in preserving Hawaii's ecosystems. As the tool's accuracy improves during real-time training, it progressively provides more suggestions to assist the annotator.
-                </p>
-                <a href="./static/images/interactive-annotator.png" class="image fit thumb">
-                    <img src="./static/images/interactive-annotator-copy.png" alt="Symbiotic Learning screenshot"/>
-                </a>
-            </article>
-
-            <!-- Project 6: EMF in Ellipses -->
-            <article class="col-12 work-item">
-                <h3>
-                    EMF in Ellipses &nbsp;&nbsp;
-                    <a href="https://doi.org/1361-6404/ABB066" target="_blank" class="icon fa-file">
-                        <span class="label">PDF</span>
-                    </a>
-                </h3>
-                <p>
-                    A study of the motional EMF induced in elliptical conducting loops traversed by a magnetic field.
-                </p>
-                <a href="https://doi.org/1361-6404/ABB066">
-                    <p>
-                        P-M Binder, Kostadin G Devedzhiev, Alexandra T Runyan. (2020). Motional emf generated by squeezing an elliptical conducting loop.
-                        European Journal of Physics, European Physical Society. https://doi.org/1361-6404/ABB066
-                    </p>
-                </a>
-                <a href="./static/images/ellipses-white.png" class="image fit thumb">
-                    <img src="./static/images/ellipses-white.png" alt="EMF in Ellipses screenshot"/>
-                </a>
-            </article>
+          <!-- Project 1: GONEXT -->
+          <article class="col-12 work-item">
+            <h3>
+              <a href="https://gonext.lol">GONEXT.lol</a> &nbsp;&nbsp;
+              <a href="https://gonext.lol" target="_blank" class="fa fa-link" title="Live Page"></a>&nbsp;&nbsp;
+              <a href="https://github.com/KostadinDev/gonext" target="_blank" class="icon brands fa-github" title="GitHub">
+                <span class="label">Github</span>
+              </a>&nbsp;&nbsp;
+            </h3>
+            <p>
+              An AI-powered analytics tool for League of Legends that provides real-time, personalized strategies, matchups, synergies, and builds. Utilizing the Riot API, it gathers live game data, including insights on both allied and enemy players. This information is then processed by advanced language models to deliver tailored, game-specific, and personalized guidance to players.
+            </p>
+            <a href="./static/images/gonext-cover-chat.png" class="image fit thumb">
+              <img src="./static/images/gonext-cover-chat.png" alt="GONEXT screenshot"/>
+            </a>
+          </article>
+        </div>
+        <!-- See all projects link -->
+        <div style="text-align: center; margin-top: 1rem;">
+          <a href="projects.html">See all projects</a>
         </div>
       </section>
 
@@ -223,62 +159,46 @@
     <script src="./static/assets/js/breakpoints.min.js"></script>
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
-<script>
-  window.addEventListener("DOMContentLoaded", function() {
-    var chatbot = document.getElementById('chatbot-container');
-    var main = document.getElementById('main');
-    var toggle = document.getElementById('chatbot-toggle');
+    <script>
+      window.addEventListener("DOMContentLoaded", function() {
+        var chatbot = document.getElementById('chatbot-container');
+        var main = document.getElementById('main');
+        var toggle = document.getElementById('chatbot-toggle');
+        var toggleState = localStorage.getItem('chatbotToggleState');
+        if (toggleState === null) {
+          toggleState = window.matchMedia("(max-width: 768px)").matches ? "closed" : "open";
+        }
+        if (toggleState === "open") {
+          chatbot.classList.add('expanded');
+          main.style.width = "calc(100% - 30% - 320px)";
+          toggle.style.right = "320px";
+          toggle.textContent = "Close";
+        } else {
+          chatbot.classList.remove('expanded');
+          main.style.width = "calc(100% - 30%)";
+          toggle.style.right = "0";
+          toggle.textContent = "Open";
+        }
+      });
 
-    // Retrieve toggle state from local storage. Possible values: "open" or "closed".
-    var toggleState = localStorage.getItem('chatbotToggleState');
-
-    // If there's no saved state, set default based on device size.
-    if (toggleState === null) {
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        toggleState = "closed";
-      } else {
-        toggleState = "open";
-      }
-    }
-
-    // Set initial state based on toggleState.
-    if (toggleState === "open") {
-      chatbot.classList.add('expanded');
-      main.style.width = "calc(100% - 30% - 320px)";
-      toggle.style.right = "320px";
-      toggle.textContent = "Close";
-    } else {
-      chatbot.classList.remove('expanded');
-      main.style.width = "calc(100% - 30%)";
-      toggle.style.right = "0";
-      toggle.textContent = "Open";
-    }
-  });
-
-  // Toggle the chatbot panel and update local storage accordingly.
-  document.getElementById('chatbot-toggle').addEventListener('click', function() {
-    var chatbot = document.getElementById('chatbot-container');
-    var main = document.getElementById('main');
-    var toggle = document.getElementById('chatbot-toggle');
-
-    if (chatbot.classList.contains('expanded')) {
-      chatbot.classList.remove('expanded');
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        main.style.width = "calc(100%)";
-      } else {
-        main.style.width = "calc(100% - 30%)";
-      }
-      toggle.style.right = "0";
-      toggle.textContent = "Open";
-      localStorage.setItem('chatbotToggleState', 'closed');
-    } else {
-      chatbot.classList.add('expanded');
-      main.style.width = "calc(100% - 30% - 320px)";
-      toggle.style.right = "320px";
-      toggle.textContent = "Close";
-      localStorage.setItem('chatbotToggleState', 'open');
-    }
-  });
-</script>
+      document.getElementById('chatbot-toggle').addEventListener('click', function() {
+        var chatbot = document.getElementById('chatbot-container');
+        var main = document.getElementById('main');
+        var toggle = document.getElementById('chatbot-toggle');
+        if (chatbot.classList.contains('expanded')) {
+          chatbot.classList.remove('expanded');
+          main.style.width = window.matchMedia("(max-width: 768px)").matches ? "calc(100%)" : "calc(100% - 30%)";
+          toggle.style.right = "0";
+          toggle.textContent = "Open";
+          localStorage.setItem('chatbotToggleState', 'closed');
+        } else {
+          chatbot.classList.add('expanded');
+          main.style.width = "calc(100% - 30% - 320px)";
+          toggle.style.right = "320px";
+          toggle.textContent = "Close";
+          localStorage.setItem('chatbotToggleState', 'open');
+        }
+      });
+    </script>
   </body>
 </html>
