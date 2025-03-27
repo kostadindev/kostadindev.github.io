@@ -34,9 +34,18 @@
       ]
     }
     </script>
-
+</script>
+    <link rel="preload" as="image" href="./static/images/gonext-cover-chat.webp" />
+    <link rel="preload" as="image" href="./static/images/ghibli_profile.webp" />
+    <link rel="preload" as="image" href="./static/images/bg.webp" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="./static/assets/css/fontawesome-all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./static/assets/css/fontawesome-all.min.css"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/assets/css/main.css" />
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
+    
 
     <style>
       #main {
@@ -73,6 +82,11 @@
         cursor: pointer;
         transition: right 0.3s ease;
       }
+
+      .cv {
+        color: #e89a3c;
+        /* text-decoration: underline; */
+      }
     </style>
   </head>
   <body class="is-preload">
@@ -80,17 +94,15 @@
     <header id="header">
       <div class="inner">
         <a href="index.html" class="image avatar">
-          <img src="./static/images/ghibli_profile.webp" alt="Kostadin Devedzhiev Profile Picture" />
+          <img src="./static/images/ghibli_profile.webp" alt="Kostadin Devedzhiev Profile Picture" width="200" />
         </a>
         <h1><strong>Kostadin Devedzhiev</strong></h1>
         <p>
           <i>kostadin.g.devedzhiev@gmail.com</i><br />
-          Software Engineer at <a href="https://stellarcyber.ai" target="_blank">Stellar Cyber</a><br />
+          Software Engineer at Stellar Cyber<br />
           Human-Inspired AI | NLP | UI
         </p>
-        <h6>
-          <a href="./static/documents/cv.pdf" target="_blank">Curriculum Vitae</a>
-        </h6>
+        <a href="./static/documents/cv.pdf" class="cv" target="_blank" rel="noopener">Curriculum Vitae</a>
         <nav id="main-nav">
           <div class="nav-link"><a href="index.html">Home</a></div>
           <div class="nav-link"><a href="projects.html">Projects</a></div>
