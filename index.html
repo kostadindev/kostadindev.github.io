@@ -2,17 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Kostadin Devedzhiev | Software Engineer & AI Researcher</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Kostadin Devedzhiev | Software Engineer &amp; AI Researcher</title>
+    <!-- Removed user-scalable=no for accessibility -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Kostadin Devedzhiev is a software engineer focused on Human-Inspired AI, NLP, and UI. MPhil student at Cambridge, building tools like GONEXT." />
     <meta name="author" content="Kostadin Devedzhiev" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Twitter -->
-    <meta property="og:title" content="Kostadin Devedzhiev | Software Engineer & AI Researcher" />
+    <meta property="og:title" content="Kostadin Devedzhiev | Software Engineer &amp; AI Researcher" />
     <meta property="og:description" content="Explore Kostadin's projects, publications, and AI work at Stellar Cyber and Cambridge." />
-    <meta property="og:image" content="https://yourdomain.com/static/images/ghibli_profile.jpg" />
-    <meta property="og:url" content="https://yourdomain.com" />
+    <meta property="og:image" content="https://kostadindev.github.io/static/images/ghibli_profile.webp" />
+    <meta property="og:url" content="https:/kostadindev.github.io" />
     <meta name="twitter:card" content="summary_large_image" />
 
     <!-- Schema.org JSON-LD -->
@@ -22,7 +23,7 @@
       "@type": "Person",
       "name": "Kostadin Devedzhiev",
       "url": "https://yourdomain.com",
-      "image": "https://yourdomain.com/static/images/ghibli_profile.jpg",
+      "image": "https://yourdomain.com/static/images/ghibli_profile.webp",
       "jobTitle": "Software Engineer",
       "worksFor": {
         "@type": "Organization",
@@ -35,8 +36,15 @@
     }
     </script>
 
+    <!-- Preload the Largest Contentful Paint image -->
+    <link rel="preload" as="image" href="./static/images/gonext-cover-chat.webp" />
+        <link rel="preload" as="image" href="./static/images/ghibli_profile.webp" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,400&display=swap"
+  rel="stylesheet">
     <link rel="stylesheet" href="./static/assets/css/main.css" />
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
+    
 
     <style>
       #main {
@@ -80,17 +88,17 @@
     <header id="header">
       <div class="inner">
         <a href="index.html" class="image avatar">
-          <img src="./static/images/ghibli_profile.jpg" alt="Kostadin Devedzhiev Profile Picture" />
+          <img src="./static/images/ghibli_profile.webp" alt="Kostadin Devedzhiev Profile Picture" width="200" />
         </a>
         <h1><strong>Kostadin Devedzhiev</strong></h1>
         <p>
           <i>kostadin.g.devedzhiev@gmail.com</i><br />
-          Software Engineer at <a href="https://stellarcyber.ai" target="_blank">Stellar Cyber</a><br />
+          Software Engineer at <a href="https://stellarcyber.ai" target="_blank" rel="noopener">Stellar Cyber</a><br />
           Human-Inspired AI | NLP | UI
         </p>
-        <h6>
-          <a href="./static/documents/cv.pdf" target="_blank">Curriculum Vitae</a>
-        </h6>
+        <p>
+          <a href="./static/documents/cv.pdf" target="_blank" rel="noopener">Curriculum Vitae</a>
+        </p>
         <nav id="main-nav">
           <div class="nav-link"><a href="index.html">Home</a></div>
           <div class="nav-link"><a href="projects.html">Projects</a></div>
@@ -112,14 +120,14 @@
         </p>
         <p>
           I currently work at 
-          <a href="https://stellarcyber.ai" target="_blank">Stellar Cyber</a> 
+          <a href="https://stellarcyber.ai" target="_blank" rel="noopener">Stellar Cyber</a> 
           on AI-powered systems for threat hunting and autonomous security operations. I’m also building 
-          <a href="https://gonext.lol" target="_blank">GONEXT</a>, a GenAI tool that delivers personalized, game-specific analytics for League of Legends.
+          <a href="https://gonext.lol" target="_blank" rel="noopener">GONEXT</a>, a GenAI tool that delivers personalized, game-specific analytics for League of Legends.
         </p>
         <p>
           This fall, I’ll begin my Master of Philosophy in Human-Inspired Artificial Intelligence at the 
-          <a href="https://www.cam.ac.uk" target="_blank">University of Cambridge</a>. I hold a bachelor's degree from 
-          <a href="https://www.stonybrook.edu" target="_blank">Stony Brook University</a>, where I double-majored in Computer Science and Applied Mathematics & Statistics.
+          <a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a>. I hold a bachelor's degree from 
+          <a href="https://www.stonybrook.edu" target="_blank" rel="noopener">Stony Brook University</a>, where I double-majored in Computer Science and Applied Mathematics &amp; Statistics.
         </p>
       </section>
 
@@ -128,16 +136,16 @@
         <h2>Current Work</h2>
         <article class="col-12 work-item">
           <h3>
-            <a href="https://gonext.lol" target="_blank">GONEXT.lol</a>&nbsp;&nbsp;
-            <a href="https://github.com/KostadinDev/gonext" target="_blank" class="icon brands fa-github" title="GitHub">
+            <a href="https://gonext.lol" target="_blank" rel="noopener">GONEXT.lol</a>&nbsp;&nbsp;
+            <a href="https://github.com/KostadinDev/gonext" target="_blank" rel="noopener" class="icon brands fa-github" aria-label="GitHub Repository for GONEXT.lol">
               <span class="label">GitHub</span>
             </a>
           </h3>
           <p>
             An AI-powered analytics tool for League of Legends that provides real-time, personalized strategies, matchups, synergies, and builds. It uses the Riot API to gather live game data, which is then processed by language models to deliver tailored, game-specific guidance to players.
           </p>
-          <a href="./static/images/gonext-cover-chat.png" class="image fit thumb">
-            <img src="./static/images/gonext-cover-chat.png" alt="Screenshot of GONEXT.lol" />
+          <a href="./static/images/gonext-cover-chat.webp" class="image fit thumb">
+            <img src="./static/images/gonext-cover-chat.webp" alt="Screenshot of GONEXT.lol" />
           </a>
         </article>
 
@@ -150,21 +158,27 @@
       <footer id="footer">
         <div class="inner">
           <ul class="icons">
-            <li><a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-            <li><a href="https://github.com/KostadinDev" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-            <li><a href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0" class="icon brands fa-spotify"><span class="label">Spotify</span></a></li>
+            <li><a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin" aria-label="LinkedIn Profile"><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://github.com/KostadinDev" class="icon brands fa-github" aria-label="GitHub Profile"><span class="label">GitHub</span></a></li>
+            <li><a href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0" class="icon brands fa-spotify" aria-label="Spotify Profile"><span class="label">Spotify</span></a></li>
           </ul>
         </div>
       </footer>
     </div>
 
-    <!-- Scripts -->
-    <script src="./static/assets/js/jquery.min.js"></script>
-    <script src="./static/assets/js/jquery.poptrox.min.js"></script>
-    <script src="./static/assets/js/browser.min.js"></script>
-    <script src="./static/assets/js/breakpoints.min.js"></script>
-    <script src="./static/assets/js/util.js"></script>
-    <script src="./static/assets/js/main.js"></script>
+    <!-- Chatbot Container -->
+    <div id="chatbot-container">
+      <iframe id="chatbot-iframe" src="your-chatbot-url-here" title="Chatbot"></iframe>
+    </div>
+    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
+
+    <!-- Scripts with defer to improve rendering -->
+    <script src="./static/assets/js/jquery.min.js" defer></script>
+    <script src="./static/assets/js/jquery.poptrox.min.js" defer></script>
+    <script src="./static/assets/js/browser.min.js" defer></script>
+    <script src="./static/assets/js/breakpoints.min.js" defer></script>
+    <script src="./static/assets/js/util.js" defer></script>
+    <script src="./static/assets/js/main.js" defer></script>
     <script>
       window.addEventListener("DOMContentLoaded", function () {
         var chatbot = document.getElementById("chatbot-container");
@@ -179,11 +193,13 @@
           main.style.width = "calc(100% - 30% - 320px)";
           toggle.style.right = "320px";
           toggle.textContent = "Close";
+          toggle.setAttribute("aria-expanded", "true");
         } else {
           chatbot.classList.remove("expanded");
           main.style.width = "calc(100% - 30%)";
           toggle.style.right = "0";
           toggle.textContent = "Open";
+          toggle.setAttribute("aria-expanded", "false");
         }
       });
 
@@ -196,12 +212,14 @@
           main.style.width = window.matchMedia("(max-width: 768px)").matches ? "100%" : "calc(100% - 30%)";
           toggle.style.right = "0";
           toggle.textContent = "Open";
+          toggle.setAttribute("aria-expanded", "false");
           localStorage.setItem("chatbotToggleState", "closed");
         } else {
           chatbot.classList.add("expanded");
           main.style.width = "calc(100% - 30% - 320px)";
           toggle.style.right = "320px";
           toggle.textContent = "Close";
+          toggle.setAttribute("aria-expanded", "true");
           localStorage.setItem("chatbotToggleState", "open");
         }
       });
