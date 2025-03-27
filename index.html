@@ -1,18 +1,47 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Home</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="./static/assets/css/main.css"/>
-    <link rel="icon" type="image/x-icon" href="./static/favicon.ico">
-    <!-- Extra styles for chatbot and transition -->
+    <meta charset="utf-8" />
+    <title>Kostadin Devedzhiev | Software Engineer & AI Researcher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Kostadin Devedzhiev is a software engineer focused on Human-Inspired AI, NLP, and UI. MPhil student at Cambridge, building tools like GONEXT." />
+    <meta name="author" content="Kostadin Devedzhiev" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="Kostadin Devedzhiev | Software Engineer & AI Researcher" />
+    <meta property="og:description" content="Explore Kostadin's projects, publications, and AI work at Stellar Cyber and Cambridge." />
+    <meta property="og:image" content="https://yourdomain.com/static/images/ghibli_profile.jpg" />
+    <meta property="og:url" content="https://yourdomain.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Kostadin Devedzhiev",
+      "url": "https://yourdomain.com",
+      "image": "https://yourdomain.com/static/images/ghibli_profile.jpg",
+      "jobTitle": "Software Engineer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Stellar Cyber"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/kostadin-dev/",
+        "https://github.com/KostadinDev"
+      ]
+    }
+    </script>
+
+    <link rel="stylesheet" href="./static/assets/css/main.css" />
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
+
     <style>
-      /* Smooth transition for the main content width */
       #main {
         transition: width 0.3s ease;
       }
-      /* Chatbot container: hidden by default (width 0), fixed to the right */
       #chatbot-container {
         position: fixed;
         right: 0;
@@ -23,17 +52,14 @@
         transition: width 0.3s ease;
         z-index: 1000;
       }
-      /* When expanded, the chatbot container becomes 320px wide */
       #chatbot-container.expanded {
         width: 320px;
       }
-      /* Iframe fills the chatbot container */
       #chatbot-iframe {
         width: 100%;
         height: 100%;
         border: none;
       }
-      /* Toggle button: fixed on the right edge and slides with the panel */
       #chatbot-toggle {
         position: fixed;
         right: 0;
@@ -47,15 +73,6 @@
         cursor: pointer;
         transition: right 0.3s ease;
       }
-
-      a {
-        text-decoration: none;
-      }
-      a:hover,
-      a:active {
-        text-decoration: underline;
-      }
-
     </style>
   </head>
   <body class="is-preload">
@@ -63,75 +80,67 @@
     <header id="header">
       <div class="inner">
         <a href="index.html" class="image avatar">
-          <img src="./static/images/ghibli_profile.jpg" alt=""/>
+          <img src="./static/images/ghibli_profile.jpg" alt="Kostadin Devedzhiev Profile Picture" />
         </a>
-        <span style="text-align: center;">
-          <h1><strong>Kostadin Devedzhiev</strong></h1>
-          <i><h5>kostadin.g.devedzhiev@gmail.com</h5></i>
-          <span>Software Engineer at Stellar Cyber</span>
-          <br>
-          <span>Human-Inspired AI | NLP | UI</span>
-          <h6>
-            <a href="./static/documents/cv.pdf" target="_blank">Curriculum Vitae</a>
-          </h6>
-          <nav id="main-nav">
-            <div class="nav-link"><a href="index.html">Home</a></div>
-            <div class="nav-link"><a href="projects.html">Projects</a></div>
-            <div class="nav-link"><a href="publications.html">Publications</a></div>
-            <div class="nav-link"><a href="certificates.html">Education</a></div>
-          </nav>
-        </span>
+        <h1><strong>Kostadin Devedzhiev</strong></h1>
+        <p>
+          <i>kostadin.g.devedzhiev@gmail.com</i><br />
+          Software Engineer at <a href="https://stellarcyber.ai" target="_blank">Stellar Cyber</a><br />
+          Human-Inspired AI | NLP | UI
+        </p>
+        <h6>
+          <a href="./static/documents/cv.pdf" target="_blank">Curriculum Vitae</a>
+        </h6>
+        <nav id="main-nav">
+          <div class="nav-link"><a href="index.html">Home</a></div>
+          <div class="nav-link"><a href="projects.html">Projects</a></div>
+          <div class="nav-link"><a href="publications.html">Publications</a></div>
+          <div class="nav-link"><a href="certificates.html">Education</a></div>
+        </nav>
       </div>
     </header>
 
-    <!-- Main content area -->
+    <!-- Main -->
     <div id="main">
-      <!-- Interests Section -->
-    <section id="one">
-      <header class="major">
-        <h2>Bio</h2>
-      </header>
-      <div>
-    <p>
-      I am a software engineer passionate about Human-Inspired artificial intelligence, specializing in natural language processing (NLP) and user interface (UI) design. My work centers around creating interactive experiences powered by intelligent systems.
-    </p>
-    <p>
-      Currently, I am a software engineer at 
-      <a href="https://stellarcyber.ai" target="_blank">Stellar Cyber</a> 
-      where I work on AI-powered systems for threat hunting and autonomous security operations. Additionally, I'm developing GONEXT, a GenAI tool that delivers personalized, game-specific analytics for League of Legends.
-    </p>
-    <p>
-      This fall, I will begin my Master of Philosophy in Human-Inspired Artificial Intelligence at the 
-      <a href="https://www.cam.ac.uk" target="_blank">University of Cambridge</a>. 
-      I hold a bachelor's degree from 
-      <a href="https://www.stonybrook.edu" target="_blank">Stony Brook University</a>, 
-      where I double-majored in Computer Science and Applied Mathematics &amp; Statistics.
-    </p>
-      </div>
-    </section>
+      <!-- Bio Section -->
+      <section id="one">
+        <header class="major">
+          <h2>Bio</h2>
+        </header>
+        <p>
+          I’m <strong><a href="index.html">Kostadin Devedzhiev</a></strong>, a software engineer passionate about Human-Inspired artificial intelligence, specializing in natural language processing (NLP) and user interface (UI) design. My work centers around creating interactive experiences powered by intelligent systems.
+        </p>
+        <p>
+          I currently work at 
+          <a href="https://stellarcyber.ai" target="_blank">Stellar Cyber</a> 
+          on AI-powered systems for threat hunting and autonomous security operations. I’m also building 
+          <a href="https://gonext.lol" target="_blank">GONEXT</a>, a GenAI tool that delivers personalized, game-specific analytics for League of Legends.
+        </p>
+        <p>
+          This fall, I’ll begin my Master of Philosophy in Human-Inspired Artificial Intelligence at the 
+          <a href="https://www.cam.ac.uk" target="_blank">University of Cambridge</a>. I hold a bachelor's degree from 
+          <a href="https://www.stonybrook.edu" target="_blank">Stony Brook University</a>, where I double-majored in Computer Science and Applied Mathematics & Statistics.
+        </p>
+      </section>
 
       <!-- Projects Section -->
       <section id="two">
         <h2>Current Work</h2>
-        <div class="row">
-          <!-- Project 1: GONEXT -->
-          <article class="col-12 work-item">
-            <h3>
-              <a href="https://gonext.lol">GONEXT.lol</a> &nbsp;&nbsp;
-              <a href="https://gonext.lol" target="_blank" class="fa fa-link" title="Live Page"></a>&nbsp;&nbsp;
-              <a href="https://github.com/KostadinDev/gonext" target="_blank" class="icon brands fa-github" title="GitHub">
-                <span class="label">Github</span>
-              </a>&nbsp;&nbsp;
-            </h3>
-            <p>
-              An AI-powered analytics tool for League of Legends that provides real-time, personalized strategies, matchups, synergies, and builds. Utilizing the Riot API, it gathers live game data, including insights on both allied and enemy players. This information is then processed by advanced language models to deliver tailored, game-specific, and personalized guidance to players.
-            </p>
-            <a href="./static/images/gonext-cover-chat.png" class="image fit thumb">
-              <img src="./static/images/gonext-cover-chat.png" alt="GONEXT screenshot"/>
+        <article class="col-12 work-item">
+          <h3>
+            <a href="https://gonext.lol" target="_blank">GONEXT.lol</a>&nbsp;&nbsp;
+            <a href="https://github.com/KostadinDev/gonext" target="_blank" class="icon brands fa-github" title="GitHub">
+              <span class="label">GitHub</span>
             </a>
-          </article>
-        </div>
-        <!-- See all projects link -->
+          </h3>
+          <p>
+            An AI-powered analytics tool for League of Legends that provides real-time, personalized strategies, matchups, synergies, and builds. It uses the Riot API to gather live game data, which is then processed by language models to deliver tailored, game-specific guidance to players.
+          </p>
+          <a href="./static/images/gonext-cover-chat.png" class="image fit thumb">
+            <img src="./static/images/gonext-cover-chat.png" alt="Screenshot of GONEXT.lol" />
+          </a>
+        </article>
+
         <div style="text-align: center; margin-top: 1rem;">
           <a href="projects.html">See all projects</a>
         </div>
@@ -141,31 +150,13 @@
       <footer id="footer">
         <div class="inner">
           <ul class="icons">
-            <li>
-              <a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin">
-                <span class="label">LinkedIn</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/KostadinDev" class="icon brands fa-github">
-                <span class="label">Github</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0?si=a22c66e820ea4ed8" class="icon brands alt fa-spotify">
-                <span class="label">Spotify</span>
-              </a>
-            </li>
+            <li><a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+            <li><a href="https://github.com/KostadinDev" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+            <li><a href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0" class="icon brands fa-spotify"><span class="label">Spotify</span></a></li>
           </ul>
         </div>
       </footer>
     </div>
-
-    <!-- Chatbot container and toggle button (toggle is open by default) -->
-    <!-- <div id="chatbot-container" class="expanded">
-      <iframe id="chatbot-iframe" src="http://localhost:5173"></iframe>
-    </div> -->
-    <!-- <button id="chatbot-toggle">Close</button> -->
 
     <!-- Scripts -->
     <script src="./static/assets/js/jquery.min.js"></script>
@@ -175,43 +166,43 @@
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
     <script>
-      window.addEventListener("DOMContentLoaded", function() {
-        var chatbot = document.getElementById('chatbot-container');
-        var main = document.getElementById('main');
-        var toggle = document.getElementById('chatbot-toggle');
-        var toggleState = localStorage.getItem('chatbotToggleState');
+      window.addEventListener("DOMContentLoaded", function () {
+        var chatbot = document.getElementById("chatbot-container");
+        var main = document.getElementById("main");
+        var toggle = document.getElementById("chatbot-toggle");
+        var toggleState = localStorage.getItem("chatbotToggleState");
         if (toggleState === null) {
           toggleState = window.matchMedia("(max-width: 768px)").matches ? "closed" : "open";
         }
         if (toggleState === "open") {
-          chatbot.classList.add('expanded');
+          chatbot.classList.add("expanded");
           main.style.width = "calc(100% - 30% - 320px)";
           toggle.style.right = "320px";
           toggle.textContent = "Close";
         } else {
-          chatbot.classList.remove('expanded');
+          chatbot.classList.remove("expanded");
           main.style.width = "calc(100% - 30%)";
           toggle.style.right = "0";
           toggle.textContent = "Open";
         }
       });
 
-      document.getElementById('chatbot-toggle').addEventListener('click', function() {
-        var chatbot = document.getElementById('chatbot-container');
-        var main = document.getElementById('main');
-        var toggle = document.getElementById('chatbot-toggle');
-        if (chatbot.classList.contains('expanded')) {
-          chatbot.classList.remove('expanded');
-          main.style.width = window.matchMedia("(max-width: 768px)").matches ? "calc(100%)" : "calc(100% - 30%)";
+      document.getElementById("chatbot-toggle")?.addEventListener("click", function () {
+        var chatbot = document.getElementById("chatbot-container");
+        var main = document.getElementById("main");
+        var toggle = document.getElementById("chatbot-toggle");
+        if (chatbot.classList.contains("expanded")) {
+          chatbot.classList.remove("expanded");
+          main.style.width = window.matchMedia("(max-width: 768px)").matches ? "100%" : "calc(100% - 30%)";
           toggle.style.right = "0";
           toggle.textContent = "Open";
-          localStorage.setItem('chatbotToggleState', 'closed');
+          localStorage.setItem("chatbotToggleState", "closed");
         } else {
-          chatbot.classList.add('expanded');
+          chatbot.classList.add("expanded");
           main.style.width = "calc(100% - 30% - 320px)";
           toggle.style.right = "320px";
           toggle.textContent = "Close";
-          localStorage.setItem('chatbotToggleState', 'open');
+          localStorage.setItem("chatbotToggleState", "open");
         }
       });
     </script>
