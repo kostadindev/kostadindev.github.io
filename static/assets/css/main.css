@@ -2132,10 +2132,6 @@ input, select, textarea {
 				width: 100%;
 			}
 
-		.image.avatar {
-
-		}
-
 			.image.avatar:before {
 				display: none;
 			}
