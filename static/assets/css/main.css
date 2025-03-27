@@ -2601,7 +2601,7 @@ input, select, textarea {
 		left: 0;
 		padding: 8em 4em;
 		position: fixed;
-		text-align: right;
+		text-align: center;
 		top: 0;
 		width: 27%;
 	}
@@ -3234,7 +3234,7 @@ input, select, textarea {
 }
 
 #main-nav .nav-link {
-  margin: 0.25em;
+  margin: 0.5em;
 }
 
 #main-nav .nav-link a {
