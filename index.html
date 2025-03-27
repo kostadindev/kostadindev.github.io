@@ -81,6 +81,11 @@
         cursor: pointer;
         transition: right 0.3s ease;
       }
+
+      .cv {
+        color: #e89a3c;
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body class="is-preload">
@@ -93,12 +98,12 @@
         <h1><strong>Kostadin Devedzhiev</strong></h1>
         <p>
           <i>kostadin.g.devedzhiev@gmail.com</i><br />
-          Software Engineer at <a href="https://stellarcyber.ai" target="_blank" rel="noopener">Stellar Cyber</a><br />
+          Software Engineer at Stellar Cyber<br />
           Human-Inspired AI | NLP | UI
         </p>
-        <p>
-          <a href="./static/documents/cv.pdf" target="_blank" rel="noopener">Curriculum Vitae</a>
-        </p>
+        <h5> 
+          <a href="./static/documents/cv.pdf" class="cv" target="_blank" rel="noopener">Curriculum Vitae</a>
+        </h5>
         <nav id="main-nav">
           <div class="nav-link"><a href="index.html">Home</a></div>
           <div class="nav-link"><a href="projects.html">Projects</a></div>
@@ -167,10 +172,10 @@
     </div>
 
     <!-- Chatbot Container -->
-    <div id="chatbot-container">
+    <!-- <div id="chatbot-container">
       <iframe id="chatbot-iframe" src="your-chatbot-url-here" title="Chatbot"></iframe>
     </div>
-    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
+    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button> -->
 
     <!-- Scripts with defer to improve rendering -->
     <script src="./static/assets/js/jquery.min.js" defer></script>
