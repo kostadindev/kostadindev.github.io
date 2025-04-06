@@ -191,10 +191,6 @@
         </div>
       </footer>
     </div>
-    <div id="chatbot-container">
-      <iframe id="chatbot-iframe" src="https://5ed1-2600-4808-5931-a900-a48a-5409-62bc-5c0b.ngrok-free.app" title="Chatbot"></iframe>
-    </div>
-    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
 
     <!-- Scripts -->
     <script src="./static/assets/js/jquery.min.js"></script>
@@ -203,46 +199,51 @@
     <script src="./static/assets/js/breakpoints.min.js"></script>
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
-    <script>
-      window.addEventListener("DOMContentLoaded", function () {
-        var chatbot = document.getElementById("chatbot-container");
-        var main = document.getElementById("main");
-        var toggle = document.getElementById("chatbot-toggle");
-        var toggleState = localStorage.getItem("chatbotToggleState");
-        if (toggleState === null) {
-          toggleState = "closed";
-        }
-        if (toggleState === "open") {
-          chatbot.classList.add("expanded");
-          main.style.width = "calc(100% - 30% - 320px)";
-          toggle.style.right = "320px";
-          toggle.textContent = "Close";
-        } else {
+<script>
+  window.addEventListener("DOMContentLoaded", function () {
+    if (window.innerWidth > 768) {
+      const chatbotHTML = `
+        <div id="chatbot-container">
+          <iframe id="chatbot-iframe" src="https://5ed1-2600-4808-5931-a900-a48a-5409-62bc-5c0b.ngrok-free.app" title="Chatbot"></iframe>
+        </div>
+        <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
+      `;
+      document.body.insertAdjacentHTML("beforeend", chatbotHTML);
+
+      // Rebind toggle logic
+      const chatbot = document.getElementById("chatbot-container");
+      const main = document.getElementById("main");
+      const toggle = document.getElementById("chatbot-toggle");
+      const toggleState = localStorage.getItem("chatbotToggleState") || "closed";
+
+      if (toggleState === "open") {
+        chatbot.classList.add("expanded");
+        main.style.width = "calc(100% - 30% - 320px)";
+        toggle.style.right = "320px";
+        toggle.textContent = "Close";
+        toggle.setAttribute("aria-expanded", "true");
+      }
+
+      toggle.addEventListener("click", function () {
+        if (chatbot.classList.contains("expanded")) {
           chatbot.classList.remove("expanded");
           main.style.width = "calc(100% - 30%)";
           toggle.style.right = "0";
           toggle.textContent = "Open";
-        }
-      });
-
-      document.getElementById("chatbot-toggle")?.addEventListener("click", function () {
-        var chatbot = document.getElementById("chatbot-container");
-        var main = document.getElementById("main");
-        var toggle = document.getElementById("chatbot-toggle");
-        if (chatbot.classList.contains("expanded")) {
-          chatbot.classList.remove("expanded");
-          main.style.width = window.matchMedia("(max-width: 768px)").matches ? "100%" : "calc(100% - 30%)";
-          toggle.style.right = "0";
-          toggle.textContent = "Open";
+          toggle.setAttribute("aria-expanded", "false");
           localStorage.setItem("chatbotToggleState", "closed");
         } else {
           chatbot.classList.add("expanded");
           main.style.width = "calc(100% - 30% - 320px)";
           toggle.style.right = "320px";
           toggle.textContent = "Close";
+          toggle.setAttribute("aria-expanded", "true");
           localStorage.setItem("chatbotToggleState", "open");
         }
       });
-    </script>
+    }
+  });
+</script>
+
   </body>
 </html>
