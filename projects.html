@@ -212,10 +212,10 @@
     </div>
 
     <!-- Chatbot container and toggle button (toggle is open by default) -->
-    <!-- <div id="chatbot-container" class="expanded">
+    <div id="chatbot-container" class="expanded">
       <iframe id="chatbot-iframe" src="http://localhost:5173"></iframe>
-    </div> -->
-    <!-- <button id="chatbot-toggle">Close</button> -->
+    </div> 
+    <button id="chatbot-toggle">Close</button>
 
     <!-- Scripts -->
     <script src="./static/assets/js/jquery.min.js"></script>
@@ -231,7 +231,7 @@
         var toggle = document.getElementById("chatbot-toggle");
         var toggleState = localStorage.getItem("chatbotToggleState");
         if (toggleState === null) {
-          toggleState = window.matchMedia("(max-width: 768px)").matches ? "closed" : "open";
+          toggleState = "closed";
         }
         if (toggleState === "open") {
           chatbot.classList.add("expanded");

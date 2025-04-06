@@ -190,7 +190,7 @@
         var toggle = document.getElementById("chatbot-toggle");
         var toggleState = localStorage.getItem("chatbotToggleState");
         if (toggleState === null) {
-          toggleState = window.matchMedia("(max-width: 768px)").matches ? "closed" : "open";
+          toggleState = "closed";
         }
         if (toggleState === "open") {
           chatbot.classList.add("expanded");

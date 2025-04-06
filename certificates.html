@@ -238,6 +238,10 @@
         </div>
       </footer>
     </div>
+    <div id="chatbot-container">
+      <iframe id="chatbot-iframe" src="https://5ed1-2600-4808-5931-a900-a48a-5409-62bc-5c0b.ngrok-free.app" title="Chatbot"></iframe>
+    </div>
+    <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
 
     <!-- Scripts -->
     <script src="./static/assets/js/jquery.min.js"></script>
@@ -253,7 +257,7 @@
         var toggle = document.getElementById("chatbot-toggle");
         var toggleState = localStorage.getItem("chatbotToggleState");
         if (toggleState === null) {
-          toggleState = window.matchMedia("(max-width: 768px)").matches ? "closed" : "open";
+          toggleState = "closed";
         }
         if (toggleState === "open") {
           chatbot.classList.add("expanded");
