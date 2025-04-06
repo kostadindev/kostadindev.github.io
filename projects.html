@@ -34,7 +34,7 @@
       ]
     }
     </script>
-</script>
+
     <link rel="preload" as="image" href="./static/images/gonext-cover-chat.webp" />
     <link rel="preload" as="image" href="./static/images/headshot.jpg" />
     <link rel="preload" as="image" href="./static/images/bg.webp" />
@@ -45,50 +45,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/assets/css/main.css" />
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
-    
 
     <style>
-      #main {
-        transition: width 0.3s ease;
-      }
-      #chatbot-container {
-        position: fixed;
-        right: 0;
-        top: 0;
-        height: 100vh;
-        width: 0;
-        overflow: hidden;
-        transition: width 0.3s ease;
-        z-index: 1000;
-      }
-      #chatbot-container.expanded {
-        width: 320px;
-      }
-      #chatbot-iframe {
-        width: 100%;
-        height: 100%;
-        border: none;
-      }
-      #chatbot-toggle {
-        position: fixed;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 500;
-        background-color: #333;
-        color: #fff;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        transition: right 0.3s ease;
-      }
-
-      .cv {
-        color: #e89a3c;
-        /* text-decoration: underline; */
-      }
     </style>
   </head>
+
   <body class="is-preload">
     <!-- Header -->
     <header id="header">
@@ -112,12 +73,9 @@
       </div>
     </header>
 
-    <!-- Main content area -->
+    <!-- Main -->
     <div id="main">
-      <!-- Projects Section -->
-      <!-- [Project content remains unchanged] -->
-     <!-- Projects -->
-    <section id="two">
+      <section id="two">
         <h2>Projects</h2>
         <div class="row">
             <!-- First 3 projects: full width -->
@@ -199,6 +157,7 @@
 
         </div>
       </section>
+
       <!-- Footer -->
       <footer id="footer">
         <div class="inner">
@@ -211,11 +170,11 @@
       </footer>
     </div>
 
-    <!-- Chatbot container and toggle button (toggle is open by default) -->
+    <!-- Chatbot and toggle button -->
     <div id="chatbot-container" class="expanded">
       <iframe id="chatbot-iframe" src="http://localhost:5173"></iframe>
     </div> 
-    <button id="chatbot-toggle">Close</button>
+    <button id="chatbot-toggle">Open</button>
 
     <!-- Scripts -->
     <script src="./static/assets/js/jquery.min.js"></script>
@@ -224,15 +183,14 @@
     <script src="./static/assets/js/breakpoints.min.js"></script>
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
+
     <script>
       window.addEventListener("DOMContentLoaded", function () {
-        var chatbot = document.getElementById("chatbot-container");
-        var main = document.getElementById("main");
-        var toggle = document.getElementById("chatbot-toggle");
-        var toggleState = localStorage.getItem("chatbotToggleState");
-        if (toggleState === null) {
-          toggleState = "closed";
-        }
+        const chatbot = document.getElementById("chatbot-container");
+        const main = document.getElementById("main");
+        const toggle = document.getElementById("chatbot-toggle");
+        let toggleState = localStorage.getItem("chatbotToggleState") || "closed";
+
         if (toggleState === "open") {
           chatbot.classList.add("expanded");
           main.style.width = "calc(100% - 30% - 320px)";
@@ -241,19 +199,20 @@
         } else {
           chatbot.classList.remove("expanded");
           main.style.width = "calc(100% - 30%)";
-          toggle.style.right = "0";
+          toggle.style.right = "20px";
           toggle.textContent = "Open";
         }
       });
 
-      document.getElementById("chatbot-toggle")?.addEventListener("click", function () {
-        var chatbot = document.getElementById("chatbot-container");
-        var main = document.getElementById("main");
-        var toggle = document.getElementById("chatbot-toggle");
+      document.getElementById("chatbot-toggle").addEventListener("click", function () {
+        const chatbot = document.getElementById("chatbot-container");
+        const main = document.getElementById("main");
+        const toggle = document.getElementById("chatbot-toggle");
+
         if (chatbot.classList.contains("expanded")) {
           chatbot.classList.remove("expanded");
           main.style.width = window.matchMedia("(max-width: 768px)").matches ? "100%" : "calc(100% - 30%)";
-          toggle.style.right = "0";
+          toggle.style.right = "0px";
           toggle.textContent = "Open";
           localStorage.setItem("chatbotToggleState", "closed");
         } else {

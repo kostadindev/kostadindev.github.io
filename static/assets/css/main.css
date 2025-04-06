@@ -3284,3 +3284,54 @@ a:hover,
 a:active {
 	text-decoration: underline;
 }
+
+      #main {
+        transition: width 0.3s ease;
+      }
+
+      #chatbot-container {
+        position: fixed;
+        right: 0;
+        top: 0;
+        height: 100vh;
+        width: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        z-index: 1000;
+      }
+
+      #chatbot-container.expanded {
+        width: 320px;
+      }
+
+      #chatbot-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Minimalist chatbot toggle button styling */
+      #chatbot-toggle {
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 500;
+        background-color: transparent;
+        color: #e89a3c;
+        border: 2px solid #e89a3c;
+        border-radius: 30px;
+        padding: 8px 16px;
+        cursor: pointer;
+        transition: right 0.3s ease, color 0.3s ease;
+        letter-spacing: 0.5px;
+      }
+
+      #chatbot-toggle:hover {
+        background-color: #e89a3c;
+        color: #fff;
+      }
+
+      .cv {
+        color: #e89a3c;
+      }
