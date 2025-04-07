@@ -21,7 +21,7 @@ https://kostadindev.github.io/
 
 ## About
 
-Kostadin Devedzhiev is a software engineer passionate about creating human-centered AI systems. He is currently working at Stellar Cyber on AI-powered security solutions and is also developing GONEXT, a GenAI tool for League of Legends. He is an incoming MPhil student at the University of Cambridge, specializing in Human-Inspired Artificial Intelligence.
+Kostadin Devedzhiev is a software engineer passionate about creating human-centered AI systems. He is currently working at Stellar Cyber on AI-powered security solutions and is also developing GONEXT, a GenAI tool for League of Legends.
 
 ## Features
 
