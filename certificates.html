@@ -45,6 +45,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./static/assets/css/main.css" />
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
+    <style>
+      .education-item { text-align: center; margin-bottom: 20px; }
+      .certificate-item {
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+      }
+      .certificate-item p { margin-bottom: 0.5em; }
+      a { text-decoration: none; }
+      a:hover, a:active { text-decoration: underline; }
+      .underline { text-decoration: underline; }
+      .cv {
+        color: #e89a3c;
+        /* text-decoration: underline; */
+        }
+    </style>
   </head>
   <body class="is-preload">
     <!-- Header -->
@@ -98,7 +114,7 @@
          <h2>Certificates</h2>
          <!-- First Row: Professional Certificate & IBM Links -->
          <div class="row">
-           <article class="col-8 certificate-item">
+           <article class="col-8 certificate-item-text">
              <h5>
                <a href="https://www.coursera.org/account/accomplishments/professional-cert/0TES73QWT9FC?utm_source=link&utm_medium=certificate&utm_content=cert_image&utm_campaign=pdf_header_button&utm_product=prof" target="_blank">
                  IBM Generative AI Engineering
@@ -203,7 +219,7 @@
     if (window.innerWidth > 768) {
       const chatbotHTML = `
         <div id="chatbot-container">
-          <iframe id="chatbot-iframe" src="https://5ed1-2600-4808-5931-a900-a48a-5409-62bc-5c0b.ngrok-free.app" title="Chatbot"></iframe>
+          <iframe id="chatbot-iframe" src="https://artificial-me.onrender.com/" title="Chatbot"></iframe>
         </div>
         <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
       `;
