@@ -136,7 +136,13 @@
           const chatbot = document.getElementById("chatbot-container");
           const main = document.getElementById("main");
           const toggle = document.getElementById("chatbot-toggle");
-          const toggleState = localStorage.getItem("chatbotToggleState") || "closed";
+          let toggleState = localStorage.getItem("chatbotToggleState");
+
+          // Default to open if no state is saved
+          if (!toggleState) {
+            toggleState = "open";
+            localStorage.setItem("chatbotToggleState", "open");
+          }
 
           if (toggleState === "open") {
             chatbot.classList.add("expanded");
@@ -145,6 +151,7 @@
             toggle.textContent = "Close";
             toggle.setAttribute("aria-expanded", "true");
           }
+
 
           toggle.addEventListener("click", function () {
             if (chatbot.classList.contains("expanded")) {

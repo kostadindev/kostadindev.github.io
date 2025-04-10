@@ -229,7 +229,10 @@
       const chatbot = document.getElementById("chatbot-container");
       const main = document.getElementById("main");
       const toggle = document.getElementById("chatbot-toggle");
-      const toggleState = localStorage.getItem("chatbotToggleState") || "closed";
+      if (!toggleState) {
+        toggleState = "open";
+        localStorage.setItem("chatbotToggleState", "open");
+      }
 
       if (toggleState === "open") {
         chatbot.classList.add("expanded");
