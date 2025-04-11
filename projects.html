@@ -300,17 +300,20 @@
       window.addEventListener("DOMContentLoaded", function () {
         if (window.innerWidth > 768) {
           const chatbotHTML = `
-        <div id="chatbot-container">
-          <iframe id="chatbot-iframe" src="https://artificial-me.onrender.com/" title="Chatbot"></iframe>
-        </div>
-        <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
-      `;
+            <div id="chatbot-container">
+              <iframe id="chatbot-iframe" src="https://artificial-me.onrender.com/" title="Chatbot"></iframe>
+            </div>
+            <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
+          `;
           document.body.insertAdjacentHTML("beforeend", chatbotHTML);
 
           // Rebind toggle logic
           const chatbot = document.getElementById("chatbot-container");
           const main = document.getElementById("main");
           const toggle = document.getElementById("chatbot-toggle");
+          let toggleState = localStorage.getItem("chatbotToggleState");
+
+          // Default to open if no state is saved
           if (!toggleState) {
             toggleState = "open";
             localStorage.setItem("chatbotToggleState", "open");
