@@ -117,7 +117,7 @@
           <h2>Bio</h2>
         </header>
         <p>
-          I’m a software engineer passionate about human-centered artificial
+          I'm a software engineer passionate about human-centered artificial
           intelligence, specializing in natural language processing (NLP) and
           user interface (UI) design. My work centers around creating
           interactive experiences powered by intelligent systems.
@@ -128,13 +128,13 @@
             >Stellar Cyber</a
           >
           on AI-powered systems for threat hunting and autonomous security
-          operations. I’m also building
+          operations. I'm also building
           <a href="https://gonext.lol" target="_blank" rel="noopener">GONEXT</a
           >, a GenAI tool that delivers personalized, game-specific analytics
           for League of Legends.
         </p>
         <!-- <p>
-          This fall, I’ll begin my Master of Philosophy in Human-Inspired Artificial Intelligence at the 
+          This fall, I'll begin my Master of Philosophy in Human-Inspired Artificial Intelligence at the 
           <a href="https://www.cam.ac.uk" target="_blank" rel="noopener">University of Cambridge</a>. I hold a bachelor's degree from 
           <a href="https://www.stonybrook.edu" target="_blank" rel="noopener">Stony Brook University</a>, where I double-majored in Computer Science and Applied Mathematics &amp; Statistics.
         </p> -->
@@ -228,7 +228,10 @@
             <div id="chatbot-container">
               <iframe id="chatbot-iframe" src="https://artificial-me.onrender.com/" title="Chatbot"></iframe>
             </div>
-            <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">Open</button>
+            <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">
+              <i class="fas fa-comment"></i>
+              <span class="toggle-text">Chat</span>
+            </button>
           `;
           document.body.insertAdjacentHTML("beforeend", chatbotHTML);
 
@@ -236,6 +239,7 @@
           const chatbot = document.getElementById("chatbot-container");
           const main = document.getElementById("main");
           const toggle = document.getElementById("chatbot-toggle");
+          const toggleText = toggle.querySelector(".toggle-text");
           let toggleState = localStorage.getItem("chatbotToggleState");
 
           // Default to open if no state is saved
@@ -246,25 +250,28 @@
 
           if (toggleState === "open") {
             chatbot.classList.add("expanded");
+            toggle.classList.add("expanded");
             main.style.width = "calc(100% - 30% - 320px)";
             toggle.style.right = "320px";
-            toggle.textContent = "Close";
+            toggleText.textContent = "Close";
             toggle.setAttribute("aria-expanded", "true");
           }
 
           toggle.addEventListener("click", function () {
             if (chatbot.classList.contains("expanded")) {
               chatbot.classList.remove("expanded");
+              toggle.classList.remove("expanded");
               main.style.width = "calc(100% - 30%)";
               toggle.style.right = "0";
-              toggle.textContent = "Open";
+              toggleText.textContent = "Chat";
               toggle.setAttribute("aria-expanded", "false");
               localStorage.setItem("chatbotToggleState", "closed");
             } else {
               chatbot.classList.add("expanded");
+              toggle.classList.add("expanded");
               main.style.width = "calc(100% - 30% - 320px)";
               toggle.style.right = "320px";
-              toggle.textContent = "Close";
+              toggleText.textContent = "Close";
               toggle.setAttribute("aria-expanded", "true");
               localStorage.setItem("chatbotToggleState", "open");
             }
