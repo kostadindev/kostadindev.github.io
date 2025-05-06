@@ -3313,7 +3313,7 @@ a:active {
 /* Minimalist chatbot toggle button styling */
 #chatbot-toggle {
 	position: fixed;
-	bottom: 30px;
+	bottom: 60px;
 	right: 0;
 	z-index: 1000;
 	background: #e89a3c;
