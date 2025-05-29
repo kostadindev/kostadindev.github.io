@@ -188,6 +188,45 @@
          </div>
        </section>
        
+       <!-- Skills Section -->
+       <section id="skills">
+         <h2>Technical Skills</h2>
+         <div class="table-wrapper">
+           <table>
+             <tbody>
+               <tr>
+                 <td>Programming Languages</td>
+                 <td>Python | JavaScript | TypeScript</td>
+               </tr>
+               <tr>
+                 <td>Frontend</td>
+                 <td>Angular | React | Tailwind</td>
+               </tr>
+               <tr>
+                 <td>Backend & APIs</td>
+                 <td>FastAPI | NodeJS | Express | Flask</td>
+               </tr>
+               <tr>
+                 <td>Databases</td>
+                 <td>MongoDB | Elastic Search | Pinecone | PostgreSQL | Redis</td>
+               </tr>
+               <tr>
+                 <td>Data Science & ML</td>
+                 <td>Pandas | NumPy | Scikit-learn</td>
+               </tr>
+               <tr>
+                 <td>Deep Learning</td>
+                 <td>TensorFlow | PyTorch</td>
+               </tr>
+               <tr>
+                 <td>DevOps</td>
+                 <td>Docker</td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+       </section>
+
        <!-- Favorite Online Courses Section -->
        <section id="online-courses">
          <h2>Favorite Online Courses</h2>
@@ -232,45 +271,6 @@
                <a href="https://www.youtube.com/playlist?list=PLOtl7M3yp-DX6ic0HGT0PUX_wiNmkWkXx" target="_blank">SBU CSE 373: Analysis of Algorithms</a>
              </h5>
            </article>
-         </div>
-       </section>
-
-       <!-- Skills Section -->
-       <section id="skills">
-         <h2>Technical Skills</h2>
-         <div class="table-wrapper">
-           <table>
-             <tbody>
-               <tr>
-                 <td>Programming Languages</td>
-                 <td>Python | JavaScript | TypeScript</td>
-               </tr>
-               <tr>
-                 <td>Frontend</td>
-                 <td>Angular | React | Tailwind</td>
-               </tr>
-               <tr>
-                 <td>Backend & APIs</td>
-                 <td>FastAPI | NodeJS | Express | Flask</td>
-               </tr>
-               <tr>
-                 <td>Databases</td>
-                 <td>MongoDB | Elastic Search | Pinecone | PostgreSQL | Redis</td>
-               </tr>
-               <tr>
-                 <td>Data Science & ML</td>
-                 <td>Pandas | NumPy | Scikit-learn</td>
-               </tr>
-               <tr>
-                 <td>Deep Learning</td>
-                 <td>TensorFlow | PyTorch</td>
-               </tr>
-               <tr>
-                 <td>DevOps</td>
-                 <td>Docker</td>
-               </tr>
-             </tbody>
-           </table>
          </div>
        </section>
 
@@ -339,15 +339,21 @@
     <script src="./static/assets/js/breakpoints.min.js"></script>
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
-     <script>
-      window.addEventListener("DOMContentLoaded", function () {
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Only add chatbot if not on mobile
         if (window.innerWidth > 768) {
           const chatbotHTML = `
             <div id="chatbot-container">
-              <iframe id="chatbot-iframe" src="https://artificial-me.onrender.com/" title="Chatbot"></iframe>
+              <iframe
+                id="chatbot-iframe"
+                src="https://gonext.lol/chat"
+                title="GONEXT Chat"
+                allow="microphone"
+              ></iframe>
             </div>
-            <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">
-              <i class="fas fa-comment"></i>
+            <button id="chatbot-toggle" aria-expanded="false">
+              <i class="fas fa-comments"></i>
               <span class="toggle-text">Chat</span>
             </button>
           `;
@@ -397,6 +403,5 @@
         }
       });
     </script>
-
   </body>
 </html>
