@@ -340,20 +340,14 @@
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Only add chatbot if not on mobile
+      window.addEventListener("DOMContentLoaded", function () {
         if (window.innerWidth > 768) {
           const chatbotHTML = `
             <div id="chatbot-container">
-              <iframe
-                id="chatbot-iframe"
-                src="https://gonext.lol/chat"
-                title="GONEXT Chat"
-                allow="microphone"
-              ></iframe>
+              <iframe id="chatbot-iframe" src="https://artificial-me.onrender.com/" title="Chatbot"></iframe>
             </div>
-            <button id="chatbot-toggle" aria-expanded="false">
-              <i class="fas fa-comments"></i>
+            <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">
+              <i class="fas fa-comment"></i>
               <span class="toggle-text">Chat</span>
             </button>
           `;
