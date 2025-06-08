@@ -240,20 +240,28 @@
                 <td>Python | JavaScript | TypeScript</td>
               </tr>
               <tr>
-                <td>AI/ML Frameworks</td>
-                <td>TensorFlow | PyTorch | Scikit-learn | Hugging Face</td>
+                <td>Frontend</td>
+                <td>Angular | React | Tailwind</td>
               </tr>
               <tr>
-                <td>Web Technologies</td>
-                <td>React | Node.js | HTML5 | CSS3</td>
+                <td>Backend & APIs</td>
+                <td>FastAPI | NodeJS | Express | Flask</td>
               </tr>
               <tr>
                 <td>Databases</td>
-                <td>PostgreSQL | MongoDB | Redis</td>
+                <td>MongoDB | Elastic Search | Pinecone | PostgreSQL | Redis</td>
               </tr>
               <tr>
-                <td>Cloud & DevOps</td>
-                <td>AWS | Docker | Kubernetes | CI/CD</td>
+                <td>Data Science & ML</td>
+                <td>Pandas | NumPy | Scikit-learn | Plotly</td>
+              </tr>
+              <tr>
+                <td>Deep Learning</td>
+                <td>TensorFlow | PyTorch</td>
+              </tr>
+              <tr>
+                <td>DevOps</td>
+                <td>Docker</td>
               </tr>
             </tbody>
           </table>
@@ -355,14 +363,51 @@
        <!-- Footer -->
        <footer id="footer" role="contentinfo">
          <div class="inner">
-           <ul class="icons">
-             <li><a href="https://www.linkedin.com/in/kostadin-dev/" class="icon brands fa-linkedin" target="_blank" rel="noopener" aria-label="LinkedIn Profile"><span class="label">LinkedIn</span></a></li>
-             <li><a href="https://github.com/KostadinDev" class="icon brands fa-github" target="_blank" rel="noopener" aria-label="GitHub Profile"><span class="label">GitHub</span></a></li>
-             <li><a href="mailto:kostadin.g.devedzhiev@gmail.com" class="icon solid fa-envelope" aria-label="Email Contact"><span class="label">Email</span></a></li>
-           </ul>
-           <ul class="copyright">
-             <li>&copy; 2024 Kostadin Devedzhiev</li>
-             <li>Design: <a href="http://html5up.net" target="_blank" rel="noopener">HTML5 UP</a></li>
+           <ul class="icons" role="list">
+             <li>
+               <a
+                 href="https://www.linkedin.com/in/kostadin-dev/"
+                 class="icon brands fa-linkedin"
+                 aria-label="Connect with Kostadin on LinkedIn"
+                 title="LinkedIn Profile"
+                 target="_blank"
+                 rel="noopener"
+                 ><span class="label">LinkedIn</span></a
+               >
+             </li>
+             <li>
+               <a
+                 href="https://github.com/KostadinDev"
+                 class="icon brands fa-github"
+                 aria-label="View Kostadin's projects on GitHub"
+                 title="GitHub Profile"
+                 target="_blank"
+                 rel="noopener"
+                 ><span class="label">GitHub</span></a
+               >
+             </li>
+             <li>
+               <a
+                 href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0"
+                 class="icon brands fa-spotify"
+                 aria-label="Follow Kostadin on Spotify"
+                 title="Spotify Profile"
+                 target="_blank"
+                 rel="noopener"
+                 ><span class="label">Spotify</span></a
+               >
+             </li>
+             <li>
+               <a
+                 href="https://leetcode.com/u/user9852My/"
+                 class="icon solid fa-code"
+                 aria-label="View Kostadin's coding challenges on LeetCode"
+                 title="LeetCode Profile"
+                 target="_blank"
+                 rel="noopener"
+                 ><span class="label">LeetCode</span></a
+               >
+             </li>
            </ul>
          </div>
        </footer>
@@ -376,11 +421,13 @@
     <script src="./static/assets/js/util.js"></script>
     <script src="./static/assets/js/main.js"></script>
     
-    <!-- Enhanced JavaScript -->
+    <!-- Enhanced chatbot integration with error handling -->
     <script>
-      // Lazy loading for images
-      document.addEventListener('DOMContentLoaded', function() {
+      // Simplified image loading - let browser handle lazy loading natively
+      function initLazyLoading() {
         const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        // Just add loaded class when images finish loading for any custom styling
         images.forEach(img => {
           if (img.complete) {
             img.classList.add('loaded');
@@ -390,41 +437,166 @@
             });
           }
         });
-      });
+      }
       
-      // Chatbot initialization with error handling
-      document.addEventListener('DOMContentLoaded', function() {
+      // Enhanced chatbot initialization with error handling
+      function initChatbot() {
         try {
-          // Initialize chatbot if available
-          if (typeof initializeChatbot === 'function') {
-            initializeChatbot();
+          if (window.innerWidth > 768) {
+            const chatbotHTML = `
+              <div id="chatbot-container" role="complementary" aria-label="AI Assistant">
+                <iframe 
+                  id="chatbot-iframe" 
+                  src="https://artificial-me.onrender.com/" 
+                  title="AI Assistant Chatbot"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <button 
+                id="chatbot-toggle" 
+                aria-expanded="false" 
+                aria-controls="chatbot-container"
+                aria-label="Toggle AI Assistant"
+              >
+                <i class="fas fa-comment" aria-hidden="true"></i>
+                <span class="toggle-text">Chat</span>
+              </button>
+            `;
+            document.body.insertAdjacentHTML("beforeend", chatbotHTML);
+
+            // Enhanced toggle logic with better state management
+            const chatbot = document.getElementById("chatbot-container");
+            const main = document.getElementById("main");
+            const toggle = document.getElementById("chatbot-toggle");
+            const toggleText = toggle.querySelector(".toggle-text");
+            let toggleState = localStorage.getItem("chatbotToggleState") || "open";
+
+            function updateChatbotState(isOpen) {
+              if (isOpen) {
+                chatbot.classList.add("expanded");
+                toggle.classList.add("expanded");
+                main.style.width = "calc(100% - 30% - 320px)";
+                toggle.style.right = "320px";
+                toggleText.textContent = "Close";
+                toggle.setAttribute("aria-expanded", "true");
+                localStorage.setItem("chatbotToggleState", "open");
+              } else {
+                chatbot.classList.remove("expanded");
+                toggle.classList.remove("expanded");
+                main.style.width = "calc(100% - 30%)";
+                toggle.style.right = "0";
+                toggleText.textContent = "Chat";
+                toggle.setAttribute("aria-expanded", "false");
+                localStorage.setItem("chatbotToggleState", "closed");
+              }
+            }
+
+            // Initialize state
+            updateChatbotState(toggleState === "open");
+
+            // Toggle event listener
+            toggle.addEventListener("click", function() {
+              const isCurrentlyOpen = chatbot.classList.contains("expanded");
+              updateChatbotState(!isCurrentlyOpen);
+            });
+            
+            // Keyboard support
+            toggle.addEventListener("keydown", function(e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle.click();
+              }
+            });
           }
         } catch (error) {
-          console.warn('Chatbot initialization failed:', error);
+          console.warn("Chatbot initialization failed:", error);
+        }
+      }
+      
+      // Enhanced DOMContentLoaded with performance monitoring
+      window.addEventListener("DOMContentLoaded", function () {
+        // Remove preload class for smooth animations
+        setTimeout(() => {
+          document.body.classList.remove("is-preload");
+          document.body.classList.add("loaded");
+        }, 100);
+        
+        // Initialize features
+        initLazyLoading();
+        initChatbot();
+        
+        // Performance monitoring
+        if ('performance' in window) {
+          window.addEventListener('load', () => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            if (perfData && perfData.loadEventEnd > 3000) {
+              console.warn('Page load time is slow:', perfData.loadEventEnd + 'ms');
+            }
+          });
         }
       });
       
-      // Performance monitoring
-      if ('performance' in window) {
-        window.addEventListener('load', function() {
-          setTimeout(function() {
-            const perfData = performance.getEntriesByType('navigation')[0];
-            if (perfData && perfData.loadEventEnd > 0) {
-              console.log('Page load time:', perfData.loadEventEnd - perfData.fetchStart, 'ms');
-            }
-          }, 0);
-        });
+      // Error handling for failed resources
+      window.addEventListener('error', function(e) {
+        if (e.target.tagName === 'IMG') {
+          console.warn('Image failed to load:', e.target.src);
+          // Could add fallback image here
+        }
+      });
+      
+      // Enhanced error tracking and performance monitoring
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+      });
+      
+      // Track Core Web Vitals
+      function trackWebVitals() {
+        if ('web-vital' in window) {
+          // This would integrate with web-vitals library if available
+          return;
+        }
+        
+        // Basic performance tracking
+        if ('performance' in window && 'PerformanceObserver' in window) {
+          // Track Largest Contentful Paint
+          try {
+            const observer = new PerformanceObserver((list) => {
+              const entries = list.getEntries();
+              const lastEntry = entries[entries.length - 1];
+              console.log('LCP:', lastEntry.startTime);
+            });
+            observer.observe({ entryTypes: ['largest-contentful-paint'] });
+          } catch (e) {
+            console.warn('LCP tracking not supported');
+          }
+          
+          // Track First Input Delay
+          try {
+            const observer = new PerformanceObserver((list) => {
+              const entries = list.getEntries();
+              entries.forEach((entry) => {
+                console.log('FID:', entry.processingStart - entry.startTime);
+              });
+            });
+            observer.observe({ entryTypes: ['first-input'] });
+          } catch (e) {
+            console.warn('FID tracking not supported');
+          }
+        }
       }
       
-      // Service Worker registration for PWA
+      // Initialize performance tracking
+      trackWebVitals();
+      
+      // Service Worker registration for performance
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
           navigator.serviceWorker.register('/sw.js')
             .then(function(registration) {
-              console.log('SW registered: ', registration);
+              console.log('ServiceWorker registration successful');
             })
-            .catch(function(registrationError) {
-              console.log('SW registration failed: ', registrationError);
+            .catch(function(error) {
+              console.log('ServiceWorker registration failed:', error);
             });
         });
       }
