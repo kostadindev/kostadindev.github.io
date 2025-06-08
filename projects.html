@@ -3,59 +3,90 @@
   <head>
     <meta charset="utf-8" />
     <title>Kostadin Devedzhiev | Projects</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
+    <!-- Enhanced viewport for better mobile experience -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta
       name="description"
-      content="Explore projects by Kostadin Devedzhiev, a software engineer specializing in Human-Inspired AI, NLP, and UI design."
+      content="Explore innovative projects by Kostadin Devedzhiev, including AI-powered tools, NLP systems, and interactive applications. From GONEXT to Recursive QA and gesture recognition systems."
     />
     <meta name="author" content="Kostadin Devedzhiev" />
     <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#e89a3c" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://kostadindev.github.io/projects.html" />
 
-    <!-- Open Graph / Twitter -->
+    <!-- Enhanced Open Graph / Twitter -->
     <meta property="og:title" content="Kostadin Devedzhiev | Projects" />
     <meta
       property="og:description"
-      content="Discover Kostadin's work in AI-powered tools, interactive systems, and NLP research."
+      content="Discover innovative AI projects including GONEXT, Recursive QA, and gesture recognition systems by software engineer Kostadin Devedzhiev."
     />
     <meta
       property="og:image"
-      content="https://yourdomain.com/static/images/headshot.jpg"
+      content="https://kostadindev.github.io/static/images/gonext-cover-chat.webp"
     />
-    <meta property="og:url" content="https://yourdomain.com/projects.html" />
+    <meta property="og:url" content="https://kostadindev.github.io/projects.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Kostadin Devedzhiev Portfolio" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@kostadindev" />
+    <meta name="twitter:title" content="Kostadin Devedzhiev | Projects" />
+    <meta name="twitter:description" content="Innovative AI projects and software engineering solutions." />
+    <meta name="twitter:image" content="https://kostadindev.github.io/static/images/gonext-cover-chat.webp" />
 
-    <!-- Schema.org JSON-LD -->
+    <!-- Enhanced Schema.org JSON-LD -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Kostadin Devedzhiev",
-        "url": "https://yourdomain.com",
-        "image": "https://yourdomain.com/static/images/headshot.jpg",
+        "url": "https://kostadindev.github.io",
+        "image": "https://kostadindev.github.io/static/images/headshot.jpg",
         "jobTitle": "Software Engineer",
+        "description": "Software engineer focused on Human-Inspired AI, NLP, and UI design",
         "worksFor": {
           "@type": "Organization",
-          "name": "Stellar Cyber"
+          "name": "Stellar Cyber",
+          "url": "https://stellarcyber.ai"
         },
+        "alumniOf": {
+          "@type": "Organization",
+          "name": "University of Cambridge"
+        },
+        "knowsAbout": ["Artificial Intelligence", "Natural Language Processing", "User Interface Design", "Cybersecurity", "Machine Learning"],
         "sameAs": [
           "https://www.linkedin.com/in/kostadin-dev/",
-          "https://github.com/KostadinDev"
+          "https://github.com/KostadinDev",
+          "https://gonext.lol"
         ]
       }
     </script>
-
+    
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//artificial-me.onrender.com" />
+    
+    <!-- Preload critical resources -->
     <link
       rel="preload"
       as="image"
       href="./static/images/gonext-cover-chat.webp"
+      fetchpriority="high"
     />
     <link rel="preload" as="image" href="./static/images/headshot.jpg" />
     <link rel="preload" as="image" href="./static/images/bg.webp" />
+    
+    <!-- Font loading optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- CSS loading optimization -->
     <link
       rel="preload"
       href="./static/assets/css/fontawesome-all.min.css"
@@ -67,25 +98,30 @@
         rel="stylesheet"
         href="./static/assets/css/fontawesome-all.min.css"
     /></noscript>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,400&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="./static/assets/css/main.css" />
+    
+    <!-- Favicon and app icons -->
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
-
-    <style></style>
+    <link rel="apple-touch-icon" href="./static/images/headshot.jpg" />
+    
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/manifest.json" />
   </head>
 
   <body class="is-preload">
+    <!-- Skip to main content for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
     <!-- Header -->
-    <header id="header">
+    <header id="header" role="banner">
       <div class="inner">
-        <a href="index.html" class="image avatar">
+        <a href="index.html" class="image avatar" aria-label="Kostadin Devedzhiev - Home">
           <img
             src="./static/images/headshot.jpg"
             alt="Kostadin Devedzhiev Profile Picture"
             width="200"
+            height="200"
+            fetchpriority="high"
           />
         </a>
         <h1><strong>Kostadin Devedzhiev</strong></h1>
@@ -99,11 +135,12 @@
           class="cv"
           target="_blank"
           rel="noopener"
+          aria-label="Download Curriculum Vitae (PDF)"
           >Curriculum Vitae</a
         >
-        <nav id="main-nav">
+        <nav id="main-nav" role="navigation" aria-label="Main navigation">
           <div class="nav-link"><a href="index.html">Home</a></div>
-          <div class="nav-link"><a href="projects.html">Projects</a></div>
+          <div class="nav-link"><a href="projects.html" aria-current="page">Projects</a></div>
           <div class="nav-link">
             <a href="publications.html">Publications</a>
           </div>
@@ -113,200 +150,324 @@
     </header>
 
     <!-- Main -->
-    <div id="main">
-      <section id="two">
-        <h2>Projects</h2>
+    <main id="main" role="main">
+      <section id="two" aria-labelledby="projects-heading">
+        <h2 id="projects-heading">Projects</h2>
         <div class="row">
 
           <!-- Project 2: Recursive QA -->
-          <article class="col-12 work-item">
-            <h3>
-              <a href="https://github.com/KostadinDev/Recursive-QA" target="_blank" rel="noopener">Recursive QA</a> &nbsp;&nbsp;
-              <a
-                href="https://github.com/KostadinDev/Recursive-QA"
-                target="_blank"
-                class="icon brands fa-github"
-              >
-                <span class="label">Github</span>
-              </a>
-            </h3>
-            <p>
-An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs, significantly simplifying the annotation process. Additionally, it integrates visualization tools, user management capabilities, and comprehensive history tracking to enhance annotation accuracy and quality control.
+          <article class="col-12 work-item" itemscope itemtype="https://schema.org/SoftwareApplication">
+            <header>
+              <h3 itemprop="name">
+                <a href="https://github.com/KostadinDev/Recursive-QA" target="_blank" rel="noopener" itemprop="url">Recursive QA</a> &nbsp;&nbsp;
+                <a
+                  href="https://github.com/KostadinDev/Recursive-QA"
+                  target="_blank"
+                  rel="noopener"
+                  class="icon brands fa-github"
+                  aria-label="View Recursive QA source code on GitHub"
+                >
+                  <span class="label">GitHub</span>
+                </a>
+              </h3>
+            </header>
+            <p itemprop="description">
+              An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs, significantly simplifying the annotation process. Additionally, it integrates visualization tools, user management capabilities, and comprehensive history tracking to enhance annotation accuracy and quality control.
             </p>
             <a
               href="./static/images/recursiveqa-cover.jpg"
               class="image fit thumb"
+              aria-label="View larger image of Recursive QA interface"
             >
               <img
                 src="./static/images/recursiveqa-cover.jpg"
-                alt="Recursive QA screenshot"
+                alt="Screenshot of Recursive QA showing the annotation interface with question-answering methodology"
+                loading="lazy"
+                width="600"
+                height="400"
               />
             </a>
           </article>
 
           <!-- Project 3: I Want to Redistrict -->
-          <article class="col-12 work-item">
-            <h3>I Want to Redistrict</h3>
-            <p>
- A political science application developed to create and evaluate state districting plans through statistical analysis. Its primary purpose is to identify gerrymandering and support the generation of equitable district maps under human supervision, utilizing data sourced from the 2020 Census. The tool operates on the advanced computational capabilities provided by Stony Brook University's SeaWulf supercomputer.
+          <article class="col-12 work-item" itemscope itemtype="https://schema.org/SoftwareApplication">
+            <header>
+              <h3 itemprop="name">I Want to Redistrict</h3>
+            </header>
+            <p itemprop="description">
+              A political science application developed to create and evaluate state districting plans through statistical analysis. Its primary purpose is to identify gerrymandering and support the generation of equitable district maps under human supervision, utilizing data sourced from the 2020 Census. The tool operates on the advanced computational capabilities provided by Stony Brook University's SeaWulf supercomputer.
             </p>
-            <a href="./static/images/redistrict.png" class="image fit thumb">
+            <a href="./static/images/redistrict.png" class="image fit thumb" aria-label="View larger image of redistricting tool">
               <img
                 src="./static/images/redistrict.png"
-                alt="Redistrict tool screenshot"
+                alt="Screenshot of redistricting tool showing district map analysis and statistical evaluation"
+                loading="lazy"
+                width="600"
+                height="400"
               />
             </a>
           </article>
 
-          <!-- Next 3 projects: half width -->
           <!-- Project 4: Deep Gestures -->
-          <article class="col-12 work-item">
-            <h3>
-              <a href="https://github.com/KostadinDev/deep-gestures" target="_blank" rel="noopener">Deep Gestures</a> &nbsp;&nbsp;
-              <a
-                href="https://github.com/KostadinDev/deep-gestures"
-                target="_blank"
-                class="icon brands fa-github"
-              >
-                <span class="label">Github</span>
-              </a>
-            </h3>
-            <p>
-A comprehensive pipeline encompassing data collection, preprocessing, model training, optimization, and deployment, tailored specifically to develop an optimized CNN for gesture recognition on the Arduino Nano 33 BLE Sense microcontroller. The pipeline leverages the device's integrated 3D accelerometer, gyroscope, and magnetometer sensors to accurately detect orientation, motion, and vibration.
+          <article class="col-12 work-item" itemscope itemtype="https://schema.org/SoftwareApplication">
+            <header>
+              <h3 itemprop="name">
+                <a href="https://github.com/KostadinDev/deep-gestures" target="_blank" rel="noopener" itemprop="url">Deep Gestures</a> &nbsp;&nbsp;
+                <a
+                  href="https://github.com/KostadinDev/deep-gestures"
+                  target="_blank"
+                  rel="noopener"
+                  class="icon brands fa-github"
+                  aria-label="View Deep Gestures source code on GitHub"
+                >
+                  <span class="label">GitHub</span>
+                </a>
+              </h3>
+            </header>
+            <p itemprop="description">
+              A comprehensive pipeline encompassing data collection, preprocessing, model training, optimization, and deployment, tailored specifically to develop an optimized CNN for gesture recognition on the Arduino Nano 33 BLE Sense microcontroller. The pipeline leverages the device's integrated 3D accelerometer, gyroscope, and magnetometer sensors to accurately detect orientation, motion, and vibration.
             </p>
             <a
               href="./static/images/deep-gestures-image.jpg"
               class="image fit thumb"
+              aria-label="View larger image of Deep Gestures system"
             >
               <img
                 src="./static/images/deep-gestures-image.jpg"
-                alt="Deep Gestures screenshot"
+                alt="Deep Gestures CNN pipeline showing gesture recognition on Arduino microcontroller"
+                loading="lazy"
+                width="600"
+                height="400"
               />
             </a>
           </article>
 
           <!-- Project 5: Symbiotic Learning -->
-          <article class="col-12 work-item">
-            <h3><a href="https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" target="_blank" rel="noopener">Symbiotic Learning</a></h3>
-            <p>
-A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing significantly to the conservation of Hawaii's ecosystems. The tool continuously enhances its accuracy through real-time training, progressively offering more accurate suggestions to support annotators effectively. <a href="https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" target="_blank" rel="noopener">[UH Hilo Stories, 2020]</a>
+          <article class="col-12 work-item" itemscope itemtype="https://schema.org/SoftwareApplication">
+            <header>
+              <h3 itemprop="name"><a href="https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" target="_blank" rel="noopener" itemprop="url">Symbiotic Learning</a></h3>
+            </header>
+            <p itemprop="description">
+              A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing significantly to the conservation of Hawaii's ecosystems. The tool continuously enhances its accuracy through real-time training, progressively offering more accurate suggestions to support annotators effectively. <a href="https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" target="_blank" rel="noopener" aria-label="UH Hilo Stories article about Symbiotic Learning">[UH Hilo Stories, 2020]</a>
             </p>
             <a
               href="https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
               class="image fit thumb"
+              aria-label="View larger image of Symbiotic Learning system"
             >
               <img
                 src="https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
-                alt="Symbiotic Learning screenshot"
+                alt="Symbiotic Learning system interface showing invasive species detection in aerial imagery"
+                loading="lazy"
+                width="600"
+                height="400"
               />
             </a>
           </article>
         </div>
       </section>
+    </main>
 
-      <!-- Footer -->
-      <footer id="footer">
-        <div class="inner">
-          <ul class="icons">
-            <li>
-              <a
-                href="https://www.linkedin.com/in/kostadin-dev/"
-                class="icon brands fa-linkedin"
-                ><span class="label">LinkedIn</span></a
-              >
-            </li>
-            <li>
-              <a
-                href="https://github.com/KostadinDev"
-                class="icon brands fa-github"
-                ><span class="label">GitHub</span></a
-              >
-            </li>
-            <li>
-              <a
-                href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0"
-                class="icon brands alt fa-spotify"
-                ><span class="label">Spotify</span></a
-              >
-            </li>
-            <li>
-              <a
-                href="https://leetcode.com/u/user9852My/"
-                class="icon solid fa-code"
-                aria-label="LeetCode Profile"
-                title="LeetCode Profile"
-                ><span class="label">LeetCode</span></a
-              >
-            </li>
-          </ul>
-        </div>
-      </footer>
-    </div>
-    <!-- Scripts -->
-    <script src="./static/assets/js/jquery.min.js"></script>
-    <script src="./static/assets/js/jquery.poptrox.min.js"></script>
-    <script src="./static/assets/js/browser.min.js"></script>
-    <script src="./static/assets/js/breakpoints.min.js"></script>
-    <script src="./static/assets/js/util.js"></script>
-    <script src="./static/assets/js/main.js"></script>
+    <!-- Footer -->
+    <footer id="footer" role="contentinfo">
+      <div class="inner">
+        <ul class="icons" role="list">
+          <li>
+            <a
+              href="https://www.linkedin.com/in/kostadin-dev/"
+              class="icon brands fa-linkedin"
+              aria-label="Connect with Kostadin on LinkedIn"
+              title="LinkedIn Profile"
+              target="_blank"
+              rel="noopener"
+              ><span class="label">LinkedIn</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/KostadinDev"
+              class="icon brands fa-github"
+              aria-label="View Kostadin's projects on GitHub"
+              title="GitHub Profile"
+              target="_blank"
+              rel="noopener"
+              ><span class="label">GitHub</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0"
+              class="icon brands fa-spotify"
+              aria-label="Follow Kostadin on Spotify"
+              title="Spotify Profile"
+              target="_blank"
+              rel="noopener"
+              ><span class="label">Spotify</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="https://leetcode.com/u/user9852My/"
+              class="icon solid fa-code"
+              aria-label="View Kostadin's coding challenges on LeetCode"
+              title="LeetCode Profile"
+              target="_blank"
+              rel="noopener"
+              ><span class="label">LeetCode</span></a
+            >
+          </li>
+        </ul>
+      </div>
+    </footer>
 
+    <!-- Scripts with defer and error handling -->
+    <script src="./static/assets/js/jquery.min.js" defer></script>
+    <script src="./static/assets/js/jquery.poptrox.min.js" defer></script>
+    <script src="./static/assets/js/browser.min.js" defer></script>
+    <script src="./static/assets/js/breakpoints.min.js" defer></script>
+    <script src="./static/assets/js/util.js" defer></script>
+    <script src="./static/assets/js/main.js" defer></script>
+    
+    <!-- Enhanced JavaScript with error handling -->
     <script>
+      // Simplified image loading - let browser handle lazy loading natively
+      function initLazyLoading() {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        
+        // Just add loaded class when images finish loading for any custom styling
+        images.forEach(img => {
+          if (img.complete) {
+            img.classList.add('loaded');
+          } else {
+            img.addEventListener('load', () => {
+              img.classList.add('loaded');
+            });
+          }
+        });
+      }
+      
+      // Enhanced chatbot initialization with error handling
+      function initChatbot() {
+        try {
+          if (window.innerWidth > 768) {
+            const chatbotHTML = `
+              <div id="chatbot-container" role="complementary" aria-label="AI Assistant">
+                <iframe 
+                  id="chatbot-iframe" 
+                  src="https://artificial-me.onrender.com/" 
+                  title="AI Assistant Chatbot"
+                  loading="lazy"
+                ></iframe>
+              </div>
+              <button 
+                id="chatbot-toggle" 
+                aria-expanded="false" 
+                aria-controls="chatbot-container"
+                aria-label="Toggle AI Assistant"
+              >
+                <i class="fas fa-comment" aria-hidden="true"></i>
+                <span class="toggle-text">Chat</span>
+              </button>
+            `;
+            document.body.insertAdjacentHTML("beforeend", chatbotHTML);
+
+            // Enhanced toggle logic with better state management
+            const chatbot = document.getElementById("chatbot-container");
+            const main = document.getElementById("main");
+            const toggle = document.getElementById("chatbot-toggle");
+            const toggleText = toggle.querySelector(".toggle-text");
+            let toggleState = localStorage.getItem("chatbotToggleState") || "open";
+
+            function updateChatbotState(isOpen) {
+              if (isOpen) {
+                chatbot.classList.add("expanded");
+                toggle.classList.add("expanded");
+                main.style.width = "calc(100% - 30% - 320px)";
+                toggle.style.right = "320px";
+                toggleText.textContent = "Close";
+                toggle.setAttribute("aria-expanded", "true");
+                localStorage.setItem("chatbotToggleState", "open");
+              } else {
+                chatbot.classList.remove("expanded");
+                toggle.classList.remove("expanded");
+                main.style.width = "calc(100% - 30%)";
+                toggle.style.right = "0";
+                toggleText.textContent = "Chat";
+                toggle.setAttribute("aria-expanded", "false");
+                localStorage.setItem("chatbotToggleState", "closed");
+              }
+            }
+
+            // Initialize state
+            updateChatbotState(toggleState === "open");
+
+            // Toggle event listener
+            toggle.addEventListener("click", function() {
+              const isCurrentlyOpen = chatbot.classList.contains("expanded");
+              updateChatbotState(!isCurrentlyOpen);
+            });
+            
+            // Keyboard support
+            toggle.addEventListener("keydown", function(e) {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                toggle.click();
+              }
+            });
+          }
+        } catch (error) {
+          console.warn("Chatbot initialization failed:", error);
+        }
+      }
+      
+      // Enhanced DOMContentLoaded with performance monitoring
       window.addEventListener("DOMContentLoaded", function () {
-        if (window.innerWidth > 768) {
-          const chatbotHTML = `
-            <div id="chatbot-container">
-              <iframe id="chatbot-iframe" src="https://artificial-me.onrender.com/" title="Chatbot"></iframe>
-            </div>
-            <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">
-              <i class="fas fa-comment"></i>
-              <span class="toggle-text">Chat</span>
-            </button>
-          `;
-          document.body.insertAdjacentHTML("beforeend", chatbotHTML);
-
-          // Rebind toggle logic
-          const chatbot = document.getElementById("chatbot-container");
-          const main = document.getElementById("main");
-          const toggle = document.getElementById("chatbot-toggle");
-          const toggleText = toggle.querySelector(".toggle-text");
-          let toggleState = localStorage.getItem("chatbotToggleState");
-
-          // Default to open if no state is saved
-          if (!toggleState) {
-            toggleState = "open";
-            localStorage.setItem("chatbotToggleState", "open");
-          }
-
-          if (toggleState === "open") {
-            chatbot.classList.add("expanded");
-            toggle.classList.add("expanded");
-            main.style.width = "calc(100% - 30% - 320px)";
-            toggle.style.right = "320px";
-            toggleText.textContent = "Close";
-            toggle.setAttribute("aria-expanded", "true");
-          }
-
-          toggle.addEventListener("click", function () {
-            if (chatbot.classList.contains("expanded")) {
-              chatbot.classList.remove("expanded");
-              toggle.classList.remove("expanded");
-              main.style.width = "calc(100% - 30%)";
-              toggle.style.right = "0";
-              toggleText.textContent = "Chat";
-              toggle.setAttribute("aria-expanded", "false");
-              localStorage.setItem("chatbotToggleState", "closed");
-            } else {
-              chatbot.classList.add("expanded");
-              toggle.classList.add("expanded");
-              main.style.width = "calc(100% - 30% - 320px)";
-              toggle.style.right = "320px";
-              toggleText.textContent = "Close";
-              toggle.setAttribute("aria-expanded", "true");
-              localStorage.setItem("chatbotToggleState", "open");
+        // Remove preload class for smooth animations
+        setTimeout(() => {
+          document.body.classList.remove("is-preload");
+          document.body.classList.add("loaded");
+        }, 100);
+        
+        // Initialize features
+        initLazyLoading();
+        initChatbot();
+        
+        // Performance monitoring
+        if ('performance' in window) {
+          window.addEventListener('load', () => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            if (perfData && perfData.loadEventEnd > 3000) {
+              console.warn('Page load time is slow:', perfData.loadEventEnd + 'ms');
             }
           });
         }
       });
+      
+      // Error handling for failed resources
+      window.addEventListener('error', function(e) {
+        if (e.target.tagName === 'IMG') {
+          console.warn('Image failed to load:', e.target.src);
+          // Could add fallback image here
+        }
+      });
+      
+      // Enhanced error tracking and performance monitoring
+      window.addEventListener('unhandledrejection', function(e) {
+        console.error('Unhandled promise rejection:', e.reason);
+      });
+      
+      // Service Worker registration for performance
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(function(error) {
+              console.log('ServiceWorker registration failed:', error);
+            });
+        });
+      }
     </script>
   </body>
 </html>
