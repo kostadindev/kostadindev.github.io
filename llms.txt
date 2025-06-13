@@ -1,0 +1,117 @@
+# Kostadin Devedzhiev – Profile Summary
+
+## 🧑‍💻 Professional Summary
+
+**Software Engineer** at **Stellar Cyber** with expertise in:
+- Natural Language Processing (NLP)
+- Human-Centered AI
+- UI/UX Design
+- Intelligent Interactive Systems  
+Focused on building AI interfaces that enhance human-machine interaction through language, vision, and reasoning.
+
+---
+
+## 🎓 Education
+
+### **Stony Brook University**
+- **B.S. in Computer Science & Applied Mathematics and Statistics**
+- Specialization: Artificial Intelligence & Data Science
+- Computer Science Honors Program
+- **GPA:** 3.89 / 4.00, **Summa Cum Laude**
+
+### **University of Hawaii at Hilo**
+- National Student Exchange Program
+- **GPA:** 3.97 / 4.00
+
+---
+
+## 🔬 Work & Research Experience
+
+### **Stellar Cyber** | *Software Engineer* (2022–Present)
+- Developed **Open XDR Investigator**, a GenAI cybersecurity assistant with Elasticsearch and multi-chart visualization via natural language.
+- Built **WebSocket pipelines** for real-time communication and reduced response time by 70%.
+- Created **GPT-based agents** for log analysis, metrics evaluation, and more.
+- Designed and maintained **Mixpanel-based analytics**, driving UX improvements.
+- Achieved over 90% test coverage; reduced bugs by 34% YoY.
+
+### **Stony Brook University** | *NLP Research Assistant*
+- Designed **Recursive QA**, an annotation framework based on parse tree-derived QA tasks.
+- Developed a full-stack annotation web app with user management and analytics.
+- Reached 80% agreement rate and 25-second annotation speed.
+
+### **University of Hawaii at Hilo**
+- Created **semi-automatic image annotation tool** for invasive species identification via drone imagery and CNNs.
+- Developed API for **holographic fan** control; built Data Viz lab website.
+
+### **Vivansa** | *Software Engineering Intern*
+- Improved CRM UI and resolved database inconsistencies via structured data cleaning.
+
+---
+
+## 🧑‍🏫 Teaching Experience
+
+- **Stony Brook TA** – AMS 210: Applied Linear Algebra
+- **UH Hilo Grader** – Linear Algebra & Intro to Computer Science
+
+---
+
+## 📚 Publication
+
+### *Motional EMF in Ellipses*
+- **European Journal of Physics (2020)**
+- Developed numerical models for EMF induced in deformed elliptical loops.
+- DOI: [10.1088/1361-6404/ABB066](https://doi.org/10.1088/1361-6404/ABB066)
+
+---
+
+## 💡 Projects
+
+### **GONEXT**
+- Real-time League of Legends assistant powered by GPT-4o and Riot API.
+- Provides strategies, synergies, and matchups based on live game data.
+- [GitHub](https://github.com/kostadindev/GONEXT)
+
+### **Knowledge Base Builder**
+- Converts documents, websites, and GitHub content into Markdown for RAG and LLMs.
+- [GitHub](https://github.com/kostadindev/knowledge-base-builder)
+
+### **Recursive QA**
+- NLP annotation framework using QA pairs from parse trees.
+- [GitHub](https://github.com/kostadindev/Recursive-QA)
+
+### **Deep Gestures**
+- Real-time CNN for gesture recognition on Arduino BLE microcontrollers.
+
+### **I Want to Redistrict**
+- Web app visualizing fair districting plans using US Census data and stochastic algorithms.
+
+---
+
+## 🧠 Research Interests
+
+- Human-Machine Interaction
+- Human-Inspired AI
+- Prompt Engineering
+- NLP Annotation Interfaces
+- Interactive AI Systems
+
+---
+
+## 🛠 Technical Skills
+
+- **Languages**: Python, JavaScript, TypeScript, Java, C
+- **Frontend**: React, Angular, Tailwind
+- **Backend**: FastAPI, Flask, Node.js, Express
+- **Databases**: MongoDB, PostgreSQL, Redis, Elasticsearch, Pinecone
+- **ML/DL**: Pandas, NumPy, Scikit-learn, TensorFlow, PyTorch
+- **DevOps**: Docker
+- **Certifications**: IBM Generative AI with LLMs
+
+---
+
+## 🌐 Online Presence
+
+- **Portfolio**: [kostadindev.github.io](https://kostadindev.github.io/)
+- **GitHub**: [github.com/kostadindev](https://github.com/kostadindev)
+- **LinkedIn**: [linkedin.com/in/kostadin-devedzhiev-23674b162](https://www.linkedin.com/in/kostadin-devedzhiev-23674b162/)
+- **LeetCode**: [leetcode.com/kostadindev](https://leetcode.com/kostadindev)
