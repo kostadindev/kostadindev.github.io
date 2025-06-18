@@ -372,11 +372,28 @@ A human-in-the-loop image annotation system created to identify and classify inv
     </script>
 
     <script>
-      // Project filtering functionality
+      // Project filtering functionality with URL sync
       document.addEventListener('DOMContentLoaded', function() {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projects = document.querySelectorAll('.work-item');
         const projectsContainer = document.getElementById('projects-container');
+        
+        // Get URL parameters
+        function getUrlParameter(name) {
+          const urlParams = new URLSearchParams(window.location.search);
+          return urlParams.get(name);
+        }
+        
+        // Set URL parameter
+        function setUrlParameter(name, value) {
+          const url = new URL(window.location);
+          if (value === 'all') {
+            url.searchParams.delete(name);
+          } else {
+            url.searchParams.set(name, value);
+          }
+          window.history.replaceState({}, '', url);
+        }
         
         // Remove existing no-results message if any
         function removeNoResultsMessage() {
@@ -418,18 +435,31 @@ A human-in-the-loop image annotation system created to identify and classify inv
           }
         }
         
+        // Update active button
+        function updateActiveButton(filter) {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          const activeButton = document.querySelector(`[data-filter="${filter}"]`);
+          if (activeButton) {
+            activeButton.classList.add('active');
+          }
+        }
+        
+        // Apply filter and update URL
+        function applyFilter(filter) {
+          filterProjects(filter);
+          updateActiveButton(filter);
+          setUrlParameter('filter', filter);
+        }
+        
+        // Initialize filter from URL on page load
+        const initialFilter = getUrlParameter('filter') || 'all';
+        applyFilter(initialFilter);
+        
         // Add click event listeners to filter buttons
         filterButtons.forEach(button => {
           button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            // Filter projects
             const filter = this.getAttribute('data-filter');
-            filterProjects(filter);
+            applyFilter(filter);
           });
         });
       });
