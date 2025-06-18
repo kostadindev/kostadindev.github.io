@@ -74,7 +74,140 @@
     <link rel="stylesheet" href="./static/assets/css/main.css" />
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
 
-    <style></style>
+    <style>
+      /* Filter styles - positioned inline with header */
+      .projects-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+      }
+      
+      .projects-content {
+        flex: 1;
+      }
+      
+      .filter-sidebar {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      
+      .filter-buttons {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      
+      .filter-btn {
+        background: transparent;
+        border: 1px solid #ccc;
+        color: #666;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 0.85rem;
+        white-space: nowrap;
+      }
+      
+      .filter-btn:hover {
+        background: #e89a3c;
+        color: white;
+        border-color: #e89a3c;
+      }
+      
+      .filter-btn.active {
+        background: #e89a3c;
+        color: white;
+        border-color: #e89a3c;
+      }
+      
+      /* Project tags - inline with project names */
+      .project-header {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 0.5rem;
+      }
+      
+      .project-title {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        flex: 1;
+        min-width: 0;
+      }
+      
+      .project-title h3 {
+        margin: 0;
+        line-height: 1.2;
+      }
+      
+      .project-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      
+      .project-tag {
+        background: #f0f0f0;
+        color: #666;
+        padding: 0.2rem 0.6rem;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        border: 1px solid #ddd;
+        white-space: nowrap;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+      }
+      
+      /* Hide filtered projects */
+      .work-item.hidden {
+        display: none;
+      }
+      
+      /* No results message */
+      .no-results {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+        font-style: italic;
+      }
+      
+      /* Responsive design */
+      @media screen and (max-width: 980px) {
+        .projects-header {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        
+        .filter-sidebar {
+          justify-content: center;
+        }
+      }
+      
+      @media screen and (max-width: 736px) {
+        .project-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.5rem;
+        }
+        
+        .project-tags {
+          justify-content: flex-start;
+        }
+        
+        .filter-buttons {
+          justify-content: center;
+        }
+      }
+    </style>
   </head>
 
   <body class="is-preload">
@@ -115,92 +248,137 @@
     <!-- Main -->
     <div id="main">
       <section id="two">
-        <h2>Projects</h2>
-        <div class="row">
+        <div class="projects-header">
+          <h2>Projects</h2>
+          <!-- Filter Sidebar -->
+          <div class="filter-sidebar">
+            <div class="filter-buttons">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="nlp">NLP</button>
+              <button class="filter-btn" data-filter="computer-vision">Computer Vision</button>
+              <button class="filter-btn" data-filter="genai">GenAI</button>
+              <button class="filter-btn" data-filter="hpc">HPC</button>
+              <button class="filter-btn" data-filter="iot">IoT</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="projects-content">
+          <div class="row" id="projects-container">
 
-          <!-- Project 2: Recursive QA -->
-          <article class="col-12 work-item">
-            <h3>
-              <a href="https://github.com/KostadinDev/Recursive-QA" target="_blank" rel="noopener">Recursive QA</a> &nbsp;&nbsp;
-              <a
-                href="https://github.com/KostadinDev/Recursive-QA"
-                target="_blank"
-                class="icon brands fa-github"
-              >
-                <span class="label">Github</span>
-              </a>
-            </h3>
-            <p>
+            <!-- Project 2: Recursive QA -->
+            <article class="col-12 work-item" data-tags="nlp">
+              <div class="project-header">
+                <div class="project-title">
+                  <h3>
+                    <a href="https://github.com/KostadinDev/Recursive-QA" target="_blank" rel="noopener">Recursive QA</a> &nbsp;&nbsp;
+                    <a
+                      href="https://github.com/KostadinDev/Recursive-QA"
+                      target="_blank"
+                      class="icon brands fa-github"
+                    >
+                      <span class="label">Github</span>
+                    </a>
+                  </h3>
+                  <div class="project-tags">
+                    <span class="project-tag">NLP</span>
+                  </div>
+                </div>
+              </div>
+              <p>
 An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs, significantly simplifying the annotation process. Additionally, it integrates visualization tools, user management capabilities, and comprehensive history tracking to enhance annotation accuracy and quality control.
-            </p>
-            <a
-              href="./static/images/recursiveqa-cover.jpg"
-              class="image fit thumb"
-            >
-              <img
-                src="./static/images/recursiveqa-cover.jpg"
-                alt="Recursive QA screenshot"
-              />
-            </a>
-          </article>
-
-          <!-- Project 3: I Want to Redistrict -->
-          <article class="col-12 work-item">
-            <h3>I Want to Redistrict</h3>
-            <p>
- A political science application developed to create and evaluate state districting plans through statistical analysis. Its primary purpose is to identify gerrymandering and support the generation of equitable district maps under human supervision, utilizing data sourced from the 2020 Census. The tool operates on the advanced computational capabilities provided by Stony Brook University's SeaWulf supercomputer.
-            </p>
-            <a href="./static/images/redistrict.png" class="image fit thumb">
-              <img
-                src="./static/images/redistrict.png"
-                alt="Redistrict tool screenshot"
-              />
-            </a>
-          </article>
-
-          <!-- Next 3 projects: half width -->
-          <!-- Project 4: Deep Gestures -->
-          <article class="col-12 work-item">
-            <h3>
-              <a href="https://github.com/KostadinDev/deep-gestures" target="_blank" rel="noopener">Deep Gestures</a> &nbsp;&nbsp;
+              </p>
               <a
-                href="https://github.com/KostadinDev/deep-gestures"
-                target="_blank"
-                class="icon brands fa-github"
+                href="./static/images/recursiveqa-cover.jpg"
+                class="image fit thumb"
               >
-                <span class="label">Github</span>
+                <img
+                  src="./static/images/recursiveqa-cover.jpg"
+                  alt="Recursive QA screenshot"
+                />
               </a>
-            </h3>
-            <p>
-A comprehensive pipeline encompassing data collection, preprocessing, model training, optimization, and deployment, tailored specifically to develop an optimized CNN for gesture recognition on the Arduino Nano 33 BLE Sense microcontroller. The pipeline leverages the device's integrated 3D accelerometer, gyroscope, and magnetometer sensors to accurately detect orientation, motion, and vibration.
-            </p>
-            <a
-              href="./static/images/deep-gestures-image.jpg"
-              class="image fit thumb"
-            >
-              <img
-                src="./static/images/deep-gestures-image.jpg"
-                alt="Deep Gestures screenshot"
-              />
-            </a>
-          </article>
+            </article>
 
-          <!-- Project 5: Symbiotic Learning -->
-          <article class="col-12 work-item">
-            <h3><a href="https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" target="_blank" rel="noopener">Symbiotic Learning</a></h3>
-            <p>
+            <!-- Project 3: I Want to Redistrict -->
+            <article class="col-12 work-item" data-tags="hpc">
+              <div class="project-header">
+                <div class="project-title">
+                  <h3>I Want to Redistrict</h3>
+                  <div class="project-tags">
+                    <span class="project-tag">HPC</span>
+                  </div>
+                </div>
+              </div>
+              <p>
+ A political science application developed to create and evaluate state districting plans through statistical analysis. Its primary purpose is to identify gerrymandering and support the generation of equitable district maps under human supervision, utilizing data sourced from the 2020 Census. The tool operates on the advanced computational capabilities provided by Stony Brook University's SeaWulf supercomputer.
+              </p>
+              <a href="./static/images/redistrict.png" class="image fit thumb">
+                <img
+                  src="./static/images/redistrict.png"
+                  alt="Redistrict tool screenshot"
+                />
+              </a>
+            </article>
+
+            <!-- Next 3 projects: half width -->
+            <!-- Project 4: Deep Gestures -->
+            <article class="col-12 work-item" data-tags="computer-vision,iot">
+              <div class="project-header">
+                <div class="project-title">
+                  <h3>
+                    <a href="https://github.com/KostadinDev/deep-gestures" target="_blank" rel="noopener">Deep Gestures</a> &nbsp;&nbsp;
+                    <a
+                      href="https://github.com/KostadinDev/deep-gestures"
+                      target="_blank"
+                      class="icon brands fa-github"
+                    >
+                      <span class="label">Github</span>
+                    </a>
+                  </h3>
+                  <div class="project-tags">
+                    <span class="project-tag">Computer Vision</span>
+                    <span class="project-tag">IoT</span>
+                  </div>
+                </div>
+              </div>
+              <p>
+A comprehensive pipeline encompassing data collection, preprocessing, model training, optimization, and deployment, tailored specifically to develop an optimized CNN for gesture recognition on the Arduino Nano 33 BLE Sense microcontroller. The pipeline leverages the device's integrated 3D accelerometer, gyroscope, and magnetometer sensors to accurately detect orientation, motion, and vibration.
+              </p>
+              <a
+                href="./static/images/deep-gestures-image.jpg"
+                class="image fit thumb"
+              >
+                <img
+                  src="./static/images/deep-gestures-image.jpg"
+                  alt="Deep Gestures screenshot"
+                />
+              </a>
+            </article>
+
+            <!-- Project 5: Symbiotic Learning -->
+            <article class="col-12 work-item" data-tags="computer-vision">
+              <div class="project-header">
+                <div class="project-title">
+                  <h3><a href="https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" target="_blank" rel="noopener">Symbiotic Learning</a></h3>
+                  <div class="project-tags">
+                    <span class="project-tag">Computer Vision</span>
+                  </div>
+                </div>
+              </div>
+              <p>
 A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing significantly to the conservation of Hawaii's ecosystems. The tool continuously enhances its accuracy through real-time training, progressively offering more accurate suggestions to support annotators effectively. <a href="https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" target="_blank" rel="noopener">[UH Hilo Stories, 2020]</a>
-            </p>
-            <a
-              href="https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
-              class="image fit thumb"
-            >
-              <img
-                src="https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
-                alt="Symbiotic Learning screenshot"
-              />
-            </a>
-          </article>
+              </p>
+              <a
+                href="https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
+                class="image fit thumb"
+              >
+                <img
+                  src="https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
+                  alt="Symbiotic Learning screenshot"
+                />
+              </a>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -320,6 +498,70 @@ A human-in-the-loop image annotation system created to identify and classify inv
           if (linkHref === currentPage) {
             link.classList.add('current-page');
           }
+        });
+      });
+    </script>
+
+    <script>
+      // Project filtering functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projects = document.querySelectorAll('.work-item');
+        const projectsContainer = document.getElementById('projects-container');
+        
+        // Remove existing no-results message if any
+        function removeNoResultsMessage() {
+          const existingMessage = document.querySelector('.no-results');
+          if (existingMessage) {
+            existingMessage.remove();
+          }
+        }
+        
+        // Add no results message
+        function addNoResultsMessage() {
+          removeNoResultsMessage();
+          const message = document.createElement('div');
+          message.className = 'no-results';
+          message.innerHTML = '<h3>No projects found</h3><p>Try selecting a different filter or view all projects.</p>';
+          projectsContainer.appendChild(message);
+        }
+        
+        // Filter projects
+        function filterProjects(filter) {
+          let visibleCount = 0;
+          
+          projects.forEach(project => {
+            const tags = project.getAttribute('data-tags').split(',');
+            
+            if (filter === 'all' || tags.includes(filter)) {
+              project.classList.remove('hidden');
+              visibleCount++;
+            } else {
+              project.classList.add('hidden');
+            }
+          });
+          
+          // Show/hide no results message
+          if (visibleCount === 0) {
+            addNoResultsMessage();
+          } else {
+            removeNoResultsMessage();
+          }
+        }
+        
+        // Add click event listeners to filter buttons
+        filterButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Filter projects
+            const filter = this.getAttribute('data-filter');
+            filterProjects(filter);
+          });
         });
       });
     </script>
