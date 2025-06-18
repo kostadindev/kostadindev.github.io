@@ -308,5 +308,20 @@ A human-in-the-loop image annotation system created to identify and classify inv
         }
       });
     </script>
+
+    <script>
+      // Highlight current page in navigation
+      document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('#main-nav .nav-link');
+        
+        navLinks.forEach(link => {
+          const linkHref = link.querySelector('a').getAttribute('href');
+          if (linkHref === currentPage) {
+            link.classList.add('current-page');
+          }
+        });
+      });
+    </script>
   </body>
 </html>

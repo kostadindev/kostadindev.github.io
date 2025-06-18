@@ -3356,3 +3356,14 @@ a:active {
 }
 
 a:hover, a:active { text-decoration: underline; }
+
+/* Current page highlighting */
+#main-nav .nav-link.current-page a {
+  color: #e89a3c !important;
+  text-decoration: underline;
+}
+
+#main-nav .nav-link.current-page a:hover {
+  color: #e89a3c !important;
+  text-decoration: underline;
+}

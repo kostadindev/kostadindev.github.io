@@ -79,7 +79,7 @@
           <div class="nav-link"><a href="index.html">Home</a></div>
           <div class="nav-link"><a href="projects.html">Projects</a></div>
           <div class="nav-link"><a href="publications.html">Publications</a></div>
-          <div class="nav-link"><a href="education.html">Certificates</a></div>
+          <div class="nav-link"><a href="education.html">Education</a></div>
         </nav>
       </div>
     </header>
@@ -450,6 +450,21 @@
             }
           });
         }
+      });
+    </script>
+
+    <script>
+      // Highlight current page in navigation
+      document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('#main-nav .nav-link');
+        
+        navLinks.forEach(link => {
+          const linkHref = link.querySelector('a').getAttribute('href');
+          if (linkHref === currentPage) {
+            link.classList.add('current-page');
+          }
+        });
       });
     </script>
   </body>
