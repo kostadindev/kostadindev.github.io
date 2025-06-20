@@ -191,6 +191,72 @@
           <div class="project-header">
             <div class="project-title">
               <h3>
+                <a href="https://github.com/kostadindev/League-of-Legends-MCP" target="_blank" rel="noopener"
+                  >League of Legends MCP Server</a
+                >&nbsp;&nbsp;
+                <a
+                  href="https://github.com/kostadindev/League-of-Legends-MCP"
+                  target="_blank"
+                  rel="noopener"
+                  class="icon brands fa-github"
+                  aria-label="GitHub Repository for League MCP"
+                >
+                  <span class="label">GitHub</span>
+                </a>
+                &nbsp;
+                <a
+                  href="https://pypi.org/project/league-mcp/"
+                  target="_blank"
+                  rel="noopener"
+                  class="icon brands fa-python"
+                  aria-label="PyPI Package for League MCP"
+                >
+                  <span class="label">PyPI</span>
+                </a>
+                &nbsp;
+                <a
+                  href="https://hub.docker.com/r/kostadindev/league-mcp"
+                  target="_blank"
+                  rel="noopener"
+                  class="icon brands fa-docker"
+                  aria-label="Docker Hub for League MCP"
+                >
+                  <span class="label">Docker</span>
+                </a>
+              </h3>
+              <div class="project-tags">
+                <span class="project-tag">MCP</span>
+                <span class="project-tag">Agentic AI</span>
+                <span class="project-tag">GenAI</span>
+            </div>
+          </div>
+          <p>
+This open-source Model Context Protocol (MCP) server empowers LLMs with
+ with comprehensive access to League of Legends game data through the Riot Games API. 
+ It features over 35 specialized tools and resources for retrieving player statistics, match history, 
+ champion information, tournament data, and real-time game monitoring, supporting both 
+ stdio and SSE transports for seamless client integration. It is shipped as a Python package  and a Docker container. 
+ Additionally, a demonstrative MCP client chatbot, leveraging a ReAct agent, is also provided to showcase the server's extensive capabilities and practical usefulness.
+      </p>
+      <p>
+        <code>pip install league-mcp</code>
+        <code>docker pull kostadindev/league-mcp</code>
+      </p>
+          <a
+            href="https://github.com/user-attachments/assets/6da6c5c2-dc71-4de0-9740-4c2da03cbb7f"
+            class="image fit thumb"
+          >
+            <img
+              src="https://github.com/user-attachments/assets/6da6c5c2-dc71-4de0-9740-4c2da03cbb7f"
+              alt="League MCP Server Demo"
+            />
+          </a>
+        </article>
+
+        <article class="col-12 work-item">
+          <div class="project-header">
+            <div class="project-title">
+              <h3>
                 <a href="https://pypi.org/project/knowledge-base-builder/" target="_blank" rel="noopener"
                   >Knowledge Base Builder</a
                 >&nbsp;&nbsp;
@@ -382,6 +448,27 @@
             link.classList.add('current-page');
           }
         });
+
+        // Avatar spin animation
+        const avatarImg = document.querySelector('#header .image.avatar img');
+        const avatarLink = document.querySelector('#header .image.avatar');
+        
+        if (avatarImg && avatarLink) {
+          let isSpinning = false;
+          
+          avatarLink.addEventListener('mouseenter', function() {
+            if (!isSpinning) {
+              isSpinning = true;
+              avatarImg.classList.add('spinning');
+              
+              // Remove the class after animation completes
+              setTimeout(() => {
+                avatarImg.classList.remove('spinning');
+                isSpinning = false;
+              }, 1000); // 1s animation duration
+            }
+          });
+        }
       });
     </script>
   </body>
