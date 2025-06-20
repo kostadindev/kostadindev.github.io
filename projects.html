@@ -120,7 +120,7 @@
             <div class="filter-buttons">
               <button class="filter-btn active" data-filter="all" title="Show all projects">All</button>
               <button class="filter-btn" data-filter="nlp" title="Natural Language Processing">NLP</button>
-              <button class="filter-btn" data-filter="computer-vision" title="Computer Vision">Computer Vision</button>
+              <button class="filter-btn" data-filter="computer-vision" title="Computer Vision">CV</button>
               <button class="filter-btn" data-filter="hpc" title="High Performance Computing">HPC</button>
               <button class="filter-btn" data-filter="iot" title="Internet of Things and Embedded Systems">IoT</button>
               <button class="filter-btn" data-filter="hitl" title="Human-in-the-Loop AI Systems">HITL</button>
@@ -368,6 +368,27 @@ A human-in-the-loop image annotation system created to identify and classify inv
             link.classList.add('current-page');
           }
         });
+
+        // Avatar spin animation
+        const avatarImg = document.querySelector('#header .image.avatar img');
+        const avatarLink = document.querySelector('#header .image.avatar');
+        
+        if (avatarImg && avatarLink) {
+          let isSpinning = false;
+          
+          avatarLink.addEventListener('mouseenter', function() {
+            if (!isSpinning) {
+              isSpinning = true;
+              avatarImg.classList.add('spinning');
+              
+              // Remove the class after animation completes
+              setTimeout(() => {
+                avatarImg.classList.remove('spinning');
+                isSpinning = false;
+              }, 1000); // 1s animation duration
+            }
+          });
+        }
       });
     </script>
 

@@ -2643,6 +2643,15 @@ input, select, textarea {
 			width: 8em;
 		}
 
+		/* Avatar spin animation on hover */
+		#header .image.avatar img {
+			transition: transform 0.3s ease;
+		}
+
+		#header .image.avatar img.spinning {
+			animation: spin 1s ease-in-out;
+		}
+
 /* Footer */
 
 	#footer .icons {
