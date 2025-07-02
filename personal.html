@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Kostadin Devedzhiev | Travel Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Explore countries visited by Kostadin Devedzhiev, a software engineer specializing in Human-Inspired AI, NLP, and UI design."
+    />
+    <meta name="author" content="Kostadin Devedzhiev" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="Kostadin Devedzhiev | Travel Map" />
+    <meta
+      property="og:description"
+      content="Interactive travel map showing countries visited by Kostadin."
+    />
+    <meta
+      property="og:image"
+      content="https://kostadindev.github.io/static/images/headshot.jpg"
+    />
+    <meta property="og:url" content="https://kostadindev.github.io/personal.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Kostadin Devedzhiev",
+        "url": "https://kostadindev.github.io",
+        "image": "https://kostadindev.github.io/static/images/headshot.jpg",
+        "jobTitle": "Software Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Stellar Cyber"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/kostadin-dev/",
+          "https://github.com/KostadinDev"
+        ]
+      }
+    </script>
+
+    <link rel="preload" as="image" href="./static/images/headshot.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="./static/assets/css/fontawesome-all.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        href="./static/assets/css/fontawesome-all.min.css"
+    /></noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./static/assets/css/main.css" />
+    <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+
+  <body class="is-preload">
+    <!-- Header -->
+    <header id="header">
+      <div class="inner">
+        <a href="index.html" class="image avatar">
+          <img
+            src="./static/images/headshot.jpg"
+            alt="Kostadin Devedzhiev Profile Picture"
+            width="200"
+          />
+        </a>
+        <h1><strong>Kostadin Devedzhiev</strong></h1>
+        <p>
+          <i>kostadin.g.devedzhiev@gmail.com</i><br />
+          Software Engineer at Stellar Cyber<br />
+          Human-Inspired AI | NLP | UI
+        </p>
+        <a
+          href="./static/documents/cv.pdf"
+          class="cv"
+          target="_blank"
+          rel="noopener"
+          >Curriculum Vitae</a
+        >
+        <nav id="main-nav">
+          <div class="nav-link"><a href="index.html">Home</a></div>
+          <div class="nav-link"><a href="projects.html">Projects</a></div>
+          <div class="nav-link">
+            <a href="publications.html">Publications</a>
+          </div>
+          <div class="nav-link"><a href="education.html">Education</a></div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <div id="main">
+      <!-- Travel Map Section -->
+      <section id="one">
+        <header class="major">
+          <h2>Travel Map</h2>
+        </header>
+        <p>
+          Interactive map showing the 19 countries I've visited across Europe, North America, the Caribbean, and South America. Countries highlighted in orange represent places I've been to.
+        </p>
+        
+        <div style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+          <div id="worldMap" style="width:100%;height:600px;"></div>
+        </div>
+
+        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-top: 20px;">
+          <h3 style="margin-top: 0; color: #333;">Countries Visited (19)</h3>
+          <p><strong>Europe (11):</strong> Bulgaria, Greece, Turkey, Belgium, France, Netherlands, Italy, Austria, Serbia, Slovenia, Croatia</p>
+          <p><strong>North America (3):</strong> United States, Canada, Mexico</p>
+          <p><strong>Caribbean (2):</strong> Bahamas, Puerto Rico</p>
+          <p><strong>South America (3):</strong> Peru, Brazil, Colombia</p>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+              <a
+                href="https://www.linkedin.com/in/kostadin-dev/"
+                class="icon brands fa-linkedin"
+                aria-label="LinkedIn Profile"
+                title="LinkedIn Profile"
+                ><span class="label">LinkedIn</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/KostadinDev"
+                class="icon brands fa-github"
+                aria-label="GitHub Profile"
+                title="GitHub Profile"
+                ><span class="label">GitHub</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0"
+                class="icon brands fa-spotify"
+                aria-label="Spotify Profile"
+                title="Spotify Profile"
+                ><span class="label">Spotify</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://leetcode.com/u/user9852My/"
+                class="icon solid fa-code"
+                aria-label="LeetCode Profile"
+                title="LeetCode Profile"
+                ><span class="label">LeetCode</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./static/assets/js/jquery.min.js" defer></script>
+    <script src="./static/assets/js/jquery.poptrox.min.js" defer></script>
+    <script src="./static/assets/js/browser.min.js" defer></script>
+    <script src="./static/assets/js/breakpoints.min.js" defer></script>
+    <script src="./static/assets/js/util.js" defer></script>
+    <script src="./static/assets/js/main.js" defer></script>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", function () {
+        if (window.innerWidth > 768) {
+          const chatbotHTML = `
+            <div id="chatbot-container">
+              <iframe id="chatbot-iframe" src="https://ai-kostadin.onrender.com/" title="Chatbot"></iframe>
+            </div>
+            <button id="chatbot-toggle" aria-expanded="false" aria-controls="chatbot-container">
+              <i class="fas fa-comment"></i>
+              <span class="toggle-text">Chat</span>
+            </button>
+          `;
+          document.body.insertAdjacentHTML("beforeend", chatbotHTML);
+
+          // Rebind toggle logic
+          const chatbot = document.getElementById("chatbot-container");
+          const main = document.getElementById("main");
+          const toggle = document.getElementById("chatbot-toggle");
+          const toggleText = toggle.querySelector(".toggle-text");
+          let toggleState = localStorage.getItem("chatbotToggleState");
+
+          // Default to open if no state is saved
+          if (!toggleState) {
+            toggleState = "open";
+            localStorage.setItem("chatbotToggleState", "open");
+          }
+
+          if (toggleState === "open") {
+            chatbot.classList.add("expanded");
+            toggle.classList.add("expanded");
+            main.style.width = "calc(100% - 30% - 350px)";
+            toggle.style.right = "350px";
+            toggleText.textContent = "Close";
+            toggle.setAttribute("aria-expanded", "true");
+          }
+
+          toggle.addEventListener("click", function () {
+            if (chatbot.classList.contains("expanded")) {
+              chatbot.classList.remove("expanded");
+              toggle.classList.remove("expanded");
+              main.style.width = "calc(100% - 30%)";
+              toggle.style.right = "0";
+              toggleText.textContent = "Chat";
+              toggle.setAttribute("aria-expanded", "false");
+              localStorage.setItem("chatbotToggleState", "closed");
+            } else {
+              chatbot.classList.add("expanded");
+              toggle.classList.add("expanded");
+              main.style.width = "calc(100% - 30% - 350px)";
+              toggle.style.right = "350px";
+              toggleText.textContent = "Close";
+              toggle.setAttribute("aria-expanded", "true");
+              localStorage.setItem("chatbotToggleState", "open");
+            }
+          });
+        }
+      });
+    </script>
+
+    <script>
+      // Highlight current page in navigation
+      document.addEventListener('DOMContentLoaded', function() {
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const navLinks = document.querySelectorAll('#main-nav .nav-link');
+        
+        navLinks.forEach(link => {
+          const linkHref = link.querySelector('a').getAttribute('href');
+          if (linkHref === currentPage) {
+            link.classList.add('current-page');
+          }
+        });
+
+        // Avatar spin animation
+        const avatarImg = document.querySelector('#header .image.avatar img');
+        const avatarLink = document.querySelector('#header .image.avatar');
+        
+        if (avatarImg && avatarLink) {
+          let isSpinning = false;
+          
+          avatarLink.addEventListener('mouseenter', function() {
+            if (!isSpinning) {
+              isSpinning = true;
+              avatarImg.classList.add('spinning');
+              
+              // Remove the class after animation completes
+              setTimeout(() => {
+                avatarImg.classList.remove('spinning');
+                isSpinning = false;
+              }, 1000); // 1s animation duration
+            }
+          });
+        }
+      });
+    </script>
+
+    <script>
+      // Travel map functionality
+      function createTravelMap() {
+        // All countries with ISO-3 codes and their visit status
+        const allCountries = [
+          // Visited countries (value = 1)
+          {code: 'BGR', country: 'Bulgaria', visited: 1},
+          {code: 'GRC', country: 'Greece', visited: 1},
+          {code: 'TUR', country: 'Turkey', visited: 1},
+          {code: 'BEL', country: 'Belgium', visited: 1},
+          {code: 'FRA', country: 'France', visited: 1},
+          {code: 'NLD', country: 'Netherlands', visited: 1},
+          {code: 'USA', country: 'United States', visited: 1},
+          {code: 'CAN', country: 'Canada', visited: 1},
+          {code: 'MEX', country: 'Mexico', visited: 1},
+          {code: 'PER', country: 'Peru', visited: 1},
+          {code: 'BRA', country: 'Brazil', visited: 1},
+          {code: 'COL', country: 'Colombia', visited: 1},
+          {code: 'ITA', country: 'Italy', visited: 1},
+          {code: 'AUT', country: 'Austria', visited: 1},
+          {code: 'SRB', country: 'Serbia', visited: 1},
+          {code: 'SVN', country: 'Slovenia', visited: 1},
+          {code: 'BHS', country: 'Bahamas', visited: 1},
+          {code: 'PRI', country: 'Puerto Rico', visited: 1},
+          {code: 'HRV', country: 'Croatia', visited: 1}
+        ];
+        
+        const data = [{
+          type: 'choropleth',
+          locations: allCountries.map(d => d.code),
+          z: allCountries.map(d => d.visited),
+          text: allCountries.map(d => `${d.country}<br>✈️ Visited!`),
+          hovertemplate: '%{text}<extra></extra>',
+          colorscale: [
+            [0, '#e89a3c'],  // Primary color for visited
+            [1, '#e89a3c']   // Same color for all visited
+          ],
+          showscale: false,
+          marker: {
+            line: {
+              color: 'white',
+              width: 1
+            }
+          }
+        }];
+
+        const layout = {
+          title: `My Travel Map - 19 Countries Visited`,
+          geo: {
+            projection: {
+              type: 'natural earth'
+            },
+            showframe: false,
+            showcoastlines: true,
+            showland: true,
+            landcolor: '#f8f8f8',
+            coastlinecolor: '#999999',
+            oceancolor: '#e6f3ff'
+          },
+          margin: {t: 50, r: 0, b: 0, l: 0}
+        };
+
+        Plotly.newPlot('worldMap', data, layout, {
+          responsive: true,
+          displayModeBar: false
+        });
+      }
+
+      // Initialize the map when the page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        createTravelMap();
+      });
+    </script>
+  </body>
+</html> 
