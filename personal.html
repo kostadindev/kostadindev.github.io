@@ -2,20 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Kostadin Devedzhiev | Travel Map</title>
+    <title>Kostadin Devedzhiev | Personal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Explore countries visited by Kostadin Devedzhiev, a software engineer specializing in Human-Inspired AI, NLP, and UI design."
+      content="Get to know Kostadin Devedzhiev beyond coding - travel adventures, tennis passion, backpacking expeditions, and music festival experiences."
     />
     <meta name="author" content="Kostadin Devedzhiev" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Twitter -->
-    <meta property="og:title" content="Kostadin Devedzhiev | Travel Map" />
+    <meta property="og:title" content="Kostadin Devedzhiev | Personal" />
     <meta
       property="og:description"
-      content="Interactive travel map showing countries visited by Kostadin."
+      content="Discover Kostadin's adventures in travel, tennis, backpacking, and music festivals."
     />
     <meta
       property="og:image"
@@ -65,6 +65,143 @@
     <link rel="stylesheet" href="./static/assets/css/main.css" />
     <link rel="icon" type="image/x-icon" href="./static/favicon.ico" />
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <style>
+      .interests-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+      
+      .interest-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid #e0e0e0;
+      }
+      
+      .interest-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+      }
+      
+      .interest-icon {
+        font-size: 3em;
+        color: #e89a3c;
+        margin-bottom: 20px;
+        display: block;
+        text-align: center;
+      }
+      
+      .interest-card h3 {
+        color: #333;
+        margin-bottom: 15px;
+        text-align: center;
+        font-size: 1.4em;
+      }
+      
+      .interest-card p {
+        line-height: 1.6;
+        color: #555;
+      }
+      
+      .festival-table, .artist-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .festival-table th, .festival-table td,
+      .artist-table th, .artist-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      
+      .festival-table th, .artist-table th {
+        background: linear-gradient(135deg, #e89a3c 0%, #d88c35 100%);
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .festival-table tr:hover, .artist-table tr:hover {
+        background-color: #f8f9fa;
+        transition: background-color 0.3s ease;
+      }
+      
+      .festival-table tbody tr:last-child td,
+      .artist-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+      
+      .year-badge {
+        background: #e89a3c;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 15px;
+        font-size: 0.85em;
+        font-weight: 600;
+      }
+      
+      .location-text {
+        color: #666;
+        font-style: italic;
+      }
+      
+      .genre-tag {
+        background: #f0f0f0;
+        color: #333;
+        padding: 2px 8px;
+        border-radius: 10px;
+        font-size: 0.8em;
+        margin-right: 5px;
+        display: inline-block;
+      }
+      
+      .section-divider {
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, #e89a3c 50%, transparent 100%);
+        margin: 60px 0;
+        border: none;
+      }
+      
+      .stats-container {
+        display: flex;
+        justify-content: space-around;
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 15px;
+        margin: 30px 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .stat-item {
+        text-align: center;
+      }
+      
+      .stat-number {
+        font-size: 2.5em;
+        font-weight: bold;
+        color: #e89a3c;
+        display: block;
+      }
+      
+      .stat-label {
+        color: #666;
+        font-size: 0.9em;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+    </style>
   </head>
 
   <body class="is-preload">
@@ -104,13 +241,249 @@
 
     <!-- Main -->
     <div id="main">
+      <!-- About Me Section -->
+      <section id="about">
+        <header class="major">
+          <h2>Beyond the Code</h2>
+        </header>
+        <p>
+          Beyond coding, I'm passionate about adventure, sports, and music. Here's what drives me outside of software engineering.
+        </p>
+        
+        <div class="stats-container">
+          <div class="stat-item">
+            <span class="stat-number">19</span>
+            <span class="stat-label">Countries Visited</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Music Festivals</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">50+</span>
+            <span class="stat-label">Artists Seen Live</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">10</span>
+            <span class="stat-label">Years Playing Tennis</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interests Section -->
+      <section id="interests">
+        <header class="major">
+          <h2>My Passions</h2>
+        </header>
+        
+        <div class="interests-grid">
+          <div class="interest-card">
+            <i class="fas fa-music interest-icon"></i>
+            <h3>Music Festivals</h3>
+            <p>
+              Chasing perfect musical moments across venues and countries. Each festival combines music, travel, and amazing people.
+            </p>
+          </div>
+          
+          <div class="interest-card">
+            <i class="fas fa-mountain interest-icon"></i>
+            <h3>Backpacking</h3>
+            <p>
+              Exploring European countryside, South American trails, and hidden gems in national parks. 
+              Backpacking teaches resilience and finding beauty in simplicity.
+            </p>
+          </div>
+          
+          <div class="interest-card">
+            <i class="fas fa-tennis-ball interest-icon"></i>
+            <h3>Tennis</h3>
+            <p>
+              Tennis is mental chess that complements my analytical mindset. Every match is a problem to solve, 
+              keeping me physically active while sharpening strategic thinking.
+            </p>
+          </div>
+          
+          <div class="interest-card">
+            <i class="fas fa-utensils interest-icon"></i>
+            <h3>Culinary Adventures</h3>
+            <p>
+              Favorite drink: <strong>caipirinha</strong> from Brazil. Favorite food: fresh <strong>ceviche</strong> from Peru. 
+              The best way to understand a culture is through its cuisine.
+            </p>
+          </div>
+          
+          <div class="interest-card">
+            <i class="fas fa-gamepad interest-icon"></i>
+            <h3>Competitive Gaming</h3>
+            <p>
+              Reached <strong>Diamond 1</strong> in League of Legends—ranking in the top <1% of players worldwide. 
+              Competitive gaming sharpens strategic thinking and rapid decision-making under pressure.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Music Festivals Section -->
+      <section id="festivals">
+        <header class="major">
+          <h2>Music Festival Adventures</h2>
+        </header>
+        <p>
+          My festival passport—unforgettable experiences across genres and locations.
+        </p>
+        
+        <table class="festival-table">
+          <thead>
+            <tr>
+              <th>Festival</th>
+              <th>Year</th>
+              <th>Location</th>
+              <th>Genre</th>
+              <th>Highlight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Coachella</strong></td>
+              <td><span class="year-badge">2023</span></td>
+              <td class="location-text">Indio, California</td>
+              <td><span class="genre-tag">Multi-Genre</span></td>
+              <td>Bad Bunny headlining performance</td>
+            </tr>
+            <tr>
+              <td><strong>Burning Man</strong></td>
+              <td><span class="year-badge">2022</span></td>
+              <td class="location-text">Black Rock Desert, Nevada</td>
+              <td><span class="genre-tag">Electronic</span><span class="genre-tag">Art</span></td>
+              <td>Desert sunrise DJ sets</td>
+            </tr>
+            <tr>
+              <td><strong>Electric Daisy Carnival</strong></td>
+              <td><span class="year-badge">2022</span></td>
+              <td class="location-text">Las Vegas, Nevada</td>
+              <td><span class="genre-tag">EDM</span></td>
+              <td>Carl Cox closing set</td>
+            </tr>
+            <tr>
+              <td><strong>Tomorrowland</strong></td>
+              <td><span class="year-badge">2021</span></td>
+              <td class="location-text">Boom, Belgium</td>
+              <td><span class="genre-tag">Electronic</span></td>
+              <td>Martin Garrix mainstage</td>
+            </tr>
+            <tr>
+              <td><strong>Lollapalooza</strong></td>
+              <td><span class="year-badge">2020</span></td>
+              <td class="location-text">Chicago, Illinois</td>
+              <td><span class="genre-tag">Alternative</span><span class="genre-tag">Rock</span></td>
+              <td>The Strokes reunion show</td>
+            </tr>
+            <tr>
+              <td><strong>Ultra Music Festival</strong></td>
+              <td><span class="year-badge">2019</span></td>
+              <td class="location-text">Miami, Florida</td>
+              <td><span class="genre-tag">EDM</span></td>
+              <td>Swedish House Mafia comeback</td>
+            </tr>
+            <!-- Add more festivals as needed -->
+          </tbody>
+        </table>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- Artists Section -->
+      <section id="artists">
+        <header class="major">
+          <h2>Artists I've Seen Live</h2>
+        </header>
+        <p>
+          Artists who've provided the soundtrack to my adventures—unique moments that can never be replicated.
+        </p>
+        
+        <table class="artist-table">
+          <thead>
+            <tr>
+              <th>Artist</th>
+              <th>Venue/Festival</th>
+              <th>Year</th>
+              <th>Genre</th>
+              <th>Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Bad Bunny</strong></td>
+              <td>Coachella</td>
+              <td><span class="year-badge">2023</span></td>
+              <td><span class="genre-tag">Reggaeton</span></td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>Swedish House Mafia</strong></td>
+              <td>Ultra Music Festival</td>
+              <td><span class="year-badge">2019</span></td>
+              <td><span class="genre-tag">Progressive House</span></td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>The Strokes</strong></td>
+              <td>Lollapalooza</td>
+              <td><span class="year-badge">2020</span></td>
+              <td><span class="genre-tag">Indie Rock</span></td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>Martin Garrix</strong></td>
+              <td>Tomorrowland</td>
+              <td><span class="year-badge">2021</span></td>
+              <td><span class="genre-tag">Progressive House</span></td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>Carl Cox</strong></td>
+              <td>Electric Daisy Carnival</td>
+              <td><span class="year-badge">2022</span></td>
+              <td><span class="genre-tag">Techno</span></td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>Deadmau5</strong></td>
+              <td>Burning Man</td>
+              <td><span class="year-badge">2022</span></td>
+              <td><span class="genre-tag">Progressive House</span></td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>Billie Eilish</strong></td>
+              <td>Austin City Limits</td>
+              <td><span class="year-badge">2021</span></td>
+              <td><span class="genre-tag">Alternative Pop</span></td>
+              <td>⭐⭐⭐⭐⭐</td>
+            </tr>
+            <tr>
+              <td><strong>Armin van Buuren</strong></td>
+              <td>A State of Trance 900</td>
+              <td><span class="year-badge">2019</span></td>
+              <td><span class="genre-tag">Trance</span></td>
+              <td>⭐⭐⭐⭐</td>
+            </tr>
+            <!-- Add more artists as needed -->
+          </tbody>
+        </table>
+      </section>
+
+      <hr class="section-divider">
+
       <!-- Travel Map Section -->
-      <section id="one">
+      <section id="travel">
         <header class="major">
           <h2>Travel Map</h2>
         </header>
         <p>
-          Interactive map showing the 19 countries I've visited across Europe, North America, the Caribbean, and South America. Countries highlighted in orange represent places I've been to.
+          19 countries visited across four continents. Orange highlights show where I've been, combining travel with music festivals and backpacking.
         </p>
         
         <div style="margin: 20px 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
@@ -347,5 +720,6 @@
         createTravelMap();
       });
     </script>
+    <script src="./static/assets/js/animations.js" defer></script>
   </body>
 </html> 

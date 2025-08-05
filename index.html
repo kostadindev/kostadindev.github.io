@@ -433,40 +433,6 @@
       });
     </script>
 
-    <script>
-      // Highlight current page in navigation
-      document.addEventListener('DOMContentLoaded', function() {
-        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-        const navLinks = document.querySelectorAll('#main-nav .nav-link');
-        
-        navLinks.forEach(link => {
-          const linkHref = link.querySelector('a').getAttribute('href');
-          if (linkHref === currentPage) {
-            link.classList.add('current-page');
-          }
-        });
-
-        // Avatar spin animation
-        const avatarImg = document.querySelector('#header .image.avatar img');
-        const avatarLink = document.querySelector('#header .image.avatar');
-        
-        if (avatarImg && avatarLink) {
-          let isSpinning = false;
-          
-          avatarLink.addEventListener('mouseenter', function() {
-            if (!isSpinning) {
-              isSpinning = true;
-              avatarImg.classList.add('spinning');
-              
-              // Remove the class after animation completes
-              setTimeout(() => {
-                avatarImg.classList.remove('spinning');
-                isSpinning = false;
-              }, 1000); // 1s animation duration
-            }
-          });
-        }
-      });
-    </script>
+    <script src="./static/assets/js/animations.js" defer></script>
   </body>
 </html>
