@@ -1,8 +1,11 @@
-import { Box, Container, Typography, Button, Stack, IconButton } from '@mui/material';
+import { useState } from 'react';
+import { Box, Container, Typography, Button, Stack, IconButton, Tooltip } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CodeIcon from '@mui/icons-material/Code';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import CheckIcon from '@mui/icons-material/Check';
 import { personalInfo } from '../data/content';
 import HeroScene from './HeroScene';
 
@@ -13,6 +16,14 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function Hero() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(personalInfo.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <Box
       sx={{
@@ -89,6 +100,34 @@ export default function Hero() {
               </IconButton>
             ))}
           </Stack>
+
+          <Stack direction="row" alignItems="center" spacing={1}>
+            <Typography
+              component="a"
+              href={`mailto:${personalInfo.email}`}
+              variant="body1"
+              sx={{
+                color: 'grey.700',
+                textDecoration: 'none',
+                '&:hover': { color: 'primary.main' },
+                transition: 'color 0.2s',
+              }}
+            >
+              {personalInfo.email}
+            </Typography>
+            <Tooltip title={copied ? 'Copied!' : 'Copy email'}>
+              <IconButton
+                onClick={handleCopyEmail}
+                size="small"
+                sx={{
+                  color: copied ? 'success.main' : 'grey.400',
+                  '&:hover': { color: copied ? 'success.main' : 'grey.600' },
+                }}
+              >
+                {copied ? <CheckIcon fontSize="small" /> : <ContentCopyIcon fontSize="small" />}
+              </IconButton>
+            </Tooltip>
+          </Stack>
         </Stack>
       </Container>
 
@@ -96,10 +135,10 @@ export default function Hero() {
         href="#about"
         sx={{
           position: 'absolute',
-          bottom: 32,
+          bottom: 48,
           left: '50%',
           transform: 'translateX(-50%)',
-          color: 'grey.400',
+          color: 'grey.600',
           animation: 'bounce 2s infinite',
           '@keyframes bounce': {
             '0%, 100%': { transform: 'translateX(-50%) translateY(0)' },

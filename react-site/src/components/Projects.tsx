@@ -34,7 +34,7 @@ export default function Projects() {
     <Box id="projects" sx={{ py: 12 }}>
       <Container maxWidth="lg">
         <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 4 }}>
-          Past <Box component="span" sx={{ color: 'primary.main' }}>Projects</Box>
+          Past Projects
         </Typography>
 
         <Box sx={{ display: 'flex', justifyContent: 'center', mb: 6 }}>

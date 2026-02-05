@@ -1,6 +1,6 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Stars, Environment, Dodecahedron, AdaptiveDpr, Preload } from '@react-three/drei';
+import { Stars, Environment, AdaptiveDpr, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 
 const BRAND_ORANGE = '#e89a3c';
@@ -12,73 +12,27 @@ const FloatingShapes = () => {
   const { shapes, count } = useMemo(() => {
     const temp = [];
 
-    // Left side cluster (visible but outside text area)
-    for (let i = 0; i < 6; i++) {
-      temp.push({
-        pos: new THREE.Vector3(
-          -7 + Math.random() * 2,
-          -3 + Math.random() * 6,
-          -3 + Math.random() * 2
-        ),
-        scale: 0.4 + Math.random() * 0.5,
-        delay: Math.random() * 5,
-        color: new THREE.Color(Math.random() > 0.5 ? BRAND_ORANGE : ACCENT_PURPLE),
-      });
-    }
+    // Scatter shapes around the edges, avoiding center
+    const numShapes = 35;
 
-    // Right side cluster
-    for (let i = 0; i < 6; i++) {
-      temp.push({
-        pos: new THREE.Vector3(
-          5 + Math.random() * 2,
-          -3 + Math.random() * 6,
-          -3 + Math.random() * 2
-        ),
-        scale: 0.4 + Math.random() * 0.5,
-        delay: Math.random() * 5,
-        color: new THREE.Color(Math.random() > 0.5 ? BRAND_ORANGE : ACCENT_PURPLE),
-      });
-    }
+    for (let i = 0; i < numShapes; i++) {
+      let x, y;
 
-    // Top left corner
-    for (let i = 0; i < 4; i++) {
-      temp.push({
-        pos: new THREE.Vector3(
-          -6 + Math.random() * 2,
-          4 + Math.random() * 2,
-          -4 + Math.random() * 2
-        ),
-        scale: 0.3 + Math.random() * 0.4,
-        delay: Math.random() * 5,
-        color: new THREE.Color(Math.random() > 0.5 ? BRAND_ORANGE : ACCENT_PURPLE),
-      });
-    }
+      // Random position but avoid center area (-4 to 4 x, -3 to 3 y)
+      do {
+        x = (Math.random() - 0.5) * 18; // -9 to 9
+        y = (Math.random() - 0.5) * 14; // -7 to 7
+      } while (Math.abs(x) < 4 && Math.abs(y) < 3.5);
 
-    // Top right corner
-    for (let i = 0; i < 4; i++) {
       temp.push({
         pos: new THREE.Vector3(
-          4 + Math.random() * 2,
-          4 + Math.random() * 2,
-          -4 + Math.random() * 2
+          x,
+          y,
+          -1 + Math.random() * -5
         ),
-        scale: 0.3 + Math.random() * 0.4,
-        delay: Math.random() * 5,
-        color: new THREE.Color(Math.random() > 0.5 ? BRAND_ORANGE : ACCENT_PURPLE),
-      });
-    }
-
-    // Bottom area (below the main content)
-    for (let i = 0; i < 5; i++) {
-      temp.push({
-        pos: new THREE.Vector3(
-          -3 + Math.random() * 6,
-          -5 + Math.random() * 1.5,
-          -2 + Math.random() * 2
-        ),
-        scale: 0.5 + Math.random() * 0.4,
-        delay: Math.random() * 5,
-        color: new THREE.Color(BRAND_ORANGE),
+        scale: 0.2 + Math.random() * 0.6,
+        delay: Math.random() * 6,
+        color: new THREE.Color(Math.random() > 0.45 ? BRAND_ORANGE : ACCENT_PURPLE),
       });
     }
 
@@ -126,41 +80,6 @@ const FloatingShapes = () => {
   );
 };
 
-const CentralShape = () => {
-  const ref = useRef<THREE.Mesh>(null);
-
-  useFrame((state) => {
-    if (ref.current) {
-      const t = state.clock.getElapsedTime();
-      ref.current.rotation.x = t * 0.15;
-      ref.current.rotation.y = t * 0.2;
-    }
-  });
-
-  return (
-    <Float speed={0.8} rotationIntensity={0.1} floatIntensity={0.3}>
-      <Dodecahedron ref={ref} args={[1.2, 0]} position={[0, -4.5, 0]}>
-        <meshStandardMaterial
-          color={BRAND_ORANGE}
-          metalness={0.6}
-          roughness={0.2}
-          transparent
-          opacity={0.6}
-        />
-      </Dodecahedron>
-      {/* Wireframe overlay */}
-      <Dodecahedron args={[1.5, 0]} position={[0, -4.5, 0]}>
-        <meshStandardMaterial
-          color={BRAND_ORANGE}
-          wireframe
-          transparent
-          opacity={0.15}
-        />
-      </Dodecahedron>
-    </Float>
-  );
-};
-
 function Scene() {
   return (
     <>
@@ -170,7 +89,6 @@ function Scene() {
       <pointLight position={[-10, -10, -10]} color={ACCENT_PURPLE} intensity={0.3} />
 
       <FloatingShapes />
-      <CentralShape />
 
       <Environment preset="city" />
       <Stars radius={80} depth={50} count={200} factor={2} saturation={0} fade speed={0.2} />

@@ -6,7 +6,7 @@ export default function Education() {
     <Box id="education" sx={{ py: 12 }}>
       <Container maxWidth="md">
         <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 6 }}>
-          <Box component="span" sx={{ color: 'primary.main' }}>Education</Box>
+          Education
         </Typography>
 
         <Stack spacing={3} sx={{ mb: 8 }}>
@@ -28,7 +28,7 @@ export default function Education() {
                     src={edu.logo}
                     alt={edu.institution}
                     variant="rounded"
-                    sx={{ width: 80, height: 80, bgcolor: 'white', p: 1.5 }}
+                    sx={{ width: 180, height: 180, bgcolor: 'white', p: 3 }}
                     imgProps={{ style: { objectFit: 'contain' } }}
                   />
                   <Box sx={{ flex: 1 }}>
@@ -74,12 +74,12 @@ export default function Education() {
                   alt={cert.title}
                   variant="rounded"
                   sx={{
-                    width: 100,
-                    height: 100,
+                    width: 140,
+                    height: 140,
                     bgcolor: 'background.paper',
                     border: 1,
                     borderColor: 'divider',
-                    p: 1.5,
+                    p: 2,
                     transition: 'all 0.3s',
                     '&:hover': {
                       borderColor: 'primary.main',
@@ -101,8 +101,8 @@ export default function Education() {
             >
               <Box
                 sx={{
-                  width: 100,
-                  height: 100,
+                  width: 140,
+                  height: 140,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',

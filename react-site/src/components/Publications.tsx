@@ -7,7 +7,7 @@ export default function Publications() {
     <Box id="publications" sx={{ py: 12, bgcolor: 'action.hover' }}>
       <Container maxWidth="md">
         <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 6 }}>
-          <Box component="span" sx={{ color: 'primary.main' }}>Publications</Box>
+          Publications
         </Typography>
 
         <Stack spacing={3}>

@@ -6,7 +6,7 @@ export default function Skills() {
     <Box sx={{ py: 12, bgcolor: 'action.hover' }}>
       <Container maxWidth="md">
         <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 6 }}>
-          Technical <Box component="span" sx={{ color: 'primary.main' }}>Skills</Box>
+          Technical Skills
         </Typography>
 
         <Grid container spacing={2}>

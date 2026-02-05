@@ -13,7 +13,7 @@ export default function About() {
     <Box id="about" sx={{ py: 12 }}>
       <Container maxWidth="md">
         <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 6 }}>
-          About <Box component="span" sx={{ color: 'primary.main' }}>Me</Box>
+          About Me
         </Typography>
 
         <Box sx={{ mb: 6 }}>

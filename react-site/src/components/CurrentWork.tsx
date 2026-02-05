@@ -80,7 +80,7 @@ export default function CurrentWork() {
     <Box id="work" sx={{ py: 12, bgcolor: 'action.hover' }}>
       <Container maxWidth="lg">
         <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 6 }}>
-          Current <Box component="span" sx={{ color: 'primary.main' }}>Work</Box>
+          Current Work
         </Typography>
 
         <Stack spacing={6}>
