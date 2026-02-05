@@ -12,7 +12,6 @@ export const personalInfo = {
   socials: [
     { name: "LinkedIn", url: "https://www.linkedin.com/in/kostadin-dev/", icon: "linkedin" },
     { name: "GitHub", url: "https://github.com/KostadinDev", icon: "github" },
-    { name: "Spotify", url: "https://open.spotify.com/user/4y1al16ad6q40hy0bm6xejks0", icon: "spotify" },
     { name: "LeetCode", url: "https://leetcode.com/u/user9852My/", icon: "code" },
   ]
 };

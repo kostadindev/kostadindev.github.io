@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,21 +11,19 @@ import Skills from './components/Skills';
 import Footer from './components/Footer';
 
 function App() {
-  const [mode, setMode] = useState<'light' | 'dark'>('light');
-
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
-          mode,
+          mode: 'light',
           primary: {
             main: '#e89a3c',
             light: '#f4c76b',
             dark: '#d4851f',
           },
           background: {
-            default: mode === 'light' ? '#fafaf8' : '#0a0a0a',
-            paper: mode === 'light' ? '#ffffff' : '#111111',
+            default: '#fafaf8',
+            paper: '#ffffff',
           },
         },
         typography: {
@@ -56,18 +54,14 @@ function App() {
           },
         },
       }),
-    [mode]
+    []
   );
-
-  const toggleColorMode = () => {
-    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
-  };
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ minHeight: '100vh' }}>
-        <Navbar mode={mode} toggleColorMode={toggleColorMode} />
+        <Navbar />
         <main>
           <Hero />
           <About />

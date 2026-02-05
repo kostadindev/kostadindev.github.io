@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   Box,
@@ -14,16 +13,9 @@ import {
   useScrollTrigger,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { navItems, personalInfo } from '../data/content';
 
-interface NavbarProps {
-  mode: 'light' | 'dark';
-  toggleColorMode: () => void;
-}
-
-export default function Navbar({ mode, toggleColorMode }: NavbarProps) {
+export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const trigger = useScrollTrigger({ disableHysteresis: true, threshold: 50 });
 
@@ -39,19 +31,7 @@ export default function Navbar({ mode, toggleColorMode }: NavbarProps) {
         }}
       >
         <Toolbar sx={{ maxWidth: 1200, width: '100%', mx: 'auto', px: { xs: 2, md: 4 } }}>
-          <Typography
-            variant="h6"
-            component="a"
-            href="#"
-            sx={{
-              flexGrow: 1,
-              fontWeight: 700,
-              color: 'primary.main',
-              textDecoration: 'none',
-            }}
-          >
-            {personalInfo.name.split(' ')[0]}
-          </Typography>
+          <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1 }}>
             {navItems.map((item) => (
@@ -71,9 +51,6 @@ export default function Navbar({ mode, toggleColorMode }: NavbarProps) {
             >
               Resume
             </Button>
-            <IconButton onClick={toggleColorMode} sx={{ ml: 1 }}>
-              {mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
           </Box>
 
           <IconButton
@@ -106,11 +83,6 @@ export default function Navbar({ mode, toggleColorMode }: NavbarProps) {
               <Button variant="contained" fullWidth href={personalInfo.cvUrl} target="_blank">
                 Resume
               </Button>
-            </ListItem>
-            <ListItem>
-              <IconButton onClick={toggleColorMode}>
-                {mode === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-              </IconButton>
             </ListItem>
           </List>
         </Box>

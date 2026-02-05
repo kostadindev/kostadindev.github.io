@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Button, Avatar, Stack, IconButton } from '@mui/material';
+import { Box, Container, Typography, Button, Stack, IconButton } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CodeIcon from '@mui/icons-material/Code';
@@ -10,7 +10,6 @@ const iconMap: Record<string, React.ReactNode> = {
   github: <GitHubIcon />,
   linkedin: <LinkedInIcon />,
   code: <CodeIcon />,
-  spotify: <Box component="span" sx={{ fontSize: 20 }}>♪</Box>,
 };
 
 export default function Hero() {
@@ -29,13 +28,15 @@ export default function Hero() {
 
       <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
         <Stack alignItems="center" spacing={4} textAlign="center">
-          <Avatar
+          <Box
+            component="img"
             src={personalInfo.avatar}
             alt={personalInfo.name}
             sx={{
-              width: 220,
-              height: 220,
-              boxShadow: '0 12px 50px rgba(0, 0, 0, 0.15)',
+              width: 240,
+              maxHeight: 320,
+              objectFit: 'cover',
+              borderRadius: 3,
             }}
           />
 
