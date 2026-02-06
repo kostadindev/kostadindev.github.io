@@ -41,8 +41,11 @@ export default function Publications() {
                   {pub.description}
                 </Typography>
 
-                <Typography variant="caption" color="text.secondary" display="block" sx={{ mb: 1 }}>
+                <Typography variant="caption" color="text.secondary" display="block">
                   {pub.authors}
+                </Typography>
+                <Typography variant="caption" color="text.secondary" display="block" fontStyle="italic" sx={{ mb: 1 }}>
+                  * All authors contributed equally
                 </Typography>
                 <Typography variant="caption" color="text.secondary" display="block" sx={{ mb: 3 }}>
                   {pub.journal} ({pub.year})
