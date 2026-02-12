@@ -54,8 +54,8 @@ export default function Experience() {
                         </Typography>
                       </Box>
                       <Stack direction="row" spacing={1} sx={{ mt: { xs: 1, sm: 0 } }}>
-                        <Chip label={job.location} size="small" sx={{ bgcolor: 'action.hover' }} />
-                        <Chip label={job.period} size="small" variant="outlined" />
+                        <Chip label={job.location} size="small" sx={{ bgcolor: 'rgba(232, 154, 60, 0.10)', color: '#b37326' }} />
+                        <Chip label={job.period} size="small" sx={{ bgcolor: 'rgba(232, 154, 60, 0.10)', color: '#b37326' }} />
                       </Stack>
                     </Stack>
                     <Box component="ul" sx={{ m: 0, pl: 2 }}>

@@ -37,9 +37,10 @@ export default function Skills() {
                         label={skill}
                         size="small"
                         sx={{
-                          bgcolor: 'action.hover',
+                          bgcolor: 'rgba(232, 154, 60, 0.10)',
+                          color: '#b37326',
                           transition: 'all 0.2s',
-                          '&:hover': { bgcolor: 'primary.main', color: 'white' },
+                          '&:hover': { bgcolor: 'rgba(232, 154, 60, 0.20)' },
                         }}
                       />
                     ))}

@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
   email: "kostadin.g.devedzhiev@gmail.com",
-  tagline: "Human-AI Orchestration | CHIA, University of Cambridge",
+  tagline: "Human-AI Orchestration | TRACE Lab, University of Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [

@@ -50,6 +50,10 @@ function App() {
             styleOverrides: {
               root: {
                 fontWeight: 500,
+                borderRadius: 20,
+                bgcolor: 'rgba(232, 154, 60, 0.10)',
+                color: '#b37326',
+                border: 'none',
               },
             },
           },

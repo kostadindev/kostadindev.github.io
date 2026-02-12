@@ -28,7 +28,10 @@ export default function Publications() {
                       key={tag}
                       label={tag}
                       size="small"
-                      sx={{ bgcolor: 'primary.main', color: 'white' }}
+                      sx={{
+                        bgcolor: 'rgba(232, 154, 60, 0.10)',
+                        color: '#b37326',
+                      }}
                     />
                   ))}
                 </Stack>

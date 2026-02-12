@@ -164,9 +164,8 @@ export default function CurrentWork() {
                       label={tag}
                       size="small"
                       sx={{
-                        bgcolor: 'primary.main',
-                        color: 'white',
-                        fontWeight: 500,
+                        bgcolor: 'rgba(232, 154, 60, 0.10)',
+                        color: '#b37326',
                       }}
                     />
                   ))}
@@ -176,9 +175,9 @@ export default function CurrentWork() {
                   {project.description}
                 </Typography>
 
-                {project.commands && (
+                {(project as any).commands && (
                   <Stack spacing={1.5}>
-                    {project.commands.map((cmd) => (
+                    {(project as any).commands.map((cmd: string) => (
                       <CopyableCommand key={cmd} command={cmd} />
                     ))}
                   </Stack>

@@ -107,7 +107,10 @@ export default function Projects() {
                           key={tag}
                           label={tag}
                           size="small"
-                          variant="outlined"
+                          sx={{
+                            bgcolor: 'rgba(232, 154, 60, 0.10)',
+                            color: '#b37326',
+                          }}
                         />
                       ))}
                     </Stack>
