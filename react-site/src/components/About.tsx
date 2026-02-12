@@ -8,7 +8,13 @@ const stats = [
     link: 'https://www.cam.ac.uk/',
   },
   {
-    label: 'Lab' ,
+    label: 'Department',
+    value: 'CHIA',
+    logo: '/images/chia-cover.png',
+    link: 'https://www.chia.cam.ac.uk/',
+  },
+  {
+    label: 'Lab',
     value: 'TRACE Lab',
     logo: '/images/trace-cover.jpeg',
     link: 'https://trace-lab.ai/',
@@ -100,7 +106,7 @@ export default function About() {
 
         <Grid container spacing={3} justifyContent="center">
           {stats.map((stat) => (
-            <Grid size={{ xs: 12, sm: 4 }} key={stat.label}>
+            <Grid size={{ xs: 12, sm: 6, md: 3 }} key={stat.label}>
               <Link href={stat.link} target="_blank" rel="noopener" underline="none">
               <Paper
                 elevation={0}
