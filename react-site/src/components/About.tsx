@@ -7,8 +7,9 @@ const stats = [
     logo: 'https://www.cam.ac.uk/sites/default/files/secondary-logo-stacked.png',
   },
   {
-    label: 'Focus',
-    value: 'Multi-Agent Orchestration of Human-AI Systems',
+    label: 'Centre',
+    value: 'CHIA',
+    logo: 'https://www.chia.cam.ac.uk/wp-content/uploads/2023/08/chia-logo.png',
   },
   {
     label: 'Experience',
@@ -28,16 +29,25 @@ export default function About() {
         <Box sx={{ mb: 6 }}>
           <Typography variant="body1" color="text.secondary" sx={{ mb: 3, lineHeight: 1.8 }}>
             I'm a postgraduate student at the{' '}
-            <Link href="https://www.cam.ac.uk/" target="_blank" rel="noopener">
-              University of Cambridge
+            <Link href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener">
+              Centre for Human-Inspired AI (CHIA)
             </Link>
-            , where I study <strong>human-inspired AI</strong>. My thesis focuses on designing{' '}
-            <strong>multi-agent orchestration</strong> under real-world conditions, such as varying
-            expertise, costs, and availability. Additionally, I am pursuing research on{' '}
-            <strong>multi-agent reinforcement learning</strong> for political alignment. In the
-            future, I aim to explore how such technologies can support{' '}
-            <strong>ecological conservation</strong> through intelligent remote sensing and
-            monitoring.
+            , University of Cambridge, where I am part of the{' '}
+            <Link href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener">
+              TRACE Lab
+            </Link>{' '}
+            advised by{' '}
+            <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener">
+              Professor Umang Bhatt
+            </Link>
+            . My research focuses on <strong>human-AI orchestration</strong> — designing
+            multi-agent systems where AI agents and humans collaborate under real-world conditions,
+            such as varying expertise, costs, and availability. I am building{' '}
+            <Link href="https://tailorworkflow.com" target="_blank" rel="noopener">
+              Tailor
+            </Link>
+            , a platform for designing workflows with built-in <strong>human oversight</strong> and{' '}
+            <strong>governance controls</strong> for regulated industries.
           </Typography>
 
           <Typography variant="body1" color="text.secondary" sx={{ mb: 3, lineHeight: 1.8 }}>
@@ -76,12 +86,7 @@ export default function About() {
             >
               [Business Wire, 2025]
             </Link>
-            . I'm also the creator of{' '}
-            <Link href="https://gonext.lol" target="_blank" rel="noopener">
-              GONEXT
-            </Link>
-            , a <strong>generative AI platform</strong> that delivers personalized analytics for{' '}
-            <em>League of Legends</em> players.
+            .
           </Typography>
 
           <Typography variant="body1" color="text.secondary" sx={{ mb: 3, lineHeight: 1.8 }}>

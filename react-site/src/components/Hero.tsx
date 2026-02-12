@@ -59,27 +59,45 @@ export default function Hero() {
               fontWeight={700}
               sx={{ color: 'grey.900' }}
             >
-              Hi, I'm{' '}
-              <Box component="span" sx={{ color: 'primary.main' }}>
-                {personalInfo.name.split(' ')[0]}
-              </Box>
+              Kostadin Devedzhiev
             </Typography>
             <Typography variant="h5" sx={{ fontWeight: 400, color: 'grey.600' }}>
               {personalInfo.tagline}
             </Typography>
           </Box>
 
-          <Stack direction="row" spacing={2}>
-            <Button variant="contained" size="large" href="#work">
+          <Stack direction="row" spacing={1.5}>
+            <Button
+              size="large"
+              href="#work"
+              sx={{
+                bgcolor: 'primary.main',
+                color: '#fff',
+                borderRadius: 2,
+                px: 3,
+                textTransform: 'none',
+                fontWeight: 500,
+                boxShadow: 'none',
+                '&:hover': { bgcolor: 'primary.dark', boxShadow: 'none' },
+              }}
+            >
               View My Work
             </Button>
             <Button
-              variant="outlined"
               size="large"
               href={`mailto:${personalInfo.email}`}
-              sx={{ borderColor: 'grey.300', color: 'grey.700' }}
+              sx={{
+                bgcolor: 'rgba(232, 154, 60, 0.08)',
+                color: 'primary.main',
+                borderRadius: 2,
+                px: 3,
+                textTransform: 'none',
+                fontWeight: 500,
+                boxShadow: 'none',
+                '&:hover': { bgcolor: 'rgba(232, 154, 60, 0.15)', boxShadow: 'none' },
+              }}
             >
-              Get In Touch
+              Get in Touch
             </Button>
           </Stack>
 

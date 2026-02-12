@@ -1,12 +1,12 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
   email: "kostadin.g.devedzhiev@gmail.com",
-  tagline: "Human-Inspired AI | ML | UI",
+  tagline: "Human-AI Orchestration | CHIA, University of Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
-    `I'm a postgraduate student at the University of Cambridge, where I study human-inspired AI. My thesis focuses on designing multi-agent orchestration under real-world conditions, such as varying expertise, costs, and availability. Additionally, I am pursuing research on multi-agent reinforcement learning for political alignment. In the future, I aim to explore how such technologies can support ecological conservation through intelligent remote sensing and monitoring.`,
-    `Previously, I worked as a Software Engineer at Stellar Cyber in San Jose, California, where I developed AI-driven interfaces for threat hunting and human-augmented autonomous cybersecurity operations powered by agentic AI. I'm also the creator of GONEXT, a generative AI platform that delivers personalized analytics for League of Legends players.`,
+    `I'm a postgraduate student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the TRACE Lab advised by Professor Umang Bhatt. My research focuses on human-AI orchestration — designing multi-agent systems where AI agents and humans collaborate under real-world conditions, such as varying expertise, costs, and availability. I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
+    `Previously, I worked as a Software Engineer at Stellar Cyber in San Jose, California, where I developed AI-driven interfaces for threat hunting and human-augmented autonomous cybersecurity operations powered by agentic AI.`,
     `In my free time, I enjoy being outdoors in nature, going to music festivals, and playing racquet sports.`
   ],
   socials: [
@@ -18,9 +18,29 @@ export const personalInfo = {
 
 export const currentWork = [
   {
+    title: "Tailor",
+    description: "A human-AI orchestration platform for designing workflows where AI agents and humans collaborate seamlessly. Features a visual workflow builder, specialized AI agents, human-in-the-loop review, and four levels of governance controls — from autonomous AI to human-led — built for regulated industries like healthcare, finance, and legal.",
+    tags: ["Human-AI Orchestration", "Agentic AI", "Human-in-the-Loop"],
+    links: [
+      { type: "website", url: "https://tailorworkflow.com" }
+    ],
+    image: "./images/tailor-cover.png"
+  },
+  {
+    title: "MARL-Align",
+    description: "A multi-agent reinforcement learning framework for LLM value alignment. Formalizes alignment as a decentralized POMDP and uses social welfare functions to train group-personalized language models. Evaluated on politically polarizing conversations, balancing individual user preferences with collective societal welfare through fairness-aware optimization.",
+    tags: ["MARL", "LLM Alignment", "Social Choice Theory"],
+    links: [],
+    image: "./images/marl-align-cover.jpg"
+  }
+];
+
+export const projects = [
+  {
     title: "GONEXT.lol",
     description: "A League of Legends analytics platform built on a multi-agent LLM architecture. It provides transparent reasoning via a thinking trail and MCP logs, calculating detailed aggregate statistics from match history. The system offers context-aware strategies and optimized item builds based on live game states, while supporting dynamic conversational inquiries about anything game related, patches, players, and tournaments.",
     tags: ["GenAI", "Agentic AI", "RAG"],
+    category: ["genai", "agentic"],
     links: [
       { type: "website", url: "https://gonext.lol" },
       { type: "github", url: "https://github.com/KostadinDev/gonext" }
@@ -31,28 +51,25 @@ export const currentWork = [
     title: "League of Legends MCP Server",
     description: "This open-source Model Context Protocol (MCP) server empowers LLMs with comprehensive access to League of Legends game data through the Riot Games API. It features over 35 tools and resources for retrieving player statistics, match history, champion information, tournament data, and real-time game monitoring.",
     tags: ["MCP", "Agentic AI", "GenAI"],
+    category: ["mcp", "agentic"],
     links: [
       { type: "github", url: "https://github.com/kostadindev/League-of-Legends-MCP" },
       { type: "docker", url: "https://hub.docker.com/r/kostadindev/league-mcp" },
       { type: "pypi", url: "https://pypi.org/project/league-mcp/" }
     ],
-    commands: ["docker pull kostadindev/league-mcp", "pip install league-mcp"],
     image: "https://github.com/user-attachments/assets/81ff5484-f747-431d-ac9c-c04933339b82"
   },
   {
     title: "Knowledge Base Builder",
     description: "Python package for converting diverse content into a search-engine-friendly knowledge base. It effortlessly ingests files (PDFs, DOCXs, spreadsheets), websites, and GitHub repositories, then leverages LLMs to generate a Markdown knowledge base. Ideal for creating structured and crawlable formats like llms.txt.",
     tags: ["GenAI", "RAG"],
+    category: ["genai", "rag"],
     links: [
       { type: "pypi", url: "https://pypi.org/project/knowledge-base-builder/" },
       { type: "github", url: "https://github.com/kostadindev/knowledge-base-builder" }
     ],
-    commands: ["pip install knowledge-base-builder"],
     image: "./images/kbb.png"
-  }
-];
-
-export const projects = [
+  },
   {
     title: "Recursive QA",
     description: "An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs.",
