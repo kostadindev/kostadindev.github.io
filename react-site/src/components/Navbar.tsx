@@ -44,10 +44,19 @@ export default function Navbar() {
               </Button>
             ))}
             <Button
-              variant="contained"
               href={personalInfo.cvUrl}
               target="_blank"
-              sx={{ ml: 1 }}
+              sx={{
+                ml: 1,
+                bgcolor: 'primary.main',
+                color: '#fff',
+                borderRadius: 2,
+                px: 3,
+                textTransform: 'none',
+                fontWeight: 500,
+                boxShadow: 'none',
+                '&:hover': { bgcolor: 'primary.dark', boxShadow: 'none' },
+              }}
             >
               Resume
             </Button>
