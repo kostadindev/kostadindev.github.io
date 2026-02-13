@@ -1,97 +1,139 @@
 import { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Stars, Environment, AdaptiveDpr, Preload } from '@react-three/drei';
+import { Environment, AdaptiveDpr, Preload } from '@react-three/drei';
 import * as THREE from 'three';
 
 const BRAND_ORANGE = '#e89a3c';
 const ACCENT_PURPLE = '#a5b4fc';
 
-const FloatingShapes = () => {
-  const meshRef = useRef<THREE.InstancedMesh>(null);
+const geometries = [
+  new THREE.OctahedronGeometry(1, 0),
+  new THREE.TetrahedronGeometry(1, 0),
+  new THREE.IcosahedronGeometry(1, 0),
+  new THREE.BoxGeometry(1, 1, 1),
+];
 
-  const { shapes, count } = useMemo(() => {
-    const temp = [];
+interface ShapeData {
+  angle: number;
+  radius: number;
+  orbitSpeed: number;
+  orbitTilt: number;
+  scale: number;
+  color: THREE.Color;
+  rotSpeed: THREE.Vector3;
+  geoIndex: number;
+  zOffset: number;
+}
 
-    // Scatter shapes around the edges, avoiding center
-    const numShapes = 35;
+const OrbitRing = () => {
+  const meshRefs = geometries.map(() => useRef<THREE.InstancedMesh>(null));
 
-    for (let i = 0; i < numShapes; i++) {
-      let x, y;
+  const shapesByGeo = useMemo(() => {
+    const totalShapes = 40;
+    const result: ShapeData[][] = geometries.map(() => []);
 
-      // Random position but avoid center area (-4 to 4 x, -3 to 3 y)
-      do {
-        x = (Math.random() - 0.5) * 18; // -9 to 9
-        y = (Math.random() - 0.5) * 14; // -7 to 7
-      } while (Math.abs(x) < 4 && Math.abs(y) < 3.5);
+    for (let i = 0; i < totalShapes; i++) {
+      const geoIndex = i % geometries.length;
+      const angle = (i / totalShapes) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
+      // Push shapes far to outer edges
+      const radius = 9 + Math.random() * 4;
 
-      temp.push({
-        pos: new THREE.Vector3(
-          x,
-          y,
-          -1 + Math.random() * -5
-        ),
-        scale: 0.2 + Math.random() * 0.6,
-        delay: Math.random() * 6,
+      result[geoIndex].push({
+        angle,
+        radius,
+        orbitSpeed: 0.06 + Math.random() * 0.08,
+        orbitTilt: (Math.random() - 0.5) * 0.4,
+        scale: 0.15 + Math.random() * 0.35,
         color: new THREE.Color(Math.random() > 0.45 ? BRAND_ORANGE : ACCENT_PURPLE),
+        rotSpeed: new THREE.Vector3(
+          (Math.random() - 0.5) * 0.5,
+          (Math.random() - 0.5) * 0.5,
+          (Math.random() - 0.5) * 0.3
+        ),
+        geoIndex,
+        zOffset: -2 + Math.random() * -3,
       });
     }
-
-    return { shapes: temp, count: temp.length };
+    return result;
   }, []);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
   useEffect(() => {
-    if (!meshRef.current) return;
-    shapes.forEach((shape, i) => {
-      meshRef.current!.setColorAt(i, shape.color);
+    shapesByGeo.forEach((shapes, gi) => {
+      const mesh = meshRefs[gi].current;
+      if (!mesh) return;
+      shapes.forEach((s, i) => mesh.setColorAt(i, s.color));
+      if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
     });
-    if (meshRef.current.instanceColor) {
-      meshRef.current.instanceColor.needsUpdate = true;
-    }
-  }, [shapes]);
+  }, [shapesByGeo]);
 
   useFrame((state) => {
-    if (!meshRef.current) return;
     const t = state.clock.getElapsedTime();
 
-    shapes.forEach((shape, i) => {
-      const wave = Math.sin(t * 0.8 + shape.delay) * 0.2;
+    shapesByGeo.forEach((shapes, gi) => {
+      const mesh = meshRefs[gi].current;
+      if (!mesh) return;
 
-      dummy.position.set(shape.pos.x, shape.pos.y + wave, shape.pos.z);
-      dummy.scale.setScalar(shape.scale);
-      dummy.rotation.set(t * 0.2 + shape.delay, t * 0.15 + shape.delay, t * 0.1);
-      dummy.updateMatrix();
-      meshRef.current!.setMatrixAt(i, dummy.matrix);
+      shapes.forEach((s, i) => {
+        const a = s.angle + t * s.orbitSpeed;
+        // Center of orbit is slightly above screen center (where profile photo sits)
+        const centerY = 1.5;
+        const x = Math.cos(a) * s.radius;
+        const y = centerY + Math.sin(a) * s.radius * 0.85 + Math.sin(a * 0.5) * s.orbitTilt;
+        const z = s.zOffset + Math.sin(a) * 0.5;
+
+        const pulse = 1 + Math.sin(t * 1.2 + s.angle * 3) * 0.06;
+
+        dummy.position.set(x, y, z);
+        dummy.scale.setScalar(s.scale * pulse);
+        dummy.rotation.set(
+          t * s.rotSpeed.x + s.angle,
+          t * s.rotSpeed.y + s.angle,
+          t * s.rotSpeed.z
+        );
+        dummy.updateMatrix();
+        mesh.setMatrixAt(i, dummy.matrix);
+      });
+      mesh.instanceMatrix.needsUpdate = true;
     });
-    meshRef.current.instanceMatrix.needsUpdate = true;
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
-      <dodecahedronGeometry args={[1, 0]} />
-      <meshStandardMaterial
-        metalness={0.3}
-        roughness={0.4}
-        transparent
-        opacity={0.5}
-      />
-    </instancedMesh>
+    <>
+      {shapesByGeo.map((shapes, gi) => (
+        <instancedMesh
+          key={gi}
+          ref={meshRefs[gi]}
+          args={[geometries[gi], undefined, shapes.length]}
+        >
+          <meshPhysicalMaterial
+            metalness={0.1}
+            roughness={0.15}
+            transparent
+            opacity={0.55}
+            clearcoat={0.8}
+            clearcoatRoughness={0.1}
+            envMapIntensity={1.2}
+          />
+        </instancedMesh>
+      ))}
+    </>
   );
 };
 
 function Scene() {
   return (
     <>
-      <fog attach="fog" args={['#fafaf8', 15, 35]} />
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <pointLight position={[-10, -10, -10]} color={ACCENT_PURPLE} intensity={0.3} />
+      <fog attach="fog" args={['#fafaf8', 12, 30]} />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1.2} />
+      <directionalLight position={[-5, -5, 5]} intensity={0.3} color={ACCENT_PURPLE} />
+      <pointLight position={[-10, -10, -10]} color={ACCENT_PURPLE} intensity={0.4} />
 
-      <FloatingShapes />
+      <OrbitRing />
 
       <Environment preset="city" />
-      <Stars radius={80} depth={50} count={200} factor={2} saturation={0} fade speed={0.2} />
       <AdaptiveDpr pixelated />
       <Preload all />
     </>
@@ -109,14 +151,14 @@ export default function HeroScene() {
         height: '100%',
         zIndex: 0,
         pointerEvents: 'none',
-        opacity: 0.8,
+        opacity: 0.85,
       }}
     >
       <Canvas
         camera={{ position: [0, 0, 16], fov: 45 }}
         gl={{
           powerPreference: 'high-performance',
-          antialias: false,
+          antialias: true,
           stencil: false,
           depth: true,
           alpha: true,
