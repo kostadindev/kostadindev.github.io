@@ -245,6 +245,40 @@ export const teaching = [
   }
 ];
 
+export const travelCountries = {
+  europe: [
+    { id: "100", name: "Bulgaria" },
+    { id: "300", name: "Greece" },
+    { id: "792", name: "Turkey" },
+    { id: "056", name: "Belgium" },
+    { id: "250", name: "France" },
+    { id: "528", name: "Netherlands" },
+    { id: "380", name: "Italy" },
+    { id: "040", name: "Austria" },
+    { id: "688", name: "Serbia" },
+    { id: "705", name: "Slovenia" },
+    { id: "191", name: "Croatia" },
+    { id: "826", name: "United Kingdom" },
+  ],
+  northAmerica: [
+    { id: "840", name: "United States" },
+    { id: "124", name: "Canada" },
+    { id: "484", name: "Mexico" },
+  ],
+  caribbean: [
+    { id: "044", name: "Bahamas" },
+    { id: "630", name: "Puerto Rico" },
+  ],
+  middleEast: [
+    { id: "414", name: "Kuwait" },
+  ],
+  southAmerica: [
+    { id: "604", name: "Peru" },
+    { id: "076", name: "Brazil" },
+    { id: "170", name: "Colombia" },
+  ],
+};
+
 export const navItems = [
   { name: "About", href: "#about" },
   { name: "Work", href: "#work" },
