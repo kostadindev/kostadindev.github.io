@@ -4,6 +4,7 @@ import {
   ComposableMap,
   Geographies,
   Geography,
+  Marker,
   ZoomableGroup,
 } from 'react-simple-maps';
 import { travelCountries } from '../data/content';
@@ -16,6 +17,12 @@ const regions = [
   { key: 'caribbean' as const, label: 'Caribbean', count: travelCountries.caribbean.length },
   { key: 'middleEast' as const, label: 'Middle East', count: travelCountries.middleEast.length },
   { key: 'southAmerica' as const, label: 'S. America', count: travelCountries.southAmerica.length },
+];
+
+const PINS: { name: string; coordinates: [number, number] }[] = [
+  { name: 'Sofia', coordinates: [23.3219, 42.6977] },
+  { name: 'New York', coordinates: [-74.006, 40.7128] },
+  { name: 'Cambridge', coordinates: [0.1218, 52.2053] },
 ];
 
 const NATIVE_ID = '100'; // Bulgaria
@@ -139,6 +146,28 @@ export default function TravelMap() {
                   })
                 }
               </Geographies>
+              {PINS.map((pin) => (
+                <Marker
+                  key={pin.name}
+                  coordinates={pin.coordinates}
+                  onMouseEnter={() => setTooltip(pin.name)}
+                  onMouseLeave={() => setTooltip('')}
+                >
+                  <circle r={3} fill="#fff" stroke="#b8720f" strokeWidth={1.5} />
+                  <text
+                    textAnchor="middle"
+                    y={-8}
+                    style={{
+                      fontFamily: 'Inter, sans-serif',
+                      fontSize: 7,
+                      fontWeight: 600,
+                      fill: '#444',
+                    }}
+                  >
+                    {pin.name}
+                  </text>
+                </Marker>
+              ))}
             </ZoomableGroup>
           </ComposableMap>
 
