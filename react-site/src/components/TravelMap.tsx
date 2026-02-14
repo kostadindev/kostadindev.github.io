@@ -1,5 +1,7 @@
-import { useMemo, useState } from 'react';
-import { Box, Container, Typography, Chip, Stack } from '@mui/material';
+import { useCallback, useMemo, useState } from 'react';
+import { Box, Container, Typography, Chip, Stack, IconButton } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 import {
   ComposableMap,
   Geographies,
@@ -57,6 +59,10 @@ function getLabel(id: string) {
 
 export default function TravelMap() {
   const [tooltip, setTooltip] = useState('');
+  const [zoom, setZoom] = useState(1);
+
+  const handleZoomIn = useCallback(() => setZoom((z) => Math.min(z * 1.5, 8)), []);
+  const handleZoomOut = useCallback(() => setZoom((z) => Math.max(z / 1.5, 1)), []);
 
   const visitedMap = useMemo(() => {
     const map = new Map<string, string>();
@@ -118,7 +124,7 @@ export default function TravelMap() {
             projectionConfig={{ rotate: [-10, 0, 0], scale: 147 }}
             style={{ width: '100%', height: 'auto' }}
           >
-            <ZoomableGroup>
+            <ZoomableGroup zoom={zoom} onMoveEnd={({ zoom: z }) => setZoom(z)}>
               <Geographies geography={GEO_URL}>
                 {({ geographies }) =>
                   geographies.map((geo) => {
@@ -180,6 +186,45 @@ export default function TravelMap() {
               ))}
             </ZoomableGroup>
           </ComposableMap>
+
+          <Stack
+            spacing={0.5}
+            sx={{
+              position: 'absolute',
+              top: 12,
+              right: 12,
+              zIndex: 2,
+            }}
+          >
+            <IconButton
+              onClick={handleZoomIn}
+              size="small"
+              sx={{
+                bgcolor: 'background.paper',
+                border: 1,
+                borderColor: 'divider',
+                width: 32,
+                height: 32,
+                '&:hover': { bgcolor: 'grey.100' },
+              }}
+            >
+              <AddIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              onClick={handleZoomOut}
+              size="small"
+              sx={{
+                bgcolor: 'background.paper',
+                border: 1,
+                borderColor: 'divider',
+                width: 32,
+                height: 32,
+                '&:hover': { bgcolor: 'grey.100' },
+              }}
+            >
+              <RemoveIcon fontSize="small" />
+            </IconButton>
+          </Stack>
 
           {tooltip && (
             <Box
