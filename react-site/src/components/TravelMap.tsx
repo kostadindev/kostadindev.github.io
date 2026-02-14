@@ -19,10 +19,11 @@ const regions = [
   { key: 'southAmerica' as const, label: 'S. America', count: travelCountries.southAmerica.length },
 ];
 
-const PINS: { name: string; coordinates: [number, number] }[] = [
-  { name: 'Sofia', coordinates: [23.3219, 42.6977] },
-  { name: 'New York', coordinates: [-74.006, 40.7128] },
-  { name: 'Cambridge', coordinates: [0.1218, 52.2053] },
+const PINS: { name: string; label: string; coordinates: [number, number] }[] = [
+  { name: 'Sofia', label: 'Native', coordinates: [23.3219, 42.6977] },
+  { name: 'New York', label: 'Lived', coordinates: [-74.006, 40.7128] },
+  { name: 'Cambridge', label: 'Current', coordinates: [0.1218, 52.2053] },
+  { name: 'Hilo', label: 'Lived', coordinates: [-155.09, 19.7241] },
 ];
 
 const NATIVE_ID = '100'; // Bulgaria
@@ -46,6 +47,12 @@ function getHoverFill(id: string) {
   if (LIVED_IDS.has(id)) return '#d4851f';
   if (allIds.has(id)) return '#e89a3c';
   return '#d6d6da';
+}
+
+function getLabel(id: string) {
+  if (id === NATIVE_ID) return 'Native';
+  if (LIVED_IDS.has(id)) return 'Lived';
+  return 'Visited';
 }
 
 export default function TravelMap() {
@@ -122,7 +129,10 @@ export default function TravelMap() {
                         key={geo.rsmKey}
                         geography={geo}
                         onMouseEnter={() => {
-                          if (isVisited) setTooltip(visitedMap.get(id) ?? id);
+                          if (isVisited) {
+                            const name = visitedMap.get(id) ?? id;
+                            setTooltip(`${name} · ${getLabel(id)}`);
+                          }
                         }}
                         onMouseLeave={() => setTooltip('')}
                         style={{
@@ -150,10 +160,10 @@ export default function TravelMap() {
                 <Marker
                   key={pin.name}
                   coordinates={pin.coordinates}
-                  onMouseEnter={() => setTooltip(pin.name)}
+                  onMouseEnter={() => setTooltip(`${pin.name} · ${pin.label}`)}
                   onMouseLeave={() => setTooltip('')}
                 >
-                  <circle r={3} fill="#fff" stroke="#b8720f" strokeWidth={1.5} />
+                  <circle r={1} fill="#fff" stroke="#b8720f" strokeWidth={1} />
                   <text
                     textAnchor="middle"
                     y={-8}
