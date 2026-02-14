@@ -72,10 +72,10 @@ function App() {
           <Hero />
           <About />
           <CurrentWork />
-          <Projects />
           <Publications />
           <Education />
           <Experience />
+          <Projects />
           <Skills />
           <TravelMap />
         </main>
