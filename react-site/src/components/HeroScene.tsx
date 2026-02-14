@@ -14,18 +14,15 @@ const geometries = [
 ];
 
 interface ShapeData {
-  angle: number;
-  radius: number;
-  orbitSpeed: number;
-  orbitTilt: number;
+  pos: THREE.Vector3;
   scale: number;
   color: THREE.Color;
   rotSpeed: THREE.Vector3;
-  geoIndex: number;
-  zOffset: number;
+  driftPhase: THREE.Vector3; // unique phase offsets for gentle drift
+  driftAmp: THREE.Vector3;  // how far it drifts in each axis
 }
 
-const OrbitRing = () => {
+const FloatingShapes = () => {
   const meshRefs = geometries.map(() => useRef<THREE.InstancedMesh>(null));
 
   const shapesByGeo = useMemo(() => {
@@ -34,24 +31,35 @@ const OrbitRing = () => {
 
     for (let i = 0; i < totalShapes; i++) {
       const geoIndex = i % geometries.length;
-      const angle = (i / totalShapes) * Math.PI * 2 + (Math.random() - 0.5) * 0.3;
-      // Push shapes far to outer edges
+
+      // Place in a ring around center, pushed to outer edges
+      const angle = (i / totalShapes) * Math.PI * 2 + (Math.random() - 0.5) * 0.4;
       const radius = 9 + Math.random() * 4;
+      const centerY = 1.5;
+
+      const x = Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius * 0.7;
+      const z = -2 + Math.random() * -3;
 
       result[geoIndex].push({
-        angle,
-        radius,
-        orbitSpeed: 0.06 + Math.random() * 0.08,
-        orbitTilt: (Math.random() - 0.5) * 0.4,
-        scale: 0.15 + Math.random() * 0.35,
+        pos: new THREE.Vector3(x, y, z),
+        scale: 0.2 + Math.random() * 0.4,
         color: new THREE.Color(Math.random() > 0.45 ? BRAND_ORANGE : ACCENT_PURPLE),
         rotSpeed: new THREE.Vector3(
-          (Math.random() - 0.5) * 0.5,
-          (Math.random() - 0.5) * 0.5,
-          (Math.random() - 0.5) * 0.3
+          (Math.random() - 0.5) * 0.15,
+          (Math.random() - 0.5) * 0.15,
+          (Math.random() - 0.5) * 0.1
         ),
-        geoIndex,
-        zOffset: -2 + Math.random() * -3,
+        driftPhase: new THREE.Vector3(
+          Math.random() * Math.PI * 2,
+          Math.random() * Math.PI * 2,
+          Math.random() * Math.PI * 2
+        ),
+        driftAmp: new THREE.Vector3(
+          0.15 + Math.random() * 0.25,
+          0.15 + Math.random() * 0.25,
+          0.05 + Math.random() * 0.1
+        ),
       });
     }
     return result;
@@ -76,20 +84,16 @@ const OrbitRing = () => {
       if (!mesh) return;
 
       shapes.forEach((s, i) => {
-        const a = s.angle + t * s.orbitSpeed;
-        // Center of orbit is slightly above screen center (where profile photo sits)
-        const centerY = 1.5;
-        const x = Math.cos(a) * s.radius;
-        const y = centerY + Math.sin(a) * s.radius * 0.85 + Math.sin(a * 0.5) * s.orbitTilt;
-        const z = s.zOffset + Math.sin(a) * 0.5;
+        // Gentle hovering drift
+        const dx = Math.sin(t * 0.4 + s.driftPhase.x) * s.driftAmp.x;
+        const dy = Math.sin(t * 0.35 + s.driftPhase.y) * s.driftAmp.y;
+        const dz = Math.sin(t * 0.3 + s.driftPhase.z) * s.driftAmp.z;
 
-        const pulse = 1 + Math.sin(t * 1.2 + s.angle * 3) * 0.06;
-
-        dummy.position.set(x, y, z);
-        dummy.scale.setScalar(s.scale * pulse);
+        dummy.position.set(s.pos.x + dx, s.pos.y + dy, s.pos.z + dz);
+        dummy.scale.setScalar(s.scale);
         dummy.rotation.set(
-          t * s.rotSpeed.x + s.angle,
-          t * s.rotSpeed.y + s.angle,
+          t * s.rotSpeed.x + s.driftPhase.x,
+          t * s.rotSpeed.y + s.driftPhase.y,
           t * s.rotSpeed.z
         );
         dummy.updateMatrix();
@@ -131,7 +135,7 @@ function Scene() {
       <directionalLight position={[-5, -5, 5]} intensity={0.3} color={ACCENT_PURPLE} />
       <pointLight position={[-10, -10, -10]} color={ACCENT_PURPLE} intensity={0.4} />
 
-      <OrbitRing />
+      <FloatingShapes />
 
       <Environment preset="city" />
       <AdaptiveDpr pixelated />
