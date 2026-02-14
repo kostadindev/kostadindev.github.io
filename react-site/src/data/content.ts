@@ -220,7 +220,8 @@ export const teaching = [
     institution: "UniHawk",
     location: "Kuwait City, Kuwait",
     period: "December 2025",
-    description: "Mentored high school students through hands-on projects in a week-long bootcamp to build AI apps, promoting creativity, technical fluency, and confidence with AI tools."
+    description: "Mentored high school students through hands-on projects in a week-long bootcamp to build AI apps, promoting creativity, technical fluency, and confidence with AI tools.",
+    link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/"
   },
   {
     title: "Teaching Assistant",

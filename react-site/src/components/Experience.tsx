@@ -1,4 +1,5 @@
-import { Box, Container, Typography, Card, CardContent, Stack, Chip, Grid, Avatar } from '@mui/material';
+import { Box, Container, Typography, Card, CardContent, Stack, Chip, Grid, Avatar, Link } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { experience, teaching } from '../data/content';
 
 export default function Experience() {
@@ -110,6 +111,25 @@ export default function Experience() {
                   <Typography variant="body2" color="text.secondary">
                     {role.description}
                   </Typography>
+                  {'link' in role && role.link && (
+                    <Link
+                      href={role.link}
+                      target="_blank"
+                      rel="noopener"
+                      variant="body2"
+                      sx={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: 0.5,
+                        mt: 1,
+                        color: 'primary.main',
+                        textDecoration: 'none',
+                        '&:hover': { textDecoration: 'underline' },
+                      }}
+                    >
+                      Learn more <OpenInNewIcon sx={{ fontSize: 14 }} />
+                    </Link>
+                  )}
                 </CardContent>
               </Card>
             </Grid>
