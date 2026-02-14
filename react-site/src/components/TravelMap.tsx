@@ -18,11 +18,28 @@ const regions = [
   { key: 'southAmerica' as const, label: 'S. America', count: travelCountries.southAmerica.length },
 ];
 
+const NATIVE_ID = '100'; // Bulgaria
+const LIVED_IDS = new Set(['840', '826']); // USA, UK
+
 const allIds = new Set(
   Object.values(travelCountries).flatMap((list) => list.map((c) => c.id))
 );
 
 const totalCountries = allIds.size;
+
+function getFill(id: string) {
+  if (id === NATIVE_ID) return '#d4851f'; // dark amber for native
+  if (LIVED_IDS.has(id)) return '#e89a3c'; // brand orange for lived in
+  if (allIds.has(id)) return '#f4c76b'; // soft gold for visited
+  return '#eaeaec';
+}
+
+function getHoverFill(id: string) {
+  if (id === NATIVE_ID) return '#b8720f';
+  if (LIVED_IDS.has(id)) return '#d4851f';
+  if (allIds.has(id)) return '#e89a3c';
+  return '#d6d6da';
+}
 
 export default function TravelMap() {
   const [tooltip, setTooltip] = useState('');
@@ -103,13 +120,13 @@ export default function TravelMap() {
                         onMouseLeave={() => setTooltip('')}
                         style={{
                           default: {
-                            fill: isVisited ? '#e89a3c' : '#eaeaec',
+                            fill: getFill(id),
                             stroke: '#fff',
                             strokeWidth: 0.5,
                             outline: 'none',
                           },
                           hover: {
-                            fill: isVisited ? '#d4851f' : '#d6d6da',
+                            fill: getHoverFill(id),
                             stroke: '#fff',
                             strokeWidth: 0.5,
                             outline: 'none',
@@ -149,11 +166,31 @@ export default function TravelMap() {
 
         <Stack
           direction="row"
+          spacing={3}
+          justifyContent="center"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          {[
+            { color: '#d4851f', label: 'Native' },
+            { color: '#e89a3c', label: 'Lived' },
+            { color: '#f4c76b', label: 'Visited' },
+          ].map((item) => (
+            <Stack key={item.label} direction="row" alignItems="center" spacing={0.75}>
+              <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: item.color }} />
+              <Typography variant="caption" sx={{ color: 'grey.600' }}>
+                {item.label}
+              </Typography>
+            </Stack>
+          ))}
+        </Stack>
+
+        <Stack
+          direction="row"
           spacing={1.5}
           flexWrap="wrap"
           useFlexGap
           justifyContent="center"
-          sx={{ mt: 3 }}
+          sx={{ mt: 1 }}
         >
           {Object.values(travelCountries)
             .flat()
