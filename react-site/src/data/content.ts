@@ -246,6 +246,21 @@ export const teaching = [
   }
 ];
 
+export const news = [
+  {
+    date: "Feb 2026",
+    title: "IndiaAI Research Symposium — New Delhi",
+    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab, University of Cambridge at the India-AI Impact Summit.",
+    link: "https://impact.indiaai.gov.in/events/research-symposium",
+  },
+  {
+    date: "Dec 2025",
+    title: "AI Leadership Bootcamp — Kuwait City",
+    description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab with Cambridge & Stanford alumni.",
+    link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/",
+  },
+];
+
 export const travelCountries = {
   europe: [
     { id: "100", name: "Bulgaria" },

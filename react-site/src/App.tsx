@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import News from './components/News';
 import CurrentWork from './components/CurrentWork';
 import Projects from './components/Projects';
 import Publications from './components/Publications';
@@ -71,6 +72,7 @@ function App() {
         <main>
           <Hero />
           <About />
+          <News />
           <CurrentWork />
           <Publications />
           <Education />
