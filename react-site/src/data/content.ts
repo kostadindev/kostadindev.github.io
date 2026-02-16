@@ -216,7 +216,7 @@ export const experience = [
 
 export const teaching = [
   {
-    title: "AI Leadership Mentor",
+    title: "AI Innovation & Leadership Mentor",
     institution: "UniHawk",
     location: "Kuwait City, Kuwait",
     period: "December 2025",
@@ -250,12 +250,12 @@ export const news = [
   {
     date: "Feb 2026",
     title: "IndiaAI Research Symposium — New Delhi",
-    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab, University of Cambridge at the India-AI Impact Summit.",
+    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab and the University of Cambridge at the India-AI Impact Summit.",
     link: "https://impact.indiaai.gov.in/events/research-symposium",
   },
   {
     date: "Dec 2025",
-    title: "AI Leadership Bootcamp — Kuwait City",
+    title: "AI Innovation & Leadership Bootcamp — Kuwait City",
     description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab with Cambridge & Stanford alumni.",
     link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/",
   },

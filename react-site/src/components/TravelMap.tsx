@@ -124,10 +124,10 @@ export default function TravelMap() {
             projectionConfig={{ rotate: [-10, 0, 0], scale: 147 }}
             style={{ width: '100%', height: 'auto' }}
           >
-            <ZoomableGroup zoom={zoom} onMoveEnd={({ zoom: z }) => setZoom(z)}>
+            <ZoomableGroup zoom={zoom} onMoveEnd={({ zoom: z }: { zoom: number }) => setZoom(z)}>
               <Geographies geography={GEO_URL}>
-                {({ geographies }) =>
-                  geographies.map((geo) => {
+                {({ geographies }: { geographies: any[] }) =>
+                  geographies.map((geo: any) => {
                     const id = geo.id;
                     const isVisited = allIds.has(id);
                     return (
