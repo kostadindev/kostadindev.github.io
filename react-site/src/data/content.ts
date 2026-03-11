@@ -283,6 +283,12 @@ export const news = [
     description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab with Cambridge & Stanford alumni.",
     link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/",
   },
+  {
+    date: "Apr 2025",
+    title: "AutoSOC Featured at RSA Conference 2025",
+    description: "Stellar Cyber debuted the Human-Augmented Autonomous SOC powered by Agentic AI at RSAC 2025.",
+    link: "https://stellarcyber.ai/news/press-releases/stellar-cyber-debuts-the-human-augmented-autonomous-soc-powered-by-agentic-ai-at-rsac-2025/",
+  },
 ];
 
 export const travelCountries = {
