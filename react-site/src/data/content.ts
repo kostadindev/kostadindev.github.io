@@ -190,6 +190,30 @@ export const experience = [
     ]
   },
   {
+    title: "NLP Research Assistant",
+    company: "Stony Brook University",
+    location: "Stony Brook, NY",
+    period: "August 2021 – May 2022",
+    logo: "https://images.credly.com/images/24977e6c-4f52-4579-b04f-0a39ae6cb39e/blob.png",
+    highlights: [
+      "Designed Recursive QA — a theoretical framework for generating formal representation annotations of natural language specifications using a guided question-answering methodology.",
+      "Generated question-answer pairs from constituency parse trees and filtered repetitive options using affinity clustering based on Levenshtein distance.",
+      "Developed an interactive full-stack web application integrating the question-answering framework, enhancing annotation quality control with features like account management, work history tracking, and graph visualizations.",
+      "Improved workflow efficiency by reducing cognitive load and enhancing annotation consistency, achieving an annotator agreement rate of over 80%, with experienced users completing annotations in about 30 seconds."
+    ]
+  },
+  {
+    title: "Artificial Intelligence Research Assistant",
+    company: "University of Hawaii at Hilo",
+    location: "Hilo, HI",
+    period: "June 2020 – August 2020",
+    logo: "https://studyhawaii.org/wp-content/uploads/2017/11/Hilo.jpg",
+    highlights: [
+      "Developed a threshold estimation heuristic using IoU and F1 score metrics to optimize acceptance of real-time CNN proposals for detection and classification tasks in an image annotation UI.",
+      "Enhanced a human-in-the-loop, semi-automatic image annotation tool for identifying invasive species in drone imagery, enabling progressive assistance as accuracy increases during real-time training."
+    ]
+  },
+  {
     title: "Software Engineering Intern",
     company: "Vivansa",
     location: "Sofia, Bulgaria",
