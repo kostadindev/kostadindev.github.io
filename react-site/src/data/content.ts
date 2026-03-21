@@ -37,14 +37,14 @@ export const currentWork = [
 
 export const projects = [
   {
-    title: "Responsible AI: Fairness & Transparency",
+    title: "Fairness and Transparency Analysis of Hospital Readmission Prediction",
     description: "An analysis of fairness and transparency in a Random Forest classifier for 30-day hospital readmission prediction using the Diabetes 130-Hospitals dataset. Evaluates group fairness via Demographic Parity and Equalized Odds using Fairlearn, and employs SHAP and LIME for transparency, reducing disparities by 74.5% using Exponentiated Gradient intervention.",
     tags: ["Responsible AI", "Fairness", "Transparency"],
     category: ["hitl"],
     links: [
       { type: "paper", url: "./documents/papers/responsible_ai_25.pdf" }
     ],
-    image: "./images/responsible_ai_cover.png"
+    image: "./images/responsible-ai-cover.png"
   },
   {
     title: "GONEXT.lol",

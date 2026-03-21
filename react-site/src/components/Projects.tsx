@@ -6,15 +6,29 @@ import {
   Card,
   CardContent,
   CardMedia,
-  CardActionArea,
   Chip,
   Stack,
   ToggleButton,
   ToggleButtonGroup,
   Grid,
+  IconButton,
+  Tooltip,
 } from '@mui/material';
-import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LanguageIcon from '@mui/icons-material/Language';
+import DescriptionIcon from '@mui/icons-material/Description';
+import ArticleIcon from '@mui/icons-material/Article';
+import InventoryIcon from '@mui/icons-material/Inventory';
 import { projects } from '../data/content';
+
+const linkIcon: Record<string, React.ReactElement> = {
+  github: <GitHubIcon fontSize="small" />,
+  website: <LanguageIcon fontSize="small" />,
+  paper: <DescriptionIcon fontSize="small" />,
+  article: <ArticleIcon fontSize="small" />,
+  docker: <InventoryIcon fontSize="small" />,
+  pypi: <InventoryIcon fontSize="small" />,
+};
 
 const filters = [
   { id: 'all', label: 'All' },
@@ -65,7 +79,7 @@ export default function Projects() {
 
         <Grid container spacing={4}>
           {filtered.map((project) => (
-            <Grid size={{ xs: 12, md: 4 }} key={project.title}>
+            <Grid size={{ xs: 12, md: 6 }} key={project.title}>
               <Card
                 elevation={0}
                 sx={{
@@ -81,45 +95,52 @@ export default function Projects() {
                   },
                 }}
               >
-                <CardActionArea
-                  href={project.links[0]?.url || '#'}
-                  target="_blank"
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}
-                >
-                  <CardMedia
-                    component="img"
-                    height="300"
-                    image={project.image}
-                    alt={project.title}
-                    sx={{ objectFit: 'cover' }}
-                  />
-                  <CardContent sx={{ flex: 1 }}>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-                      <Typography variant="h5" fontWeight={600}>
-                        {project.title}
-                      </Typography>
-                      {project.links.length > 0 && <ArrowOutwardIcon fontSize="small" color="primary" />}
-                    </Stack>
-
-                    <Stack direction="row" spacing={1} sx={{ mb: 2 }} flexWrap="wrap" useFlexGap>
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <Chip
-                          key={tag}
-                          label={tag}
-                          size="small"
-                          sx={{
-                            bgcolor: 'rgba(232, 154, 60, 0.10)',
-                            color: '#b37326',
-                          }}
-                        />
+                <CardMedia
+                  component="img"
+                  image={project.image}
+                  alt={project.title}
+                  sx={{ objectFit: 'cover', width: '100%', height: 280 }}
+                />
+                <CardContent sx={{ flex: 1 }}>
+                  <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                    <Typography variant="h5" fontWeight={600}>
+                      {project.title}
+                    </Typography>
+                    <Stack direction="row" spacing={0.5}>
+                      {project.links.map((link) => (
+                        <Tooltip key={link.url} title={link.type} arrow>
+                          <IconButton
+                            component="a"
+                            href={link.url}
+                            target="_blank"
+                            size="small"
+                            color="primary"
+                          >
+                            {linkIcon[link.type] || <LanguageIcon fontSize="small" />}
+                          </IconButton>
+                        </Tooltip>
                       ))}
                     </Stack>
+                  </Stack>
 
-                    <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                      {project.description}
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
+                  <Stack direction="row" spacing={1} sx={{ mb: 2 }} flexWrap="wrap" useFlexGap>
+                    {project.tags.slice(0, 3).map((tag) => (
+                      <Chip
+                        key={tag}
+                        label={tag}
+                        size="small"
+                        sx={{
+                          bgcolor: 'rgba(232, 154, 60, 0.10)',
+                          color: '#b37326',
+                        }}
+                      />
+                    ))}
+                  </Stack>
+
+                  <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                    {project.description}
+                  </Typography>
+                </CardContent>
               </Card>
             </Grid>
           ))}
