@@ -42,6 +42,7 @@ export const projects = [
     tags: ["Responsible AI", "Fairness", "Transparency"],
     category: ["hitl"],
     links: [
+      { type: "website", url: "./documents/papers/responsible_ai_25.html" },
       { type: "paper", url: "./documents/papers/responsible_ai_25.pdf" }
     ],
     image: "./images/responsible-ai-cover.svg"
