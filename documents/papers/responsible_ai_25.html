@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fairness and Transparency Analysis of Hospital Readmission Prediction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-tertiary: #888;
+    --accent: #c4704b;
+    --accent-bg: #fdf6f0;
+    --border: #e8e4df;
+    --bg: #fcfbf9;
+    --paper: #ffffff;
+    --code-bg: #f5f3ef;
+    --serif: 'Source Serif 4', 'Georgia', serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+    --mono: 'Source Code Pro', monospace;
+  }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Top bar */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(252, 251, 249, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+  }
+  .topbar a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .topbar a:hover { text-decoration: underline; }
+  .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
+  .topbar-right a {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  /* Article container */
+  article {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  /* Header */
+  header { margin-bottom: 3rem; text-align: center; }
+
+  header h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+  }
+
+  .author {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 600;
+    margin-bottom: 0.15rem;
+  }
+  .affiliation {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .affiliation a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .affiliation a:hover { text-decoration: underline; }
+
+  /* Abstract */
+  .abstract {
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.75rem;
+    background: var(--accent-bg);
+    border-radius: 8px;
+    border-left: 3px solid var(--accent);
+  }
+  .abstract-label {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .abstract p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+  }
+
+  /* TOC */
+  .toc {
+    margin: 2rem 0 3rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: var(--sans);
+  }
+  .toc-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-tertiary);
+    margin-bottom: 0.75rem;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+  .toc > ol > li { counter-increment: toc; }
+  .toc > ol > li::before {
+    content: counter(toc) ".";
+    display: inline-block;
+    width: 1.5rem;
+    color: var(--text-tertiary);
+    font-size: 0.82rem;
+  }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .toc a:hover { color: var(--accent); }
+  .toc li { margin-bottom: 0.3rem; }
+
+  /* Section headings */
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 3rem 0 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    line-height: 1.3;
+  }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+    color: var(--text);
+  }
+
+  h4 {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  /* Body text */
+  p { margin-bottom: 1.1rem; }
+
+  strong { font-weight: 600; }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* Inline citations */
+  a[href^="#ref-"] {
+    color: var(--text-secondary);
+    background: rgba(196, 112, 75, 0.08);
+    padding: 0.05em 0.35em;
+    border-radius: 4px;
+    font-size: 0.88em;
+    font-family: var(--sans);
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  a[href^="#ref-"]:hover {
+    background: rgba(196, 112, 75, 0.18);
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* Highlight target reference when jumped to */
+  .ref-list li:target {
+    background: var(--accent-bg);
+    border-radius: 4px;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-left: -0.5rem;
+    padding-left: calc(2rem + 0.5rem);
+  }
+
+  /* Lists */
+  ol, ul {
+    margin: 0.75rem 0 1.25rem 1.25rem;
+    line-height: 1.75;
+  }
+  li { margin-bottom: 0.35rem; }
+
+  /* Tables */
+  .table-wrap {
+    margin: 1.5rem 0 2rem;
+    overflow-x: auto;
+  }
+  .table-caption {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--sans);
+    font-size: 0.85rem;
+  }
+  thead th {
+    font-weight: 600;
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--text);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-bg); }
+  .num { font-variant-numeric: tabular-nums; text-align: right; font-family: var(--mono); font-size: 0.82rem; }
+  .highlight-cell { font-weight: 600; color: var(--accent); }
+
+  /* Math / equations */
+  .equation {
+    margin: 1.5rem 0;
+    text-align: center;
+    font-size: 0.95rem;
+    overflow-x: auto;
+    padding: 0.75rem 0;
+  }
+  .eq-number {
+    float: right;
+    color: var(--text-tertiary);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+  }
+
+  /* Callout box */
+  .callout {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    background: #f0f7ff;
+    border-left: 3px solid #4a90d9;
+    border-radius: 4px;
+    font-size: 0.92rem;
+  }
+  .callout-label {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #4a90d9;
+    margin-bottom: 0.35rem;
+  }
+
+  /* References */
+  .references {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .references h2 { border-top: none; padding-top: 0; margin-top: 0; }
+  .ref-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .ref-list li {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    margin-bottom: 0.85rem;
+    padding-left: 2rem;
+    text-indent: -2rem;
+    color: var(--text-secondary);
+  }
+  .ref-list .ref-id {
+    font-family: var(--sans);
+    font-weight: 600;
+    color: var(--text-tertiary);
+    font-size: 0.75rem;
+  }
+  .ref-list em { font-style: italic; }
+
+  /* Footer */
+  .paper-footer {
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+  }
+  .paper-footer a { color: var(--accent); }
+
+  /* Charts */
+  .chart-wrap {
+    margin: 2rem 0 2.5rem;
+    padding: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .chart-title {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Horizontal bar chart */
+  .hbar { margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hbar-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    width: 130px;
+    text-align: right;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .hbar-track {
+    flex: 1;
+    height: 22px;
+    background: #f3f1ed;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hbar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hbar-value {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    width: 42px;
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  /* Grouped bars */
+  .grouped-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 180px;
+    padding-top: 0.5rem;
+    border-bottom: 1.5px solid var(--border);
+    margin-bottom: 0.5rem;
+  }
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    flex: 1;
+  }
+  .bar-pair {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 150px;
+  }
+  .bar {
+    width: 18px;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+  .bar:hover { opacity: 0.8; }
+  .bar-group-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 0.35rem;
+    vertical-align: middle;
+  }
+
+  /* Waterfall chart */
+  .waterfall { display: flex; flex-direction: column; gap: 0.5rem; }
+  .wf-row { display: flex; align-items: center; gap: 0.5rem; }
+  .wf-label {
+    font-family: var(--sans);
+    font-size: 0.73rem;
+    color: var(--text-secondary);
+    width: 200px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .wf-bar-area {
+    flex: 1;
+    height: 24px;
+    position: relative;
+  }
+  .wf-bar {
+    position: absolute;
+    height: 100%;
+    border-radius: 3px;
+    top: 0;
+  }
+  .wf-val {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    width: 44px;
+    flex-shrink: 0;
+  }
+
+  /* Comparison chart */
+  .comparison-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .comp-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    width: 140px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .comp-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .comp-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .comp-bar {
+    height: 16px;
+    border-radius: 3px;
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .comp-val {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    html { font-size: 15.5px; }
+    article { padding: 2rem 1rem 4rem; }
+    header h1 { font-size: 1.65rem; }
+    h2 { font-size: 1.3rem; }
+    thead th, tbody td { padding: 0.4rem 0.5rem; }
+    .hbar-label { width: 90px; font-size: 0.68rem; }
+    .wf-label { width: 130px; font-size: 0.68rem; }
+    .comp-label { width: 100px; font-size: 0.68rem; }
+    .bar { width: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/">Kostadin Devedzhiev</a>
+  <div class="topbar-right">
+    <a href="./responsible_ai_25.pdf">PDF</a>
+  </div>
+</div>
+
+<article>
+
+<div style="margin: 0 -1.5rem 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--bg);">
+  <img src="../../images/responsible-ai-cover.svg" alt="Fairness and Transparency Analysis cover illustration" style="width: 100%; display: block;">
+</div>
+
+<header>
+  <h1>Fairness and Transparency Analysis of Hospital Readmission Prediction</h1>
+  <div class="author">Kostadin Devedzhiev</div>
+  <div class="affiliation">
+    Centre for Human-Inspired AI, University of Cambridge<br>
+    <a href="mailto:kgd26@cam.ac.uk">kgd26@cam.ac.uk</a>
+  </div>
+</header>
+
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>
+    We analyze fairness and transparency in a Random Forest classifier for 30-day hospital readmission using the Diabetes 130-Hospitals dataset (101,766 encounters). Adopting the "We Are All Equal" (WAE) worldview from Friedler et al., we evaluate group fairness via Demographic Parity and Equalized Odds using Fairlearn. For transparency, we employ SHAP and LIME, addressing the fidelity-interpretability tradeoff for different stakeholders. Our baseline exhibits significant disparities (Demographic Parity Difference = 0.248), which we reduce by 74.5% using an in-processing Exponentiated Gradient intervention, demonstrating fundamental fairness-accuracy tradeoffs. This work illustrates how responsible AI deployment requires explicit worldview selection, stakeholder-appropriate transparency, and honest engagement with fundamental tradeoffs.
+  </p>
+</div>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#methodology">Methodology</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#discussion">Discussion</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ol>
+</nav>
+
+<!-- 1. Introduction -->
+<h2 id="introduction">1. Introduction</h2>
+
+<p>Machine learning in healthcare risks perpetuating bias against protected groups <a href="#ref-obermeyer">[Obermeyer et al., 2019]</a>. Hospital readmission prediction exemplifies both <strong>individual harms</strong> (patients incorrectly flagged receive unnecessary interventions) and <strong>cumulative harms</strong> (systematic under-prediction for certain groups leads to resource misallocation). Such bias may be <strong>pre-existing</strong> (reflecting historical healthcare disparities), <strong>technical</strong> (introduced by model architecture), or <strong>emergent</strong> (arising from deployment context) <a href="#ref-friedman">[Friedman and Nissenbaum, 1996]</a>.</p>
+
+<p>We address two critical dimensions of responsible AI: <strong>fairness</strong> and <strong>transparency</strong> (via feature attribution methods). Our contributions include: (1) fairness analysis situating disparities within theoretical frameworks, (2) transparency using SHAP and LIME with attention to stakeholder needs, and (3) in-processing intervention demonstrating inherent tradeoffs identified by impossibility theorems.</p>
+
+<!-- 2. Background -->
+<h2 id="background">2. Background</h2>
+
+<h3>2.1 Fairness: Worldviews, Metrics, and Impossibility</h3>
+
+<p>The fairness literature distinguishes two fundamental approaches <a href="#ref-dwork">[Dwork et al., 2012]</a>. <strong>Group Fairness</strong> requires that protected group membership be irrelevant to classification outcomes&mdash;operationalized through metrics like Demographic Parity:</p>
+
+<div class="equation">
+  <span class="eq-number">(1)</span>
+  <span class="katex-render" data-formula="P(\hat{Y} = 1 \mid S = 0) = P(\hat{Y} = 1 \mid S = 1)"></span>
+</div>
+
+<p><strong>Individual Fairness</strong> requires similar treatment for similar individuals, formalized as a Lipschitz condition.</p>
+
+<p>Friedler et al. <a href="#ref-friedler">[2021]</a> articulate the worldviews underlying these approaches. The <strong>"What You See Is What You Get" (WYSIWYG)</strong> worldview assumes observed features faithfully represent underlying constructs&mdash;supporting individual fairness approaches. The <strong>"We Are All Equal" (WAE)</strong> worldview acknowledges that the mapping from Construct Space to Observed Space introduces structural bias aligned with group membership&mdash;justifying group-level corrections. We adopt the WAE perspective, recognizing that healthcare access disparities mean observed clinical features may systematically differ across racial groups independent of underlying health status.</p>
+
+<div class="callout">
+  <div class="callout-label">Key Insight</div>
+  <p>Chouldechova <a href="#ref-chouldechova">[2017]</a> and Kleinberg et al. <a href="#ref-kleinberg">[2017]</a> proved fundamental <strong>impossibility results</strong>: when base rates differ across groups, simultaneously satisfying calibration, balance for the positive class, and balance for the negative class is mathematically impossible. Choosing fairness metrics involves value judgments about whose errors matter.</p>
+</div>
+
+<h3>2.2 Transparency: From QII to Additive Feature Attribution</h3>
+
+<p>Transparency serves multiple goals: answering "how does the system work?", "why was I denied?", and "are decisions discriminatory?" <a href="#ref-datta">[Datta et al., 2016]</a>. The <strong>Quantitative Input Influence (QII)</strong> framework uses causal interventions to measure feature influence, using <strong>Shapley values</strong> from cooperative game theory to aggregate marginal influence across all possible feature subsets.</p>
+
+<p><strong>SHAP</strong> <a href="#ref-lundberg">[Lundberg and Lee, 2017]</a> provides a unified framework for "additive feature attribution methods" satisfying three axioms: (1) <strong>Local Accuracy</strong>&mdash;attributions sum to the prediction difference from baseline; (2) <strong>Missingness</strong>&mdash;absent features receive zero attribution; (3) <strong>Consistency</strong>&mdash;if a feature's marginal contribution increases, its attribution cannot decrease. These properties uniquely determine Shapley value allocation.</p>
+
+<p><strong>LIME</strong> <a href="#ref-ribeiro">[Ribeiro et al., 2016]</a> attempts to address the <strong>fidelity-interpretability tradeoff</strong>: complex models are accurate but opaque, while interpretable surrogates are understandable but approximate. LIME samples locally, weights by proximity, and fits an interpretable model&mdash;navigating this tradeoff for individual predictions.</p>
+
+<!-- 3. Methodology -->
+<h2 id="methodology">3. Methodology</h2>
+
+<h3>3.1 Dataset and Problem Formulation</h3>
+
+<p>The Diabetes 130-Hospitals dataset <a href="#ref-clore">[Clore and Strack, 2014]</a> (101,766 encounters) maps from <strong>Construct Space</strong> (true readmission risk) through <strong>Observed Space</strong> (clinical features reflecting both health and healthcare access) to <strong>Decision Space</strong> (model predictions) <a href="#ref-friedler">[Friedler et al., 2021]</a>. Key features include demographics (race, gender, age), clinical indicators (diagnoses, medications, lab procedures, hospital stay), and administrative data. The target is 30-day readmission (11.2% base rate).</p>
+
+<h3>3.2 Fairness Metrics</h3>
+
+<p>Following Fairlearn <a href="#ref-bird">[Bird et al., 2020]</a>, we evaluate:</p>
+
+<p><strong>Demographic Parity Difference (DPD)</strong>&mdash;measuring disparate impact in selection rates:</p>
+
+<div class="equation">
+  <span class="eq-number">(2)</span>
+  <span class="katex-render" data-formula="DPD = \max_{g \in G} P(\hat{Y} = 1 \mid A = g) - \min_{g \in G} P(\hat{Y} = 1 \mid A = g)"></span>
+</div>
+
+<p><strong>Equalized Odds Difference (EOD)</strong>&mdash;capturing error rate balance <a href="#ref-hardt">[Hardt et al., 2016]</a>:</p>
+
+<div class="equation">
+  <span class="eq-number">(3)</span>
+  <span class="katex-render" data-formula="EOD = \max\!\left(\max_g TPR_g - \min_g TPR_g,\; \max_g FPR_g - \min_g FPR_g\right)"></span>
+</div>
+
+<p>Equalized Odds ensures that test performance (FPR and FNR) does not skew with group membership.</p>
+
+<h3>3.3 Transparency Methods</h3>
+
+<p><strong>SHAP</strong> decomposes predictions using Shapley values:</p>
+
+<div class="equation">
+  <span class="eq-number">(4)</span>
+  <span class="katex-render" data-formula="f(x) = \phi_0 + \sum_{i=1}^{M} \phi_i(x)"></span>
+</div>
+
+<p>where &phi;<sub>0</sub> is the base rate and &phi;<sub>i</sub> represents feature <em>i</em>'s marginal contribution averaged over all feature orderings&mdash;the unique solution satisfying local accuracy, missingness, and consistency.</p>
+
+<p><strong>LIME</strong> fits a local surrogate by minimizing:</p>
+
+<div class="equation">
+  <span class="eq-number">(5)</span>
+  <span class="katex-render" data-formula="\xi(x) = \arg\min_{g \in \mathcal{G}} \mathcal{L}(f, g, \pi_x) + \Omega(g)"></span>
+</div>
+
+<p>where &pi;<sub>x</sub> defines locality weights, <em>L</em> measures fidelity to <em>f</em>, and &Omega;(g) penalizes complexity.</p>
+
+<h3>3.4 Intervention: In-Processing</h3>
+
+<p>Fairness interventions are categorized as: <strong>pre-processing</strong> (modifying training data), <strong>in-processing</strong> (constraining learning), or <strong>post-processing</strong> (adjusting predictions). We apply <strong>Exponentiated Gradient</strong> <a href="#ref-agarwal">[Agarwal et al., 2018]</a>&mdash;an in-processing method that iteratively reweights samples to satisfy Equalized Odds constraints while minimizing accuracy loss.</p>
+
+<!-- 4. Results -->
+<h2 id="results">4. Results</h2>
+
+<h3>4.1 Baseline Performance and Fairness Disparities</h3>
+
+<p>The Random Forest (100 estimators, max depth 10, balanced classes) achieves 64.5% accuracy, 0.71 weighted F1, and 0.651 ROC-AUC. Table 1 reveals substantial racial disparities.</p>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 1: Fairness Metrics by Race (Baseline Model)</div>
+  <table>
+    <thead>
+      <tr><th>Race</th><th class="num">Selection Rate</th><th class="num">TPR</th><th class="num">FPR</th><th class="num">Accuracy</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>African American</td><td class="num">0.370</td><td class="num">0.539</td><td class="num">0.348</td><td class="num">0.639</td></tr>
+      <tr><td>Caucasian</td><td class="num">0.384</td><td class="num">0.587</td><td class="num">0.358</td><td class="num">0.636</td></tr>
+      <tr><td>Hispanic</td><td class="num">0.277</td><td class="num">0.560</td><td class="num">0.237</td><td class="num">0.738</td></tr>
+      <tr><td>Asian</td><td class="num">0.293</td><td class="num">0.400</td><td class="num">0.283</td><td class="num">0.691</td></tr>
+      <tr><td>Other</td><td class="num">0.232</td><td class="num">0.400</td><td class="num">0.219</td><td class="num">0.754</td></tr>
+      <tr><td>Unknown</td><td class="num">0.136</td><td class="num">0.310</td><td class="num">0.119</td><td class="num">0.829</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 1: Selection Rate and False Positive Rate by Race</div>
+  <div class="grouped-bars">
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 55.5%; background: #c4704b;" title="Selection Rate: 0.370"></div>
+        <div class="bar" style="height: 52.2%; background: #4a90d9;" title="FPR: 0.348"></div>
+      </div>
+      <div class="bar-group-label">African<br>American</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 57.6%; background: #c4704b;" title="Selection Rate: 0.384"></div>
+        <div class="bar" style="height: 53.7%; background: #4a90d9;" title="FPR: 0.358"></div>
+      </div>
+      <div class="bar-group-label">Caucasian</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 41.6%; background: #c4704b;" title="Selection Rate: 0.277"></div>
+        <div class="bar" style="height: 35.6%; background: #4a90d9;" title="FPR: 0.237"></div>
+      </div>
+      <div class="bar-group-label">Hispanic</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 44%; background: #c4704b;" title="Selection Rate: 0.293"></div>
+        <div class="bar" style="height: 42.5%; background: #4a90d9;" title="FPR: 0.283"></div>
+      </div>
+      <div class="bar-group-label">Asian</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 34.8%; background: #c4704b;" title="Selection Rate: 0.232"></div>
+        <div class="bar" style="height: 32.9%; background: #4a90d9;" title="FPR: 0.219"></div>
+      </div>
+      <div class="bar-group-label">Other</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 20.4%; background: #c4704b;" title="Selection Rate: 0.136"></div>
+        <div class="bar" style="height: 17.9%; background: #4a90d9;" title="FPR: 0.119"></div>
+      </div>
+      <div class="bar-group-label">Unknown</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #c4704b;"></span>Selection Rate</span>
+    <span><span class="legend-dot" style="background: #4a90d9;"></span>False Positive Rate</span>
+  </div>
+</div>
+
+<p>The baseline exhibits <strong>DPD = 0.248</strong> and <strong>EOD = 0.278</strong>, both substantially exceeding acceptable thresholds. From the WAE perspective, these disparities reflect how Observed Space features&mdash;shaped by differential healthcare access&mdash;distort the mapping from Construct Space. Caucasian patients are flagged at 2.8&times; the rate of Unknown patients, constituting <strong>disparate impact</strong>. African American patients face FPR of 0.348 versus 0.119 for Unknown patients, directly violating Equalized Odds. Gender disparities are less pronounced (DPD = 0.025, EOD = 0.055), suggesting race is the primary axis of unfairness.</p>
+
+<h3>4.2 Transparency Analysis</h3>
+
+<h4>SHAP</h4>
+
+<p>SHAP analysis reveals the top Shapley value attributions:</p>
+
+<ol>
+  <li><strong>Had Inpatient Days</strong> (|&phi;| = 0.065): Prior hospitalizations are the strongest predictor</li>
+  <li><strong>Discharge Disposition</strong> (|&phi;| = 0.034): Where patients are discharged reflects post-acute care needs</li>
+  <li><strong>Number of Diagnoses</strong> (|&phi;| = 0.015): Diagnostic burden reflects disease complexity</li>
+  <li><strong>Time in Hospital</strong> (|&phi;| = 0.014): Longer stays indicate severity</li>
+  <li><strong>Primary Diagnosis</strong> (|&phi;| = 0.012): The main admission reason directly influences readmission risk</li>
+</ol>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 2: Mean Absolute SHAP Values &mdash; Top Feature Attributions</div>
+  <div class="hbar">
+    <div class="hbar-label">Had Inpatient Days</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 100%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.065</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Discharge Disposition</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 52.3%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.034</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Number of Diagnoses</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 23.1%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.015</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Time in Hospital</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 21.5%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.014</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Primary Diagnosis</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 18.5%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.012</div>
+  </div>
+</div>
+
+<p>Importantly, <strong>race does not appear among top features</strong>, suggesting no direct discriminatory use. However, this does not preclude <strong>proxy discrimination</strong>&mdash;race may influence predictions through correlated features like discharge disposition or prior utilization patterns.</p>
+
+<h4>LIME</h4>
+
+<p>Following Bhatt et al. <a href="#ref-bhatt">[2020]</a>, we recognize that different stakeholders need different explanations. LIME provides instance-specific attributions (Table 2). For <strong>clinicians</strong>: highlights actionable risk factors. For <strong>patients</strong> seeking recourse: suggests reducing emergency utilization could lower predicted risk. For <strong>regulators</strong>: enables checking whether protected characteristics inappropriately influence decisions.</p>
+
+<div class="callout">
+  <div class="callout-label">Caution</div>
+  <p>As Dimanov et al. <a href="#ref-dimanov">[2020]</a> demonstrated, models can be adversarially trained to conceal unfairness from explanation methods. This underscores that <strong>explanations complement but cannot replace fairness audits</strong>.</p>
+</div>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 2: LIME Explanation for Sample High-Risk Prediction</div>
+  <table>
+    <thead>
+      <tr><th>Feature Condition</th><th class="num">Contribution</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Had Inpatient Days (present)</td><td class="num highlight-cell">+0.130</td></tr>
+      <tr><td>Discharge Disposition (home)</td><td class="num">&minus;0.071</td></tr>
+      <tr><td>Number of Diagnoses (low)</td><td class="num">&minus;0.045</td></tr>
+      <tr><td>Primary Diagnosis (diabetes-related)</td><td class="num highlight-cell">+0.033</td></tr>
+      <tr><td>Time in Hospital (short)</td><td class="num">&minus;0.031</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 3: LIME Feature Contributions &mdash; High-Risk Prediction</div>
+  <div class="waterfall">
+    <div class="wf-row">
+      <div class="wf-label">Had Inpatient Days (present)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="left: 50%; width: 32.5%; background: #c4704b;"></div></div>
+      <div class="wf-val" style="color: #c4704b;">+0.130</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Primary Diagnosis (diabetes)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="left: 50%; width: 8.25%; background: #c4704b;"></div></div>
+      <div class="wf-val" style="color: #c4704b;">+0.033</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Time in Hospital (short)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="right: 50%; width: 7.75%; background: #4a90d9;"></div></div>
+      <div class="wf-val" style="color: #4a90d9;">&minus;0.031</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Number of Diagnoses (low)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="right: 50%; width: 11.25%; background: #4a90d9;"></div></div>
+      <div class="wf-val" style="color: #4a90d9;">&minus;0.045</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Discharge Disposition (home)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="right: 50%; width: 17.75%; background: #4a90d9;"></div></div>
+      <div class="wf-val" style="color: #4a90d9;">&minus;0.071</div>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 0.5rem;">
+    <span style="font-family: var(--sans); font-size: 0.65rem; color: var(--text-tertiary);">← Decreases risk &nbsp;&nbsp;|&nbsp;&nbsp; Increases risk →</span>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #c4704b;"></span>Positive contribution</span>
+    <span><span class="legend-dot" style="background: #4a90d9;"></span>Negative contribution</span>
+  </div>
+</div>
+
+<h3>4.3 Fairness Intervention Results</h3>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 3: Fairness Intervention &mdash; Baseline vs. Fair Model</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th class="num">Baseline</th><th class="num">Fair Model</th><th class="num">&Delta;</th><th class="num">Improvement</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Accuracy</td><td class="num">0.645</td><td class="num">0.530</td><td class="num">&minus;0.115</td><td class="num">&minus;17.8%</td></tr>
+      <tr><td>Demographic Parity Diff</td><td class="num">0.248</td><td class="num">0.063</td><td class="num">&minus;0.185</td><td class="num highlight-cell">+74.5%</td></tr>
+      <tr><td>Demographic Parity Ratio</td><td class="num">0.355</td><td class="num">0.881</td><td class="num">+0.526</td><td class="num highlight-cell">+148.0%</td></tr>
+      <tr><td>Equalized Odds Diff</td><td class="num">0.278</td><td class="num">0.171</td><td class="num">&minus;0.107</td><td class="num highlight-cell">+38.2%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 4: Fairness Intervention &mdash; Baseline vs. Fair Model</div>
+  <div class="comparison-row">
+    <div class="comp-label">Accuracy</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 64.5%; background: #bbb;"></div>
+        <div class="comp-val">0.645</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 53%; background: #999;"></div>
+        <div class="comp-val">0.530 <span style="color: #c4704b; font-size: 0.65rem;">&minus;17.8%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="comparison-row">
+    <div class="comp-label">Dem. Parity Diff</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 62%; background: #e8a0a0;"></div>
+        <div class="comp-val">0.248</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 15.75%; background: #8ec49a;"></div>
+        <div class="comp-val">0.063 <span style="color: #3a8a4a; font-size: 0.65rem; font-weight: 600;">+74.5%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="comparison-row">
+    <div class="comp-label">Dem. Parity Ratio</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 35.5%; background: #e8a0a0;"></div>
+        <div class="comp-val">0.355</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 88.1%; background: #8ec49a;"></div>
+        <div class="comp-val">0.881 <span style="color: #3a8a4a; font-size: 0.65rem; font-weight: 600;">+148%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="comparison-row" style="margin-bottom: 0;">
+    <div class="comp-label">Equalized Odds Diff</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 69.5%; background: #e8a0a0;"></div>
+        <div class="comp-val">0.278</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 42.75%; background: #8ec49a;"></div>
+        <div class="comp-val">0.171 <span style="color: #3a8a4a; font-size: 0.65rem; font-weight: 600;">+38.2%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #bbb;"></span>Baseline</span>
+    <span><span class="legend-dot" style="background: #999;"></span>Fair Model</span>
+    <span><span class="legend-dot" style="background: #e8a0a0;"></span>Worse</span>
+    <span><span class="legend-dot" style="background: #8ec49a;"></span>Better</span>
+  </div>
+</div>
+
+<p>The Exponentiated Gradient intervention substantially reduces disparities. DPD drops from 0.248 to 0.063&mdash;below the 0.1 threshold typically considered acceptable. The Demographic Parity Ratio improves from 0.355 to 0.881, approaching the ideal value of 1.0. This improvement comes at significant cost: accuracy drops from 64.5% to 53.0%. This 11.5 percentage point reduction represents the <strong>"price of fairness"</strong>&mdash;a direct manifestation of the impossibility theorems. When base rates differ across groups, achieving equal error rates reduces overall accuracy. The tradeoff is not a limitation of our method but a fundamental mathematical constraint.</p>
+
+<!-- 5. Discussion -->
+<h2 id="discussion">5. Discussion</h2>
+
+<p>Our analysis operationalizes several key concepts:</p>
+
+<ul>
+  <li><strong>Worldview Selection:</strong> By adopting WAE rather than WYSIWYG, we acknowledge that observed clinical features reflect structural healthcare disparities, justifying group-level fairness corrections.</li>
+  <li><strong>Stakeholder-Specific Transparency:</strong> SHAP and LIME provide global importance for model developers and local explanations for clinicians and patients.</li>
+  <li><strong>Impossibility Awareness:</strong> Our fairness-accuracy tradeoff directly demonstrates Chouldechova's findings, showing that choosing to optimize Equalized Odds prioritizes equal error rates over calibration&mdash;a value judgment requiring stakeholder input.</li>
+</ul>
+
+<p><strong>Limitations:</strong> (1) Explanations can be manipulated to conceal unfairness <a href="#ref-dimanov">[Dimanov et al., 2020]</a>; (2) SHAP reveals correlations, not causal pathways; (3) We optimize group fairness, potentially at individual fairness cost; (4) The dataset (1999&ndash;2008) may not reflect current clinical practices.</p>
+
+<!-- 6. Conclusion -->
+<h2 id="conclusion">6. Conclusion</h2>
+
+<p>This work demonstrates systematic evaluation of fairness and transparency in healthcare ML. Key findings:</p>
+
+<ol>
+  <li>Standard classifiers exhibit substantial fairness disparities (DPD = 0.248) invisible to aggregate accuracy metrics, validating the WAE worldview that observed features encode structural bias.</li>
+  <li>SHAP and LIME provide complementary transparency serving different stakeholder needs, though explanations alone cannot guarantee fairness.</li>
+  <li>In-processing interventions substantially reduce disparities (74.5% DPD improvement) at non-trivial accuracy cost (11.5 percentage points), reflecting the fundamental impossibility of simultaneously satisfying all fairness criteria.</li>
+</ol>
+
+<p>Responsible AI deployment in healthcare requires explicit worldview engagement, stakeholder-appropriate transparency mechanisms, and honest acknowledgment that the question is not <em>whether</em> to accept tradeoffs, but <em>which</em> tradeoffs align with institutional values and patient welfare.</p>
+
+<!-- References -->
+<div class="references">
+<h2>References</h2>
+<ul class="ref-list">
+  <li id="ref-agarwal"><span class="ref-id">[Agarwal et al., 2018]</span> Alekh Agarwal, Alina Beygelzimer, Miroslav Dud&iacute;k, John Langford, and Hanna Wallach. A reductions approach to fair classification. In <em>International Conference on Machine Learning</em>, pages 60&ndash;69. PMLR, 2018.</li>
+  <li id="ref-bhatt"><span class="ref-id">[Bhatt et al., 2020]</span> Umang Bhatt, Alice Xiang, Shubham Sharma, Adrian Weller, Ankur Taly, Yunhan Jia, Joydeep Ghosh, Ruchir Puri, Jos&eacute; MF Moura, and Peter Eckersley. Explainable machine learning in deployment. In <em>Proceedings of the 2020 Conference on Fairness, Accountability, and Transparency</em>, pages 648&ndash;657. ACM, 2020.</li>
+  <li id="ref-bird"><span class="ref-id">[Bird et al., 2020]</span> Sarah Bird, Miro Dud&iacute;k, Richard Edgar, Brandon Horn, Roman Lutz, Vanessa Milan, Mehrnoosh Sameki, Hanna Wallach, and Kathleen Walker. Fairlearn: A toolkit for assessing and improving fairness in AI. Technical Report MSR-TR-2020-32, Microsoft, 2020.</li>
+  <li id="ref-chouldechova"><span class="ref-id">[Chouldechova, 2017]</span> Alexandra Chouldechova. Fair prediction with disparate impact: A study of bias in recidivism prediction instruments. <em>Big Data</em>, 5(2):153&ndash;163, 2017.</li>
+  <li id="ref-clore"><span class="ref-id">[Clore and Strack, 2014]</span> Cios Krzysztof DeShazo Jon Clore, John and Beata Strack. Diabetes 130-US Hospitals for Years 1999-2008. UCI Machine Learning Repository, 2014.</li>
+  <li id="ref-datta"><span class="ref-id">[Datta et al., 2016]</span> Anupam Datta, Shayak Sen, and Yair Zick. Algorithmic transparency via quantitative input influence: Theory and experiments with learning systems. In <em>IEEE Symposium on Security and Privacy</em>, pages 598&ndash;617. IEEE, 2016.</li>
+  <li id="ref-dimanov"><span class="ref-id">[Dimanov et al., 2020]</span> Botty Dimanov, Umang Bhatt, Mateja Jamnik, and Adrian Weller. You shouldn't trust me: Learning models which conceal unfairness from multiple explanation methods. In <em>European Conference on Artificial Intelligence</em>, pages 2473&ndash;2480. IOS Press, 2020.</li>
+  <li id="ref-dwork"><span class="ref-id">[Dwork et al., 2012]</span> Cynthia Dwork, Moritz Hardt, Toniann Pitassi, Omer Reingold, and Richard Zemel. Fairness through awareness. In <em>Proceedings of the 3rd Innovations in Theoretical Computer Science Conference</em>, pages 214&ndash;226. ACM, 2012.</li>
+  <li id="ref-friedler"><span class="ref-id">[Friedler et al., 2021]</span> Sorelle A Friedler, Carlos Scheidegger, and Suresh Venkatasubramanian. On the (im)possibility of fairness. <em>Communications of the ACM</em>, 64(4):136&ndash;143, 2021.</li>
+  <li id="ref-friedman"><span class="ref-id">[Friedman and Nissenbaum, 1996]</span> Batya Friedman and Helen Nissenbaum. Bias in computer systems. <em>ACM Transactions on Information Systems</em>, 14(3):330&ndash;347, 1996.</li>
+  <li id="ref-hardt"><span class="ref-id">[Hardt et al., 2016]</span> Moritz Hardt, Eric Price, and Nati Srebro. Equality of opportunity in supervised learning. In <em>Advances in Neural Information Processing Systems</em>, volume 29, 2016.</li>
+  <li id="ref-kleinberg"><span class="ref-id">[Kleinberg et al., 2017]</span> Jon Kleinberg, Sendhil Mullainathan, and Manish Raghavan. Inherent trade-offs in the fair determination of risk scores. In <em>Proceedings of the 8th Innovations in Theoretical Computer Science Conference</em>. ACM, 2017.</li>
+  <li id="ref-lundberg"><span class="ref-id">[Lundberg and Lee, 2017]</span> Scott M Lundberg and Su-In Lee. A unified approach to interpreting model predictions. In <em>Advances in Neural Information Processing Systems</em>, volume 30, 2017.</li>
+  <li id="ref-obermeyer"><span class="ref-id">[Obermeyer et al., 2019]</span> Ziad Obermeyer, Brian Powers, Christine Vogeli, and Sendhil Mullainathan. Dissecting racial bias in an algorithm used to manage the health of populations. <em>Science</em>, 366(6464):447&ndash;453, 2019.</li>
+  <li id="ref-ribeiro"><span class="ref-id">[Ribeiro et al., 2016]</span> Marco Tulio Ribeiro, Sameer Singh, and Carlos Guestrin. "Why should I trust you?": Explaining the predictions of any classifier. In <em>Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>, pages 1135&ndash;1144. ACM, 2016.</li>
+</ul>
+</div>
+
+<div class="paper-footer">
+  <p>Centre for Human-Inspired AI &middot; University of Cambridge &middot; 2025</p>
+  <p><a href="/">Back to portfolio</a></p>
+</div>
+
+</article>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.katex-render').forEach(function(el) {
+      katex.render(el.dataset.formula, el, { throwOnError: false, displayMode: true });
+    });
+  });
+</script>
+
+</body>
+</html>
