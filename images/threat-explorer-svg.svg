@@ -1,0 +1,166 @@
+<svg width="1180" height="540" viewBox="0 0 1180 540" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<style>
+text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+.th { font-size: 14px; font-weight: 500; }
+.ts { font-size: 12px; font-weight: 400; }
+.tl { font-size: 10px; }
+</style>
+</defs>
+
+<!-- S0: NL Query -->
+<rect x="20" y="220" width="130" height="70" rx="35" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="85" y="249" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Natural</text>
+<text class="th" x="85" y="267" text-anchor="middle" dominant-baseline="central" fill="#3C3489">language query</text>
+
+<!-- Connectors: query → agents -->
+<path id="p-q-llm" d="M150,240 Q172,240 172,130 Q172,110 200,110" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path id="p-q-react" d="M150,255 L200,255" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path id="p-q-multi" d="M150,270 Q172,270 172,390 Q172,400 200,400" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+
+<!-- S1: Agents -->
+<rect x="200" y="78" width="155" height="64" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text class="th" x="277" y="102" text-anchor="middle" dominant-baseline="central" fill="#0C447C">LLM chain</text>
+<text class="ts" x="277" y="120" text-anchor="middle" dominant-baseline="central" fill="#185FA5">Predefined tool flow</text>
+<rect x="200" y="146" width="155" height="22" rx="4" fill="none" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="tl" x="277" y="160" text-anchor="middle" dominant-baseline="central" fill="#888">96.7% valid · $0.02 · 307s</text>
+
+<rect x="200" y="223" width="155" height="64" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="277" y="247" text-anchor="middle" dominant-baseline="central" fill="#085041">ReAct agent</text>
+<text class="ts" x="277" y="265" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">Reason + act loop</text>
+<rect x="200" y="291" width="155" height="22" rx="4" fill="none" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="tl" x="277" y="305" text-anchor="middle" dominant-baseline="central" fill="#888">100% valid · $0.04 · 476s</text>
+
+<rect x="200" y="368" width="155" height="64" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<text class="th" x="277" y="392" text-anchor="middle" dominant-baseline="central" fill="#712B13">Multi-agent</text>
+<text class="ts" x="277" y="410" text-anchor="middle" dominant-baseline="central" fill="#993C1D">3 specialized agents</text>
+<rect x="200" y="436" width="155" height="22" rx="4" fill="none" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="tl" x="277" y="450" text-anchor="middle" dominant-baseline="central" fill="#888">70% valid · $0.57 · 2741s</text>
+
+<!-- SQL Tool -->
+<rect x="390" y="340" width="130" height="52" rx="8" fill="#F5F5F2" stroke="#999" stroke-width="0.5" stroke-dasharray="4 3"/>
+<text class="th" x="455" y="360" text-anchor="middle" dominant-baseline="central" fill="#444">SQL tool</text>
+<text class="ts" x="455" y="378" text-anchor="middle" dominant-baseline="central" fill="#888">40k rows · 25 cols</text>
+
+<!-- Dashed tool call lines -->
+<path d="M355,130 Q420,130 420,338" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+<path d="M355,255 Q420,255 420,338" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+<path d="M355,400 L388,400 Q400,400 400,380 L400,346" fill="none" stroke="#999" stroke-width="0.5" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+<text class="ts" x="435" y="322" text-anchor="middle" dominant-baseline="central" fill="#888" font-style="italic">tool call</text>
+
+<!-- Connectors: agents → response gen -->
+<path id="p-llm-resp" d="M355,110 Q500,110 500,225 Q500,238 540,238" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path id="p-react-resp" d="M355,255 Q470,255 470,248 Q470,248 540,248" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path id="p-multi-resp" d="M355,400 Q500,400 500,260 Q500,258 540,258" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+
+<!-- S3: Response gen -->
+<rect x="540" y="218" width="155" height="60" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="617" y="242" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Response</text>
+<text class="th" x="617" y="260" text-anchor="middle" dominant-baseline="central" fill="#3C3489">generation</text>
+
+<!-- Connectors: response → outputs -->
+<path id="p-resp-text" d="M695,236 Q720,236 720,110 Q720,100 760,100" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path id="p-resp-bar" d="M695,248 L760,248" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path id="p-resp-pie" d="M695,258 Q730,258 730,360 Q730,370 760,370" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+<path id="p-resp-table" d="M695,262 Q740,262 740,468 Q740,478 760,478" fill="none" stroke="#999" stroke-width="0.5" marker-end="url(#arrow)"/>
+
+<!-- S4: Text output -->
+<rect x="760" y="70" width="155" height="60" rx="8" fill="#F5F5F2" stroke="#ccc" stroke-width="0.5"/>
+<text class="th" x="837" y="94" text-anchor="middle" dominant-baseline="central" fill="#444">Text output</text>
+<text class="ts" x="837" y="112" text-anchor="middle" dominant-baseline="central" fill="#888">Plain-text summary</text>
+<rect x="760" y="134" width="155" height="22" rx="4" fill="none" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="tl" x="837" y="148" text-anchor="middle" dominant-baseline="central" fill="#888">Usability 3.42 · Efficiency 2.58</text>
+
+<!-- Bar chart card -->
+<rect x="760" y="218" width="155" height="60" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="th" x="816" y="242" text-anchor="middle" dominant-baseline="central" fill="#27500A">Bar chart</text>
+<text class="ts" x="816" y="260" text-anchor="middle" dominant-baseline="central" fill="#3B6D11">Distributions</text>
+<rect x="862" y="236" width="8" height="24" rx="1" fill="#3B6D11" opacity="0.5"/>
+<rect x="874" y="228" width="8" height="32" rx="1" fill="#3B6D11" opacity="0.7"/>
+<rect x="886" y="240" width="8" height="20" rx="1" fill="#3B6D11" opacity="0.5"/>
+<rect x="898" y="232" width="8" height="28" rx="1" fill="#3B6D11" opacity="0.65"/>
+<line x1="860" y1="260" x2="908" y2="260" stroke="#3B6D11" stroke-width="0.5" opacity="0.4"/>
+
+<!-- Pie chart card -->
+<rect x="760" y="340" width="155" height="60" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="th" x="816" y="364" text-anchor="middle" dominant-baseline="central" fill="#27500A">Pie chart</text>
+<text class="ts" x="816" y="382" text-anchor="middle" dominant-baseline="central" fill="#3B6D11">Proportions</text>
+<circle cx="886" cy="370" r="16" fill="none" stroke="#3B6D11" stroke-width="0.5" opacity="0.3"/>
+<path d="M886,370 L886,354 A16,16 0 0,1 900,362 Z" fill="#3B6D11" opacity="0.7"/>
+<path d="M886,370 L900,362 A16,16 0 0,1 894,385 Z" fill="#3B6D11" opacity="0.45"/>
+<path d="M886,370 L894,385 A16,16 0 1,1 886,354 Z" fill="#3B6D11" opacity="0.25"/>
+
+<!-- Table card -->
+<rect x="760" y="448" width="155" height="60" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<text class="th" x="816" y="472" text-anchor="middle" dominant-baseline="central" fill="#27500A">Table</text>
+<text class="ts" x="816" y="490" text-anchor="middle" dominant-baseline="central" fill="#3B6D11">Detailed records</text>
+<rect x="862" y="462" width="44" height="32" rx="2" fill="none" stroke="#3B6D11" stroke-width="0.5" opacity="0.4"/>
+<line x1="862" y1="472" x2="906" y2="472" stroke="#3B6D11" stroke-width="0.5" opacity="0.4"/>
+<line x1="862" y1="482" x2="906" y2="482" stroke="#3B6D11" stroke-width="0.5" opacity="0.3"/>
+<line x1="882" y1="462" x2="882" y2="494" stroke="#3B6D11" stroke-width="0.5" opacity="0.3"/>
+
+<!-- Bracket + stats -->
+<path d="M930,248 Q944,248 944,370 Q944,478 944,478" fill="none" stroke="#999" stroke-width="0.5"/>
+<line x1="930" y1="248" x2="944" y2="248" stroke="#999" stroke-width="0.5"/>
+<line x1="930" y1="370" x2="944" y2="370" stroke="#999" stroke-width="0.5"/>
+<line x1="930" y1="478" x2="944" y2="478" stroke="#999" stroke-width="0.5"/>
+<line x1="944" y1="370" x2="956" y2="370" stroke="#999" stroke-width="0.5"/>
+<rect x="964" y="346" width="160" height="48" rx="8" fill="none" stroke="#ccc" stroke-width="0.5" stroke-dasharray="3 3"/>
+<text class="ts" x="1044" y="364" text-anchor="middle" dominant-baseline="central" fill="#666">Usability 4.67*</text>
+<text class="ts" x="1044" y="380" text-anchor="middle" dominant-baseline="central" fill="#666">Efficiency 4.75*</text>
+
+<!-- Key findings -->
+<rect x="20" y="500" width="1080" height="32" rx="10" fill="none" stroke="#ccc" stroke-width="0.5" stroke-dasharray="4 4"/>
+<circle cx="50" cy="516" r="4" fill="#0F6E56"/>
+<text class="ts" x="62" y="516" dominant-baseline="central" fill="#666">ReAct: 100% valid</text>
+<circle cx="260" cy="516" r="4" fill="#185FA5"/>
+<text class="ts" x="272" y="516" dominant-baseline="central" fill="#666">LLM chain: 3× faster, 27× cheaper</text>
+<circle cx="560" cy="516" r="4" fill="#3B6D11"/>
+<text class="ts" x="572" y="516" dominant-baseline="central" fill="#666">Charts: sig. gains in usability, clarity, efficiency (p_adj &lt; .05)</text>
+
+<!-- ===== ANIMATED FLOW DOTS ===== -->
+
+<!-- Path A: Query → LLM Chain → Response → Bar chart (blue) -->
+<circle r="4" fill="#185FA5" opacity="0.8">
+<animateMotion dur="1.2s" begin="0s;pA3.end+2s" fill="freeze" id="pA0"><mpath href="#p-q-llm"/></animateMotion>
+</circle>
+<circle r="4" fill="#185FA5" opacity="0.8">
+<animateMotion dur="1.2s" begin="pA0.end" fill="freeze" id="pA1"><mpath href="#p-llm-resp"/></animateMotion>
+</circle>
+<circle r="4" fill="#185FA5" opacity="0.8">
+<animateMotion dur="0.6s" begin="pA1.end" fill="freeze" id="pA2"><mpath href="#p-resp-bar"/></animateMotion>
+</circle>
+<circle r="4" fill="#185FA5" opacity="0">
+<animate attributeName="opacity" values="0" dur="2s" begin="pA2.end" id="pA3"/>
+</circle>
+
+<!-- Path B: Query → ReAct → Response → Pie chart (teal) -->
+<circle r="4" fill="#0F6E56" opacity="0.8">
+<animateMotion dur="0.5s" begin="2s;pB3.end+2s" fill="freeze" id="pB0"><mpath href="#p-q-react"/></animateMotion>
+</circle>
+<circle r="4" fill="#0F6E56" opacity="0.8">
+<animateMotion dur="1s" begin="pB0.end" fill="freeze" id="pB1"><mpath href="#p-react-resp"/></animateMotion>
+</circle>
+<circle r="4" fill="#0F6E56" opacity="0.8">
+<animateMotion dur="0.8s" begin="pB1.end" fill="freeze" id="pB2"><mpath href="#p-resp-pie"/></animateMotion>
+</circle>
+<circle r="4" fill="#0F6E56" opacity="0">
+<animate attributeName="opacity" values="0" dur="2s" begin="pB2.end" id="pB3"/>
+</circle>
+
+<!-- Path C: Query → Multi-agent → Response → Table (coral) -->
+<circle r="4" fill="#993C1D" opacity="0.8">
+<animateMotion dur="1.2s" begin="4s;pC3.end+2s" fill="freeze" id="pC0"><mpath href="#p-q-multi"/></animateMotion>
+</circle>
+<circle r="4" fill="#993C1D" opacity="0.8">
+<animateMotion dur="1.2s" begin="pC0.end" fill="freeze" id="pC1"><mpath href="#p-multi-resp"/></animateMotion>
+</circle>
+<circle r="4" fill="#993C1D" opacity="0.8">
+<animateMotion dur="0.8s" begin="pC1.end" fill="freeze" id="pC2"><mpath href="#p-resp-table"/></animateMotion>
+</circle>
+<circle r="4" fill="#993C1D" opacity="0">
+<animate attributeName="opacity" values="0" dur="2s" begin="pC2.end" id="pC3"/>
+</circle>
+
+</svg>

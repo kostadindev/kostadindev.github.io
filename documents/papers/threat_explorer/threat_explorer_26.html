@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Threat Explorer: A Comparative Study of Agentic Architectures and Visualization Strategies for Conversational Cybersecurity Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-tertiary: #888;
+    --accent: #c4704b;
+    --accent-bg: #fdf6f0;
+    --border: #e8e4df;
+    --bg: #fcfbf9;
+    --paper: #ffffff;
+    --code-bg: #f5f3ef;
+    --serif: 'Source Serif 4', 'Georgia', serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+    --mono: 'Source Code Pro', monospace;
+  }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(252, 251, 249, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--sans); font-size: 0.8rem;
+  }
+  .topbar a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .topbar a:hover { text-decoration: underline; }
+  .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
+  .topbar-right a { color: var(--text-secondary); font-weight: 500; }
+
+  article { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+
+  header { margin-bottom: 3rem; text-align: center; }
+  header h1 { font-size: 2.1rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--text); }
+  .author { font-family: var(--sans); font-size: 0.95rem; color: var(--text); font-weight: 600; margin-bottom: 0.15rem; }
+  .affiliation { font-family: var(--sans); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+  .affiliation a { color: var(--accent); text-decoration: none; }
+  .affiliation a:hover { text-decoration: underline; }
+
+  .abstract { margin: 2.5rem 0; padding: 1.5rem 1.75rem; background: var(--accent-bg); border-radius: 8px; border-left: 3px solid var(--accent); }
+  .abstract-label { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; }
+  .abstract p { font-size: 0.92rem; line-height: 1.75; color: var(--text-secondary); }
+
+  .toc { margin: 2rem 0 3rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; font-family: var(--sans); }
+  .toc-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin-bottom: 0.75rem; }
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc > ol > li { counter-increment: toc; }
+  .toc > ol > li::before { content: counter(toc) "."; display: inline-block; width: 1.5rem; color: var(--text-tertiary); font-size: 0.82rem; }
+  .toc a { color: var(--text); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.15s; }
+  .toc a:hover { color: var(--accent); }
+  .toc li { margin-bottom: 0.3rem; }
+
+  h2 { font-size: 1.5rem; font-weight: 700; margin: 3rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--border); line-height: 1.3; }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 0.75rem; color: var(--text); }
+  h4 { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin: 1.5rem 0 0.5rem; }
+
+  p { margin-bottom: 1.1rem; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  a[href^="#ref-"] { color: var(--text-secondary); background: rgba(196, 112, 75, 0.08); padding: 0.05em 0.35em; border-radius: 4px; font-size: 0.88em; font-family: var(--sans); font-weight: 500; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+  a[href^="#ref-"]:hover { background: rgba(196, 112, 75, 0.18); color: var(--accent); text-decoration: none; }
+  .ref-list li:target { background: var(--accent-bg); border-radius: 4px; padding-top: 0.3rem; padding-bottom: 0.3rem; margin-left: -0.5rem; padding-left: calc(2rem + 0.5rem); }
+
+  ol, ul { margin: 0.75rem 0 1.25rem 1.25rem; line-height: 1.75; }
+  li { margin-bottom: 0.35rem; }
+
+  .table-wrap { margin: 1.5rem 0 2rem; overflow-x: auto; }
+  .table-caption { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; text-align: center; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 0.85rem; }
+  thead th { font-weight: 600; text-align: left; padding: 0.6rem 1rem; border-bottom: 2px solid var(--text); white-space: nowrap; }
+  tbody td { padding: 0.5rem 1rem; border-bottom: 1px solid var(--border); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-bg); }
+  .num { font-variant-numeric: tabular-nums; text-align: right; font-family: var(--mono); font-size: 0.82rem; }
+  .highlight-cell { font-weight: 600; color: var(--accent); }
+
+  .callout { margin: 1.5rem 0; padding: 1rem 1.25rem; background: #f0f7ff; border-left: 3px solid #4a90d9; border-radius: 4px; font-size: 0.92rem; }
+  .callout-label { font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4a90d9; margin-bottom: 0.35rem; }
+
+  .references { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .references h2 { border-top: none; padding-top: 0; margin-top: 0; }
+  .ref-list { list-style: none; margin: 0; padding: 0; }
+  .ref-list li { font-size: 0.82rem; line-height: 1.65; margin-bottom: 0.85rem; padding-left: 2rem; text-indent: -2rem; color: var(--text-secondary); }
+  .ref-list .ref-id { font-family: var(--sans); font-weight: 600; color: var(--text-tertiary); font-size: 0.75rem; }
+  .ref-list em { font-style: italic; }
+
+  .paper-footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; font-family: var(--sans); font-size: 0.78rem; color: var(--text-tertiary); }
+  .paper-footer a { color: var(--accent); }
+
+  .chart-wrap { margin: 2rem 0 2.5rem; padding: 1.5rem; background: var(--paper); border: 1px solid var(--border); border-radius: 10px; }
+  .chart-title { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); text-align: center; margin-bottom: 1.25rem; }
+
+  .hbar { margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hbar-label { font-family: var(--sans); font-size: 0.75rem; color: var(--text-secondary); width: 130px; text-align: right; flex-shrink: 0; white-space: nowrap; }
+  .hbar-track { flex: 1; height: 22px; background: #f3f1ed; border-radius: 4px; overflow: hidden; position: relative; }
+  .hbar-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+  .hbar-value { font-family: var(--mono); font-size: 0.72rem; color: var(--text-secondary); width: 55px; text-align: left; flex-shrink: 0; }
+
+  .grouped-bars { display: flex; justify-content: space-around; align-items: flex-end; height: 180px; padding-top: 0.5rem; border-bottom: 1.5px solid var(--border); margin-bottom: 0.5rem; }
+  .bar-group { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; flex: 1; }
+  .bar-pair { display: flex; align-items: flex-end; gap: 3px; height: 150px; }
+  .bar { width: 18px; border-radius: 3px 3px 0 0; transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+  .bar:hover { opacity: 0.8; }
+  .bar-group-label { font-family: var(--sans); font-size: 0.65rem; color: var(--text-tertiary); text-align: center; line-height: 1.2; }
+  .chart-legend { display: flex; justify-content: center; gap: 1.25rem; margin-top: 0.75rem; font-family: var(--sans); font-size: 0.72rem; color: var(--text-secondary); }
+  .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 0.35rem; vertical-align: middle; }
+
+  .figure { margin: 2rem 0; text-align: center; }
+  .figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .figure-caption { font-family: var(--sans); font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.6rem; font-weight: 500; }
+  .figure-row { display: flex; gap: 1rem; margin: 2rem 0; }
+  .figure-row .figure { flex: 1; margin: 0; }
+
+  @media (max-width: 640px) {
+    html { font-size: 15.5px; }
+    article { padding: 2rem 1rem 4rem; }
+    header h1 { font-size: 1.65rem; }
+    h2 { font-size: 1.3rem; }
+    thead th, tbody td { padding: 0.4rem 0.5rem; }
+    .hbar-label { width: 90px; font-size: 0.68rem; }
+    .bar { width: 12px; }
+    .figure-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/">Kostadin Devedzhiev</a>
+  <div class="topbar-right">
+    <a href="./threat_explorer_26.pdf">PDF</a>
+  </div>
+</div>
+
+<article>
+
+<div style="margin: 0 -1.5rem 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--bg);">
+  <img src="../../../images/threat-explorer-svg.svg" alt="Threat Explorer cover illustration" style="width: 100%; display: block;">
+</div>
+
+<header>
+  <h1>Threat Explorer: A Comparative Study of Agentic Architectures and Visualization Strategies for Conversational Cybersecurity Analytics</h1>
+  <div class="author">Kostadin Devedzhiev</div>
+  <div class="affiliation">
+    University of Cambridge<br>
+    Cambridge, United Kingdom<br>
+    <a href="mailto:kgd26@cam.ac.uk">kgd26@cam.ac.uk</a>
+  </div>
+</header>
+
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>
+    This paper presents Threat Explorer, a conversational AI system for cybersecurity threat analysis that translates natural language queries into SQL over a 40,000-record attack dataset. We evaluate three agentic architectures&mdash;an LLM Chain, a ReAct agent, and a multi-agent system&mdash;across retrieval accuracy, latency, cost, and perceived quality. A separate within-subjects user study (N=12) compares text-only and chart-augmented responses using Likert-scale surveys with Holm&ndash;Bonferroni-corrected Wilcoxon tests. The ReAct agent achieves the highest query validity (100%) while the LLM Chain offers the best cost&ndash;speed trade-off; chart-based output yields statistically significant improvements in usability, clarity, and efficiency. We discuss the socio-technical risks of visually compelling but potentially inaccurate LLM output and describe transparency mechanisms to support human-in-the-loop validation.
+  </p>
+</div>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#use-case">Use-Case and Goals</a></li>
+    <li><a href="#baseline">Baseline System Design</a></li>
+    <li><a href="#technical">Technical Experimental Study</a></li>
+    <li><a href="#design">Design-Focused Experimental Study</a></li>
+    <li><a href="#final-system">Final System Design</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ol>
+</nav>
+
+<!-- 1. Use-Case and Goals -->
+<h2 id="use-case">1. Use-Case and Goals</h2>
+
+<p><strong>Threat Explorer</strong> is a chatbot for analyzing cybersecurity threats in a database using natural language, inspired by Stellar Cyber's AI Investigator <a href="#ref-stellar">[Stellar Cyber, 2025]</a>. The system lets security experts analyze data quickly, without deep knowledge of the schema or query language, in collaboration with AI. The database uses Inscribo's dataset from Kaggle <a href="#ref-kaggle">[Inscribo, 2024]</a>, with 40,000 records and 25 columns (e.g., Timestamp, Source IP Address, Attack Type, Anomaly Score, IDS/IPS Alerts).</p>
+
+<p>Threat Explorer can answer queries like "show the last 10 attacks with an anomaly score over 75" or "show the number of high severity attacks by type." The system uses three agents: a custom LLM chain, a ReAct agent <a href="#ref-yao">[Yao et al., 2022]</a>, and a multi-agent architecture. This paper explores the system in two main dimensions:</p>
+
+<ol>
+  <li><strong>Technical Robustness:</strong> Evaluating the retrieval performance, speed, cost efficiency, and perceived usefulness of different agent architectures for response generation in multi-turn dialogues.</li>
+  <li><strong>Design Effectiveness:</strong> Comparing structured output strategies (plain text vs. charts) in terms of usability, helpfulness, and cognitive load through a controlled user study.</li>
+</ol>
+
+<!-- 2. Baseline System Design -->
+<h2 id="baseline">2. Baseline System Design</h2>
+
+<p>Threat Explorer is a <strong>Retrieval-Augmented Generation (RAG)</strong> <a href="#ref-lewis">[Lewis et al., 2021]</a> system powered by OpenAI's <strong>GPT-4o mini</strong> <a href="#ref-gpt4omini">[OpenAI, 2024]</a> for its cost-effectiveness. The workflow consists of four stages: (1) receiving a natural language prompt, (2) constructing an SQL query via an agent, (3) executing the query to retrieve relevant records, and (4) generating a natural language report of the results. The baseline agent is a predefined LLM chain equipped with tools for executing SQL queries and inspecting the database schema. The backend is built with FastAPI <a href="#ref-fastapi">[FastAPI, 2023]</a> and uses LangChain <a href="#ref-langchain">[Chase, 2022]</a> and CrewAI <a href="#ref-crewai">[CrewAI, 2025]</a> for agent orchestration. The frontend is built with React <a href="#ref-react">[Meta, 2025]</a>, and the database is SQLite <a href="#ref-sqlite3">[Python Software Foundation, 2024]</a>.</p>
+
+<!-- 3. Technical Experimental Study -->
+<h2 id="technical">3. Technical Experimental Study</h2>
+
+<h3>3.1 Research Question</h3>
+
+<p>To what extent do different agentic architectures affect the accuracy, speed, cost, and perceived utility of the RAG-based dialogue system?</p>
+
+<h3>3.2 Setup and Evaluation Metrics</h3>
+
+<p>A test set of 10 dialogues with 30 system turns was annotated, each containing a rubric and ground-truth SQL queries of varying complexity across use cases including attack analysis, protocol investigation, severity analysis, and temporal analysis.</p>
+
+<div class="figure">
+  <img src="./t1.png" alt="Example of a test rubric for IDS/IPS Alerts Analysis">
+  <div class="figure-caption">Figure 1: Example of a test rubric</div>
+</div>
+
+<p>Each turn is evaluated on the following metrics:</p>
+
+<ul>
+  <li><strong>Retrieval Performance:</strong> Query Validity (percentage of executable queries) and Pattern Match Accuracy (correctness of query results against ground truth).</li>
+  <li><strong>Cost:</strong> Token consumption and total price in USD.</li>
+  <li><strong>Speed:</strong> Wall-clock time in seconds to produce a response.</li>
+  <li><strong>Generation Quality (LLM-as-a-Judge):</strong> Scores on a 1&ndash;5 scale for factuality, helpfulness, and overall quality <a href="#ref-llmjudge">[Gu et al., 2024]</a>.</li>
+</ul>
+
+<h3>3.3 Results</h3>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 1: Retrieval Performance Across Agents (N=30 turns)</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th class="num">LLM Chain</th><th class="num">ReAct</th><th class="num">Multi-Agent</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Query Validity</td><td class="num">96.7%</td><td class="num highlight-cell">100.0%</td><td class="num">70.0%</td></tr>
+      <tr><td>Pattern Match</td><td class="num highlight-cell">86.7%</td><td class="num highlight-cell">86.7%</td><td class="num">43.3%</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 2: Retrieval Performance by Agent Architecture</div>
+  <div class="grouped-bars">
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 96.7%; background: #c4704b;" title="Query Validity: 96.7%"></div>
+        <div class="bar" style="height: 86.7%; background: #4a90d9;" title="Pattern Match: 86.7%"></div>
+      </div>
+      <div class="bar-group-label">LLM<br>Chain</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 100%; background: #c4704b;" title="Query Validity: 100%"></div>
+        <div class="bar" style="height: 86.7%; background: #4a90d9;" title="Pattern Match: 86.7%"></div>
+      </div>
+      <div class="bar-group-label">ReAct</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 70%; background: #c4704b;" title="Query Validity: 70%"></div>
+        <div class="bar" style="height: 43.3%; background: #4a90d9;" title="Pattern Match: 43.3%"></div>
+      </div>
+      <div class="bar-group-label">Multi-<br>Agent</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #c4704b;"></span>Query Validity</span>
+    <span><span class="legend-dot" style="background: #4a90d9;"></span>Pattern Match Accuracy</span>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 2: Efficiency and Token Distribution Across Agents (N=30 turns)</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th class="num">LLM Chain</th><th class="num">ReAct</th><th class="num">Multi-Agent</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Total Time (s)</td><td class="num highlight-cell">306.9</td><td class="num">475.8</td><td class="num">2741.4</td></tr>
+      <tr><td>Input Tokens</td><td class="num highlight-cell">84,265</td><td class="num">190,517</td><td class="num">2,047,357</td></tr>
+      <tr><td>Output Tokens</td><td class="num highlight-cell">13,275</td><td class="num">23,259</td><td class="num">444,435</td></tr>
+      <tr><td>Total Tokens</td><td class="num highlight-cell">97,540</td><td class="num">213,776</td><td class="num">2,491,792</td></tr>
+      <tr><td>Total Cost ($)</td><td class="num highlight-cell">$0.0206</td><td class="num">$0.0425</td><td class="num">$0.5738</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 3: Cost and Speed Comparison Across Agents</div>
+  <div style="margin-bottom: 1.5rem;">
+    <div class="hbar">
+      <div class="hbar-label">LLM Chain</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width: 11.2%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+      <div class="hbar-value">306.9s</div>
+    </div>
+    <div class="hbar">
+      <div class="hbar-label">ReAct</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width: 17.4%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+      <div class="hbar-value">475.8s</div>
+    </div>
+    <div class="hbar">
+      <div class="hbar-label">Multi-Agent</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width: 100%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+      <div class="hbar-value">2741.4s</div>
+    </div>
+  </div>
+  <div>
+    <div class="hbar">
+      <div class="hbar-label">LLM Chain</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width: 3.6%; background: linear-gradient(90deg, #4a90d9, #6aa8e8);"></div></div>
+      <div class="hbar-value">$0.021</div>
+    </div>
+    <div class="hbar">
+      <div class="hbar-label">ReAct</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width: 7.4%; background: linear-gradient(90deg, #4a90d9, #6aa8e8);"></div></div>
+      <div class="hbar-value">$0.043</div>
+    </div>
+    <div class="hbar">
+      <div class="hbar-label">Multi-Agent</div>
+      <div class="hbar-track"><div class="hbar-fill" style="width: 100%; background: linear-gradient(90deg, #4a90d9, #6aa8e8);"></div></div>
+      <div class="hbar-value">$0.574</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #c4704b;"></span>Time (seconds)</span>
+    <span><span class="legend-dot" style="background: #4a90d9;"></span>Cost (USD)</span>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 3: Generation Quality (LLM-as-a-Judge Score, 1&ndash;5)</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th class="num">LLM Chain</th><th class="num">ReAct</th><th class="num">Multi-Agent</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Factuality</td><td class="num highlight-cell">4.67</td><td class="num">4.53</td><td class="num">3.70</td></tr>
+      <tr><td>Helpfulness</td><td class="num">4.40</td><td class="num highlight-cell">4.57</td><td class="num">4.17</td></tr>
+      <tr><td>Overall Quality</td><td class="num">4.37</td><td class="num highlight-cell">4.47</td><td class="num">3.67</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>3.4 Discussion</h3>
+
+<p>The <strong>ReAct agent</strong> achieved 100% query validity, meaning all generated SQL queries were executable on the database through its iterative refinement and reasoning. It also tied with the LLM chain for the highest pattern match accuracy at 86.7%. The <strong>LLM Chain</strong> had the fastest response times and the lowest token consumption and cost.</p>
+
+<p>The multi-agent architecture performed the worst across all metrics due to poor orchestration. However, improving it was not a priority since the simpler agents already achieved high accuracy while being cheaper and faster. The LLM judge scored the LLM chain highest for factuality but favored ReAct for helpfulness and overall quality.</p>
+
+<div class="callout">
+  <div class="callout-label">Key Insight</div>
+  <p>The trade-offs between agents motivate a system design that supports switching based on preference, requirements, and budget. The multi-agent orchestration consists of an SQL Query Analyst, a Cybersecurity Threat Analyst, and a Report Formatter&mdash;specialized agents whose system prompts specify tools, schema, reasoning, role, and expected markup format.</p>
+</div>
+
+<p>In one example, the multi-agent hallucinated output convincingly, whereas the ReAct agent provided accurate results given identical prompting&mdash;highlighting the risk of complex orchestration introducing unreliable behavior.</p>
+
+<div class="figure-row">
+  <div class="figure">
+    <img src="./a2.png" alt="ReAct agent correct result">
+    <div class="figure-caption">(a) ReAct Correct Result</div>
+  </div>
+  <div class="figure">
+    <img src="./a3.png" alt="Multi-Agent hallucinated output">
+    <div class="figure-caption">(b) Multi-Agent Hallucination</div>
+  </div>
+</div>
+<div class="figure" style="margin-top: -1rem;">
+  <div class="figure-caption">Figure 4: Comparison of ReAct vs. Multi-Agent outputs for the same query</div>
+</div>
+
+<!-- 4. Design-Focused Experimental Study -->
+<h2 id="design">4. Design-Focused Experimental Study</h2>
+
+<h3>4.1 Research Question</h3>
+
+<p>Does different structured output, such as using LLM-generated visualizations versus text-only, affect the usability, helpfulness, clarity, confidence, and cognitive load of a cybersecurity data analytics chatbot?</p>
+
+<h3>4.2 Setup</h3>
+
+<p>The experiment included a header button to toggle visualizations, which update the agents' structured output. Twelve postgraduate Cambridge students were given the chatbot with a <strong>text</strong> (plain-text summary) and a <strong>chart</strong> (visual data presentation) condition for 5 minutes each. Half of the students had undergraduate degrees in computer science, and none had formal cybersecurity experience.</p>
+
+<div class="figure-row">
+  <div class="figure">
+    <img src="./c1.png" alt="Text-only response">
+    <div class="figure-caption">(a) Text-Only Response</div>
+  </div>
+  <div class="figure">
+    <img src="./c2.png" alt="Chart response with table">
+    <div class="figure-caption">(b) Chart Response</div>
+  </div>
+</div>
+<div class="figure" style="margin-top: -1rem;">
+  <div class="figure-caption">Figure 5: Comparison of Text-Only vs. Chart-Based Responses in the Design Study</div>
+</div>
+
+<p>The post-interaction survey included 5 questions, each on a 5-point Likert scale, comparing the two systems across five dimensions:</p>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 4: Post-Interaction Survey Questions</div>
+  <table>
+    <thead>
+      <tr><th>Dimension</th><th>Survey Question</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>A. Usability</strong></td><td>The responses were presented in a well-organized way.</td></tr>
+      <tr><td><strong>B. Helpfulness</strong></td><td>The system gave me the right level of detail.</td></tr>
+      <tr><td><strong>C. Clarity</strong></td><td>I could identify the key evidence supporting the conclusion.</td></tr>
+      <tr><td><strong>D. Trust</strong></td><td>I trust the chatbot's output for the tasks I performed.</td></tr>
+      <tr><td><strong>E. Efficiency</strong></td><td>This version helped me understand the output quickly.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>4.3 Results and Statistical Analysis</h3>
+
+<p>Analysis of the Likert-scale responses using a one-sided Wilcoxon Signed-Rank Test (&alpha;=0.05) given a priori of an expected improvement and small sample size showed the chart version had higher scores across all dimensions and statistical significance (p &lt; 0.05) after Holm-Bonferroni adjustment in usability, clarity, and efficiency.</p>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 5: Design Experiment Results with Holm-Bonferroni Correction (1&ndash;5 Likert Scale)</div>
+  <table>
+    <thead>
+      <tr><th>Dimension</th><th class="num">Mean Text</th><th class="num">Mean Chart</th><th class="num">SD Text</th><th class="num">SD Chart</th><th class="num">p</th><th class="num">p<sub>adj</sub></th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>A. Usability</strong></td><td class="num">3.42</td><td class="num highlight-cell">4.67</td><td class="num">0.79</td><td class="num">0.49</td><td class="num">0.002</td><td class="num highlight-cell">0.008*</td></tr>
+      <tr><td><strong>B. Helpfulness</strong></td><td class="num">3.50</td><td class="num">4.42</td><td class="num">1.09</td><td class="num">0.67</td><td class="num">0.045</td><td class="num">0.078</td></tr>
+      <tr><td><strong>C. Clarity</strong></td><td class="num">3.17</td><td class="num highlight-cell">4.50</td><td class="num">0.83</td><td class="num">0.67</td><td class="num">0.002</td><td class="num highlight-cell">0.008*</td></tr>
+      <tr><td><strong>D. Trust</strong></td><td class="num">3.83</td><td class="num">4.58</td><td class="num">0.94</td><td class="num">0.67</td><td class="num">0.039</td><td class="num">0.078</td></tr>
+      <tr><td><strong>E. Efficiency</strong></td><td class="num">2.58</td><td class="num highlight-cell">4.75</td><td class="num">1.31</td><td class="num">0.45</td><td class="num">0.001</td><td class="num highlight-cell">0.005*</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 6: Text vs. Chart Scores Across Dimensions</div>
+  <div class="grouped-bars">
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 68.4%; background: #bbb;" title="Text: 3.42"></div>
+        <div class="bar" style="height: 93.4%; background: #8ec49a;" title="Chart: 4.67"></div>
+      </div>
+      <div class="bar-group-label">Usability*</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 70%; background: #bbb;" title="Text: 3.50"></div>
+        <div class="bar" style="height: 88.4%; background: #8ec49a;" title="Chart: 4.42"></div>
+      </div>
+      <div class="bar-group-label">Helpfulness</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 63.4%; background: #bbb;" title="Text: 3.17"></div>
+        <div class="bar" style="height: 90%; background: #8ec49a;" title="Chart: 4.50"></div>
+      </div>
+      <div class="bar-group-label">Clarity*</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 76.6%; background: #bbb;" title="Text: 3.83"></div>
+        <div class="bar" style="height: 91.6%; background: #8ec49a;" title="Chart: 4.58"></div>
+      </div>
+      <div class="bar-group-label">Trust</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 51.6%; background: #bbb;" title="Text: 2.58"></div>
+        <div class="bar" style="height: 95%; background: #8ec49a;" title="Chart: 4.75"></div>
+      </div>
+      <div class="bar-group-label">Efficiency*</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #bbb;"></span>Text</span>
+    <span><span class="legend-dot" style="background: #8ec49a;"></span>Chart</span>
+    <span style="font-size: 0.65rem; color: var(--text-tertiary);">* p<sub>adj</sub> &lt; 0.05</span>
+  </div>
+</div>
+
+<h3>4.4 Discussion</h3>
+
+<p>The results show that <strong>structured visual output</strong> provides user experience value in Threat Explorer, supporting the decision to make visualizations the default output setting.</p>
+
+<h4>Socio-Technical Reflection and Trust</h4>
+
+<p><strong>Trust</strong> and <strong>Helpfulness</strong> in the chart version require critical reflection, as users may perceive data visualizations as more trustworthy than plain text, which can be misleading in an LLM-powered system that generates inaccurate or incomplete queries, hallucinates explanations, or misinterprets data. This may be especially true for users without domain expertise, who may over-rely on visually compelling output, leading to unquestioned acceptance of information.</p>
+
+<div class="callout">
+  <div class="callout-label">Caution</div>
+  <p>Visually compelling LLM-generated charts may increase user trust even when the underlying data retrieval is incorrect. This creates a risk of <strong>automation bias</strong>&mdash;users accepting AI output without critical evaluation, particularly when they lack domain expertise.</p>
+</div>
+
+<h4>Mitigation and Transparency</h4>
+
+<p>To improve transparency, agents always include SQL queries used in the output and support syntax highlighting so the queries are inspectable. Furthermore, the agents provide an explanation of their thinking. In future designs, the query should be editable so users can explore the data even if the agents are unable to fulfill the requirements. Interactive features will change the user's role from a passive recipient to an active validator, promoting human-in-the-loop ML <a href="#ref-wu">[Wu et al., 2022]</a> and human-AI collaboration <a href="#ref-vats">[Vats et al., 2024]</a>.</p>
+
+<!-- 5. Final System Design -->
+<h2 id="final-system">5. Final System Design</h2>
+
+<p>The final system can switch between agents. It supports logging, uploading, and downloading dialogues in JSON format. The backend is a FastAPI server using LangChain and CrewAI for orchestration. The interface is built with React. The database is SQLite. The repository includes documentation for running and scripts for evaluations and report generation. The source code is available at <a href="https://github.com/kostadindev/Threat-Explorer">github.com/kostadindev/Threat-Explorer</a>.</p>
+
+<div class="figure-row">
+  <div class="figure">
+    <img src="./q1.png" alt="Dialogue example: high anomaly score attacks">
+    <div class="figure-caption">Table query with SQL</div>
+  </div>
+  <div class="figure">
+    <img src="./d1.png" alt="Dialogue example: top users by attacks">
+    <div class="figure-caption">User investigation query</div>
+  </div>
+</div>
+<div class="figure-row">
+  <div class="figure">
+    <img src="./q2.png" alt="Dialogue example: severity distribution bar chart">
+    <div class="figure-caption">Bar chart visualization</div>
+  </div>
+  <div class="figure">
+    <img src="./d2.png" alt="Dialogue example: detailed attack records">
+    <div class="figure-caption">Detailed record view</div>
+  </div>
+</div>
+<div class="figure-row">
+  <div class="figure">
+    <img src="./q3.png" alt="Dialogue example: pie chart visualization">
+    <div class="figure-caption">Pie chart visualization</div>
+  </div>
+  <div class="figure">
+    <img src="./d3.png" alt="Dialogue example: elaboration on findings">
+    <div class="figure-caption">Elaboration on findings</div>
+  </div>
+</div>
+<div class="figure" style="margin-top: -1rem;">
+  <div class="figure-caption">Figure 7: Dialogue Examples</div>
+</div>
+
+<div class="figure">
+  <img src="./l1.png" alt="Logs output from Threat Explorer">
+  <div class="figure-caption">Figure 8: Logs Output from Threat Explorer</div>
+</div>
+
+<!-- 6. Conclusion -->
+<h2 id="conclusion">6. Conclusion</h2>
+
+<p>This work explored technical and design aspects of Threat Explorer, a conversational AI cybersecurity analysis tool. The technical study showed that while the ReAct agent is most reliable, the LLM Chain is most efficient, leading to the design decision to support switching between agents.</p>
+
+<p>The design experiment yielded statistically significant results showing that visualizations enhance usability, clarity, and efficiency, making them a core feature of Threat Explorer. While helpful, these visualizations pose a risk of misleading users through inaccurate LLM-generated content. Threat Explorer aims to improve transparency and mitigate over-reliance by providing its thought process and SQL queries.</p>
+
+<p>Future work should focus on stronger guardrails against unrelated or dangerous prompts, editable inline SQL queries and charts, support for more chart types, faster response times by sending completed segments over WebSockets, adaptive agent routing, improved prompting and orchestration, short and long-term memory, and observability.</p>
+
+<!-- References -->
+<div class="references">
+<h2>References</h2>
+<ul class="ref-list">
+  <li id="ref-crewai"><span class="ref-id">[CrewAI, 2025]</span> CrewAI. &ldquo;CrewAI &mdash; Platform for Multi AI Agents Systems.&rdquo; <a href="https://www.crewai.com/">https://www.crewai.com/</a>.</li>
+  <li id="ref-fastapi"><span class="ref-id">[FastAPI, 2023]</span> FastAPI. &ldquo;FastAPI Documentation.&rdquo; 2023. <a href="https://fastapi.tiangolo.com/">https://fastapi.tiangolo.com/</a>.</li>
+  <li id="ref-llmjudge"><span class="ref-id">[Gu et al., 2024]</span> Jiawei Gu et al. &ldquo;A Survey on LLM-As-a-Judge.&rdquo; <em>ArXiv</em>, 2024. <a href="https://arxiv.org/abs/2411.15594">arxiv.org/abs/2411.15594</a>.</li>
+  <li id="ref-kaggle"><span class="ref-id">[Inscribo, 2024]</span> Inscribo. &ldquo;Cyber Security Attacks.&rdquo; <em>Kaggle</em>, 2024. <a href="https://www.kaggle.com/datasets/teamincribo/cyber-security-attacks">kaggle.com/datasets/teamincribo/cyber-security-attacks</a>.</li>
+  <li id="ref-langchain"><span class="ref-id">[Chase, 2022]</span> Harrison Chase. &ldquo;LangChain.&rdquo; GitHub, 1 Oct. 2022. <a href="https://github.com/langchain-ai/langchain">github.com/langchain-ai/langchain</a>.</li>
+  <li id="ref-lewis"><span class="ref-id">[Lewis et al., 2021]</span> Patrick Lewis et al. &ldquo;Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.&rdquo; <em>ArXiv</em>, 2021. <a href="https://arxiv.org/abs/2005.11401">arxiv.org/abs/2005.11401</a>.</li>
+  <li id="ref-gpt4omini"><span class="ref-id">[OpenAI, 2024]</span> OpenAI. &ldquo;GPT-4o Mini: Advancing Cost-Efficient Intelligence.&rdquo; 18 July 2024. <a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/</a>.</li>
+  <li id="ref-sqlite3"><span class="ref-id">[Python Software Foundation, 2024]</span> Python Software Foundation. &ldquo;sqlite3 &mdash; DB-API 2.0 Interface for SQLite Databases.&rdquo; <em>Python 3 Documentation</em>, 2024. <a href="https://docs.python.org/3/library/sqlite3.html">docs.python.org/3/library/sqlite3.html</a>.</li>
+  <li id="ref-react"><span class="ref-id">[Meta, 2025]</span> React. Meta Open Source. &ldquo;React.&rdquo; 2025. <a href="https://react.dev/">react.dev</a>.</li>
+  <li id="ref-stellar"><span class="ref-id">[Stellar Cyber, 2025]</span> Stellar Cyber. &ldquo;AI Investigator &mdash; Natural Language Threat Hunting with XDR.&rdquo; 4 Dec. 2025. <a href="https://stellarcyber.ai/ai-investigator-natural-language-threat-hunting/">stellarcyber.ai/ai-investigator-natural-language-threat-hunting/</a>.</li>
+  <li id="ref-vats"><span class="ref-id">[Vats et al., 2024]</span> Vanshika Vats et al. &ldquo;A Survey on Human-AI Teaming with Large Pre-Trained Models.&rdquo; <em>ArXiv</em>, 2024. <a href="https://arxiv.org/abs/2403.04931">arxiv.org/abs/2403.04931</a>.</li>
+  <li id="ref-wu"><span class="ref-id">[Wu et al., 2022]</span> Xingjiao Wu et al. &ldquo;A Survey of Human-In-The-Loop for Machine Learning.&rdquo; <em>Future Generation Computer Systems</em>, vol. 135, Oct. 2022, pp. 364&ndash;381.</li>
+  <li id="ref-yao"><span class="ref-id">[Yao et al., 2022]</span> Shunyu Yao et al. &ldquo;ReAct: Synergizing Reasoning and Acting in Language Models.&rdquo; 2022.</li>
+</ul>
+</div>
+
+<div class="paper-footer">
+  <p>University of Cambridge &middot; 2026</p>
+  <p><a href="/">Back to portfolio</a></p>
+</div>
+
+</article>
+
+</body>
+</html>
