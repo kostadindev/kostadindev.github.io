@@ -75,19 +75,21 @@ export default function Hero() {
         >
           {/* Left: Photo + socials */}
           <Stack alignItems="center" spacing={2} sx={{ flexShrink: 0 }}>
-            <Box
-              component="img"
-              src={personalInfo.avatar}
-              alt={personalInfo.name}
-              sx={{
-                width: { xs: 180, md: 200 },
-                maxHeight: { xs: 240, md: 280 },
-                objectFit: 'cover',
-                borderRadius: '20px',
-                boxShadow: '0 20px 60px rgba(0,0,0,0.12)',
-                border: '4px solid rgba(255,255,255,0.8)',
-              }}
-            />
+            <Tooltip title={personalInfo.name} arrow>
+              <Box
+                component="img"
+                src={personalInfo.avatar}
+                alt={personalInfo.name}
+                sx={{
+                  width: { xs: 180, md: 200 },
+                  maxHeight: { xs: 240, md: 280 },
+                  objectFit: 'cover',
+                  borderRadius: '20px',
+                  boxShadow: '0 20px 60px rgba(0,0,0,0.12)',
+                  border: '4px solid rgba(255,255,255,0.8)',
+                }}
+              />
+            </Tooltip>
 
             <Stack direction="row" spacing={1}>
               {personalInfo.socials.map((social) => (
@@ -297,15 +299,17 @@ export default function Hero() {
                   }}
                 >
                   <Stack spacing={1.5} alignItems="center">
-                    <Box sx={{ width: 130, height: 130, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <Avatar
-                        src={stat.logo}
-                        alt={stat.value}
-                        variant="square"
-                        sx={{ width: '100%', height: '100%', bgcolor: 'transparent' }}
-                        imgProps={{ style: { objectFit: 'contain' } }}
-                      />
-                    </Box>
+                    <Tooltip title={stat.value} arrow>
+                      <Box sx={{ width: 130, height: 130, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                        <Avatar
+                          src={stat.logo}
+                          alt={stat.value}
+                          variant="square"
+                          sx={{ width: '100%', height: '100%', bgcolor: 'transparent' }}
+                          imgProps={{ style: { objectFit: 'contain' } }}
+                        />
+                      </Box>
+                    </Tooltip>
                     <Typography variant="caption" color="text.secondary" fontWeight={500}>
                       {stat.label}
                     </Typography>
