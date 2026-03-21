@@ -16,7 +16,12 @@ export default function Footer() {
   return (
     <Box
       component="footer"
-      sx={{ py: 6, borderTop: 1, borderColor: 'divider' }}
+      sx={{
+        py: 6,
+        borderTop: '1px solid',
+        borderColor: 'rgba(0,0,0,0.06)',
+        bgcolor: '#faf9f7',
+      }}
     >
       <Container maxWidth="lg">
         <Stack
@@ -26,7 +31,15 @@ export default function Footer() {
           spacing={3}
         >
           <Box textAlign={{ xs: 'center', md: 'left' }}>
-            <Typography variant="h6" color="primary" fontWeight={700}>
+            <Typography
+              variant="h6"
+              fontWeight={700}
+              sx={{
+                fontFamily: '"DM Serif Display", Georgia, serif',
+                fontWeight: 400,
+                fontSize: '1.2rem',
+              }}
+            >
               {personalInfo.name}
             </Typography>
             <Typography variant="caption" color="text.secondary">
@@ -42,8 +55,13 @@ export default function Footer() {
                 target="_blank"
                 size="small"
                 sx={{
-                  bgcolor: 'action.hover',
-                  '&:hover': { bgcolor: 'primary.main', color: 'white' },
+                  color: 'text.secondary',
+                  border: '1px solid',
+                  borderColor: 'rgba(0,0,0,0.08)',
+                  width: 36,
+                  height: 36,
+                  '&:hover': { bgcolor: '#1a1a1a', color: 'white', borderColor: '#1a1a1a' },
+                  transition: 'all 0.2s',
                 }}
               >
                 {iconMap[social.icon]}
@@ -55,7 +73,16 @@ export default function Footer() {
             <Typography variant="caption" color="text.secondary" display="block">
               © {new Date().getFullYear()} {personalInfo.name}
             </Typography>
-            <Link href={`mailto:${personalInfo.email}`} variant="caption" color="primary">
+            <Link
+              href={`mailto:${personalInfo.email}`}
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+                textDecoration: 'none',
+                fontWeight: 500,
+                '&:hover': { textDecoration: 'underline' },
+              }}
+            >
               {personalInfo.email}
             </Link>
           </Box>
@@ -65,11 +92,19 @@ export default function Footer() {
           <IconButton
             href="#"
             size="small"
-            sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+            sx={{
+              color: 'text.secondary',
+              border: '1px solid',
+              borderColor: 'rgba(0,0,0,0.08)',
+              width: 32,
+              height: 32,
+              '&:hover': { color: 'primary.main', borderColor: 'primary.light' },
+              transition: 'all 0.2s',
+            }}
           >
-            <KeyboardArrowUpIcon />
+            <KeyboardArrowUpIcon fontSize="small" />
           </IconButton>
-          <Typography variant="caption" color="text.secondary" display="block">
+          <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 0.5 }}>
             Back to top
           </Typography>
         </Box>

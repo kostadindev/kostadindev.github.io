@@ -4,24 +4,42 @@ import { publications } from '../data/content';
 
 export default function Publications() {
   return (
-    <Box id="publications" sx={{ py: 12, bgcolor: 'action.hover' }}>
+    <Box id="publications" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f5f3ef' }}>
       <Container maxWidth="md">
-        <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 6 }}>
+        <Typography
+          variant="h3"
+          textAlign="center"
+          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
+        >
           Publications
         </Typography>
+        <Box
+          sx={{
+            width: 40,
+            height: 3,
+            bgcolor: 'primary.main',
+            mx: 'auto',
+            mb: 6,
+            borderRadius: 2,
+          }}
+        />
 
-        <Stack spacing={3}>
+        <Stack spacing={3} className="reveal-stagger">
           {publications.map((pub) => (
             <Card
               key={pub.title}
               elevation={0}
               sx={{
                 bgcolor: 'background.paper',
-                border: 1,
-                borderColor: 'divider',
+                border: '1px solid',
+                borderColor: 'rgba(0,0,0,0.06)',
+                '&:hover': {
+                  borderColor: 'primary.light',
+                  boxShadow: '0 8px 32px rgba(212, 133, 31, 0.08)',
+                },
               }}
             >
-              <CardContent sx={{ p: 4 }}>
+              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                 <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
                   {pub.tags.map((tag) => (
                     <Chip
@@ -29,8 +47,8 @@ export default function Publications() {
                       label={tag}
                       size="small"
                       sx={{
-                        bgcolor: 'rgba(232, 154, 60, 0.10)',
-                        color: '#b37326',
+                        bgcolor: 'rgba(212, 133, 31, 0.08)',
+                        color: 'primary.dark',
                       }}
                     />
                   ))}
@@ -59,6 +77,14 @@ export default function Publications() {
                   startIcon={<ArticleIcon />}
                   href={pub.doi}
                   target="_blank"
+                  sx={{
+                    borderColor: 'rgba(0,0,0,0.15)',
+                    color: 'text.primary',
+                    '&:hover': {
+                      borderColor: 'primary.main',
+                      bgcolor: 'rgba(212, 133, 31, 0.04)',
+                    },
+                  }}
                 >
                   View Publication
                 </Button>

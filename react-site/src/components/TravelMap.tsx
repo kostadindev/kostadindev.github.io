@@ -75,15 +75,29 @@ export default function TravelMap() {
   }, []);
 
   return (
-    <Box id="travel" sx={{ py: 12, bgcolor: '#fafaf8' }}>
+    <Box id="travel" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#faf9f7' }}>
       <Container maxWidth="md">
-        <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 2 }}>
+        <Typography
+          variant="h3"
+          textAlign="center"
+          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
+        >
           Travel Map
         </Typography>
+        <Box
+          sx={{
+            width: 40,
+            height: 3,
+            bgcolor: 'primary.main',
+            mx: 'auto',
+            mb: 2,
+            borderRadius: 2,
+          }}
+        />
         <Typography
           variant="body1"
           textAlign="center"
-          sx={{ color: 'grey.600', mb: 4, maxWidth: 520, mx: 'auto' }}
+          sx={{ color: 'text.secondary', mb: 4, maxWidth: 520, mx: 'auto' }}
         >
           {totalCountries} countries across four continents.
         </Typography>
@@ -102,8 +116,8 @@ export default function TravelMap() {
               label={`${r.label} (${r.count})`}
               size="small"
               sx={{
-                bgcolor: 'rgba(232, 154, 60, 0.10)',
-                color: '#b37326',
+                bgcolor: 'rgba(212, 133, 31, 0.08)',
+                color: 'primary.dark',
                 fontWeight: 500,
               }}
             />
@@ -114,8 +128,8 @@ export default function TravelMap() {
           sx={{
             position: 'relative',
             bgcolor: 'background.paper',
-            border: 1,
-            borderColor: 'divider',
+            border: '1px solid',
+            borderColor: 'rgba(0,0,0,0.06)',
             borderRadius: 3,
             overflow: 'hidden',
           }}

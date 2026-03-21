@@ -129,7 +129,7 @@ const FloatingShapes = () => {
 function Scene() {
   return (
     <>
-      <fog attach="fog" args={['#fafaf8', 12, 30]} />
+      <fog attach="fog" args={['#faf9f7', 12, 30]} />
       <ambientLight intensity={0.5} />
       <directionalLight position={[10, 10, 5]} intensity={1.2} />
       <directionalLight position={[-5, -5, 5]} intensity={0.3} color={ACCENT_PURPLE} />

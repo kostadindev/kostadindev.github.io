@@ -32,22 +32,24 @@ export default function Hero() {
         alignItems: 'center',
         position: 'relative',
         overflow: 'hidden',
-        bgcolor: '#fafaf8',
+        bgcolor: '#faf9f7',
       }}
     >
       <HeroScene />
 
       <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
-        <Stack alignItems="center" spacing={4} textAlign="center">
+        <Stack alignItems="center" spacing={3} textAlign="center">
           <Box
             component="img"
             src={personalInfo.avatar}
             alt={personalInfo.name}
             sx={{
-              width: 240,
-              maxHeight: 320,
+              width: 200,
+              maxHeight: 280,
               objectFit: 'cover',
-              borderRadius: 3,
+              borderRadius: '20px',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.12)',
+              border: '4px solid rgba(255,255,255,0.8)',
             }}
           />
 
@@ -55,30 +57,41 @@ export default function Hero() {
             <Typography
               variant="h2"
               component="h1"
-              gutterBottom
-              fontWeight={700}
-              sx={{ color: 'grey.900' }}
+              sx={{
+                color: '#1a1a1a',
+                fontSize: { xs: '2.2rem', md: '3.2rem' },
+                letterSpacing: '-0.01em',
+                mb: 1.5,
+              }}
             >
               Kostadin Devedzhiev
             </Typography>
-            <Typography variant="h5" sx={{ fontWeight: 400, color: 'grey.600' }}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontWeight: 400,
+                color: 'text.secondary',
+                fontSize: { xs: '1rem', md: '1.15rem' },
+                maxWidth: 480,
+                mx: 'auto',
+              }}
+            >
               {personalInfo.tagline}
             </Typography>
           </Box>
 
-          <Stack direction="row" spacing={1.5}>
+          <Stack direction="row" spacing={1.5} sx={{ pt: 1 }}>
             <Button
               size="large"
               href="#work"
               sx={{
-                bgcolor: 'primary.main',
+                bgcolor: '#1a1a1a',
                 color: '#fff',
-                borderRadius: 2,
-                px: 3,
-                textTransform: 'none',
-                fontWeight: 500,
-                boxShadow: 'none',
-                '&:hover': { bgcolor: 'primary.dark', boxShadow: 'none' },
+                px: 3.5,
+                py: 1.2,
+                fontSize: '0.9rem',
+                '&:hover': { bgcolor: '#333', transform: 'translateY(-2px)', boxShadow: '0 8px 24px rgba(0,0,0,0.15)' },
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
             >
               View My Work
@@ -87,14 +100,20 @@ export default function Hero() {
               size="large"
               href={`mailto:${personalInfo.email}`}
               sx={{
-                bgcolor: 'rgba(232, 154, 60, 0.08)',
-                color: 'primary.main',
-                borderRadius: 2,
-                px: 3,
-                textTransform: 'none',
-                fontWeight: 500,
-                boxShadow: 'none',
-                '&:hover': { bgcolor: 'rgba(232, 154, 60, 0.15)', boxShadow: 'none' },
+                bgcolor: 'transparent',
+                color: '#1a1a1a',
+                border: '1.5px solid',
+                borderColor: 'rgba(0,0,0,0.15)',
+                px: 3.5,
+                py: 1.2,
+                fontSize: '0.9rem',
+                '&:hover': {
+                  borderColor: 'primary.main',
+                  color: 'primary.main',
+                  bgcolor: 'rgba(212, 133, 31, 0.04)',
+                  transform: 'translateY(-2px)',
+                },
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
             >
               Get in Touch
@@ -109,9 +128,18 @@ export default function Hero() {
                 target="_blank"
                 rel="noopener"
                 sx={{
-                  bgcolor: 'grey.100',
-                  color: 'grey.600',
-                  '&:hover': { bgcolor: 'primary.main', color: 'white' },
+                  color: 'text.secondary',
+                  border: '1px solid',
+                  borderColor: 'rgba(0,0,0,0.08)',
+                  width: 42,
+                  height: 42,
+                  '&:hover': {
+                    bgcolor: '#1a1a1a',
+                    color: 'white',
+                    borderColor: '#1a1a1a',
+                    transform: 'translateY(-2px)',
+                  },
+                  transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
               >
                 {iconMap[social.icon]}
@@ -123,9 +151,9 @@ export default function Hero() {
             <Typography
               component="a"
               href={`mailto:${personalInfo.email}`}
-              variant="body1"
+              variant="body2"
               sx={{
-                color: 'grey.700',
+                color: 'text.secondary',
                 textDecoration: 'none',
                 '&:hover': { color: 'primary.main' },
                 transition: 'color 0.2s',
@@ -153,14 +181,14 @@ export default function Hero() {
         href="#about"
         sx={{
           position: 'absolute',
-          bottom: 48,
+          bottom: 40,
           left: '50%',
           transform: 'translateX(-50%)',
-          color: 'grey.600',
-          animation: 'bounce 2s infinite',
+          color: 'grey.400',
+          animation: 'bounce 2.5s ease-in-out infinite',
           '@keyframes bounce': {
             '0%, 100%': { transform: 'translateX(-50%) translateY(0)' },
-            '50%': { transform: 'translateX(-50%) translateY(-10px)' },
+            '50%': { transform: 'translateX(-50%) translateY(-8px)' },
           },
         }}
       >

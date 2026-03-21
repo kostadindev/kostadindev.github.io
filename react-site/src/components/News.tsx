@@ -29,33 +29,60 @@ function renderDescription(text: string) {
 
 export default function News() {
   return (
-    <Box id="news" sx={{ py: 8, bgcolor: '#fafaf8' }}>
+    <Box id="news" sx={{ py: { xs: 6, md: 8 } }}>
       <Container maxWidth="md">
-        <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 3 }}>
+        <Typography
+          variant="h3"
+          textAlign="center"
+          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
+        >
           News
         </Typography>
+        <Box
+          sx={{
+            width: 40,
+            height: 3,
+            bgcolor: 'primary.main',
+            mx: 'auto',
+            mb: 4,
+            borderRadius: 2,
+          }}
+        />
 
-        <Stack spacing={1.5}>
-          {news.map((item) => (
+        <Stack spacing={0} className="reveal-stagger">
+          {news.map((item, index) => (
             <Stack
               key={item.title}
               direction="row"
-              spacing={2}
+              spacing={2.5}
               alignItems="baseline"
               sx={{
-                py: 1.5,
-                px: 2,
+                py: 2,
+                px: 2.5,
                 borderRadius: 2,
-                '&:hover': { bgcolor: 'rgba(232, 154, 60, 0.04)' },
+                borderLeft: '2px solid',
+                borderColor: index === 0 ? 'primary.main' : 'transparent',
+                transition: 'all 0.2s',
+                '&:hover': {
+                  bgcolor: 'rgba(212, 133, 31, 0.03)',
+                  borderColor: 'primary.light',
+                },
               }}
             >
               <Typography
                 variant="caption"
-                sx={{ color: '#b37326', fontWeight: 600, whiteSpace: 'nowrap', minWidth: 70 }}
+                sx={{
+                  color: 'primary.dark',
+                  fontWeight: 600,
+                  whiteSpace: 'nowrap',
+                  minWidth: 75,
+                  fontSize: '0.78rem',
+                  letterSpacing: '0.03em',
+                }}
               >
                 {item.date}
               </Typography>
-              <Typography variant="body2" color="text.primary">
+              <Typography variant="body2" color="text.primary" sx={{ lineHeight: 1.7 }}>
                 <strong>{item.title}</strong>
                 {' — '}
                 {renderDescription(item.description)}

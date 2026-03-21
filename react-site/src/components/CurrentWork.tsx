@@ -30,11 +30,11 @@ const CopyableCommand = ({ command }: { command: string }) => {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        bgcolor: '#f5f5f4',
+        bgcolor: '#f8f7f5',
         borderRadius: 2,
         overflow: 'hidden',
         border: '1px solid',
-        borderColor: 'grey.300',
+        borderColor: 'rgba(0,0,0,0.08)',
       }}
     >
       <Box
@@ -48,7 +48,7 @@ const CopyableCommand = ({ command }: { command: string }) => {
           overflow: 'auto',
         }}
       >
-        <Box component="span" sx={{ color: '#d97706', mr: 1 }}>$</Box>
+        <Box component="span" sx={{ color: 'primary.main', mr: 1 }}>$</Box>
         {command}
       </Box>
       <Tooltip title={copied ? 'Copied!' : 'Copy'}>
@@ -57,8 +57,8 @@ const CopyableCommand = ({ command }: { command: string }) => {
           size="small"
           sx={{
             mr: 1,
-            color: copied ? '#16a34a' : 'grey.600',
-            '&:hover': { color: copied ? '#16a34a' : 'grey.800' },
+            color: copied ? '#16a34a' : 'grey.500',
+            '&:hover': { color: copied ? '#16a34a' : 'grey.700' },
           }}
         >
           {copied ? <CheckIcon fontSize="small" /> : <ContentCopyIcon fontSize="small" />}
@@ -89,13 +89,33 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export default function CurrentWork() {
   return (
-    <Box id="work" sx={{ py: 12, bgcolor: 'action.hover' }}>
+    <Box
+      id="work"
+      sx={{
+        py: { xs: 8, md: 12 },
+        bgcolor: '#f5f3ef',
+      }}
+    >
       <Container maxWidth="lg">
-        <Typography variant="h3" gutterBottom textAlign="center" sx={{ mb: 6 }}>
+        <Typography
+          variant="h3"
+          textAlign="center"
+          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
+        >
           Current Work
         </Typography>
+        <Box
+          sx={{
+            width: 40,
+            height: 3,
+            bgcolor: 'primary.main',
+            mx: 'auto',
+            mb: 6,
+            borderRadius: 2,
+          }}
+        />
 
-        <Stack spacing={6}>
+        <Stack spacing={5} className="reveal-stagger">
           {currentWork.map((project, index) => (
             <Card
               key={project.title}
@@ -105,18 +125,20 @@ export default function CurrentWork() {
                 flexDirection: { xs: 'column', md: index % 2 === 0 ? 'row' : 'row-reverse' },
                 bgcolor: 'background.paper',
                 overflow: 'hidden',
-                transition: 'transform 0.3s, box-shadow 0.3s',
+                border: '1px solid',
+                borderColor: 'rgba(0,0,0,0.06)',
                 '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: 8,
+                  transform: 'translateY(-6px)',
+                  boxShadow: '0 24px 60px rgba(0,0,0,0.08)',
+                  borderColor: 'rgba(0,0,0,0.04)',
                 },
               }}
             >
               <Box
                 sx={{
-                  width: { xs: '100%', md: '55%' },
-                  height: { xs: 220, md: 320 },
-                  bgcolor: '#f5f5f4',
+                  width: { xs: '100%', md: '50%' },
+                  height: { xs: 220, md: 340 },
+                  bgcolor: '#f8f7f5',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -136,7 +158,7 @@ export default function CurrentWork() {
               </Box>
               <CardContent sx={{ flex: 1, p: { xs: 3, md: 5 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
-                  <Typography variant="h4" fontWeight={600}>
+                  <Typography variant="h4" sx={{ fontSize: { xs: '1.5rem', md: '1.8rem' } }}>
                     {project.title}
                   </Typography>
                   <Stack direction="row" spacing={0.5}>
@@ -147,8 +169,10 @@ export default function CurrentWork() {
                         target="_blank"
                         size="small"
                         sx={{
-                          bgcolor: 'action.hover',
-                          '&:hover': { bgcolor: 'primary.main', color: 'white' },
+                          border: '1px solid',
+                          borderColor: 'rgba(0,0,0,0.08)',
+                          '&:hover': { bgcolor: '#1a1a1a', color: 'white', borderColor: '#1a1a1a' },
+                          transition: 'all 0.2s',
                         }}
                       >
                         {iconMap[link.type]}
@@ -164,14 +188,15 @@ export default function CurrentWork() {
                       label={tag}
                       size="small"
                       sx={{
-                        bgcolor: 'rgba(232, 154, 60, 0.10)',
-                        color: '#b37326',
+                        bgcolor: 'rgba(212, 133, 31, 0.08)',
+                        color: 'primary.dark',
+                        fontWeight: 500,
                       }}
                     />
                   ))}
                 </Stack>
 
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 3, lineHeight: 1.8 }}>
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
                   {project.description}
                 </Typography>
 

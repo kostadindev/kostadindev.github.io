@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -14,37 +14,63 @@ import TravelMap from './components/TravelMap';
 import Footer from './components/Footer';
 
 function App() {
+  // Scroll-reveal observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
           mode: 'light',
           primary: {
-            main: '#e89a3c',
-            light: '#f4c76b',
-            dark: '#d4851f',
+            main: '#d4851f',
+            light: '#e89a3c',
+            dark: '#b8720f',
           },
           background: {
-            default: '#fafaf8',
+            default: '#faf9f7',
             paper: '#ffffff',
+          },
+          text: {
+            primary: '#1a1a1a',
+            secondary: '#5a5a5a',
           },
         },
         typography: {
-          fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-          h1: { fontWeight: 700 },
-          h2: { fontWeight: 700 },
-          h3: { fontWeight: 600 },
-          h4: { fontWeight: 600 },
+          fontFamily: '"DM Sans", "Helvetica", "Arial", sans-serif',
+          h1: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
+          h2: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
+          h3: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
+          h4: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
+          h5: { fontWeight: 500 },
+          h6: { fontWeight: 600 },
+          body1: { lineHeight: 1.75, letterSpacing: '0.01em' },
+          body2: { lineHeight: 1.7, letterSpacing: '0.01em' },
         },
         shape: {
-          borderRadius: 12,
+          borderRadius: 16,
         },
         components: {
           MuiButton: {
             styleOverrides: {
               root: {
                 textTransform: 'none',
-                fontWeight: 500,
+                fontWeight: 600,
+                letterSpacing: '0.02em',
+                borderRadius: 10,
               },
             },
           },
@@ -52,10 +78,17 @@ function App() {
             styleOverrides: {
               root: {
                 fontWeight: 500,
-                borderRadius: 20,
-                bgcolor: 'rgba(232, 154, 60, 0.10)',
-                color: '#b37326',
-                border: 'none',
+                borderRadius: 8,
+                fontSize: '0.78rem',
+                letterSpacing: '0.02em',
+              },
+            },
+          },
+          MuiCard: {
+            styleOverrides: {
+              root: {
+                borderRadius: 16,
+                transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
               },
             },
           },
@@ -67,7 +100,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ minHeight: '100vh' }}>
+      <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
         <Navbar />
         <main>
           <Hero />
