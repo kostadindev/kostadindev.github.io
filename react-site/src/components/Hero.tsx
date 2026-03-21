@@ -3,6 +3,7 @@ import { Box, Container, Typography, Button, Stack, IconButton, Tooltip, Link, G
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CodeIcon from '@mui/icons-material/Code';
+import SchoolIcon from '@mui/icons-material/School';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
@@ -40,6 +41,7 @@ const iconMap: Record<string, React.ReactNode> = {
   github: <GitHubIcon />,
   linkedin: <LinkedInIcon />,
   code: <CodeIcon />,
+  scholar: <SchoolIcon />,
 };
 
 export default function Hero() {
@@ -89,28 +91,29 @@ export default function Hero() {
 
             <Stack direction="row" spacing={1}>
               {personalInfo.socials.map((social) => (
-                <IconButton
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener"
-                  sx={{
-                    color: 'text.secondary',
-                    border: '1px solid',
-                    borderColor: 'rgba(0,0,0,0.08)',
-                    width: 38,
-                    height: 38,
-                    '&:hover': {
-                      bgcolor: '#1a1a1a',
-                      color: 'white',
-                      borderColor: '#1a1a1a',
-                      transform: 'translateY(-2px)',
-                    },
-                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
-                  }}
-                >
-                  {iconMap[social.icon]}
-                </IconButton>
+                <Tooltip key={social.name} title={social.name} arrow>
+                  <IconButton
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener"
+                    sx={{
+                      color: 'text.secondary',
+                      border: '1px solid',
+                      borderColor: 'rgba(0,0,0,0.08)',
+                      width: 38,
+                      height: 38,
+                      '&:hover': {
+                        bgcolor: '#1a1a1a',
+                        color: 'white',
+                        borderColor: '#1a1a1a',
+                        transform: 'translateY(-2px)',
+                      },
+                      transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                    }}
+                  >
+                    {iconMap[social.icon]}
+                  </IconButton>
+                </Tooltip>
               ))}
             </Stack>
 
