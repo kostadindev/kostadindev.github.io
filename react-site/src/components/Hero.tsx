@@ -7,6 +7,7 @@ import SchoolIcon from '@mui/icons-material/School';
 import SvgIcon from '@mui/material/SvgIcon';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckIcon from '@mui/icons-material/Check';
 import { personalInfo } from '../data/content';
 import HeroScene from './HeroScene';
@@ -179,6 +180,12 @@ export default function Hero() {
                     {copied === 'kgd26@cam.ac.uk' ? <CheckIcon sx={{ fontSize: 14 }} /> : <ContentCopyIcon sx={{ fontSize: 14 }} />}
                   </IconButton>
                 </Tooltip>
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={0.3}>
+                <LocationOnIcon sx={{ fontSize: 14, color: 'text.secondary' }} />
+                <Typography variant="caption" color="text.secondary">
+                  Cambridge, UK
+                </Typography>
               </Stack>
             </Stack>
           </Stack>

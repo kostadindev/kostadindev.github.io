@@ -39,8 +39,8 @@ export const currentWork = [
 
 export const projects = [
   {
-    title: "Knowledge Base Builder",
-    description: "Python package for converting diverse content into a search-engine-friendly knowledge base. It effortlessly ingests files (PDFs, DOCXs, spreadsheets), websites, and GitHub repositories, then leverages LLMs to generate a Markdown knowledge base. Ideal for creating structured and crawlable formats like llms.txt.",
+    title: "Knowledge Base Builder: Multi-Source Knowledge Base Construction with LLMs",
+    description: "A Python package that consolidates heterogeneous research artifacts — publications, code repositories, web documentation, lecture recordings, and presentation materials — into structured Markdown knowledge bases using large language models. Ingests content from 11 source types and produces output suitable for retrieval-augmented generation (RAG) systems, vector database preprocessing, and web-crawlable context files such as llms.txt.",
     tags: ["GenAI", "RAG"],
     category: ["genai", "rag"],
     links: [

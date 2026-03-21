@@ -1,4 +1,5 @@
-import { Box, Container, Typography, Card, CardContent, Avatar, Stack, Link, Grid } from '@mui/material';
+import { Box, Container, Typography, Card, CardContent, Avatar, Stack, Link, Grid, Button } from '@mui/material';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { education, certificates } from '../data/content';
 
 export default function Education() {
@@ -122,35 +123,32 @@ export default function Education() {
               </Link>
             </Grid>
           ))}
-          <Grid>
-            <Link
-              href="https://www.credly.com/users/kostadin-devedzhiev.e059b079"
-              target="_blank"
-              rel="noopener"
-              underline="none"
-            >
-              <Box
-                sx={{
-                  width: 130,
-                  height: 130,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '2px dashed',
-                  borderColor: 'primary.main',
-                  borderRadius: 3,
-                  color: 'primary.main',
-                  transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-                  '&:hover': { bgcolor: 'primary.main', color: 'white' },
-                }}
-              >
-                <Typography variant="h6">+</Typography>
-                <Typography variant="caption" fontWeight={500}>View All</Typography>
-              </Box>
-            </Link>
-          </Grid>
         </Grid>
+
+        <Box sx={{ textAlign: 'center', mt: 3 }}>
+          <Button
+            href="https://www.credly.com/users/kostadin-devedzhiev.e059b079"
+            target="_blank"
+            rel="noopener"
+            variant="outlined"
+            size="small"
+            endIcon={<OpenInNewIcon sx={{ fontSize: 14 }} />}
+            sx={{
+              color: 'text.secondary',
+              borderColor: 'rgba(0,0,0,0.12)',
+              fontWeight: 500,
+              fontSize: '0.82rem',
+              px: 2.5,
+              '&:hover': {
+                borderColor: 'primary.main',
+                color: 'primary.main',
+                bgcolor: 'rgba(212, 133, 31, 0.04)',
+              },
+            }}
+          >
+            View all on Credly
+          </Button>
+        </Box>
       </Container>
     </Box>
   );
