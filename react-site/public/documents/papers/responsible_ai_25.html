@@ -314,6 +314,179 @@
   }
   .paper-footer a { color: var(--accent); }
 
+  /* Charts */
+  .chart-wrap {
+    margin: 2rem 0 2.5rem;
+    padding: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .chart-title {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Horizontal bar chart */
+  .hbar { margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hbar-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    width: 130px;
+    text-align: right;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .hbar-track {
+    flex: 1;
+    height: 22px;
+    background: #f3f1ed;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+  }
+  .hbar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hbar-value {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    width: 42px;
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  /* Grouped bars */
+  .grouped-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 180px;
+    padding-top: 0.5rem;
+    border-bottom: 1.5px solid var(--border);
+    margin-bottom: 0.5rem;
+  }
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    flex: 1;
+  }
+  .bar-pair {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 150px;
+  }
+  .bar {
+    width: 18px;
+    border-radius: 3px 3px 0 0;
+    transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+  .bar:hover { opacity: 0.8; }
+  .bar-group-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    line-height: 1.2;
+  }
+  .chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 0.75rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 0.35rem;
+    vertical-align: middle;
+  }
+
+  /* Waterfall chart */
+  .waterfall { display: flex; flex-direction: column; gap: 0.5rem; }
+  .wf-row { display: flex; align-items: center; gap: 0.5rem; }
+  .wf-label {
+    font-family: var(--sans);
+    font-size: 0.73rem;
+    color: var(--text-secondary);
+    width: 200px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .wf-bar-area {
+    flex: 1;
+    height: 24px;
+    position: relative;
+  }
+  .wf-bar {
+    position: absolute;
+    height: 100%;
+    border-radius: 3px;
+    top: 0;
+  }
+  .wf-val {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    width: 44px;
+    flex-shrink: 0;
+  }
+
+  /* Comparison chart */
+  .comparison-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .comp-label {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    width: 140px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .comp-bars {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .comp-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .comp-bar {
+    height: 16px;
+    border-radius: 3px;
+    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .comp-val {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+
   /* Responsive */
   @media (max-width: 640px) {
     html { font-size: 15.5px; }
@@ -321,6 +494,10 @@
     header h1 { font-size: 1.65rem; }
     h2 { font-size: 1.3rem; }
     thead th, tbody td { padding: 0.4rem 0.5rem; }
+    .hbar-label { width: 90px; font-size: 0.68rem; }
+    .wf-label { width: 130px; font-size: 0.68rem; }
+    .comp-label { width: 100px; font-size: 0.68rem; }
+    .bar { width: 12px; }
   }
 </style>
 </head>
@@ -334,6 +511,10 @@
 </div>
 
 <article>
+
+<div style="margin: 0 -1.5rem 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--bg);">
+  <img src="../../images/responsible-ai-cover.svg" alt="Fairness and Transparency Analysis cover illustration" style="width: 100%; display: block;">
+</div>
 
 <header>
   <h1>Fairness and Transparency Analysis of Hospital Readmission Prediction</h1>
@@ -474,6 +655,58 @@
   </table>
 </div>
 
+<div class="chart-wrap">
+  <div class="chart-title">Figure 1: Selection Rate and False Positive Rate by Race</div>
+  <div class="grouped-bars">
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 55.5%; background: #c4704b;" title="Selection Rate: 0.370"></div>
+        <div class="bar" style="height: 52.2%; background: #4a90d9;" title="FPR: 0.348"></div>
+      </div>
+      <div class="bar-group-label">African<br>American</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 57.6%; background: #c4704b;" title="Selection Rate: 0.384"></div>
+        <div class="bar" style="height: 53.7%; background: #4a90d9;" title="FPR: 0.358"></div>
+      </div>
+      <div class="bar-group-label">Caucasian</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 41.6%; background: #c4704b;" title="Selection Rate: 0.277"></div>
+        <div class="bar" style="height: 35.6%; background: #4a90d9;" title="FPR: 0.237"></div>
+      </div>
+      <div class="bar-group-label">Hispanic</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 44%; background: #c4704b;" title="Selection Rate: 0.293"></div>
+        <div class="bar" style="height: 42.5%; background: #4a90d9;" title="FPR: 0.283"></div>
+      </div>
+      <div class="bar-group-label">Asian</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 34.8%; background: #c4704b;" title="Selection Rate: 0.232"></div>
+        <div class="bar" style="height: 32.9%; background: #4a90d9;" title="FPR: 0.219"></div>
+      </div>
+      <div class="bar-group-label">Other</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height: 20.4%; background: #c4704b;" title="Selection Rate: 0.136"></div>
+        <div class="bar" style="height: 17.9%; background: #4a90d9;" title="FPR: 0.119"></div>
+      </div>
+      <div class="bar-group-label">Unknown</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #c4704b;"></span>Selection Rate</span>
+    <span><span class="legend-dot" style="background: #4a90d9;"></span>False Positive Rate</span>
+  </div>
+</div>
+
 <p>The baseline exhibits <strong>DPD = 0.248</strong> and <strong>EOD = 0.278</strong>, both substantially exceeding acceptable thresholds. From the WAE perspective, these disparities reflect how Observed Space features&mdash;shaped by differential healthcare access&mdash;distort the mapping from Construct Space. Caucasian patients are flagged at 2.8&times; the rate of Unknown patients, constituting <strong>disparate impact</strong>. African American patients face FPR of 0.348 versus 0.119 for Unknown patients, directly violating Equalized Odds. Gender disparities are less pronounced (DPD = 0.025, EOD = 0.055), suggesting race is the primary axis of unfairness.</p>
 
 <h3>4.2 Transparency Analysis</h3>
@@ -489,6 +722,35 @@
   <li><strong>Time in Hospital</strong> (|&phi;| = 0.014): Longer stays indicate severity</li>
   <li><strong>Primary Diagnosis</strong> (|&phi;| = 0.012): The main admission reason directly influences readmission risk</li>
 </ol>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 2: Mean Absolute SHAP Values &mdash; Top Feature Attributions</div>
+  <div class="hbar">
+    <div class="hbar-label">Had Inpatient Days</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 100%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.065</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Discharge Disposition</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 52.3%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.034</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Number of Diagnoses</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 23.1%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.015</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Time in Hospital</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 21.5%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.014</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Primary Diagnosis</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width: 18.5%; background: linear-gradient(90deg, #c4704b, #d4896a);"></div></div>
+    <div class="hbar-value">0.012</div>
+  </div>
+</div>
 
 <p>Importantly, <strong>race does not appear among top features</strong>, suggesting no direct discriminatory use. However, this does not preclude <strong>proxy discrimination</strong>&mdash;race may influence predictions through correlated features like discharge disposition or prior utilization patterns.</p>
 
@@ -517,6 +779,44 @@
   </table>
 </div>
 
+<div class="chart-wrap">
+  <div class="chart-title">Figure 3: LIME Feature Contributions &mdash; High-Risk Prediction</div>
+  <div class="waterfall">
+    <div class="wf-row">
+      <div class="wf-label">Had Inpatient Days (present)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="left: 50%; width: 32.5%; background: #c4704b;"></div></div>
+      <div class="wf-val" style="color: #c4704b;">+0.130</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Primary Diagnosis (diabetes)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="left: 50%; width: 8.25%; background: #c4704b;"></div></div>
+      <div class="wf-val" style="color: #c4704b;">+0.033</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Time in Hospital (short)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="right: 50%; width: 7.75%; background: #4a90d9;"></div></div>
+      <div class="wf-val" style="color: #4a90d9;">&minus;0.031</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Number of Diagnoses (low)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="right: 50%; width: 11.25%; background: #4a90d9;"></div></div>
+      <div class="wf-val" style="color: #4a90d9;">&minus;0.045</div>
+    </div>
+    <div class="wf-row">
+      <div class="wf-label">Discharge Disposition (home)</div>
+      <div class="wf-bar-area"><div class="wf-bar" style="right: 50%; width: 17.75%; background: #4a90d9;"></div></div>
+      <div class="wf-val" style="color: #4a90d9;">&minus;0.071</div>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: 0.5rem;">
+    <span style="font-family: var(--sans); font-size: 0.65rem; color: var(--text-tertiary);">← Decreases risk &nbsp;&nbsp;|&nbsp;&nbsp; Increases risk →</span>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #c4704b;"></span>Positive contribution</span>
+    <span><span class="legend-dot" style="background: #4a90d9;"></span>Negative contribution</span>
+  </div>
+</div>
+
 <h3>4.3 Fairness Intervention Results</h3>
 
 <div class="table-wrap">
@@ -532,6 +832,68 @@
       <tr><td>Equalized Odds Diff</td><td class="num">0.278</td><td class="num">0.171</td><td class="num">&minus;0.107</td><td class="num highlight-cell">+38.2%</td></tr>
     </tbody>
   </table>
+</div>
+
+<div class="chart-wrap">
+  <div class="chart-title">Figure 4: Fairness Intervention &mdash; Baseline vs. Fair Model</div>
+  <div class="comparison-row">
+    <div class="comp-label">Accuracy</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 64.5%; background: #bbb;"></div>
+        <div class="comp-val">0.645</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 53%; background: #999;"></div>
+        <div class="comp-val">0.530 <span style="color: #c4704b; font-size: 0.65rem;">&minus;17.8%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="comparison-row">
+    <div class="comp-label">Dem. Parity Diff</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 62%; background: #e8a0a0;"></div>
+        <div class="comp-val">0.248</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 15.75%; background: #8ec49a;"></div>
+        <div class="comp-val">0.063 <span style="color: #3a8a4a; font-size: 0.65rem; font-weight: 600;">+74.5%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="comparison-row">
+    <div class="comp-label">Dem. Parity Ratio</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 35.5%; background: #e8a0a0;"></div>
+        <div class="comp-val">0.355</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 88.1%; background: #8ec49a;"></div>
+        <div class="comp-val">0.881 <span style="color: #3a8a4a; font-size: 0.65rem; font-weight: 600;">+148%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="comparison-row" style="margin-bottom: 0;">
+    <div class="comp-label">Equalized Odds Diff</div>
+    <div class="comp-bars">
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 69.5%; background: #e8a0a0;"></div>
+        <div class="comp-val">0.278</div>
+      </div>
+      <div class="comp-bar-row">
+        <div class="comp-bar" style="width: 42.75%; background: #8ec49a;"></div>
+        <div class="comp-val">0.171 <span style="color: #3a8a4a; font-size: 0.65rem; font-weight: 600;">+38.2%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background: #bbb;"></span>Baseline</span>
+    <span><span class="legend-dot" style="background: #999;"></span>Fair Model</span>
+    <span><span class="legend-dot" style="background: #e8a0a0;"></span>Worse</span>
+    <span><span class="legend-dot" style="background: #8ec49a;"></span>Better</span>
+  </div>
 </div>
 
 <p>The Exponentiated Gradient intervention substantially reduces disparities. DPD drops from 0.248 to 0.063&mdash;below the 0.1 threshold typically considered acceptable. The Demographic Parity Ratio improves from 0.355 to 0.881, approaching the ideal value of 1.0. This improvement comes at significant cost: accuracy drops from 64.5% to 53.0%. This 11.5 percentage point reduction represents the <strong>"price of fairness"</strong>&mdash;a direct manifestation of the impossibility theorems. When base rates differ across groups, achieving equal error rates reduces overall accuracy. The tradeoff is not a limitation of our method but a fundamental mathematical constraint.</p>
