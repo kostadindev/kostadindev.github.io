@@ -65,7 +65,7 @@ export default function Projects() {
 
         <Grid container spacing={4}>
           {filtered.map((project) => (
-            <Grid size={{ xs: 12, md: 6 }} key={project.title}>
+            <Grid size={{ xs: 12, md: 4 }} key={project.title}>
               <Card
                 elevation={0}
                 sx={{
