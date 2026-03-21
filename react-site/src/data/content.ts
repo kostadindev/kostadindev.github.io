@@ -44,6 +44,7 @@ export const projects = [
     tags: ["GenAI", "RAG"],
     category: ["genai", "rag"],
     links: [
+      { type: "report", url: "./documents/papers/kbb/kbb_26.html" },
       { type: "pypi", url: "https://pypi.org/project/knowledge-base-builder/" },
       { type: "github", url: "https://github.com/kostadindev/knowledge-base-builder" }
     ],
