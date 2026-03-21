@@ -53,8 +53,8 @@ export const projects = [
     tags: ["Responsible AI", "Fairness", "Transparency"],
     category: ["hitl"],
     links: [
-      { type: "website", url: "./documents/papers/responsible_ai_25.html" },
-      { type: "paper", url: "./documents/papers/responsible_ai_25.pdf" }
+      { type: "website", url: "./documents/papers/responsible_ai/responsible_ai_25.html" },
+      { type: "paper", url: "./documents/papers/responsible_ai/responsible_ai_25.pdf" }
     ],
     image: "./images/responsible-ai-cover.svg"
   },
@@ -112,6 +112,18 @@ export const projects = [
       { type: "pypi", url: "https://pypi.org/project/league-mcp/" }
     ],
     image: "https://github.com/user-attachments/assets/81ff5484-f747-431d-ac9c-c04933339b82"
+  },
+  {
+    title: "Threat Explorer",
+    description: "A conversational AI system for analyzing cybersecurity threats using natural language. Compares three agentic architectures (LLM Chain, ReAct, Multi-Agent) for RAG-based SQL query generation over 40K threat records. A user study with 12 participants showed statistically significant improvements in usability, clarity, and efficiency when using LLM-generated visualizations over plain text.",
+    tags: ["Cybersecurity", "Agentic AI", "RAG"],
+    category: ["genai", "agentic", "hitl"],
+    links: [
+      { type: "website", url: "./documents/papers/threat_explorer/threat_explorer_26.html" },
+      { type: "paper", url: "./documents/papers/threat_explorer/threat_explorer_26.pdf" },
+      { type: "github", url: "https://github.com/kostadindev/threat-explorer" }
+    ],
+    image: "./images/threat-explorer-svg.svg"
   }
 ];
 
