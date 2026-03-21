@@ -44,7 +44,7 @@ export const projects = [
     links: [
       { type: "paper", url: "./documents/papers/responsible_ai_25.pdf" }
     ],
-    image: "./images/responsible-ai-cover.png"
+    image: "./images/responsible-ai-cover.svg"
   },
   {
     title: "GONEXT.lol",
@@ -78,7 +78,7 @@ export const projects = [
       { type: "pypi", url: "https://pypi.org/project/knowledge-base-builder/" },
       { type: "github", url: "https://github.com/kostadindev/knowledge-base-builder" }
     ],
-    image: "./images/kbb.png"
+    image: "./images/kbb.svg"
   },
   {
     title: "Recursive QA",

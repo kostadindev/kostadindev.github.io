@@ -1,0 +1,131 @@
+<svg width="100%" viewBox="0 0 960 420" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+<pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+<circle cx="10" cy="10" r="0.8" fill="#888780" opacity="0.2"/>
+</pattern>
+<style>
+@media(prefers-reduced-motion:no-preference){
+.pulse{animation:pulse 3s ease-in-out infinite}
+.pulse2{animation:pulse 3s ease-in-out infinite .5s}
+@keyframes pulse{0%,100%{opacity:.1}50%{opacity:.22}}
+.glow{animation:glow 2.5s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:.08}50%{opacity:.18}}
+.particle{animation:flow var(--dur,3s) linear infinite;animation-delay:var(--delay,0s);offset-rotate:0deg}
+@keyframes flow{0%{offset-distance:0%;opacity:0}10%{opacity:1}90%{opacity:1}100%{offset-distance:100%;opacity:0}}
+.fan-particle{animation:fanflow var(--dur,2.5s) linear infinite;animation-delay:var(--delay,0s);offset-rotate:0deg}
+@keyframes fanflow{0%{offset-distance:0%;opacity:0}15%{opacity:.7}85%{opacity:.7}100%{offset-distance:100%;opacity:0}}
+.node-pop{animation:nodepop .6s ease-out both;animation-delay:var(--d,0s)}
+@keyframes nodepop{0%{opacity:0;transform:scale(.85)}100%{opacity:1;transform:scale(1)}}
+.merge-spin{animation:mspin 8s linear infinite;transform-origin:394px 210px}
+@keyframes mspin{to{transform:rotate(360deg)}}
+}
+text{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif}
+.th{font-size:14px;font-weight:500;fill:#2C2C2A}
+.ts{font-size:12px;font-weight:400;fill:#5F5E5A}
+</style>
+</defs>
+
+<rect x="0" y="0" width="960" height="420" fill="url(#dots)"/>
+
+<!-- Stream curves -->
+<path d="M189,75 C279,75 299,210 359,210" fill="none" stroke="#7F77DD" stroke-width="4" opacity="0.2" stroke-linecap="round"/>
+<path d="M189,75 C279,75 299,210 359,210" fill="none" stroke="#7F77DD" stroke-width="2" opacity="0.45" stroke-linecap="round"/>
+<path d="M189,210 C259,210 299,210 359,210" fill="none" stroke="#378ADD" stroke-width="4" opacity="0.2" stroke-linecap="round"/>
+<path d="M189,210 C259,210 299,210 359,210" fill="none" stroke="#378ADD" stroke-width="2" opacity="0.45" stroke-linecap="round"/>
+<path d="M189,345 C279,345 299,210 359,210" fill="none" stroke="#D85A30" stroke-width="4" opacity="0.2" stroke-linecap="round"/>
+<path d="M189,345 C279,345 299,210 359,210" fill="none" stroke="#D85A30" stroke-width="2" opacity="0.45" stroke-linecap="round"/>
+
+<!-- Input stream particles -->
+<circle r="3.5" fill="#7F77DD" class="particle" style="--dur:2.8s;--delay:0s;offset-path:path('M189,75 C279,75 299,210 359,210')"/>
+<circle r="2.5" fill="#7F77DD" opacity="0.6" class="particle" style="--dur:2.8s;--delay:1.4s;offset-path:path('M189,75 C279,75 299,210 359,210')"/>
+<circle r="3.5" fill="#378ADD" class="particle" style="--dur:2.2s;--delay:0.3s;offset-path:path('M189,210 C259,210 299,210 359,210')"/>
+<circle r="2.5" fill="#378ADD" opacity="0.6" class="particle" style="--dur:2.2s;--delay:1.3s;offset-path:path('M189,210 C259,210 299,210 359,210')"/>
+<circle r="3.5" fill="#D85A30" class="particle" style="--dur:2.8s;--delay:0.6s;offset-path:path('M189,345 C279,345 299,210 359,210')"/>
+<circle r="2.5" fill="#D85A30" opacity="0.6" class="particle" style="--dur:2.8s;--delay:2s;offset-path:path('M189,345 C279,345 299,210 359,210')"/>
+
+<!-- Merge to LLM particles -->
+<circle r="3" fill="#1D9E75" class="particle" style="--dur:2s;--delay:0.5s;offset-path:path('M418,210 C450,210 510,210 559,210')"/>
+<circle r="2" fill="#1D9E75" opacity="0.7" class="particle" style="--dur:2s;--delay:1.5s;offset-path:path('M418,210 C450,210 510,210 559,210')"/>
+
+<!-- LLM to knowledge.md particles -->
+<circle r="3" fill="#BA7517" class="particle" style="--dur:1.8s;--delay:0.2s;offset-path:path('M559,210 C570,210 585,210 597,210')"/>
+<circle r="2" fill="#BA7517" opacity="0.7" class="particle" style="--dur:1.8s;--delay:1.1s;offset-path:path('M559,210 C570,210 585,210 597,210')"/>
+
+<!-- Fan-out arrows -->
+<path d="M739,198 C762,198 768,60 796,60" fill="none" stroke="#639922" stroke-width="1.5" opacity="0.3" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M739,204 C762,204 768,150 796,150" fill="none" stroke="#639922" stroke-width="1.5" opacity="0.3" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M739,216 C762,216 768,280 796,280" fill="none" stroke="#639922" stroke-width="1.5" opacity="0.3" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M739,222 C762,222 768,370 796,370" fill="none" stroke="#639922" stroke-width="1.5" opacity="0.3" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+<!-- Fan-out particles — synced -->
+<circle r="2.5" fill="#639922" class="fan-particle" style="--dur:2.5s;--delay:0s;offset-path:path('M739,198 C762,198 768,60 796,60')"/>
+<circle r="2.5" fill="#639922" class="fan-particle" style="--dur:2.5s;--delay:0s;offset-path:path('M739,204 C762,204 768,150 796,150')"/>
+<circle r="2.5" fill="#639922" class="fan-particle" style="--dur:2.5s;--delay:0s;offset-path:path('M739,216 C762,216 768,280 796,280')"/>
+<circle r="2.5" fill="#639922" class="fan-particle" style="--dur:2.5s;--delay:0s;offset-path:path('M739,222 C762,222 768,370 796,370')"/>
+
+<!-- Files -->
+<rect x="39" y="52" width="150" height="46" rx="23" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<g transform="translate(61,64)"><path d="M0,2 L0,10 A1,1 0 0,0 1,11 L11,11 A1,1 0 0,0 12,10 L12,4 A1,1 0 0,0 11,3 L6,3 L5,1.5 A1,1 0 0,0 4,1 L1,1 A1,1 0 0,0 0,2Z" fill="none" stroke="#3C3489" stroke-width="1" opacity="0.8"/></g>
+<text class="th" x="121" y="69" text-anchor="middle" dominant-baseline="central" style="font-size:14px" fill="#3C3489">Files</text>
+<text class="ts" x="114" y="86" text-anchor="middle" dominant-baseline="central" fill="#534AB7">pdf, docx, csv</text>
+
+<!-- Web -->
+<rect x="39" y="187" width="150" height="46" rx="23" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<g transform="translate(61,199)"><circle cx="6" cy="6" r="5.5" fill="none" stroke="#0C447C" stroke-width="1" opacity="0.8"/><ellipse cx="6" cy="6" rx="3" ry="5.5" fill="none" stroke="#0C447C" stroke-width="0.8" opacity="0.8"/><line x1="0.5" y1="6" x2="11.5" y2="6" stroke="#0C447C" stroke-width="0.8" opacity="0.8"/></g>
+<text class="th" x="121" y="204" text-anchor="middle" dominant-baseline="central" style="font-size:14px" fill="#0C447C">Web</text>
+<text class="ts" x="114" y="221" text-anchor="middle" dominant-baseline="central" fill="#185FA5">html, xml, json</text>
+
+<!-- GitHub -->
+<rect x="39" y="322" width="150" height="46" rx="23" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+<g transform="translate(59,334)"><circle cx="4" cy="3" r="2" fill="none" stroke="#712B13" stroke-width="1" opacity="0.8"/><circle cx="4" cy="11" r="2" fill="none" stroke="#712B13" stroke-width="1" opacity="0.8"/><circle cx="10" cy="5" r="2" fill="none" stroke="#712B13" stroke-width="1" opacity="0.8"/><line x1="4" y1="5" x2="4" y2="9" stroke="#712B13" stroke-width="1" opacity="0.8"/><path d="M8,5 C6,5 4,6 4,8" fill="none" stroke="#712B13" stroke-width="1" opacity="0.8"/></g>
+<text class="th" x="121" y="339" text-anchor="middle" dominant-baseline="central" style="font-size:14px" fill="#712B13">GitHub</text>
+<text class="ts" x="114" y="356" text-anchor="middle" dominant-baseline="central" fill="#993C1D">markdowns</text>
+
+<text class="ts" x="219" y="63" opacity="0.4" style="font-size:11px">extract</text>
+<text class="ts" x="219" y="198" opacity="0.4" style="font-size:11px">extract</text>
+<text class="ts" x="219" y="333" opacity="0.4" style="font-size:11px">extract</text>
+
+<!-- Merge -->
+<circle cx="394" cy="210" r="42" fill="none" stroke="#1D9E75" stroke-width="0.5" class="pulse"/>
+<circle cx="394" cy="210" r="34" fill="none" stroke="#1D9E75" stroke-width="0.5" class="pulse2"/>
+<circle cx="394" cy="210" r="38" fill="none" stroke="#1D9E75" stroke-width="0.4" stroke-dasharray="4 8" opacity="0.15" class="merge-spin"/>
+<circle cx="394" cy="210" r="24" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<g transform="translate(386,200)"><path d="M0,0 L8,8 M16,0 L8,8 M8,8 L8,18" fill="none" stroke="#04342C" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/></g>
+
+<line x1="418" y1="210" x2="467" y2="210" stroke="#1D9E75" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+
+<!-- LLM -->
+<circle cx="519" cy="210" r="50" fill="none" stroke="#BA7517" stroke-width="0.5" class="glow"/>
+<circle cx="519" cy="210" r="42" fill="none" stroke="#BA7517" stroke-width="0.5" class="pulse2"/>
+<rect x="479" y="182" width="80" height="56" rx="28" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
+<g transform="translate(511,192)"><path d="M5,0 L6.2,3.5 L10,5 L6.2,6.5 L5,10 L3.8,6.5 L0,5 L3.8,3.5Z" fill="#633806" opacity="0.6"/><path d="M12,1 L12.5,2.8 L14.5,3.2 L12.5,3.8 L12,5.5 L11.5,3.8 L9.5,3.2 L11.5,2.8Z" fill="#633806" opacity="0.4"/></g>
+<text class="th" x="519" y="218" text-anchor="middle" dominant-baseline="central" style="font-size:14px" fill="#633806">LLM</text>
+
+<line x1="559" y1="210" x2="597" y2="210" stroke="#BA7517" stroke-width="2" opacity="0.35" stroke-linecap="round"/>
+
+<!-- knowledge.md -->
+<rect x="599" y="186" width="140" height="48" rx="8" fill="#EAF3DE" stroke="#3B6D11" stroke-width="0.5"/>
+<g transform="translate(613,210)"><rect x="0" y="-7" width="10" height="14" rx="1.5" fill="none" stroke="#27500A" stroke-width="1" opacity="0.8"/><line x1="2.5" y1="-3.5" x2="7.5" y2="-3.5" stroke="#27500A" stroke-width="0.7" opacity="0.6"/><line x1="2.5" y1="0" x2="7.5" y2="0" stroke="#27500A" stroke-width="0.7" opacity="0.6"/><line x1="2.5" y1="3.5" x2="5.5" y2="3.5" stroke="#27500A" stroke-width="0.7" opacity="0.6"/></g>
+<text class="th" x="679" y="210" text-anchor="middle" dominant-baseline="central" style="font-size:14px" fill="#27500A">knowledge.md</text>
+
+<!-- llms.txt -->
+<rect x="798" y="42" width="120" height="36" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<g transform="translate(812,60)"><rect x="0" y="-6" width="9" height="12" rx="1" fill="none" stroke="#444441" stroke-width="0.8" opacity="0.7"/><line x1="2.5" y1="-3" x2="6.5" y2="-3" stroke="#444441" stroke-width="0.6" opacity="0.5"/><line x1="2.5" y1="0" x2="6.5" y2="0" stroke="#444441" stroke-width="0.6" opacity="0.5"/><line x1="2.5" y1="3" x2="5" y2="3" stroke="#444441" stroke-width="0.6" opacity="0.5"/></g>
+<text class="th" x="866" y="60" text-anchor="middle" dominant-baseline="central" style="font-size:12px" fill="#444441">llms.txt</text>
+
+<!-- llms-full.txt -->
+<rect x="798" y="132" width="120" height="36" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<g transform="translate(812,150)"><rect x="0" y="-6" width="9" height="12" rx="1" fill="none" stroke="#444441" stroke-width="0.8" opacity="0.7"/><line x1="2.5" y1="-3" x2="6.5" y2="-3" stroke="#444441" stroke-width="0.6" opacity="0.5"/><line x1="2.5" y1="0" x2="6.5" y2="0" stroke="#444441" stroke-width="0.6" opacity="0.5"/><line x1="2.5" y1="3" x2="5" y2="3" stroke="#444441" stroke-width="0.6" opacity="0.5"/></g>
+<text class="th" x="866" y="150" text-anchor="middle" dominant-baseline="central" style="font-size:12px" fill="#444441">llms-full.txt</text>
+
+<!-- Vector DB -->
+<rect x="798" y="262" width="120" height="36" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<g transform="translate(812,280)"><ellipse cx="5" cy="-4" rx="5" ry="2" fill="none" stroke="#444441" stroke-width="0.8" opacity="0.7"/><path d="M0,-4 L0,4 A5,2 0 0,0 10,4 L10,-4" fill="none" stroke="#444441" stroke-width="0.8" opacity="0.7"/><path d="M0,0 A5,2 0 0,0 10,0" fill="none" stroke="#444441" stroke-width="0.6" opacity="0.4"/></g>
+<text class="th" x="866" y="280" text-anchor="middle" dominant-baseline="central" style="font-size:12px" fill="#444441">Vector DB</text>
+
+<!-- README.md -->
+<rect x="798" y="352" width="120" height="36" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<g transform="translate(812,370)"><rect x="0" y="-6" width="9" height="12" rx="1" fill="none" stroke="#444441" stroke-width="0.8" opacity="0.7"/><line x1="2.5" y1="-3" x2="6.5" y2="-3" stroke="#444441" stroke-width="0.6" opacity="0.5"/><line x1="2.5" y1="0" x2="6.5" y2="0" stroke="#444441" stroke-width="0.6" opacity="0.5"/><line x1="2.5" y1="3" x2="5" y2="3" stroke="#444441" stroke-width="0.6" opacity="0.5"/></g>
+<text class="th" x="866" y="370" text-anchor="middle" dominant-baseline="central" style="font-size:12px" fill="#444441">README.md</text>
+</svg>

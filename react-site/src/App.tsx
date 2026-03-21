@@ -2,7 +2,6 @@ import { useMemo, useEffect } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
 import News from './components/News';
 import CurrentWork from './components/CurrentWork';
 import Projects from './components/Projects';
@@ -104,7 +103,6 @@ function App() {
         <Navbar />
         <main>
           <Hero />
-          <About />
           <News />
           <CurrentWork />
           <Publications />

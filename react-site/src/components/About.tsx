@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Grid, Paper, Link, Avatar, Stack } from '@mui/material';
+import { Box, Container, Grid, Paper, Link, Avatar, Stack, Typography } from '@mui/material';
 
 const stats = [
   {
@@ -29,95 +29,8 @@ const stats = [
 
 export default function About() {
   return (
-    <Box id="about" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box id="about" sx={{ py: { xs: 6, md: 8 } }}>
       <Container maxWidth="md">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          About Me
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 6,
-            borderRadius: 2,
-          }}
-        />
-
-        <Box className="reveal" sx={{ mb: 8 }}>
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-            I'm a postgraduate student at the{' '}
-            <Link href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener">
-              Centre for Human-Inspired AI (CHIA)
-            </Link>
-            , University of Cambridge, where I am part of the{' '}
-            <Link href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener">
-              TRACE Lab
-            </Link>{' '}
-            advised by{' '}
-            <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener">
-              Professor Umang Bhatt
-            </Link>
-            . My research focuses on <strong>human-AI orchestration</strong> — designing
-            multi-agent systems where AI agents and humans collaborate under real-world conditions,
-            such as varying expertise, costs, and availability. I am building{' '}
-            <Link href="https://tailorworkflow.com" target="_blank" rel="noopener">
-              Tailor
-            </Link>
-            , a platform for designing workflows with built-in <strong>human oversight</strong> and{' '}
-            <strong>governance controls</strong> for regulated industries.
-          </Typography>
-
-          <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-            Previously, I worked as a <strong>Software Engineer</strong> at{' '}
-            <Link href="https://stellarcyber.ai" target="_blank" rel="noopener">
-              Stellar Cyber
-            </Link>{' '}
-            in San Jose, California, where I developed AI-driven interfaces for threat hunting{' '}
-            <Link
-              href="https://stellarcyber.ai/ai-investigator-natural-language-threat-hunting"
-              target="_blank"
-              rel="noopener"
-            >
-              [Stellar Cyber]
-            </Link>{' '}
-            <Link
-              href="https://aimresearch.co/generative-ai/stellar-cyber-unveils-genai-driven-open-xdr-investigator"
-              target="_blank"
-              rel="noopener"
-            >
-              [AIM Research, 2024]
-            </Link>{' '}
-            and <strong>human-augmented</strong> autonomous cybersecurity operations powered by{' '}
-            <strong>agentic AI</strong>{' '}
-            <Link
-              href="https://stellarcyber.ai/platform/capabilities-autonomous-soc"
-              target="_blank"
-              rel="noopener"
-            >
-              [Stellar Cyber]
-            </Link>{' '}
-            <Link
-              href="https://www.businesswire.com/news/home/20250422895828/en/Stellar-Cyber-Debuts-the-Human-Augmented-Autonomous-SOC-Powered-by-Agentic-AI-at-RSAC-2025"
-              target="_blank"
-              rel="noopener"
-            >
-              [Business Wire, 2025]
-            </Link>
-            .
-          </Typography>
-
-          <Typography variant="body1" color="text.secondary">
-            In my free time, I enjoy being outdoors in nature, going to music festivals, and
-            playing racquet sports.
-          </Typography>
-        </Box>
-
         <Grid container spacing={2.5} justifyContent="center" className="reveal-stagger">
           {stats.map((stat) => (
             <Grid size={{ xs: 6, sm: 6, md: 3 }} key={stat.label}>

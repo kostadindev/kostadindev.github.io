@@ -29,7 +29,7 @@ function renderDescription(text: string) {
 
 export default function News() {
   return (
-    <Box id="news" sx={{ py: { xs: 6, md: 8 } }}>
+    <Box id="news" sx={{ py: { xs: 5, md: 6 } }}>
       <Container maxWidth="md">
         <Typography
           variant="h3"
@@ -44,30 +44,19 @@ export default function News() {
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
-            mb: 4,
+            mb: 3,
             borderRadius: 2,
           }}
         />
 
-        <Stack spacing={0} className="reveal-stagger">
-          {news.map((item, index) => (
+        <Stack spacing={0} divider={<Box sx={{ borderBottom: '1px solid', borderColor: 'rgba(0,0,0,0.05)' }} />} className="reveal">
+          {news.map((item) => (
             <Stack
               key={item.title}
               direction="row"
-              spacing={2.5}
+              spacing={2}
               alignItems="baseline"
-              sx={{
-                py: 2,
-                px: 2.5,
-                borderRadius: 2,
-                borderLeft: '2px solid',
-                borderColor: index === 0 ? 'primary.main' : 'transparent',
-                transition: 'all 0.2s',
-                '&:hover': {
-                  bgcolor: 'rgba(212, 133, 31, 0.03)',
-                  borderColor: 'primary.light',
-                },
-              }}
+              sx={{ py: 1.5 }}
             >
               <Typography
                 variant="caption"
@@ -75,15 +64,14 @@ export default function News() {
                   color: 'primary.dark',
                   fontWeight: 600,
                   whiteSpace: 'nowrap',
-                  minWidth: 75,
-                  fontSize: '0.78rem',
-                  letterSpacing: '0.03em',
+                  minWidth: 70,
+                  fontSize: '0.75rem',
                 }}
               >
                 {item.date}
               </Typography>
-              <Typography variant="body2" color="text.primary" sx={{ lineHeight: 1.7 }}>
-                <strong>{item.title}</strong>
+              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+                <Box component="span" sx={{ color: 'text.primary', fontWeight: 600 }}>{item.title}</Box>
                 {' — '}
                 {renderDescription(item.description)}
                 {' '}
@@ -96,10 +84,9 @@ export default function News() {
                     textDecoration: 'none',
                     fontWeight: 500,
                     '&:hover': { textDecoration: 'underline' },
-                    whiteSpace: 'nowrap',
                   }}
                 >
-                  Learn more ↗
+                  ↗
                 </Link>
               </Typography>
             </Stack>
