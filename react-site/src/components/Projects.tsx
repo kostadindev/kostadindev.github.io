@@ -18,6 +18,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ArticleIcon from '@mui/icons-material/Article';
+import SummarizeIcon from '@mui/icons-material/Summarize';
 import { projects } from '../data/content';
 
 const DockerIcon = () => (
@@ -37,6 +38,7 @@ const linkIcon: Record<string, React.ReactElement> = {
   website: <LanguageIcon fontSize="small" />,
   paper: <DescriptionIcon fontSize="small" />,
   article: <ArticleIcon fontSize="small" />,
+  report: <SummarizeIcon fontSize="small" />,
   docker: <DockerIcon />,
   pypi: <PythonIcon />,
 };
