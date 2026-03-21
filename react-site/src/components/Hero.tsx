@@ -43,12 +43,12 @@ const iconMap: Record<string, React.ReactNode> = {
 };
 
 export default function Hero() {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<string | null>(null);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(personalInfo.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopyEmail = (email: string) => {
+    navigator.clipboard.writeText(email);
+    setCopied(email);
+    setTimeout(() => setCopied(null), 2000);
   };
 
   return (
@@ -114,32 +114,61 @@ export default function Hero() {
               ))}
             </Stack>
 
-            <Stack direction="row" alignItems="center" spacing={0.5}>
-              <Typography
-                component="a"
-                href={`mailto:${personalInfo.email}`}
-                variant="caption"
-                sx={{
-                  color: 'text.secondary',
-                  textDecoration: 'none',
-                  '&:hover': { color: 'primary.main' },
-                  transition: 'color 0.2s',
-                }}
-              >
-                {personalInfo.email}
-              </Typography>
-              <Tooltip title={copied ? 'Copied!' : 'Copy email'}>
-                <IconButton
-                  onClick={handleCopyEmail}
-                  size="small"
+            <Stack alignItems="center" spacing={0.5}>
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Typography
+                  component="a"
+                  href={`mailto:${personalInfo.email}`}
+                  variant="caption"
                   sx={{
-                    color: copied ? 'success.main' : 'grey.400',
-                    '&:hover': { color: copied ? 'success.main' : 'grey.600' },
+                    color: 'text.secondary',
+                    textDecoration: 'none',
+                    '&:hover': { color: 'primary.main' },
+                    transition: 'color 0.2s',
                   }}
                 >
-                  {copied ? <CheckIcon sx={{ fontSize: 14 }} /> : <ContentCopyIcon sx={{ fontSize: 14 }} />}
-                </IconButton>
-              </Tooltip>
+                  {personalInfo.email}
+                </Typography>
+                <Tooltip title={copied === personalInfo.email ? 'Copied!' : 'Copy email'}>
+                  <IconButton
+                    onClick={() => handleCopyEmail(personalInfo.email)}
+                    size="small"
+                    sx={{
+                      color: copied === personalInfo.email ? 'success.main' : 'grey.400',
+                      '&:hover': { color: copied === personalInfo.email ? 'success.main' : 'grey.600' },
+                    }}
+                  >
+                    {copied === personalInfo.email ? <CheckIcon sx={{ fontSize: 14 }} /> : <ContentCopyIcon sx={{ fontSize: 14 }} />}
+                  </IconButton>
+                </Tooltip>
+              </Stack>
+              <Stack direction="row" alignItems="center" spacing={0.5}>
+                <Typography
+                  component="a"
+                  href="mailto:kgd26@cam.ac.uk"
+                  variant="caption"
+                  sx={{
+                    color: 'text.secondary',
+                    textDecoration: 'none',
+                    '&:hover': { color: 'primary.main' },
+                    transition: 'color 0.2s',
+                  }}
+                >
+                  kgd26@cam.ac.uk
+                </Typography>
+                <Tooltip title={copied === 'kgd26@cam.ac.uk' ? 'Copied!' : 'Copy email'}>
+                  <IconButton
+                    onClick={() => handleCopyEmail('kgd26@cam.ac.uk')}
+                    size="small"
+                    sx={{
+                      color: copied === 'kgd26@cam.ac.uk' ? 'success.main' : 'grey.400',
+                      '&:hover': { color: copied === 'kgd26@cam.ac.uk' ? 'success.main' : 'grey.600' },
+                    }}
+                  >
+                    {copied === 'kgd26@cam.ac.uk' ? <CheckIcon sx={{ fontSize: 14 }} /> : <ContentCopyIcon sx={{ fontSize: 14 }} />}
+                  </IconButton>
+                </Tooltip>
+              </Stack>
             </Stack>
           </Stack>
 

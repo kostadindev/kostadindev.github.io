@@ -37,6 +37,17 @@ export const currentWork = [
 
 export const projects = [
   {
+    title: "Knowledge Base Builder",
+    description: "Python package for converting diverse content into a search-engine-friendly knowledge base. It effortlessly ingests files (PDFs, DOCXs, spreadsheets), websites, and GitHub repositories, then leverages LLMs to generate a Markdown knowledge base. Ideal for creating structured and crawlable formats like llms.txt.",
+    tags: ["GenAI", "RAG"],
+    category: ["genai", "rag"],
+    links: [
+      { type: "pypi", url: "https://pypi.org/project/knowledge-base-builder/" },
+      { type: "github", url: "https://github.com/kostadindev/knowledge-base-builder" }
+    ],
+    image: "./images/kbb.svg"
+  },
+  {
     title: "Fairness and Transparency Analysis of Hospital Readmission Prediction",
     description: "An analysis of fairness and transparency in a Random Forest classifier for 30-day hospital readmission prediction using the Diabetes 130-Hospitals dataset. Evaluates group fairness via Demographic Parity and Equalized Odds using Fairlearn, and employs SHAP and LIME for transparency, reducing disparities by 74.5% using Exponentiated Gradient intervention.",
     tags: ["Responsible AI", "Fairness", "Transparency"],
@@ -59,35 +70,12 @@ export const projects = [
     image: "./images/gonext-cover-chat.webp"
   },
   {
-    title: "League of Legends MCP Server",
-    description: "This open-source Model Context Protocol (MCP) server empowers LLMs with comprehensive access to League of Legends game data through the Riot Games API. It features over 35 tools and resources for retrieving player statistics, match history, champion information, tournament data, and real-time game monitoring.",
-    tags: ["MCP", "Agentic AI", "GenAI"],
-    category: ["mcp", "agentic"],
-    links: [
-      { type: "github", url: "https://github.com/kostadindev/League-of-Legends-MCP" },
-      { type: "docker", url: "https://hub.docker.com/r/kostadindev/league-mcp" },
-      { type: "pypi", url: "https://pypi.org/project/league-mcp/" }
-    ],
-    image: "https://github.com/user-attachments/assets/81ff5484-f747-431d-ac9c-c04933339b82"
-  },
-  {
-    title: "Knowledge Base Builder",
-    description: "Python package for converting diverse content into a search-engine-friendly knowledge base. It effortlessly ingests files (PDFs, DOCXs, spreadsheets), websites, and GitHub repositories, then leverages LLMs to generate a Markdown knowledge base. Ideal for creating structured and crawlable formats like llms.txt.",
-    tags: ["GenAI", "RAG"],
-    category: ["genai", "rag"],
-    links: [
-      { type: "pypi", url: "https://pypi.org/project/knowledge-base-builder/" },
-      { type: "github", url: "https://github.com/kostadindev/knowledge-base-builder" }
-    ],
-    image: "./images/kbb.svg"
-  },
-  {
-    title: "Recursive QA",
-    description: "An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs.",
-    tags: ["NLP", "Human-in-the-Loop"],
-    category: ["nlp", "hitl"],
-    links: [{ type: "github", url: "https://github.com/KostadinDev/Recursive-QA" }],
-    image: "./images/recursiveqa-cover.jpg"
+    title: "Symbiotic Learning",
+    description: "A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing to the conservation of Hawaii's ecosystems.",
+    tags: ["Computer Vision", "Human-in-the-Loop", "Ecological Conservation"],
+    category: ["cv", "hitl"],
+    links: [{ type: "article", url: "https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" }],
+    image: "https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
   },
   {
     title: "I Want to Redistrict",
@@ -106,12 +94,24 @@ export const projects = [
     image: "./images/deep-gestures-image.jpg"
   },
   {
-    title: "Symbiotic Learning",
-    description: "A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing to the conservation of Hawaii's ecosystems.",
-    tags: ["Computer Vision", "Human-in-the-Loop", "Ecological Conservation"],
-    category: ["cv", "hitl"],
-    links: [{ type: "article", url: "https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" }],
-    image: "https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
+    title: "Recursive QA",
+    description: "An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs.",
+    tags: ["NLP", "Human-in-the-Loop"],
+    category: ["nlp", "hitl"],
+    links: [{ type: "github", url: "https://github.com/KostadinDev/Recursive-QA" }],
+    image: "./images/recursiveqa-cover.jpg"
+  },
+  {
+    title: "League of Legends MCP Server",
+    description: "This open-source Model Context Protocol (MCP) server empowers LLMs with comprehensive access to League of Legends game data through the Riot Games API. It features over 35 tools and resources for retrieving player statistics, match history, champion information, tournament data, and real-time game monitoring.",
+    tags: ["MCP", "Agentic AI", "GenAI"],
+    category: ["mcp", "agentic"],
+    links: [
+      { type: "github", url: "https://github.com/kostadindev/League-of-Legends-MCP" },
+      { type: "docker", url: "https://hub.docker.com/r/kostadindev/league-mcp" },
+      { type: "pypi", url: "https://pypi.org/project/league-mcp/" }
+    ],
+    image: "https://github.com/user-attachments/assets/81ff5484-f747-431d-ac9c-c04933339b82"
   }
 ];
 
