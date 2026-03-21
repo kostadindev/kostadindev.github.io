@@ -115,7 +115,7 @@ export default function CurrentWork() {
               <Box
                 sx={{
                   width: { xs: '100%', md: '55%' },
-                  height: { xs: 320, md: 480 },
+                  height: { xs: 220, md: 320 },
                   bgcolor: '#f5f5f4',
                   display: 'flex',
                   alignItems: 'center',
