@@ -1,10 +1,29 @@
-import { Box, Container, Typography, Card, CardContent, Chip, Stack, Grid } from '@mui/material';
+import { Box, Container, Typography, Chip, Stack, Grid } from '@mui/material';
+import CodeIcon from '@mui/icons-material/Code';
+import WebIcon from '@mui/icons-material/Web';
+import DnsIcon from '@mui/icons-material/Dns';
+import StorageIcon from '@mui/icons-material/Storage';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import PsychologyIcon from '@mui/icons-material/Psychology';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
+import CloudIcon from '@mui/icons-material/Cloud';
 import { skills } from '../data/content';
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  'Programming Languages': <CodeIcon sx={{ fontSize: 18 }} />,
+  'Frontend': <WebIcon sx={{ fontSize: 18 }} />,
+  'Backend & APIs': <DnsIcon sx={{ fontSize: 18 }} />,
+  'Databases': <StorageIcon sx={{ fontSize: 18 }} />,
+  'Data Science & ML': <BarChartIcon sx={{ fontSize: 18 }} />,
+  'Deep Learning': <PsychologyIcon sx={{ fontSize: 18 }} />,
+  'AI Frameworks': <SmartToyIcon sx={{ fontSize: 18 }} />,
+  'DevOps': <CloudIcon sx={{ fontSize: 18 }} />,
+};
 
 export default function Skills() {
   return (
     <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f5f3ef' }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Typography
           variant="h3"
           textAlign="center"
@@ -26,38 +45,41 @@ export default function Skills() {
         <Grid container spacing={2} className="reveal-stagger">
           {Object.entries(skills).map(([category, skillList]) => (
             <Grid size={{ xs: 12, sm: 6 }} key={category}>
-              <Card
-                elevation={0}
+              <Box
                 sx={{
                   height: '100%',
                   bgcolor: 'background.paper',
                   border: '1px solid',
                   borderColor: 'rgba(0,0,0,0.06)',
+                  borderRadius: 4,
+                  p: 2.5,
+                  transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                   '&:hover': {
                     borderColor: 'primary.light',
                     boxShadow: '0 8px 32px rgba(212, 133, 31, 0.08)',
                   },
                 }}
               >
-                <CardContent sx={{ p: 2.5 }}>
-                  <Typography
-                    variant="subtitle2"
-                    fontWeight={600}
-                    sx={{
-                      mb: 2,
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 1,
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.06em',
-                      fontSize: '0.75rem',
-                      color: 'text.secondary',
-                    }}
-                  >
-                    <Box sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: 'primary.main' }} />
-                    {category}
-                  </Typography>
-                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                <Stack spacing={1.5}>
+                  <Stack direction="row" alignItems="center" spacing={1}>
+                    <Box sx={{ color: 'primary.main', display: 'flex' }}>
+                      {categoryIcons[category]}
+                    </Box>
+                    <Typography
+                      variant="subtitle2"
+                      fontWeight={600}
+                      sx={{
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.06em',
+                        fontSize: '0.73rem',
+                        color: 'text.secondary',
+                      }}
+                    >
+                      {category}
+                    </Typography>
+                  </Stack>
+
+                  <Stack direction="row" spacing={0.75} flexWrap="wrap" useFlexGap>
                     {skillList.map((skill) => (
                       <Chip
                         key={skill}
@@ -76,8 +98,8 @@ export default function Skills() {
                       />
                     ))}
                   </Stack>
-                </CardContent>
-              </Card>
+                </Stack>
+              </Box>
             </Grid>
           ))}
         </Grid>

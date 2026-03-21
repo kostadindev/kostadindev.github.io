@@ -13,6 +13,7 @@ export const personalInfo = {
     { name: "LinkedIn", url: "https://www.linkedin.com/in/kostadin-dev/", icon: "linkedin" },
     { name: "GitHub", url: "https://github.com/KostadinDev", icon: "github" },
     { name: "Google Scholar", url: "https://scholar.google.com/citations?user=hJlCT-0AAAAJ&hl=en", icon: "scholar" },
+    { name: "ORCID", url: "https://orcid.org/0009-0008-2508-2766", icon: "orcid" },
     { name: "LeetCode", url: "https://leetcode.com/u/user9852My/", icon: "code" },
   ]
 };
