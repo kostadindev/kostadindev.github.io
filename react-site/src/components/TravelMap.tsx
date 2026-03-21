@@ -60,6 +60,7 @@ function getLabel(id: string) {
 export default function TravelMap() {
   const [tooltip, setTooltip] = useState('');
   const [zoom, setZoom] = useState(1);
+  const [center, setCenter] = useState<[number, number]>([0, 0]);
 
   const handleZoomIn = useCallback(() => setZoom((z) => Math.min(z * 1.5, 8)), []);
   const handleZoomOut = useCallback(() => setZoom((z) => Math.max(z / 1.5, 1)), []);
@@ -138,7 +139,14 @@ export default function TravelMap() {
             projectionConfig={{ rotate: [-10, 0, 0], scale: 147 }}
             style={{ width: '100%', height: 'auto' }}
           >
-            <ZoomableGroup zoom={zoom} onMoveEnd={({ zoom: z }: { zoom: number }) => setZoom(z)}>
+            <ZoomableGroup
+              zoom={zoom}
+              center={center}
+              onMoveEnd={({ coordinates, zoom: z }: { coordinates: [number, number]; zoom: number }) => {
+                setCenter(coordinates);
+                setZoom(z);
+              }}
+            >
               <Geographies geography={GEO_URL}>
                 {({ geographies }: { geographies: any[] }) =>
                   geographies.map((geo: any) => {

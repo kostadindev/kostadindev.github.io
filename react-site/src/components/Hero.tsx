@@ -211,7 +211,7 @@ export default function Hero() {
               <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener">
                 Professor Umang Bhatt
               </Link>
-              . My research focuses on <strong>human-AI orchestration</strong> — designing
+              . My research focuses on <strong>human-AI interaction</strong> — designing
               multi-agent systems where AI agents and humans collaborate under real-world conditions.
             </Typography>
 
@@ -294,7 +294,7 @@ export default function Hero() {
                   }}
                 >
                   <Stack spacing={1.5} alignItems="center">
-                    <Box sx={{ width: 100, height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Box sx={{ width: 130, height: 130, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <Avatar
                         src={stat.logo}
                         alt={stat.value}

@@ -46,8 +46,8 @@ export default function Experience() {
                     alt={job.company}
                     variant="rounded"
                     sx={{
-                      width: 100,
-                      height: 100,
+                      width: 160,
+                      height: 160,
                       bgcolor: 'white',
                       p: 2,
                       borderRadius: 3,
