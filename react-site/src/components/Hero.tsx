@@ -10,7 +10,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckIcon from '@mui/icons-material/Check';
 import { personalInfo } from '../data/content';
-import HeroScene from './HeroScene';
+// import HeroScene from './HeroScene';
 
 const affiliations = [
   {
@@ -72,7 +72,7 @@ export default function Hero() {
         py: { xs: 10, md: 4 },
       }}
     >
-      <HeroScene />
+      {/* <HeroScene /> */}
 
       <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
         <Stack
