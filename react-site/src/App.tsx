@@ -7,7 +7,6 @@ import CurrentWork from './components/CurrentWork';
 import Projects from './components/Projects';
 import Publications from './components/Publications';
 import Education from './components/Education';
-import Timeline from './components/Timeline';
 import Experience from './components/Experience';
 const Globe = lazy(() => import('./components/Globe'));
 const SkillsConstellation = lazy(() => import('./components/SkillsConstellation'));
@@ -114,7 +113,6 @@ function App() {
           <Suspense fallback={null}>
             <SkillsConstellation />
           </Suspense>
-          <Timeline />
           <Hobbies />
           <Suspense fallback={null}>
             <Globe />
