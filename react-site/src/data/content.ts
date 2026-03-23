@@ -353,9 +353,10 @@ export const travelCountries = {
 
 export const navItems = [
   { name: "About", href: "#about" },
+  { name: "News", href: "#news" },
   { name: "Work", href: "#work" },
-  { name: "Projects", href: "#projects" },
   { name: "Publications", href: "#publications" },
   { name: "Education", href: "#education" },
   { name: "Experience", href: "#experience" },
+  { name: "Projects", href: "#projects" },
 ];
