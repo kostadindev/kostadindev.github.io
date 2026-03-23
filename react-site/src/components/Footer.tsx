@@ -77,9 +77,6 @@ export default function Footer() {
           </Stack>
 
           <Box textAlign={{ xs: 'center', md: 'right' }}>
-            <Typography variant="caption" color="text.secondary" display="block">
-              © {new Date().getFullYear()} {personalInfo.name}
-            </Typography>
             <Link
               href={`mailto:${personalInfo.email}`}
               variant="caption"

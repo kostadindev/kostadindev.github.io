@@ -63,7 +63,7 @@ export default function News() {
               direction="row"
               spacing={2}
               alignItems="baseline"
-              sx={{ py: 1.5 }}
+              sx={{ py: 1 }}
             >
               <Stack sx={{ minWidth: 110, flexShrink: 0 }}>
                 <Typography
@@ -88,7 +88,7 @@ export default function News() {
                   {item.location}
                 </Typography>
               </Stack>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
+              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.4 }}>
                 <Link
                   href={item.link}
                   target="_blank"

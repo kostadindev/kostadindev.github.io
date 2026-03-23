@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
-  email: "kostadin.g.devedzhiev@gmail.com",
+  email: "kgd26@cam.ac.uk",
   tagline: "Human-AI Interaction | TRACE Lab, University of Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
@@ -301,7 +301,7 @@ export const news = [
     date: "Feb 2026",
     location: "New Delhi, India",
     title: "IndiaAI Research Symposium",
-    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab at the India-AI Impact Summit.",
+    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab and the University of Cambridge at the India-AI Impact Summit.",
     link: "https://impact.indiaai.gov.in/events/research-symposium",
   },
   {
@@ -310,6 +310,13 @@ export const news = [
     title: "AI Innovation & Leadership Bootcamp",
     description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab.",
     link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/",
+  },
+  {
+    date: "Aug 2025",
+    location: "Las Vegas, NV",
+    title: "AI Investigator Featured at Black Hat 2025",
+    description: "My work on the AI Investigator for Stellar Cyber was featured at Black Hat 2025.",
+    link: "https://stellarcyber.ai/stellar-cyber-improves-soc-operations-with-human-augmented-autonomous-cybersecurity-blackhat-2025/",
   },
   {
     date: "Apr 2025",
