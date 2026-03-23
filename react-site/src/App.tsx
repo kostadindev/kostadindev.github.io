@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, lazy, Suspense } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -9,7 +9,7 @@ import Publications from './components/Publications';
 import Education from './components/Education';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
-import TravelMap from './components/TravelMap';
+const Globe = lazy(() => import('./components/Globe'));
 import Hobbies from './components/Hobbies';
 import Footer from './components/Footer';
 
@@ -112,7 +112,7 @@ function App() {
           <Projects />
           <Skills />
           <Hobbies />
-          <TravelMap />
+          <Globe />
         </main>
         <Footer />
       </Box>

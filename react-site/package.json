@@ -16,6 +16,8 @@
     "@mui/material": "^7.3.7",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
+    "@types/earcut": "^3.0.0",
+    "earcut": "^3.0.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-simple-maps": "^3.0.0",
