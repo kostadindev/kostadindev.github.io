@@ -1,4 +1,4 @@
-import { useMemo, useEffect, lazy, Suspense } from 'react';
+import { useMemo, useEffect, useState, useRef, lazy, Suspense } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Box } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -7,11 +7,29 @@ import CurrentWork from './components/CurrentWork';
 import Projects from './components/Projects';
 import Publications from './components/Publications';
 import Education from './components/Education';
+import Skills from './components/Skills';
 import Experience from './components/Experience';
 const Globe = lazy(() => import('./components/Globe'));
-const SkillsConstellation = lazy(() => import('./components/SkillsConstellation'));
 import Hobbies from './components/Hobbies';
 import Footer from './components/Footer';
+
+function LazyOnVisible({ children, rootMargin = '200px' }: { children: React.ReactNode; rootMargin?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect(); } },
+      { rootMargin },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [rootMargin]);
+
+  return <div ref={ref}>{visible ? children : null}</div>;
+}
 
 function App() {
   // Scroll-reveal observer
@@ -110,13 +128,13 @@ function App() {
           <Education />
           <Experience />
           <Projects />
-          <Suspense fallback={null}>
-            <SkillsConstellation />
-          </Suspense>
+          <Skills />
           <Hobbies />
-          <Suspense fallback={null}>
-            <Globe />
-          </Suspense>
+          <LazyOnVisible>
+            <Suspense fallback={null}>
+              <Globe />
+            </Suspense>
+          </LazyOnVisible>
         </main>
         <Footer />
       </Box>
