@@ -7,9 +7,10 @@ import CurrentWork from './components/CurrentWork';
 import Projects from './components/Projects';
 import Publications from './components/Publications';
 import Education from './components/Education';
-import Skills from './components/Skills';
+import Timeline from './components/Timeline';
 import Experience from './components/Experience';
 const Globe = lazy(() => import('./components/Globe'));
+const SkillsConstellation = lazy(() => import('./components/SkillsConstellation'));
 import Hobbies from './components/Hobbies';
 import Footer from './components/Footer';
 
@@ -110,9 +111,14 @@ function App() {
           <Education />
           <Experience />
           <Projects />
-          <Skills />
+          <Suspense fallback={null}>
+            <SkillsConstellation />
+          </Suspense>
+          <Timeline />
           <Hobbies />
-          <Globe />
+          <Suspense fallback={null}>
+            <Globe />
+          </Suspense>
         </main>
         <Footer />
       </Box>
