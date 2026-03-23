@@ -10,7 +10,6 @@ import Education from './components/Education';
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 const Globe = lazy(() => import('./components/Globe'));
-import Hobbies from './components/Hobbies';
 import Footer from './components/Footer';
 
 function LazyOnVisible({ children, rootMargin = '200px' }: { children: React.ReactNode; rootMargin?: string }) {
@@ -129,7 +128,6 @@ function App() {
           <Experience />
           <Projects />
           <Skills />
-          <Hobbies />
           <LazyOnVisible>
             <Suspense fallback={null}>
               <Globe />

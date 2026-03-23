@@ -10,7 +10,12 @@ import {
   Typography,
   Stack,
   Chip,
+  Grid,
+  Link,
 } from '@mui/material';
+import SportsTennisIcon from '@mui/icons-material/SportsTennis';
+import HikingIcon from '@mui/icons-material/Hiking';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
 
@@ -409,6 +414,24 @@ export default function Globe() {
       .catch(console.error);
   }, []);
 
+  const hobbies = [
+    { icon: <SportsTennisIcon />, label: 'Racquet Sports', text: 'Tennis, squash, and table tennis.' },
+    { icon: <HikingIcon />, label: 'Travel & Backpacking', text: 'Exploring new countries on foot.' },
+    {
+      icon: <MusicNoteIcon />,
+      label: 'Music Festivals',
+      text: (
+        <>
+          Favourite artist:{' '}
+          <Link href="https://open.spotify.com/album/763xbIwmR5A5EzoVreGlUG" target="_blank" rel="noopener"
+            sx={{ fontWeight: 600, color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+            Subtronics
+          </Link>.
+        </>
+      ),
+    },
+  ];
+
   return (
     <Box id="travel" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#faf9f7' }}>
       <Container maxWidth="md">
@@ -417,11 +440,47 @@ export default function Globe() {
           textAlign="center"
           sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
         >
-          Travel
+          Beyond Work
         </Typography>
         <Box
           sx={{
             width: 40,
+            height: 3,
+            bgcolor: 'primary.main',
+            mx: 'auto',
+            mb: 6,
+            borderRadius: 2,
+          }}
+        />
+
+        {/* Hobbies */}
+        <Grid container spacing={3} justifyContent="center" className="reveal-stagger" sx={{ mb: 8 }}>
+          {hobbies.map((hobby) => (
+            <Grid size={{ xs: 12, sm: 4 }} key={hobby.label}>
+              <Stack spacing={1} alignItems="center" textAlign="center">
+                <Box sx={{ color: 'primary.main' }}>{hobby.icon}</Box>
+                <Typography variant="subtitle2" fontWeight={600} sx={{ fontSize: '0.85rem' }}>
+                  {hobby.label}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {hobby.text}
+                </Typography>
+              </Stack>
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Travel subheading */}
+        <Typography
+          variant="h4"
+          textAlign="center"
+          sx={{ mb: 1, fontSize: { xs: '1.5rem', md: '1.8rem' } }}
+        >
+          Travel
+        </Typography>
+        <Box
+          sx={{
+            width: 30,
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
@@ -523,11 +582,13 @@ export default function Globe() {
                 key={c.id}
                 label={c.name}
                 size="small"
-                variant="outlined"
+                variant={NATIVE_ID === c.id || LIVED_IDS.has(c.id) ? 'filled' : 'outlined'}
                 sx={{
-                  borderColor: 'rgba(232, 154, 60, 0.3)',
-                  color: 'grey.700',
+                  borderColor: NATIVE_ID === c.id ? 'primary.main' : LIVED_IDS.has(c.id) ? 'primary.light' : 'rgba(232, 154, 60, 0.3)',
+                  bgcolor: NATIVE_ID === c.id ? 'primary.main' : LIVED_IDS.has(c.id) ? 'primary.light' : 'transparent',
+                  color: NATIVE_ID === c.id || LIVED_IDS.has(c.id) ? 'white' : 'grey.700',
                   fontSize: 12,
+                  fontWeight: NATIVE_ID === c.id || LIVED_IDS.has(c.id) ? 600 : 400,
                 }}
               />
             ))}
