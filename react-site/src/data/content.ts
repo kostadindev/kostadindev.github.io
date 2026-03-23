@@ -299,18 +299,21 @@ export const teaching = [
 export const news = [
   {
     date: "Feb 2026",
-    title: "IndiaAI Research Symposium — New Delhi",
+    location: "New Delhi, India",
+    title: "IndiaAI Research Symposium",
     description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab at the India-AI Impact Summit.",
     link: "https://impact.indiaai.gov.in/events/research-symposium",
   },
   {
     date: "Dec 2025",
-    title: "AI Innovation & Leadership Bootcamp — Kuwait City",
+    location: "Kuwait City, Kuwait",
+    title: "AI Innovation & Leadership Bootcamp",
     description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab.",
     link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/",
   },
   {
     date: "Apr 2025",
+    location: "San Francisco, CA",
     title: "AutoSOC Featured at RSA Conference 2025",
     description: "My work on the AutoSOC for Stellar Cyber was featured at RSAC 2025.",
     link: "https://stellarcyber.ai/news/press-releases/stellar-cyber-debuts-the-human-augmented-autonomous-soc-powered-by-agentic-ai-at-rsac-2025/",

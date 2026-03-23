@@ -65,18 +65,29 @@ export default function News() {
               alignItems="baseline"
               sx={{ py: 1.5 }}
             >
-              <Typography
-                variant="caption"
-                sx={{
-                  color: 'primary.dark',
-                  fontWeight: 600,
-                  whiteSpace: 'nowrap',
-                  minWidth: 70,
-                  fontSize: '0.75rem',
-                }}
-              >
-                {item.date}
-              </Typography>
+              <Stack sx={{ minWidth: 110, flexShrink: 0 }}>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: 'primary.dark',
+                    fontWeight: 600,
+                    whiteSpace: 'nowrap',
+                    fontSize: '0.75rem',
+                  }}
+                >
+                  {item.date}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: 'text.secondary',
+                    whiteSpace: 'nowrap',
+                    fontSize: '0.7rem',
+                  }}
+                >
+                  {item.location}
+                </Typography>
+              </Stack>
               <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
                 <Link
                   href={item.link}
