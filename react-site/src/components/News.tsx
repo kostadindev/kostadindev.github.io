@@ -1,5 +1,8 @@
-import { Box, Container, Typography, Stack, Link } from '@mui/material';
+import { useState } from 'react';
+import { Box, Container, Typography, Stack, Link, Pagination } from '@mui/material';
 import { news } from '../data/content';
+
+const PAGE_SIZE = 5;
 
 function renderDescription(text: string) {
   const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
@@ -28,6 +31,10 @@ function renderDescription(text: string) {
 }
 
 export default function News() {
+  const [page, setPage] = useState(1);
+  const pageCount = Math.ceil(news.length / PAGE_SIZE);
+  const paginatedNews = news.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   return (
     <Box id="news" sx={{ py: { xs: 5, md: 6 } }}>
       <Container maxWidth="md">
@@ -50,7 +57,7 @@ export default function News() {
         />
 
         <Stack spacing={0} divider={<Box sx={{ borderBottom: '1px solid', borderColor: 'rgba(0,0,0,0.05)' }} />} className="reveal">
-          {news.map((item) => (
+          {paginatedNews.map((item) => (
             <Stack
               key={item.title}
               direction="row"
@@ -92,6 +99,24 @@ export default function News() {
             </Stack>
           ))}
         </Stack>
+
+        {pageCount > 1 && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={(_, value) => setPage(value)}
+              color="standard"
+              sx={{
+                '& .Mui-selected': {
+                  bgcolor: 'primary.main',
+                  color: 'white',
+                  '&:hover': { bgcolor: 'primary.dark' },
+                },
+              }}
+            />
+          </Box>
+        )}
       </Container>
     </Box>
   );
