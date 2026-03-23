@@ -76,9 +76,9 @@ export default function Footer() {
             ))}
           </Stack>
 
-          <Box textAlign={{ xs: 'center', md: 'right' }}>
+          <Stack textAlign={{ xs: 'center', md: 'right' }} spacing={0.5}>
             <Link
-              href={`mailto:${personalInfo.email}`}
+              href="mailto:kostadin.g.devedzhiev@gmail.com"
               variant="caption"
               sx={{
                 color: 'primary.main',
@@ -87,9 +87,21 @@ export default function Footer() {
                 '&:hover': { textDecoration: 'underline' },
               }}
             >
-              {personalInfo.email}
+              kostadin.g.devedzhiev@gmail.com
             </Link>
-          </Box>
+            <Link
+              href="mailto:kgd26@cam.ac.uk"
+              variant="caption"
+              sx={{
+                color: 'primary.main',
+                textDecoration: 'none',
+                fontWeight: 500,
+                '&:hover': { textDecoration: 'underline' },
+              }}
+            >
+              kgd26@cam.ac.uk
+            </Link>
+          </Stack>
         </Stack>
 
         <Box textAlign="center" sx={{ mt: 4 }}>
