@@ -312,7 +312,7 @@ export const news = [
   {
     date: "Apr 2025",
     title: "AutoSOC Featured at RSA Conference 2025",
-    description: "Stellar Cyber debuted the Human-Augmented Autonomous SOC powered by Agentic AI at RSAC 2025.",
+    description: "My work on the AutoSOC for Stellar Cyber was featured at RSAC 2025.",
     link: "https://stellarcyber.ai/news/press-releases/stellar-cyber-debuts-the-human-augmented-autonomous-soc-powered-by-agentic-ai-at-rsac-2025/",
   },
 ];

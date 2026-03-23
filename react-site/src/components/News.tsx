@@ -37,7 +37,7 @@ export default function News() {
 
   return (
     <Box id="news" sx={{ py: { xs: 5, md: 6 } }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Typography
           variant="h3"
           textAlign="center"
