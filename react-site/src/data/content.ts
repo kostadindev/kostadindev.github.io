@@ -300,13 +300,13 @@ export const news = [
   {
     date: "Feb 2026",
     title: "IndiaAI Research Symposium — New Delhi",
-    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab and the University of Cambridge at the India-AI Impact Summit.",
+    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab at the India-AI Impact Summit.",
     link: "https://impact.indiaai.gov.in/events/research-symposium",
   },
   {
     date: "Dec 2025",
     title: "AI Innovation & Leadership Bootcamp — Kuwait City",
-    description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab with Cambridge & Stanford alumni.",
+    description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab.",
     link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/",
   },
   {

@@ -78,23 +78,21 @@ export default function News() {
                 {item.date}
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.7 }}>
-                <Box component="span" sx={{ color: 'text.primary', fontWeight: 600 }}>{item.title}</Box>
-                {' — '}
-                {renderDescription(item.description)}
-                {' '}
                 <Link
                   href={item.link}
                   target="_blank"
                   rel="noopener"
                   sx={{
-                    color: 'primary.main',
+                    color: 'text.primary',
                     textDecoration: 'none',
-                    fontWeight: 500,
+                    fontWeight: 600,
                     '&:hover': { textDecoration: 'underline' },
                   }}
                 >
-                  ↗
+                  {item.title}
                 </Link>
+                {' — '}
+                {renderDescription(item.description)}
               </Typography>
             </Stack>
           ))}
