@@ -92,7 +92,7 @@ export default function CurrentWork() {
     <Box
       id="work"
       sx={{
-        py: { xs: 8, md: 12 },
+        py: { xs: 6, md: 8 },
         bgcolor: '#f5f3ef',
       }}
     >
@@ -110,7 +110,7 @@ export default function CurrentWork() {
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
-            mb: 6,
+            mb: 4,
             borderRadius: 2,
           }}
         />

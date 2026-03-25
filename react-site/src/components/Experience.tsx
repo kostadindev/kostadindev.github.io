@@ -4,7 +4,7 @@ import { experience, teaching } from '../data/content';
 
 export default function Experience() {
   return (
-    <Box id="experience" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f5f3ef' }}>
+    <Box id="experience" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#f5f3ef' }}>
       <Container maxWidth="md">
         <Typography
           variant="h3"
@@ -19,12 +19,12 @@ export default function Experience() {
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
-            mb: 6,
+            mb: 4,
             borderRadius: 2,
           }}
         />
 
-        <Stack spacing={3} sx={{ mb: 8 }} className="reveal-stagger">
+        <Stack spacing={3} sx={{ mb: 6 }} className="reveal-stagger">
           {experience.map((job) => (
             <Card
               key={`${job.company}-${job.title}`}

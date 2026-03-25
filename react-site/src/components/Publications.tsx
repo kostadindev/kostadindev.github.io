@@ -4,7 +4,7 @@ import { publications } from '../data/content';
 
 export default function Publications() {
   return (
-    <Box id="publications" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f5f3ef' }}>
+    <Box id="publications" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#f5f3ef' }}>
       <Container maxWidth="md">
         <Typography
           variant="h3"
@@ -19,7 +19,7 @@ export default function Publications() {
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
-            mb: 6,
+            mb: 4,
             borderRadius: 2,
           }}
         />

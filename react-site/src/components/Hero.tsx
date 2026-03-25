@@ -290,7 +290,7 @@ export default function Hero() {
         </Stack>
 
         {/* Affiliation cards */}
-        <Grid container spacing={2} justifyContent="center" sx={{ mt: { xs: 5, md: 6 } }}>
+        <Grid container spacing={2} justifyContent="center" sx={{ mt: { xs: 4, md: 5 } }}>
           {affiliations.map((stat) => (
             <Grid size={{ xs: 6, sm: 3 }} key={stat.label}>
               <Link href={stat.link} target="_blank" rel="noopener" underline="none">

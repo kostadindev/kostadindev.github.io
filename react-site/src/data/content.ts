@@ -1,6 +1,6 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
-  email: "kgd26@cam.ac.uk",
+  email: "kostadin.g.devedzhiev@gmail.com",
   tagline: "Human-AI Interaction | TRACE Lab, University of Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
@@ -297,6 +297,13 @@ export const teaching = [
 ];
 
 export const news = [
+  {
+    date: "Mar 2026",
+    location: "London, UK",
+    title: "ICO Technical Workshop: Know Your Data",
+    description: "Attended a two-day ICO workshop bringing together foundation model developers and academics to design AI transparency mechanisms for identifying and notifying individuals whose personal data appears in web-scale training datasets.",
+    link: "https://ico.org.uk/global/know-your-data/#ICO",
+  },
   {
     date: "Feb 2026",
     location: "New Delhi, India",

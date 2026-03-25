@@ -58,7 +58,7 @@ export default function Projects() {
   );
 
   return (
-    <Box id="projects" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box id="projects" sx={{ py: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"
@@ -73,12 +73,12 @@ export default function Projects() {
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
-            mb: 5,
+            mb: 4,
             borderRadius: 2,
           }}
         />
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 5 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
           <ToggleButtonGroup
             value={filter}
             exclusive

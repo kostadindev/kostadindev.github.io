@@ -18,6 +18,8 @@ import HikingIcon from '@mui/icons-material/Hiking';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+const US_STATES_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
+const HIGHLIGHT_STATE_IDS = new Set(['36', '15']); // New York, Hawaii
 
 const NATIVE_ID = '100';
 const LIVED_IDS = new Set(['840', '826']);
@@ -108,6 +110,35 @@ function parseCountries(topo: any): CountryData[] {
         rings.push({
           coords2D: coords,
           coords3D: coords.map(([lng, lat]) => latLngToVector3(lat, lng, RADIUS + 0.003)),
+        });
+      }
+      polygons.push(rings);
+    }
+
+    result.push({ id, polygons });
+  }
+  return result;
+}
+
+function parseStates(topo: any): CountryData[] {
+  const arcs = decodeArcs(topo);
+  const geometries = topo.objects.states.geometries;
+  const result: CountryData[] = [];
+
+  for (const geo of geometries) {
+    const id = String(geo.id);
+    if (!HIGHLIGHT_STATE_IDS.has(id)) continue;
+
+    const polygons: CountryRing[][] = [];
+    const polyArcs = geo.type === 'Polygon' ? [geo.arcs] : geo.type === 'MultiPolygon' ? geo.arcs : [];
+
+    for (const polygon of polyArcs) {
+      const rings: CountryRing[] = [];
+      for (const arcIndices of polygon) {
+        const coords = getArcCoords(arcs, arcIndices);
+        rings.push({
+          coords2D: coords,
+          coords3D: coords.map(([lng, lat]) => latLngToVector3(lat, lng, RADIUS + 0.005)),
         });
       }
       polygons.push(rings);
@@ -325,7 +356,7 @@ function Arc({ start, end, color }: { start: THREE.Vector3; end: THREE.Vector3; 
   return <Line points={points} color={color} transparent opacity={0.5} lineWidth={1.5} />;
 }
 
-function GlobeMesh({ countries }: { countries: CountryData[] }) {
+function GlobeMesh({ countries, states }: { countries: CountryData[]; states: CountryData[] }) {
   const globeRef = useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
@@ -386,6 +417,24 @@ function GlobeMesh({ countries }: { countries: CountryData[] }) {
         )
       )}
 
+      {/* Highlighted state outlines (New York & Hawaii) */}
+      {states.map((state) =>
+        state.polygons.map((polygon, pi) =>
+          polygon.map((ring, ri) =>
+            ring.coords3D.length >= 2 ? (
+              <Line
+                key={`state-outline-${state.id}-${pi}-${ri}`}
+                points={ring.coords3D}
+                color="#d4851f"
+                lineWidth={2.5}
+                transparent
+                opacity={0.9}
+              />
+            ) : null
+          )
+        )
+      )}
+
       {/* Country name labels */}
       {COUNTRY_LABELS.map((cl) => (
         <CountryLabel key={cl.id} lat={cl.lat} lng={cl.lng} name={cl.name} />
@@ -406,11 +455,16 @@ function GlobeMesh({ countries }: { countries: CountryData[] }) {
 
 export default function Globe() {
   const [countries, setCountries] = useState<CountryData[]>([]);
+  const [states, setStates] = useState<CountryData[]>([]);
 
   useEffect(() => {
     fetch(GEO_URL)
       .then((res) => res.json())
       .then((topo) => setCountries(parseCountries(topo)))
+      .catch(console.error);
+    fetch(US_STATES_URL)
+      .then((res) => res.json())
+      .then((topo) => setStates(parseStates(topo)))
       .catch(console.error);
   }, []);
 
@@ -433,7 +487,7 @@ export default function Globe() {
   ];
 
   return (
-    <Box id="travel" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#faf9f7' }}>
+    <Box id="travel" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#faf9f7' }}>
       <Container maxWidth="md">
         <Typography
           variant="h3"
@@ -448,13 +502,13 @@ export default function Globe() {
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
-            mb: 6,
+            mb: 4,
             borderRadius: 2,
           }}
         />
 
         {/* Hobbies */}
-        <Grid container spacing={3} justifyContent="center" className="reveal-stagger" sx={{ mb: 8 }}>
+        <Grid container spacing={3} justifyContent="center" sx={{ mb: 6 }}>
           {hobbies.map((hobby) => (
             <Grid size={{ xs: 12, sm: 4 }} key={hobby.label}>
               <Stack spacing={1} alignItems="center" textAlign="center">
@@ -534,7 +588,7 @@ export default function Globe() {
           >
             <ambientLight intensity={0.8} />
             <directionalLight position={[5, 3, 5]} intensity={0.5} />
-            <GlobeMesh countries={countries} />
+            <GlobeMesh countries={countries} states={states} />
             <OrbitControls
               enableZoom={true}
               enablePan={false}

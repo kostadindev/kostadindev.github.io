@@ -22,7 +22,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 export default function Skills() {
   return (
-    <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: '#f5f3ef' }}>
+    <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: '#f5f3ef' }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"
@@ -37,7 +37,7 @@ export default function Skills() {
             height: 3,
             bgcolor: 'primary.main',
             mx: 'auto',
-            mb: 6,
+            mb: 4,
             borderRadius: 2,
           }}
         />
