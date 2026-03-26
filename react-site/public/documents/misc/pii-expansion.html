@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PII Expansion — ICO Workshop Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Fira+Code:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fg: #1e293b;
+  --fg-muted: #64748b;
+  --fg-faint: #94a3b8;
+  --bg: #fffefa;
+  --bg-subtle: #f8f6f1;
+  --border: #e2ddd4;
+  --accent: #e89a3c;
+  --accent-dark: #d4851f;
+  --redact: #1e293b;
+  --pii: rgba(232,154,60,0.25);
+  --redact-bg: rgba(30,41,59,0.18);
+  --mono: 'Fira Code', 'Menlo', monospace;
+  --serif: 'Newsreader', 'Georgia', serif;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+
+  --c-constituency: #1e293b;
+  --c-dependency: #e89a3c;
+  --c-cooccurrence: #7c3aed;
+  --c-srl: #0891b2;
+  --c-clustering: #059669;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--serif);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.75;
+  font-size: 16px;
+}
+
+::selection { background: rgba(232,154,60,0.2); }
+
+.page {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 100px 24px 140px;
+}
+
+/* ── Typography ── */
+h1 {
+  font-family: var(--sans);
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  color: var(--fg);
+}
+h2 {
+  font-family: var(--sans);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+h3 {
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin: 28px 0 10px;
+}
+p {
+  font-size: 0.92rem;
+  color: var(--fg-muted);
+  line-height: 1.8;
+  margin: 0 0 16px;
+  font-weight: 400;
+}
+a { color: var(--accent-dark); }
+a:hover { color: var(--accent); }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 48px 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  background: var(--bg-subtle);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--fg);
+}
+
+/* ── Header ── */
+.header-meta {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--fg-faint);
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.subtitle {
+  font-size: 1rem;
+  color: var(--fg-muted);
+  font-weight: 300;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.author-line {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+}
+.author-line a {
+  color: var(--fg-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+}
+.author-line a:hover { border-color: var(--accent); color: var(--fg); }
+
+/* ── Steps ── */
+.steps {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.step {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.step-num {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--accent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.step-title {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--fg);
+}
+.step p {
+  font-size: 0.8rem;
+  margin: 6px 0 0;
+  line-height: 1.6;
+}
+
+/* ── Highlighted text ── */
+.hl-box {
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  font-family: var(--mono);
+  font-size: 0.84rem;
+  line-height: 2;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.pii { background: var(--pii); border-radius: 2px; padding: 1px 2px; }
+.redact { background: var(--redact-bg); border-radius: 2px; padding: 1px 2px; }
+.masked { background: var(--redact); color: transparent; border-radius: 2px; user-select: none; }
+.quasi { background: rgba(232,154,60,0.1); border-radius: 2px; padding: 1px 2px; }
+
+/* ── Scale steps ── */
+.scale-step { margin-bottom: 28px; }
+.scale-step .scale-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.scale-badge {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fg);
+  color: #fff;
+  flex-shrink: 0;
+}
+.scale-label {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--fg);
+}
+.scale-desc {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  margin: 0 0 8px;
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ── Algorithm cards ── */
+.alg-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.alg-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  border-left: 3px solid var(--border);
+}
+.alg-card h4 {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin: 0 0 2px;
+}
+.alg-card .alg-unit {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+.alg-card p {
+  font-size: 0.78rem;
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 24px;
+}
+th {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--fg-muted);
+}
+td:first-child { color: var(--fg); }
+td.faint { color: var(--fg-faint); }
+
+/* ── Recommendation cards ── */
+.rec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.rec-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  border-top: 3px solid var(--border);
+}
+.rec-scenario {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--fg-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.rec-pick {
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.rec-card p { font-size: 0.78rem; margin: 0; line-height: 1.6; font-weight: 300; }
+
+/* ── Rankings ── */
+.rank-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.rank-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.rank-card h4 {
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 500;
+  margin: 0 0 2px;
+}
+.rank-sub {
+  font-size: 0.68rem;
+  color: var(--fg-faint);
+  margin-bottom: 10px;
+}
+.rank-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 0.76rem;
+}
+.rank-item span:first-child { color: var(--fg-muted); font-weight: 300; }
+.rank-item span:last-child { font-family: var(--mono); font-size: 0.72rem; color: var(--fg-muted); }
+.rank-item.top span { color: var(--fg); font-weight: 500; }
+
+/* ── Findings ── */
+.finding {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: var(--bg-subtle);
+  border-radius: 8px;
+  border-left: 3px solid var(--border);
+}
+.finding-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 100px;
+}
+.finding p { font-size: 0.78rem; margin: 0; line-height: 1.6; font-weight: 300; }
+
+/* ── Legend ── */
+.legend {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  color: var(--fg-muted);
+}
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── Chart ── */
+.chart-wrap {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-subtle);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+.chart-wrap svg { display: block; width: 100%; height: auto; }
+
+.bar-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+/* ── Pseudocode block ── */
+.pseudocode {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  line-height: 1.9;
+  white-space: pre-wrap;
+  color: var(--fg);
+  overflow-x: auto;
+}
+.pseudocode .title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Worked example levels ── */
+.level-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 12px;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.level-row:nth-child(odd) { background: var(--bg-subtle); }
+.level-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+.level-desc { font-size: 0.76rem; color: var(--fg-muted); font-weight: 300; }
+.level-result {
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  color: var(--fg);
+  margin-top: 2px;
+}
+.level-result span {
+  background: rgba(30,41,59,0.1);
+  border-radius: 2px;
+  padding: 1px 4px;
+}
+
+/* ── Metric cards ── */
+.metric-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+}
+.metric-card h4 {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  margin: 0 0 4px;
+}
+.metric-unit {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--fg-faint);
+  background: var(--bg-subtle);
+  padding: 2px 8px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.metric-formula {
+  font-family: var(--mono);
+  font-size: 0.73rem;
+  color: var(--accent);
+  background: rgba(232,154,60,0.06);
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+}
+.metric-card .def, .metric-card .interp {
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  margin: 0 0 8px;
+  line-height: 1.7;
+  font-weight: 300;
+}
+.metric-card .def strong, .metric-card .interp strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* ── Scoring side-by-side ── */
+.score-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.score-pair > div { }
+.score-pair .label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ── Parse tree ── */
+.tree-block {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.7;
+  white-space: pre;
+  color: var(--fg-muted);
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .page { padding: 60px 16px 100px; }
+  h1 { font-size: 1.5rem; }
+  .steps { flex-direction: column; }
+  .alg-grid, .rec-grid, .score-pair, .bar-pair { grid-template-columns: 1fr; }
+  .rank-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ━━ Header ━━ -->
+<header style="margin-bottom: 56px;">
+  <div class="header-meta">ICO Know Your Data Workshop &middot; 24&ndash;25 March 2026</div>
+  <h1>PII Expansion</h1>
+  <p class="subtitle">Scale anonymization outward from detected PII through coreference and constituency links.</p>
+  <p class="author-line">
+    Kostadin Devedzhiev &middot;
+    <a href="mailto:kgd26@cam.ac.uk">kgd26@cam.ac.uk</a> &middot;
+    <a href="kostadin-ico-slide.pdf">Workshop slide (PDF)</a>
+  </p>
+</header>
+
+<!-- ━━ Motivation ━━ -->
+<h2>Motivation</h2>
+<p>
+  Under Article 14 of the UK GDPR, organisations that collect personal data indirectly &mdash; such as
+  through web scraping for AI training &mdash; must provide meaningful transparency to data subjects about
+  how their data is processed. The ICO has identified that Foundation Model developers find it
+  technically infeasible or disproportionately costly to identify personal data in web-scale training
+  sets and notify individuals.
+</p>
+<p>
+  The ICO's March 2026 technical workshop (&ldquo;Know your data: Designing AI transparency mechanisms&rdquo;)
+  frames this as a pipeline of challenge areas: identifying unique individuals in large-scale datasets,
+  linking scattered records across web pages to those individuals, and notifying data subjects without
+  exposing others' personal data.
+</p>
+<p>
+  Crucially, personal data under the UK GDPR extends well beyond direct identifiers. A name is a
+  direct identifier, but &ldquo;a serial tech entrepreneur with a decade of experience in sustainable
+  innovation&rdquo; or &ldquo;38, previously co-founded SmartGrid Solutions&rdquo; are also personal data that relates
+  to and can help re-identify an individual. This distinction &mdash; between direct identifiers and the
+  broader set of related personal data &mdash; is exactly the gap that standard PII detectors leave open.
+</p>
+
+<hr>
+
+<!-- ━━ The Problem ━━ -->
+<h2>The problem</h2>
+<p>
+  Standard PII detectors find direct identifiers &mdash; names, emails, SSNs &mdash; but leave surrounding
+  context intact. That context is often enough to re-identify someone. Consider:
+</p>
+<div class="hl-box"><span class="masked">[NAME]</span> resides at The Manor House, Woolton, Hertfordshire. He is 29 years old.</div>
+<p>
+  The name is gone, but &ldquo;resides at The Manor House, Woolton, Hertfordshire, 29 years old&rdquo; narrows
+  the identity to very few people. PII Expansion addresses this by masking outward from PII through
+  the sentence structure.
+</p>
+
+<hr>
+
+<!-- ━━ How It Works ━━ -->
+<h2>How it works</h2>
+<div class="steps">
+  <div class="step">
+    <div><span class="step-num">1</span><span class="step-title">Detect</span></div>
+    <p>Presidio finds PII entities (names, emails, SSNs) &mdash; these become graph roots.</p>
+  </div>
+  <div class="step">
+    <div><span class="step-num">2</span><span class="step-title">Resolve</span></div>
+    <p>Coreference resolution links pronouns (he, she, his) back to the PII they refer to.</p>
+  </div>
+  <div class="step">
+    <div><span class="step-num">3</span><span class="step-title">Expand</span></div>
+    <p>A linking algorithm builds progressively larger text spans around each entity. Five algorithms are available.</p>
+  </div>
+</div>
+<p>
+  The result is a graph where PII entities sit at the center and each ring outward represents one
+  more level of contextual expansion. The <code>scale</code> slider controls how many rings to mask.
+</p>
+
+<hr>
+
+<!-- ━━ Example: Constituency Expansion ━━ -->
+<h2>Example: constituency expansion</h2>
+<p>
+  Take the sentence: <code>Mr. Worthing resides at The Manor House, Woolton, Hertfordshire.</code>
+  Here is what each scale level masks:
+</p>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">1</span><span class="scale-label">Direct PII only</span></div>
+  <p class="scale-desc">Only the PII entity itself is masked. The name disappears, but the address remains fully intact.</p>
+  <div class="hl-box"><span class="pii">Mr. Worthing</span> resides at The Manor House, Woolton, Hertfordshire.</div>
+</div>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">2</span><span class="scale-label">PII + verb phrase</span></div>
+  <p class="scale-desc">The next constituent is added &mdash; &ldquo;resides&rdquo; &mdash; linking the name to the action.</p>
+  <div class="hl-box"><span class="redact">Mr. Worthing</span> <span class="pii">resides</span> at The Manor House, Woolton, Hertfordshire.</div>
+</div>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">3</span><span class="scale-label">PII + address context</span></div>
+  <p class="scale-desc">The prepositional phrase is now also masked, removing the address that could re-identify.</p>
+  <div class="hl-box"><span class="redact">Mr. Worthing resides</span> <span class="pii">at The Manor House, Woolton, Hertfordshire</span>.</div>
+</div>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">4</span><span class="scale-label">Full sentence</span></div>
+  <p class="scale-desc">All remaining constituents are included. The entire sentence is redacted.</p>
+  <div class="hl-box"><span class="redact">Mr. Worthing resides at The Manor House, Woolton, Hertfordshire.</span></div>
+</div>
+
+<hr>
+
+<!-- ━━ Example: Shakespeare (Merchant of Venice) ━━ -->
+<h2>Example: Shakespeare &mdash; The Merchant of Venice</h2>
+<p>
+  PII expansion applies equally to literary and historical text. Consider this passage in the style of Shakespeare's <em>The Merchant of Venice</em>, dense with names, locations, and financial details:
+</p>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">1</span><span class="scale-label">Direct PII only</span></div>
+  <p class="scale-desc">Presidio detects three person entities &mdash; Antonio, Shylock, Bassanio &mdash; and the location &ldquo;Venice.&rdquo; Surrounding context (the bond amount, the flesh clause, Belmont) remains fully visible.</p>
+  <div class="hl-box">Signior <span class="pii">Antonio</span>, a merchant of <span class="pii">Venice</span> dwelling in the Rialto district, entered into a bond of three thousand ducats with <span class="pii">Shylock</span> of the Jewish quarter on the fourteenth of March. The bond was secured by a pound of <span class="pii">Antonio</span>'s flesh, to be forfeited should he fail to repay within three months. His friend <span class="pii">Bassanio</span>, lately of Belmont, stood witness to the agreement.</div>
+</div>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">2</span><span class="scale-label">PII + immediate phrases</span></div>
+  <p class="scale-desc">Sibling constituents are added: &ldquo;Signior,&rdquo; &ldquo;a merchant of,&rdquo; &ldquo;dwelling in the Rialto district,&rdquo; &ldquo;of the Jewish quarter,&rdquo; &ldquo;His friend,&rdquo; and &ldquo;lately of Belmont.&rdquo; The quasi-identifiers that characterise each person begin to disappear.</p>
+  <div class="hl-box"><span class="redact">Signior</span> <span class="redact">Antonio</span>, <span class="pii">a merchant of Venice dwelling in the Rialto district</span>, entered into a bond of three thousand ducats with <span class="redact">Shylock</span> <span class="pii">of the Jewish quarter</span> on the fourteenth of March. The bond was secured by a pound of <span class="redact">Antonio's</span> flesh, to be forfeited should <span class="pii">he</span> fail to repay within three months. <span class="pii">His friend</span> <span class="redact">Bassanio</span>, <span class="pii">lately of Belmont</span>, stood witness to the agreement.</div>
+</div>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">3</span><span class="scale-label">PII + verb phrases &amp; clauses</span></div>
+  <p class="scale-desc">Expansion now covers the main verb phrases &mdash; &ldquo;entered into a bond of three thousand ducats,&rdquo; &ldquo;was secured by a pound of Antonio's flesh,&rdquo; and &ldquo;stood witness to the agreement.&rdquo; The financial and contractual details are masked.</p>
+  <div class="hl-box"><span class="redact">Signior Antonio, a merchant of Venice dwelling in the Rialto district, entered into a bond of three thousand ducats with Shylock of the Jewish quarter</span> on the fourteenth of March. <span class="redact">The bond was secured by a pound of Antonio's flesh, to be forfeited should he fail to repay within three months.</span> <span class="redact">His friend Bassanio, lately of Belmont, stood witness to the agreement.</span></div>
+</div>
+
+<div class="scale-step">
+  <div class="scale-header"><span class="scale-badge">4</span><span class="scale-label">Full passage</span></div>
+  <p class="scale-desc">All remaining constituents absorbed. The entire passage is redacted.</p>
+  <div class="hl-box"><span class="redact">Signior Antonio, a merchant of Venice dwelling in the Rialto district, entered into a bond of three thousand ducats with Shylock of the Jewish quarter on the fourteenth of March. The bond was secured by a pound of Antonio's flesh, to be forfeited should he fail to repay within three months. His friend Bassanio, lately of Belmont, stood witness to the agreement.</span></div>
+</div>
+
+<hr>
+
+<!-- ━━ Algorithm 1: Constituency ━━ -->
+<h2>Algorithm 1: Constituency Parse Tree Expansion</h2>
+<p>
+  The constituency algorithm produces the finest-grained expansion by walking the parse tree
+  bottom-to-top and adding sibling leaf constituents one at a time.
+</p>
+
+<div class="pseudocode"><div class="title">Algorithm 1 &mdash; ExpandFrom(node, p_s, p_e)</div><span style="color:var(--fg-muted);font-size:0.7rem"><strong style="color:var(--fg)">Input:</strong> Constituency parse tree node <em>node</em> for the sentence containing PII span [p_s, p_e)
+<strong style="color:var(--fg)">Output:</strong> Ordered list of expansion spans E = [(s_1, e_1), (s_2, e_2), ...]</span>
+
+ 1.  Let C = [c_1, ..., c_k] be the children of node
+ 2.  if C is empty then return []
+ 3.  Find index j such that c_j contains [p_s, p_e)
+ 4.  if no such j exists then return []
+
+     // Recurse into deeper tree levels first (bottom-up)
+ 5.  E_deep = ExpandFrom(c_j, p_s, p_e)
+
+     // Collect leaf spans from sibling subtrees
+ 6.  R = []                    (right siblings)
+ 7.  for i = j+1 to k do
+ 8.      R = R ++ LeafSpans(c_i)
+ 9.  L = []                    (left siblings, reversed)
+10.  for i = j-1 downto 1 do
+11.      L = L ++ Reverse(LeafSpans(c_i))
+
+     // Initialize accumulator to PII-containing child's span
+12.  s_acc = start(c_j),  e_acc = end(c_j)
+13.  E_level = [],  r = 0,  l = 0
+
+     // Interleave right-then-left, growing one leaf at a time
+14.  while r &lt; |R| or l &lt; |L| do
+15.      if r &lt; |R| then
+16.          e_acc = max(e_acc, end(R[r])),  r += 1
+17.          if (s_acc, e_acc) is new and span &gt; [p_s, p_e) then
+18.              append (s_acc, e_acc) to E_level
+19.      if l &lt; |L| then
+20.          s_acc = min(s_acc, start(L[l])),  l += 1
+21.          if (s_acc, e_acc) is new and span &gt; [p_s, p_e) then
+22.              append (s_acc, e_acc) to E_level
+
+23.  return E_deep ++ E_level</div>
+
+<h3>Worked example</h3>
+<p>
+  Consider <code>Mr. John Worthing resides at The Manor House</code> with
+  PII entity &ldquo;John Worthing&rdquo;. The constituency tree decomposes as:
+</p>
+<div class="tree-block">              S
+            /    \
+          NP       VP
+         /  \     /   \
+       NNP  NNP  VBZ    PP
+       Mr.  John       /   \
+            Worthing  IN     NP
+                      at    /  \
+                          DT    NP
+                         The   /  \
+                             NNP  NNP
+                            Manor House</div>
+
+<p>Starting from &ldquo;John Worthing&rdquo; inside the left NP, expansion proceeds:</p>
+
+<div style="margin-bottom:16px">
+  <div class="level-row"><span class="level-label">Level 1</span><div><span class="level-desc">deeper recursion within NP &mdash; sibling leaf &ldquo;Mr.&rdquo; added</span><div class="level-result">&rarr; <span>Mr. John Worthing</span></div></div></div>
+  <div class="level-row"><span class="level-label">Level 2</span><div><span class="level-desc">S-level, right sibling VP, leaf 1 &mdash; &ldquo;resides&rdquo; added</span><div class="level-result">&rarr; <span>Mr. John Worthing resides</span></div></div></div>
+  <div class="level-row"><span class="level-label">Level 3</span><div><span class="level-desc">S-level, right sibling VP, leaf 2 &mdash; &ldquo;at&rdquo; added</span><div class="level-result">&rarr; <span>Mr. John Worthing resides at</span></div></div></div>
+  <div class="level-row"><span class="level-label">Level 4</span><div><span class="level-desc">S-level, right sibling VP, leaf 3 &mdash; &ldquo;The&rdquo; added</span><div class="level-result">&rarr; <span>Mr. John Worthing resides at The</span></div></div></div>
+  <div class="level-row"><span class="level-label">Level 5</span><div><span class="level-desc">S-level, right sibling VP, leaf 4 &mdash; &ldquo;Manor&rdquo; added</span><div class="level-result">&rarr; <span>Mr. John Worthing resides at The Manor</span></div></div></div>
+  <div class="level-row"><span class="level-label">Level 6</span><div><span class="level-desc">S-level, right sibling VP, leaf 5 &mdash; &ldquo;House&rdquo; added</span><div class="level-result">&rarr; <span>Mr. John Worthing resides at The Manor House</span></div></div></div>
+</div>
+
+<p>
+  This yields <strong>6 expansion spans</strong> from a single PII entity, each adding exactly one terminal
+  constituent &mdash; maximising granularity.
+</p>
+
+<hr>
+
+<!-- ━━ Example: Coreference ━━ -->
+<h2>Example: coreference</h2>
+<p>Now consider a two-sentence passage:</p>
+<div class="hl-box"><span class="pii">Mr. Worthing</span> resides at The Manor House. <span class="pii">He</span> was found in a handbag at Victoria Station.</div>
+<p>
+  Coreference resolution recognises that &ldquo;He&rdquo; refers to &ldquo;Mr. Worthing&rdquo;. Both are linked in the graph,
+  so expanding from the name also pulls in the second sentence. Without this, scale 1 would
+  mask only the name &mdash; leaving &ldquo;He was found in a handbag at Victoria Station&rdquo; as an obvious re-identification path.
+</p>
+
+<hr>
+
+<!-- ━━ Scoring ━━ -->
+<h2>Scoring</h2>
+<p>
+  The Evaluate tab measures how thorough an anonymisation is. Given an original and anonymised text,
+  it rebuilds the expansion graph and checks which entities still appear verbatim. The result is an
+  <em>achieved scale</em> &mdash; how many hops from PII were fully covered.
+</p>
+
+<div class="score-pair">
+  <div>
+    <span class="label">Weak anonymisation (scale 1)</span>
+    <div class="hl-box"><span class="masked">[NAME]</span> resides at The Manor House, Woolton. He is 29.</div>
+  </div>
+  <div>
+    <span class="label">Strong anonymisation (scale 4)</span>
+    <div class="hl-box"><span class="masked">[REDACTED]</span>. <span class="masked">[REDACTED]</span>.</div>
+  </div>
+</div>
+
+<hr>
+
+<!-- ━━ Algorithm Comparison ━━ -->
+<h2>Algorithm comparison</h2>
+<p>
+  We implemented five linking algorithms and ran each on five test texts (employment, medical, financial,
+  literary, long narrative). All share the same Presidio detection and coreference resolution
+  stages &mdash; only the graph-building step differs.
+</p>
+
+<h3>The five algorithms</h3>
+<div class="alg-grid">
+  <div class="alg-card" style="border-left-color:var(--c-constituency)">
+    <h4>Constituency</h4>
+    <span class="alg-unit" style="color:var(--c-constituency);background:rgba(30,41,59,0.06)">phrase-level</span>
+    <p>Walks the benepar constituency parse tree. For each PII entity, accumulates sibling constituents outward, creating a chain of progressively larger phrase-level spans.</p>
+  </div>
+  <div class="alg-card" style="border-left-color:var(--c-dependency)">
+    <h4>Dependency</h4>
+    <span class="alg-unit" style="color:var(--c-dependency);background:rgba(232,154,60,0.08)">word-level</span>
+    <p>BFS through spaCy's dependency graph from PII tokens. Each hop adds governors and dependents, producing progressively larger contiguous spans.</p>
+  </div>
+  <div class="alg-card" style="border-left-color:var(--c-cooccurrence)">
+    <h4>Co-occurrence</h4>
+    <span class="alg-unit" style="color:var(--c-cooccurrence);background:rgba(124,58,237,0.06)">sentence-level</span>
+    <p>Links every entity to its containing sentence span, then chains adjacent sentences. Expansion radiates outward one sentence at a time from PII roots.</p>
+  </div>
+  <div class="alg-card" style="border-left-color:var(--c-srl)">
+    <h4>Semantic Roles</h4>
+    <span class="alg-unit" style="color:var(--c-srl);background:rgba(8,145,178,0.06)">frame-level</span>
+    <p>Approximates SRL via dependency parse. Groups PII with co-arguments of the same verb frame (who/what/where), then expands to full sentences and neighbours.</p>
+  </div>
+  <div class="alg-card" style="border-left-color:var(--c-clustering)">
+    <h4>Entity Clustering</h4>
+    <span class="alg-unit" style="color:var(--c-clustering);background:rgba(5,150,105,0.06)">entity-level</span>
+    <p>Groups PII by real-world entity using coreference + dependency tree walking + string matching. Links a person's name, SSN, email, and phone as one cluster, then expands to sentences.</p>
+  </div>
+</div>
+
+<h3>Evaluation metrics</h3>
+<p>
+  Three metrics capture different aspects of expansion quality. All are computed from the BFS expansion curve.
+</p>
+
+<div class="metric-card">
+  <h4>Max Scale (s<sub>max</sub>)</h4>
+  <span class="metric-unit">integer &ge; 1</span>
+  <div class="metric-formula">s_max = eccentricity(PII roots) + 1</div>
+  <p class="def"><strong>Definition:</strong> The largest scale value at which BFS discovers at least one new node.</p>
+  <p class="interp"><strong>Interpretation:</strong> Higher max scale means more discrete privacy levels. A max scale of 21 gives 21 distinct slider positions; a max scale of 4 gives only 4.</p>
+</div>
+<div class="metric-card">
+  <h4>Distinct Coverage Levels</h4>
+  <span class="metric-unit">integer &ge; 1</span>
+  <div class="metric-formula">|{ coverage(s) : s in [1, s_max] }|</div>
+  <p class="def"><strong>Definition:</strong> The number of unique character-coverage values across all scales. Counts only steps where coverage actually changes.</p>
+  <p class="interp"><strong>Interpretation:</strong> The effective granularity. Constituency averages 17.6 distinct levels; co-occurrence averages only 2.2.</p>
+</div>
+<div class="metric-card">
+  <h4>Full Coverage</h4>
+  <span class="metric-unit">percentage, 0&ndash;100%</span>
+  <div class="metric-formula">coverage(s_max) = |masked_chars(s_max)| / |d|</div>
+  <p class="def"><strong>Definition:</strong> The fraction of the document's characters masked when BFS has been exhausted.</p>
+  <p class="interp"><strong>Interpretation:</strong> Below 100% means some parts are unreachable from any PII root. Sentence-level algorithms achieve ~98.7%; constituency and dependency average ~91.8%.</p>
+</div>
+
+<h3>Aggregate results</h3>
+<p>Averaged across five test texts of varying length (162&ndash;713 chars) and domain.</p>
+
+<div class="legend">
+  <span class="legend-item"><span class="legend-dot" style="background:var(--c-constituency)"></span> Constituency</span>
+  <span class="legend-item"><span class="legend-dot" style="background:var(--c-dependency)"></span> Dependency</span>
+  <span class="legend-item"><span class="legend-dot" style="background:var(--c-cooccurrence)"></span> Co-occurrence</span>
+  <span class="legend-item"><span class="legend-dot" style="background:var(--c-srl)"></span> Semantic Roles</span>
+  <span class="legend-item"><span class="legend-dot" style="background:var(--c-clustering)"></span> Clustering</span>
+</div>
+
+<!-- Bar charts: Granularity + Max Scale -->
+<div class="bar-pair">
+  <div class="chart-wrap">
+    <svg viewBox="0 0 340 210">
+      <!-- Granularity chart -->
+      <line x1="50" y1="20" x2="310" y2="20" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="55" x2="310" y2="55" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="90" x2="310" y2="90" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="125" x2="310" y2="125" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="160" x2="310" y2="160" stroke="#e2ddd4" stroke-width="0.5"/>
+      <text x="46" y="163" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">0</text>
+      <text x="46" y="128" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">5</text>
+      <text x="46" y="93" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">10</text>
+      <text x="46" y="58" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">15</text>
+      <text x="46" y="23" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">20</text>
+      <!-- Bars: max=20 => 140px height -->
+      <rect x="62" y="36.8" width="36" height="123.2" rx="3" fill="#1e293b" opacity="0.85"/>
+      <text x="80" y="32" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#1e293b">17.6</text>
+      <text x="80" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Const.</text>
+      <rect x="114" y="132" width="36" height="28" rx="3" fill="#e89a3c" opacity="0.85"/>
+      <text x="132" y="127" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#e89a3c">4.0</text>
+      <text x="132" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Dep.</text>
+      <rect x="166" y="144.6" width="36" height="15.4" rx="3" fill="#7c3aed" opacity="0.85"/>
+      <text x="184" y="140" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#7c3aed">2.2</text>
+      <text x="184" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Co-oc.</text>
+      <rect x="218" y="139" width="36" height="21" rx="3" fill="#0891b2" opacity="0.85"/>
+      <text x="236" y="134" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#0891b2">3.0</text>
+      <text x="236" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">SRL</text>
+      <rect x="270" y="139" width="36" height="21" rx="3" fill="#059669" opacity="0.85"/>
+      <text x="288" y="134" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#059669">3.0</text>
+      <text x="288" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Clust.</text>
+      <text x="180" y="197" text-anchor="middle" font-size="9" font-family="'DM Sans',sans-serif" fill="#64748b">Avg distinct coverage levels</text>
+    </svg>
+  </div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 340 210">
+      <!-- Max scale chart (max=25) -->
+      <line x1="50" y1="20" x2="310" y2="20" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="55" x2="310" y2="55" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="90" x2="310" y2="90" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="125" x2="310" y2="125" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="160" x2="310" y2="160" stroke="#e2ddd4" stroke-width="0.5"/>
+      <text x="46" y="163" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">0</text>
+      <text x="46" y="128" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">6</text>
+      <text x="46" y="93" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">12</text>
+      <text x="46" y="58" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">18</text>
+      <text x="46" y="23" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">24</text>
+      <!-- Bars: max=24 => 140px height, 1 unit=5.83px -->
+      <rect x="62" y="37.5" width="36" height="122.5" rx="3" fill="#1e293b" opacity="0.85"/>
+      <text x="80" y="33" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#1e293b">21.0</text>
+      <text x="80" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Const.</text>
+      <rect x="114" y="125" width="36" height="35" rx="3" fill="#e89a3c" opacity="0.85"/>
+      <text x="132" y="121" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#e89a3c">6.0</text>
+      <text x="132" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Dep.</text>
+      <rect x="166" y="135.5" width="36" height="24.5" rx="3" fill="#7c3aed" opacity="0.85"/>
+      <text x="184" y="131" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#7c3aed">4.2</text>
+      <text x="184" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Co-oc.</text>
+      <rect x="218" y="136.7" width="36" height="23.3" rx="3" fill="#0891b2" opacity="0.85"/>
+      <text x="236" y="132" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#0891b2">4.0</text>
+      <text x="236" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">SRL</text>
+      <rect x="270" y="136.7" width="36" height="23.3" rx="3" fill="#059669" opacity="0.85"/>
+      <text x="288" y="132" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#059669">4.0</text>
+      <text x="288" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Clust.</text>
+      <text x="180" y="197" text-anchor="middle" font-size="9" font-family="'DM Sans',sans-serif" fill="#64748b">Avg max scale (depth of control)</text>
+    </svg>
+  </div>
+</div>
+
+<div class="bar-pair">
+  <div class="chart-wrap">
+    <svg viewBox="0 0 340 210">
+      <!-- Full coverage chart (range 88-100) -->
+      <line x1="50" y1="20" x2="310" y2="20" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="55" x2="310" y2="55" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="90" x2="310" y2="90" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="125" x2="310" y2="125" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="160" x2="310" y2="160" stroke="#e2ddd4" stroke-width="0.5"/>
+      <text x="46" y="163" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">88%</text>
+      <text x="46" y="128" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">91%</text>
+      <text x="46" y="93" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">94%</text>
+      <text x="46" y="58" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">97%</text>
+      <text x="46" y="23" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">100%</text>
+      <!-- Bars: range 88-100=12%, height=140px, 1%=11.67px; 91.8% => (91.8-88)=3.8*11.67=44.3 -->
+      <rect x="62" y="115.7" width="36" height="44.3" rx="3" fill="#1e293b" opacity="0.85"/>
+      <text x="80" y="111" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#1e293b">91.8%</text>
+      <text x="80" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Const.</text>
+      <rect x="114" y="115.7" width="36" height="44.3" rx="3" fill="#e89a3c" opacity="0.85"/>
+      <text x="132" y="111" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#e89a3c">91.8%</text>
+      <text x="132" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Dep.</text>
+      <!-- 98.7% => (98.7-88)=10.7*11.67=124.8 -->
+      <rect x="166" y="35.2" width="36" height="124.8" rx="3" fill="#7c3aed" opacity="0.85"/>
+      <text x="184" y="31" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#7c3aed">98.7%</text>
+      <text x="184" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Co-oc.</text>
+      <rect x="218" y="35.2" width="36" height="124.8" rx="3" fill="#0891b2" opacity="0.85"/>
+      <text x="236" y="31" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#0891b2">98.7%</text>
+      <text x="236" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">SRL</text>
+      <rect x="270" y="35.2" width="36" height="124.8" rx="3" fill="#059669" opacity="0.85"/>
+      <text x="288" y="31" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#059669">98.7%</text>
+      <text x="288" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Clust.</text>
+      <text x="180" y="197" text-anchor="middle" font-size="9" font-family="'DM Sans',sans-serif" fill="#64748b">Avg full coverage at max scale</text>
+    </svg>
+  </div>
+  <div class="chart-wrap">
+    <svg viewBox="0 0 340 210">
+      <!-- Processing time chart (max 0.35) -->
+      <line x1="50" y1="20" x2="310" y2="20" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="55" x2="310" y2="55" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="90" x2="310" y2="90" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="125" x2="310" y2="125" stroke="#e2ddd4" stroke-width="0.5"/>
+      <line x1="50" y1="160" x2="310" y2="160" stroke="#e2ddd4" stroke-width="0.5"/>
+      <text x="46" y="163" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">0.0</text>
+      <text x="46" y="128" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">0.1</text>
+      <text x="46" y="93" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">0.2</text>
+      <text x="46" y="58" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">0.3</text>
+      <text x="46" y="23" text-anchor="end" font-size="8" font-family="'Fira Code',monospace" fill="#94a3b8">0.4</text>
+      <!-- Bars: max=0.4, 140px. 0.28=98px, 0.12=42px, 0.14=49px -->
+      <rect x="62" y="62" width="36" height="98" rx="3" fill="#1e293b" opacity="0.85"/>
+      <text x="80" y="57" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#1e293b">0.28</text>
+      <text x="80" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Const.</text>
+      <rect x="114" y="118" width="36" height="42" rx="3" fill="#e89a3c" opacity="0.85"/>
+      <text x="132" y="114" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#e89a3c">0.12</text>
+      <text x="132" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Dep.</text>
+      <rect x="166" y="118" width="36" height="42" rx="3" fill="#7c3aed" opacity="0.85"/>
+      <text x="184" y="114" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#7c3aed">0.12</text>
+      <text x="184" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Co-oc.</text>
+      <rect x="218" y="118" width="36" height="42" rx="3" fill="#0891b2" opacity="0.85"/>
+      <text x="236" y="114" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#0891b2">0.12</text>
+      <text x="236" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">SRL</text>
+      <rect x="270" y="111" width="36" height="49" rx="3" fill="#059669" opacity="0.85"/>
+      <text x="288" y="107" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" font-weight="500" fill="#059669">0.14</text>
+      <text x="288" y="174" text-anchor="middle" font-size="7" font-family="'DM Sans',sans-serif" fill="#64748b">Clust.</text>
+      <text x="180" y="197" text-anchor="middle" font-size="9" font-family="'DM Sans',sans-serif" fill="#64748b">Avg processing time (seconds)</text>
+    </svg>
+  </div>
+</div>
+
+<!-- Results table -->
+<table>
+  <thead>
+    <tr>
+      <th>Metric</th><th>Constituency</th><th>Dependency</th><th>Co-occurrence</th><th>Semantic Roles</th><th>Clustering</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Avg max scale</td><td>21.0</td><td>6.0</td><td>4.2</td><td>4.0</td><td>4.0</td></tr>
+    <tr><td>Avg distinct levels</td><td>17.6</td><td>4.0</td><td>2.2</td><td>3.0</td><td>3.0</td></tr>
+    <tr><td>Avg full coverage</td><td>91.8%</td><td>91.8%</td><td>98.7%</td><td>98.7%</td><td>98.7%</td></tr>
+    <tr><td>Avg time (s)</td><td>0.28</td><td>0.12</td><td>0.12</td><td>0.12</td><td>0.14</td></tr>
+  </tbody>
+</table>
+
+<h3>Coverage progression (employment text)</h3>
+<p>Character coverage at each scale level for the employment sample (162 chars, 3 PII roots).</p>
+
+<!-- Line chart: Coverage progression -->
+<div class="chart-wrap">
+  <svg viewBox="0 0 700 310">
+    <!-- Grid -->
+    <line x1="50" y1="24" x2="540" y2="24" stroke="#e2ddd4" stroke-width="0.5"/>
+    <line x1="50" y1="84" x2="540" y2="84" stroke="#e2ddd4" stroke-width="0.5"/>
+    <line x1="50" y1="144" x2="540" y2="144" stroke="#e2ddd4" stroke-width="0.5"/>
+    <line x1="50" y1="204" x2="540" y2="204" stroke="#e2ddd4" stroke-width="0.5"/>
+    <line x1="50" y1="264" x2="540" y2="264" stroke="#e2ddd4" stroke-width="0.5"/>
+    <text x="46" y="267" text-anchor="end" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">0%</text>
+    <text x="46" y="207" text-anchor="end" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">25%</text>
+    <text x="46" y="147" text-anchor="end" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">50%</text>
+    <text x="46" y="87" text-anchor="end" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">75%</text>
+    <text x="46" y="27" text-anchor="end" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">100%</text>
+    <!-- X axis labels: 1-10. x = 50 + (s-1)/9 * 490 -->
+    <text x="50" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">1</text>
+    <text x="104.4" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">2</text>
+    <text x="158.9" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">3</text>
+    <text x="213.3" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">4</text>
+    <text x="267.8" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">5</text>
+    <text x="322.2" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">6</text>
+    <text x="376.7" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">7</text>
+    <text x="431.1" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">8</text>
+    <text x="485.6" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">9</text>
+    <text x="540" y="282" text-anchor="middle" font-size="9" font-family="'Fira Code',monospace" fill="#94a3b8">10</text>
+    <text x="295" y="300" text-anchor="middle" font-size="9" font-family="'DM Sans',sans-serif" fill="#64748b">Scale</text>
+    <!-- y(coverage) = 264 - coverage/100 * 240 -->
+    <!-- Constituency: 23.5,53.7,60.5,69.8,83.3,87.0,91.4,92.0,97.5,98.1 -->
+    <polyline fill="none" stroke="#1e293b" stroke-width="2" stroke-linejoin="round"
+      points="50,207.6 104.4,135.1 158.9,118.8 213.3,96.5 267.8,64.1 322.2,55.2 376.7,44.6 431.1,43.2 485.6,30 540,28.6"/>
+    <circle cx="50" cy="207.6" r="3" fill="#1e293b"/><circle cx="104.4" cy="135.1" r="3" fill="#1e293b"/><circle cx="158.9" cy="118.8" r="3" fill="#1e293b"/>
+    <circle cx="213.3" cy="96.5" r="3" fill="#1e293b"/><circle cx="267.8" cy="64.1" r="3" fill="#1e293b"/><circle cx="322.2" cy="55.2" r="3" fill="#1e293b"/>
+    <circle cx="376.7" cy="44.6" r="3" fill="#1e293b"/><circle cx="431.1" cy="43.2" r="3" fill="#1e293b"/><circle cx="485.6" cy="30" r="3" fill="#1e293b"/>
+    <circle cx="540" cy="28.6" r="3" fill="#1e293b"/>
+    <text x="550" y="31.6" font-size="9" font-family="'DM Sans',sans-serif" fill="#1e293b" font-weight="500">Constituency</text>
+    <!-- Dependency: 23.5,55.6,92.0,98.1,98.1,98.1 -->
+    <polyline fill="none" stroke="#e89a3c" stroke-width="2" stroke-linejoin="round"
+      points="50,207.6 104.4,130.6 158.9,43.2 213.3,28.6 267.8,28.6 322.2,28.6"/>
+    <circle cx="50" cy="207.6" r="3" fill="#e89a3c"/><circle cx="104.4" cy="130.6" r="3" fill="#e89a3c"/><circle cx="158.9" cy="43.2" r="3" fill="#e89a3c"/>
+    <circle cx="213.3" cy="28.6" r="3" fill="#e89a3c"/><circle cx="267.8" cy="28.6" r="3" fill="#e89a3c"/><circle cx="322.2" cy="28.6" r="3" fill="#e89a3c"/>
+    <text x="332" y="31.6" font-size="9" font-family="'DM Sans',sans-serif" fill="#e89a3c" font-weight="500">Dependency</text>
+    <!-- Co-occurrence: 23.5,98.1,98.1,98.1 -->
+    <polyline fill="none" stroke="#7c3aed" stroke-width="2" stroke-linejoin="round"
+      points="50,207.6 104.4,28.6 158.9,28.6 213.3,28.6"/>
+    <circle cx="50" cy="207.6" r="3" fill="#7c3aed"/><circle cx="104.4" cy="28.6" r="3" fill="#7c3aed"/><circle cx="158.9" cy="28.6" r="3" fill="#7c3aed"/>
+    <circle cx="213.3" cy="28.6" r="3" fill="#7c3aed"/>
+    <text x="223" y="31.6" font-size="9" font-family="'DM Sans',sans-serif" fill="#7c3aed" font-weight="500">Co-occurrence</text>
+    <!-- SRL: 23.5,93.2,98.1,98.1 -->
+    <polyline fill="none" stroke="#0891b2" stroke-width="2" stroke-linejoin="round" stroke-dasharray="6,3"
+      points="50,207.6 104.4,40.3 158.9,28.6 213.3,28.6"/>
+    <circle cx="50" cy="207.6" r="3" fill="#0891b2"/><circle cx="104.4" cy="40.3" r="3" fill="#0891b2"/><circle cx="158.9" cy="28.6" r="3" fill="#0891b2"/>
+    <circle cx="213.3" cy="28.6" r="3" fill="#0891b2"/>
+    <text x="223" y="41" font-size="9" font-family="'DM Sans',sans-serif" fill="#0891b2" font-weight="500">Semantic Roles</text>
+    <!-- Clustering: 23.5,86.4,98.1,98.1 -->
+    <polyline fill="none" stroke="#059669" stroke-width="2" stroke-linejoin="round" stroke-dasharray="3,3"
+      points="50,207.6 104.4,56.6 158.9,28.6 213.3,28.6"/>
+    <circle cx="50" cy="207.6" r="3" fill="#059669"/><circle cx="104.4" cy="56.6" r="3" fill="#059669"/><circle cx="158.9" cy="28.6" r="3" fill="#059669"/>
+    <circle cx="213.3" cy="28.6" r="3" fill="#059669"/>
+    <text x="223" y="51" font-size="9" font-family="'DM Sans',sans-serif" fill="#059669" font-weight="500">Clustering</text>
+  </svg>
+</div>
+
+<!-- Coverage table -->
+<table>
+  <thead>
+    <tr><th>Scale</th><th>Constituency</th><th>Dependency</th><th>Co-occurrence</th><th>Semantic Roles</th><th>Clustering</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>23.5%</td><td>23.5%</td><td>23.5%</td><td>23.5%</td><td>23.5%</td></tr>
+    <tr><td>2</td><td>53.7%</td><td>55.6%</td><td>98.1%</td><td>93.2%</td><td>86.4%</td></tr>
+    <tr><td>3</td><td>60.5%</td><td>92.0%</td><td>98.1%</td><td>98.1%</td><td>98.1%</td></tr>
+    <tr><td>4</td><td>69.8%</td><td>98.1%</td><td>98.1%</td><td>98.1%</td><td>98.1%</td></tr>
+    <tr><td>5</td><td>83.3%</td><td>98.1%</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td></tr>
+    <tr><td>6</td><td>87.0%</td><td>98.1%</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td></tr>
+    <tr><td>7</td><td>91.4%</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td></tr>
+    <tr><td>8</td><td>92.0%</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td></tr>
+    <tr><td>9</td><td>97.5%</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td></tr>
+    <tr><td>10</td><td>98.1%</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td><td class="faint">&mdash;</td></tr>
+  </tbody>
+</table>
+
+<h3>Rankings</h3>
+<div class="rank-grid">
+  <div class="rank-card">
+    <h4>Granularity</h4>
+    <div class="rank-sub">distinct coverage levels</div>
+    <div class="rank-item top"><span>1. Constituency</span><span>17.6</span></div>
+    <div class="rank-item"><span>2. Dependency</span><span>4.0</span></div>
+    <div class="rank-item"><span>3. Semantic Roles</span><span>3.0</span></div>
+    <div class="rank-item"><span>4. Clustering</span><span>3.0</span></div>
+    <div class="rank-item"><span>5. Co-occurrence</span><span>2.2</span></div>
+  </div>
+  <div class="rank-card">
+    <h4>Full coverage</h4>
+    <div class="rank-sub">context captured at max scale</div>
+    <div class="rank-item top"><span>1. Co-occurrence</span><span>98.7%</span></div>
+    <div class="rank-item top"><span>2. Semantic Roles</span><span>98.7%</span></div>
+    <div class="rank-item top"><span>3. Clustering</span><span>98.7%</span></div>
+    <div class="rank-item"><span>4. Constituency</span><span>91.8%</span></div>
+    <div class="rank-item"><span>5. Dependency</span><span>91.8%</span></div>
+  </div>
+  <div class="rank-card">
+    <h4>Scale depth</h4>
+    <div class="rank-sub">max useful scale</div>
+    <div class="rank-item top"><span>1. Constituency</span><span>21.0</span></div>
+    <div class="rank-item"><span>2. Dependency</span><span>6.0</span></div>
+    <div class="rank-item"><span>3. Co-occurrence</span><span>4.2</span></div>
+    <div class="rank-item"><span>4. Semantic Roles</span><span>4.0</span></div>
+    <div class="rank-item"><span>5. Clustering</span><span>4.0</span></div>
+  </div>
+</div>
+
+<h3>Key findings</h3>
+<div class="finding" style="border-left-color:var(--c-constituency)">
+  <span class="finding-label" style="color:var(--c-constituency)">Constituency</span>
+  <p>Finest-grained control (avg 17.6 distinct levels, max scale 21.0). Best for precise privacy-utility tradeoffs. The deep parse tree produces many intermediate expansion steps.</p>
+</div>
+<div class="finding" style="border-left-color:var(--c-dependency)">
+  <span class="finding-label" style="color:var(--c-dependency)">Dependency</span>
+  <p>Strong middle ground (avg 4.0 levels, max scale 6.0). Walks the dep tree more gradually than constituency's phrase-level jumps, producing word-level expansion.</p>
+</div>
+<div class="finding" style="border-left-color:var(--c-cooccurrence)">
+  <span class="finding-label" style="color:var(--c-cooccurrence)">Co-occurrence</span>
+  <p>Jumps from ~14% to ~99% in one step. Simplest model: sentence-level on/off. Best coverage (98.7%) because sentence chaining reaches non-PII sentences.</p>
+</div>
+<div class="finding" style="border-left-color:var(--c-srl)">
+  <span class="finding-label" style="color:var(--c-srl)">Semantic Roles</span>
+  <p>Adds one meaningful intermediate level between PII and full sentences &mdash; the verb-frame arguments. Semantically motivated groupings.</p>
+</div>
+<div class="finding" style="border-left-color:var(--c-clustering)">
+  <span class="finding-label" style="color:var(--c-clustering)">Clustering</span>
+  <p>Groups PII by real-world entity using coreference, dependency walks, and string matching. Ensures a person's SSN, email, and name are always masked as a unit.</p>
+</div>
+
+<hr>
+
+<!-- ━━ Recommendations ━━ -->
+<h2>Recommendations</h2>
+<p>The right algorithm depends on the use case. No single approach dominates on every axis.</p>
+
+<div class="rec-grid">
+  <div class="rec-card" style="border-top-color:var(--c-constituency)">
+    <div class="rec-scenario">Maximum control</div>
+    <div class="rec-pick" style="color:var(--c-constituency)">Constituency</div>
+    <p>When users need a fine-grained slider with many distinct privacy levels. Best for interactive tools where the operator tunes the tradeoff manually.</p>
+  </div>
+  <div class="rec-card" style="border-top-color:var(--c-dependency)">
+    <div class="rec-scenario">No extra models</div>
+    <div class="rec-pick" style="color:var(--c-dependency)">Dependency</div>
+    <p>When you want to drop the benepar dependency. Uses only spaCy (already required for NER), giving 4 distinct levels and comparable coverage.</p>
+  </div>
+  <div class="rec-card" style="border-top-color:var(--c-cooccurrence)">
+    <div class="rec-scenario">Full document coverage</div>
+    <div class="rec-pick" style="color:var(--c-cooccurrence)">Co-occurrence</div>
+    <p>When every sentence in the document must be reachable &mdash; even those without any PII anchor. Sentence chaining guarantees 98.7% avg coverage.</p>
+  </div>
+  <div class="rec-card" style="border-top-color:var(--c-srl)">
+    <div class="rec-scenario">Semantic grouping</div>
+    <div class="rec-pick" style="color:var(--c-srl)">Semantic Roles</div>
+    <p>When the intermediate level should be semantically meaningful &mdash; &ldquo;what happened involving this person&rdquo; &mdash; rather than syntactic phrases.</p>
+  </div>
+  <div class="rec-card" style="border-top-color:var(--c-clustering);grid-column:span 2">
+    <div class="rec-scenario">Multi-person documents</div>
+    <div class="rec-pick" style="color:var(--c-clustering)">Entity Clustering</div>
+    <p>When the text mentions multiple people with interleaved PII. Clustering ensures each person's attributes (name, SSN, email) are grouped and masked as a unit, preventing cross-entity leakage at scale 2.</p>
+  </div>
+</div>
+
+<hr>
+
+<footer style="text-align:center;padding-top:8px">
+  <p style="font-size:0.78rem;color:var(--fg-faint)">
+    Kostadin Devedzhiev &middot; University of Cambridge &middot; ICO Know Your Data Workshop, March 2026
+  </p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -27,7 +27,7 @@ const affiliations = [
   },
   {
     label: 'Lab',
-    value: 'TRACE Lab',
+    value: 'Trustworthy AI Lab',
     logo: '/images/trace-cover.jpeg',
     link: 'https://trace-lab.ai/',
   },
@@ -224,7 +224,7 @@ export default function Hero() {
               </Link>
               , University of Cambridge, where I am part of the{' '}
               <Link href="https://trace-lab.ai/" target="_blank" rel="noopener">
-                TRACE Lab
+                Trustworthy AI Lab
               </Link>{' '}
               advised by{' '}
               <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener">

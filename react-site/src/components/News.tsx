@@ -1,29 +1,39 @@
 import { useState } from 'react';
-import { Box, Container, Typography, Stack, Link, Pagination } from '@mui/material';
+import { Box, Container, Typography, Stack, Link, Pagination, Tooltip } from '@mui/material';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import SlideshowOutlinedIcon from '@mui/icons-material/SlideshowOutlined';
 import { news } from '../data/content';
 
 const PAGE_SIZE = 5;
+
+const ICON_LABELS: Record<string, React.ReactNode> = {
+  'report': <DescriptionOutlinedIcon sx={{ fontSize: '1rem', verticalAlign: 'middle' }} />,
+  'slide': <SlideshowOutlinedIcon sx={{ fontSize: '1rem', verticalAlign: 'middle' }} />,
+};
 
 function renderDescription(text: string) {
   const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
   return parts.map((part, i) => {
     const match = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
     if (match) {
+      const label = match[1];
+      const icon = ICON_LABELS[label.toLowerCase()];
       return (
-        <Link
-          key={i}
-          href={match[2]}
-          target="_blank"
-          rel="noopener"
-          sx={{
-            color: 'primary.main',
-            textDecoration: 'none',
-            fontWeight: 600,
-            '&:hover': { textDecoration: 'underline' },
-          }}
-        >
-          {match[1]}
-        </Link>
+        <Tooltip key={i} title={label} arrow>
+          <Link
+            href={match[2]}
+            target="_blank"
+            rel="noopener"
+            sx={{
+              color: 'primary.main',
+              textDecoration: 'none',
+              fontWeight: 600,
+              '&:hover': { textDecoration: 'underline' },
+            }}
+          >
+            {icon ?? label}
+          </Link>
+        </Tooltip>
       );
     }
     return part;
@@ -37,7 +47,7 @@ export default function News() {
 
   return (
     <Box id="news" sx={{ py: { xs: 5, md: 6 } }}>
-      <Container maxWidth="lg">
+      <Container maxWidth="md">
         <Typography
           variant="h3"
           textAlign="center"

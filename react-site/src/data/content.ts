@@ -1,11 +1,11 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
   email: "kostadin.g.devedzhiev@gmail.com",
-  tagline: "Human-AI Interaction | TRACE Lab, University of Cambridge",
+  tagline: "Human-AI Interaction | Trustworthy AI Lab, University of Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
-    `I'm a postgraduate student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the TRACE Lab advised by Professor Umang Bhatt. My research focuses on human-AI interaction — designing multi-agent systems where AI agents and humans collaborate under real-world conditions, such as varying expertise, costs, and availability. I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
+    `I'm a postgraduate student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the Trustworthy AI Lab advised by Professor Umang Bhatt. My research focuses on human-AI interaction — designing multi-agent systems where AI agents and humans collaborate under real-world conditions, such as varying expertise, costs, and availability. I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
     `Previously, I worked as a Software Engineer at Stellar Cyber in San Jose, California, where I developed AI-driven interfaces for threat hunting and human-augmented autonomous cybersecurity operations powered by agentic AI.`,
     `In my free time, I enjoy being outdoors in nature, going to music festivals, and playing racquet sports.`
   ],
@@ -301,14 +301,14 @@ export const news = [
     date: "Mar 2026",
     location: "London, UK",
     title: "ICO Technical Workshop: Know Your Data",
-    description: "Attended a two-day ICO workshop bringing together foundation model developers and academics to design AI transparency mechanisms for identifying and notifying individuals whose personal data appears in web-scale training datasets.",
+    description: "Attended the UK Information Commissioner's Office workshop on AI transparency and personal data in foundation model training. [Report](documents/misc/pii-expansion.html) [Slide](documents/misc/kostadin-ico-slide.pdf)",
     link: "https://ico.org.uk/global/know-your-data/#ICO",
   },
   {
     date: "Feb 2026",
     location: "New Delhi, India",
     title: "IndiaAI Research Symposium",
-    description: "[Tailor](https://tailorworkflow.com) is being presented on behalf of TRACE Lab and the University of Cambridge at the India-AI Impact Summit.",
+    description: "[Tailor](https://tailorworkflow.com) presented on behalf of Trustworthy AI Lab and Cambridge at the Impact Summit.",
     link: "https://impact.indiaai.gov.in/events/research-symposium",
   },
   {
@@ -329,7 +329,7 @@ export const news = [
     date: "Apr 2025",
     location: "San Francisco, CA",
     title: "AutoSOC Featured at RSA Conference 2025",
-    description: "My work on the AutoSOC for Stellar Cyber was featured at RSAC 2025.",
+    description: "My work on the AutoSOC agent for Stellar Cyber was featured at RSAC 2025.",
     link: "https://stellarcyber.ai/news/press-releases/stellar-cyber-debuts-the-human-augmented-autonomous-soc-powered-by-agentic-ai-at-rsac-2025/",
   },
 ];
