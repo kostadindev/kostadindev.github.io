@@ -38,11 +38,23 @@ export const currentWork = [
 ];
 
 export const projects = [
+  // HIDDEN — uncomment when ready to publish
+  // {
+  //   title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
+  //   description: "A framework that treats humans as callable sensors that agentic AI systems can query to reduce uncertainty, shifting the human role from 'in the loop' to 'on call.' Compares a structured Human API with conversational deferral on MedQA, finding comparable accuracy (84–86.8%) but different evidence-gathering behavior, complementarity (each uniquely solving 5–6% of cases), and lower cost for structured sensing. Also sketches an online adaptive version using contextual bandits that learns action and source utility through interaction.",
+  //   tags: ["Human-AI Collaboration", "Agentic AI", "Medical AI"],
+  //   category: ["genai", "agentic", "human-ai"],
+  //   links: [
+  //     { type: "report", url: "./documents/papers/human-ai-collab/human_ai_collab_26.html" },
+  //     { type: "paper", url: "./documents/papers/human-ai-collab/paper.pdf" }
+  //   ],
+  //   image: "./documents/papers/human-ai-collab/hapi-animated-svg.svg"
+  // },
   {
     title: "Knowledge Base Builder: Multi-Source Knowledge Base Construction with LLMs",
     description: "A Python package that consolidates heterogeneous research artifacts — publications, code repositories, web documentation, lecture recordings, and presentation materials — into structured Markdown knowledge bases using large language models. Ingests content from 11 source types and produces output suitable for retrieval-augmented generation (RAG) systems, vector database preprocessing, and web-crawlable context files such as llms.txt.",
     tags: ["GenAI", "RAG"],
-    category: ["genai", "rag"],
+    category: ["genai", "nlp"],
     links: [
       { type: "report", url: "./documents/papers/kbb/kbb_26.html" },
       { type: "pypi", url: "https://pypi.org/project/knowledge-base-builder/" },
@@ -54,7 +66,7 @@ export const projects = [
     title: "Fairness and Transparency Analysis of Hospital Readmission Prediction",
     description: "An analysis of fairness and transparency in a Random Forest classifier for 30-day hospital readmission prediction using the Diabetes 130-Hospitals dataset. Evaluates group fairness via Demographic Parity and Equalized Odds using Fairlearn, and employs SHAP and LIME for transparency, reducing disparities by 74.5% using Exponentiated Gradient intervention.",
     tags: ["Responsible AI", "Fairness", "Transparency"],
-    category: ["hitl"],
+    category: ["human-ai"],
     links: [
       { type: "report", url: "./documents/papers/responsible_ai/responsible_ai_25.html" },
       { type: "paper", url: "./documents/papers/responsible_ai/responsible_ai_25.pdf" }
@@ -65,7 +77,7 @@ export const projects = [
     title: "Threat Explorer: Agentic Architectures and Visualization for Cybersecurity Analytics",
     description: "A conversational AI system for cybersecurity threat analysis that translates natural language queries into SQL over a 40,000-record attack dataset. Evaluates three agentic architectures — LLM Chain, ReAct, and multi-agent — across retrieval accuracy, latency, cost, and perceived quality. A within-subjects user study (N=12) with Holm–Bonferroni-corrected Wilcoxon tests shows chart-based output yields statistically significant improvements in usability, clarity, and efficiency over text-only responses.",
     tags: ["Cybersecurity", "Agentic AI", "RAG"],
-    category: ["genai", "agentic", "hitl"],
+    category: ["genai", "agentic", "human-ai"],
     links: [
       { type: "report", url: "./documents/papers/threat_explorer/threat_explorer_26.html" },
       { type: "paper", url: "./documents/papers/threat_explorer/threat_explorer_26.pdf" },
@@ -88,7 +100,7 @@ export const projects = [
     title: "Symbiotic Learning",
     description: "A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing to the conservation of Hawaii's ecosystems.",
     tags: ["Computer Vision", "Human-in-the-Loop", "Ecological Conservation"],
-    category: ["cv", "hitl"],
+    category: ["cv", "human-ai"],
     links: [{ type: "article", url: "https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" }],
     image: "https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
   },
@@ -96,7 +108,7 @@ export const projects = [
     title: "I Want to Redistrict",
     description: "A political science application developed to create and evaluate state districting plans through statistical analysis. Its primary purpose is to identify gerrymandering and support the generation of equitable district maps using 2020 Census data.",
     tags: ["High Performance Computing", "Human-in-the-Loop", "Political Science"],
-    category: ["hpc", "hitl"],
+    category: ["hpc", "human-ai"],
     links: [],
     image: "./images/redistrict.png"
   },
@@ -112,7 +124,7 @@ export const projects = [
     title: "Recursive QA",
     description: "An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs.",
     tags: ["NLP", "Human-in-the-Loop"],
-    category: ["nlp", "hitl"],
+    category: ["nlp", "human-ai"],
     links: [{ type: "github", url: "https://github.com/KostadinDev/Recursive-QA" }],
     image: "./images/recursiveqa-cover.jpg"
   },

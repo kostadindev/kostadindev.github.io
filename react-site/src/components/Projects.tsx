@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   Box,
+  Button,
   Container,
   Typography,
   Card,
@@ -14,6 +15,8 @@ import {
   IconButton,
   Tooltip,
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -45,17 +48,23 @@ const linkIcon: Record<string, React.ReactElement> = {
 
 const filters = [
   { id: 'all', label: 'All' },
-  { id: 'nlp', label: 'NLP' },
+  { id: 'agentic', label: 'Agentic AI' },
+  { id: 'human-ai', label: 'Human–AI' },
+  { id: 'nlp', label: 'NLP & IR' },
   { id: 'cv', label: 'Computer Vision' },
-  { id: 'hitl', label: 'Human-in-the-Loop' },
 ];
+
+const INITIAL_COUNT = 6;
 
 export default function Projects() {
   const [filter, setFilter] = useState('all');
+  const [expanded, setExpanded] = useState(false);
 
   const filtered = projects.filter(
     (p) => filter === 'all' || p.category.includes(filter)
   );
+  const visible = expanded ? filtered : filtered.slice(0, INITIAL_COUNT);
+  const hasMore = filtered.length > INITIAL_COUNT;
 
   return (
     <Box id="projects" sx={{ py: { xs: 6, md: 8 } }}>
@@ -82,7 +91,7 @@ export default function Projects() {
           <ToggleButtonGroup
             value={filter}
             exclusive
-            onChange={(_, v) => v && setFilter(v)}
+            onChange={(_, v) => { if (v) { setFilter(v); setExpanded(false); } }}
             size="small"
             sx={{
               '& .MuiToggleButton-root': {
@@ -112,7 +121,7 @@ export default function Projects() {
         </Box>
 
         <Grid container spacing={3} className="reveal-stagger">
-          {filtered.map((project) => (
+          {visible.map((project) => (
             <Grid size={{ xs: 12, md: 6 }} key={project.title}>
               <Card
                 elevation={0}
@@ -133,7 +142,13 @@ export default function Projects() {
                   component="img"
                   image={project.image}
                   alt={project.title}
-                  sx={{ objectFit: 'cover', width: '100%', height: 260 }}
+                  sx={{
+                    width: '100%',
+                    height: 260,
+                    objectFit: project.image.endsWith('.svg') ? 'contain' : 'cover',
+                    bgcolor: project.image.endsWith('.svg') ? '#faf9f7' : 'transparent',
+                    p: project.image.endsWith('.svg') ? 1 : 0,
+                  }}
                 />
                 <CardContent sx={{ flex: 1, p: 3 }}>
                   <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
@@ -184,6 +199,24 @@ export default function Projects() {
             </Grid>
           ))}
         </Grid>
+
+        {hasMore && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <Button
+              onClick={() => setExpanded(!expanded)}
+              endIcon={expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              sx={{
+                textTransform: 'none',
+                fontSize: '0.9rem',
+                fontWeight: 500,
+                color: 'text.secondary',
+                '&:hover': { color: 'primary.main' },
+              }}
+            >
+              {expanded ? 'Show less' : `Show ${filtered.length - INITIAL_COUNT} more`}
+            </Button>
+          </Box>
+        )}
       </Container>
     </Box>
   );
