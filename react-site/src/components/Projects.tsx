@@ -145,9 +145,9 @@ export default function Projects() {
                   sx={{
                     width: '100%',
                     height: 260,
-                    objectFit: project.image.endsWith('.svg') ? 'contain' : 'cover',
-                    bgcolor: project.image.endsWith('.svg') ? '#faf9f7' : 'transparent',
-                    p: project.image.endsWith('.svg') ? 1 : 0,
+                    objectFit: (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 'contain' : 'cover',
+                    bgcolor: (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? '#faf9f7' : 'transparent',
+                    p: (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 1 : 0,
                   }}
                 />
                 <CardContent sx={{ flex: 1, p: 3 }}>

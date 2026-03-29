@@ -73,6 +73,19 @@ export const projects = [
     ],
     image: "./images/responsible-ai-cover.svg"
   },
+  // HIDDEN — uncomment when ready to publish
+  // {
+  //   title: "MobileAgents: Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go",
+  //   description: "An open-source mobile platform that lets users bring their own AI agents and manage them via text, voice, and images. Features an LLM orchestrator that decomposes multimodal requests into task plans dispatched to specialised agents, with three transparency configurations — black box, plan preview, and full transparency with a real-time execution graph. A within-subjects user study (N=13) shows trust and control increase monotonically with transparency and that input modalities are complementary.",
+  //   tags: ["Agentic AI", "HCI", "Multimodal"],
+  //   category: ["agentic", "human-ai"],
+  //   links: [
+  //     { type: "report", url: "./documents/papers/mobile_agents/mobile_agents_26.html" },
+  //     { type: "paper", url: "./documents/papers/mobile_agents/Mobile_Agent_Manager.pdf" }
+  //   ],
+  //   image: "./documents/papers/mobile_agents/flow.png",
+  //   imageFit: "contain"
+  // },
   {
     title: "Threat Explorer: Agentic Architectures and Visualization for Cybersecurity Analytics",
     description: "A conversational AI system for cybersecurity threat analysis that translates natural language queries into SQL over a 40,000-record attack dataset. Evaluates three agentic architectures — LLM Chain, ReAct, and multi-agent — across retrieval accuracy, latency, cost, and perceived quality. A within-subjects user study (N=12) with Holm–Bonferroni-corrected Wilcoxon tests shows chart-based output yields statistically significant improvements in usability, clarity, and efficiency over text-only responses.",
