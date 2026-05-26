@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MobileAgents: Designing and Evaluating a Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-tertiary: #888;
+    --accent: #c4704b;
+    --accent-bg: #fdf6f0;
+    --border: #e8e4df;
+    --bg: #fcfbf9;
+    --paper: #ffffff;
+    --code-bg: #f5f3ef;
+    --serif: 'Source Serif 4', 'Georgia', serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+    --mono: 'Source Code Pro', monospace;
+    --c1: #9e9e9e; --c2: #7c6bc4; --c3: #c4704b;
+    --m1: #c4704b; --m2: #7c6bc4; --m3: #4a90d9;
+  }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+  body { font-family: var(--serif); color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+
+  .topbar { position: sticky; top: 0; z-index: 100; background: rgba(252,251,249,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0.6rem 1.5rem; display: flex; align-items: center; justify-content: space-between; font-family: var(--sans); font-size: 0.8rem; }
+  .topbar a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .topbar a:hover { text-decoration: underline; }
+  .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
+  .topbar-right a { color: var(--text-secondary); font-weight: 500; }
+
+  article { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+
+  header { margin-bottom: 3rem; text-align: center; }
+  header h1 { font-size: 2.1rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 1.5rem; }
+  .author { font-family: var(--sans); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.15rem; }
+  .affiliation { font-family: var(--sans); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+  .affiliation a { color: var(--accent); text-decoration: none; }
+
+  .abstract { margin: 2.5rem 0; padding: 1.5rem 1.75rem; background: var(--accent-bg); border-radius: 8px; border-left: 3px solid var(--accent); }
+  .abstract-label { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; }
+  .abstract p { font-size: 0.92rem; line-height: 1.75; color: var(--text-secondary); }
+
+  .toc { margin: 2rem 0 3rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; font-family: var(--sans); }
+  .toc-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin-bottom: 0.75rem; }
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc > ol > li { counter-increment: toc; }
+  .toc > ol > li::before { content: counter(toc) "."; display: inline-block; width: 1.5rem; color: var(--text-tertiary); font-size: 0.82rem; }
+  .toc a { color: var(--text); text-decoration: none; font-size: 0.88rem; font-weight: 500; }
+  .toc a:hover { color: var(--accent); }
+  .toc li { margin-bottom: 0.3rem; }
+
+  h2 { font-size: 1.5rem; font-weight: 700; margin: 3rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--border); line-height: 1.3; }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 0.75rem; }
+  p { margin-bottom: 1.1rem; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  a[href^="#ref-"] { color: var(--text-secondary); background: rgba(196,112,75,0.08); padding: 0.05em 0.35em; border-radius: 4px; font-size: 0.88em; font-family: var(--sans); font-weight: 500; white-space: nowrap; }
+  a[href^="#ref-"]:hover { background: rgba(196,112,75,0.18); color: var(--accent); text-decoration: none; }
+  .ref-list li:target { background: var(--accent-bg); border-radius: 4px; padding: 0.3rem 0; margin-left: -0.5rem; padding-left: calc(2rem + 0.5rem); }
+
+  ol, ul { margin: 0.75rem 0 1.25rem 1.25rem; line-height: 1.75; }
+  li { margin-bottom: 0.35rem; }
+
+  .table-wrap { margin: 1.5rem 0 2rem; overflow-x: auto; }
+  .table-caption { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; text-align: center; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 0.85rem; }
+  thead th { font-weight: 600; text-align: left; padding: 0.6rem 1rem; border-bottom: 2px solid var(--text); white-space: nowrap; }
+  tbody td { padding: 0.5rem 1rem; border-bottom: 1px solid var(--border); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-bg); }
+  .num { font-variant-numeric: tabular-nums; text-align: right; font-family: var(--mono); font-size: 0.82rem; }
+  .highlight-cell { font-weight: 600; color: var(--accent); }
+
+  .callout { margin: 1.5rem 0; padding: 1rem 1.25rem; background: #f0f7ff; border-left: 3px solid #4a90d9; border-radius: 4px; font-size: 0.92rem; }
+  .callout-label { font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4a90d9; margin-bottom: 0.35rem; }
+
+  .references { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .references h2 { border-top: none; padding-top: 0; margin-top: 0; }
+  .ref-list { list-style: none; margin: 0; padding: 0; }
+  .ref-list li { font-size: 0.82rem; line-height: 1.65; margin-bottom: 0.85rem; padding-left: 2rem; text-indent: -2rem; color: var(--text-secondary); }
+  .ref-list .ref-id { font-family: var(--sans); font-weight: 600; color: var(--text-tertiary); font-size: 0.75rem; }
+  .ref-list em { font-style: italic; }
+
+  .paper-footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; font-family: var(--sans); font-size: 0.78rem; color: var(--text-tertiary); }
+  .paper-footer a { color: var(--accent); }
+
+  .figure { margin: 2rem 0; text-align: center; }
+  .figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .figure-caption { font-family: var(--sans); font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.6rem; font-weight: 500; }
+  .figure-row { display: flex; gap: 1rem; margin: 2rem 0; align-items: flex-start; }
+  .figure-row .figure { flex: 1; margin: 0; }
+
+  .phone-row { display: flex; gap: 0.75rem; margin: 2rem 0; justify-content: center; align-items: flex-start; }
+  .phone-row .figure { flex: 0 1 auto; margin: 0; max-width: 180px; }
+  .phone-row .figure img { border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+  .phone-caption { text-align: center; font-family: var(--sans); font-size: 0.78rem; color: var(--text-secondary); margin-top: -0.5rem; margin-bottom: 2rem; font-weight: 500; }
+
+  /* ── Chart styles ── */
+  .chart-wrap { margin: 2rem 0 2.5rem; padding: 1.5rem; background: var(--paper); border: 1px solid var(--border); border-radius: 10px; }
+  .chart-title { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); text-align: center; margin-bottom: 1.25rem; }
+
+  .grouped-bars { display: flex; justify-content: space-around; align-items: flex-end; height: 200px; padding-top: 0.5rem; border-bottom: 1.5px solid var(--border); margin-bottom: 0.5rem; }
+  .bar-group { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; flex: 1; }
+  .bar-pair { display: flex; align-items: flex-end; gap: 3px; height: 170px; }
+  .bar { width: 22px; border-radius: 3px 3px 0 0; position: relative; transition: height 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .bar:hover { opacity: 0.8; }
+  .bar-val { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 0.65rem; color: var(--text-secondary); white-space: nowrap; }
+  .bar-group-label { font-family: var(--sans); font-size: 0.72rem; color: var(--text-tertiary); text-align: center; line-height: 1.2; margin-top: 0.25rem; }
+  .chart-legend { display: flex; justify-content: center; gap: 1.25rem; margin-top: 0.75rem; font-family: var(--sans); font-size: 0.72rem; color: var(--text-secondary); }
+  .legend-dot { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 0.35rem; vertical-align: middle; }
+
+  .hbar { margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.5rem; }
+  .hbar-label { font-family: var(--sans); font-size: 0.75rem; color: var(--text-secondary); width: 120px; text-align: right; flex-shrink: 0; white-space: nowrap; }
+  .hbar-track { flex: 1; height: 22px; background: #f3f1ed; border-radius: 4px; overflow: hidden; }
+  .hbar-fill { height: 100%; border-radius: 4px; transition: width 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .hbar-value { font-family: var(--mono); font-size: 0.72rem; color: var(--text-secondary); width: 45px; text-align: left; flex-shrink: 0; }
+
+  @media (max-width: 640px) {
+    html { font-size: 15.5px; }
+    article { padding: 2rem 1rem 4rem; }
+    header h1 { font-size: 1.65rem; }
+    h2 { font-size: 1.3rem; }
+    thead th, tbody td { padding: 0.4rem 0.5rem; }
+    .figure-row { flex-direction: column; }
+    .phone-row { flex-wrap: wrap; }
+    .phone-row .figure { max-width: 140px; }
+    .bar { width: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/">Kostadin Devedzhiev</a>
+  <div class="topbar-right">
+    <a href="./Mobile_Agent_Manager.pdf">PDF</a>
+  </div>
+</div>
+
+<article>
+
+<header>
+  <h1>MobileAgents: Designing and Evaluating a Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go</h1>
+  <div class="author">Kostadin Devedzhiev</div>
+  <div class="affiliation">
+    University of Cambridge<br>
+    Cambridge, United Kingdom<br>
+    <a href="mailto:kgd26@cam.ac.uk">kgd26@cam.ac.uk</a>
+  </div>
+</header>
+
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>
+    AI Agents are increasingly capable, yet they are typically controlled programmatically or through desktop applications. We present <strong>MobileAgents</strong>, an open-source mobile platform that lets users bring their own AI agents and manage them via text, voice, and images while on the go. The system features an LLM orchestrator that decomposes multimodal requests into task plans dispatched to a team of specialised agents. We design three transparency configurations&mdash;black box, plan preview, and full transparency with a real-time execution graph&mdash;and evaluate them alongside three input modalities through a within-subjects user study (N=13). Results show that trust and control increase monotonically with transparency, that modalities are complementary, and that users value the execution graph and plan approval as the most trusted features.
+  </p>
+</div>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#introduction">Introduction: Use Case and Goals</a></li>
+    <li><a href="#design">System Design and Implementation</a></li>
+    <li><a href="#evaluation">Research Questions and Evaluation</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#discussion">Discussion and Future Work</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ 1 ═══ -->
+<h2 id="introduction">1. Introduction: Use Case and Goals</h2>
+
+<p>AI Agents are increasingly capable <a href="#ref-guo">[Guo et al., 2024]</a>, <a href="#ref-kim">[Kim et al., 2025]</a>, <a href="#ref-stauder">[Stauder et al., 2026]</a>. However, these agents need to be controlled programmatically or through desktop applications. An important use case is that they can perform tasks while we are away from the workspace. This was demonstrated by OpenClaw <a href="#ref-openclaw">[OpenClaw, 2026]</a>, an AI agent controlled via messaging apps. This underscores the need for a mobile agent platform that enables frictionless management of agents while on-the-go with adjustable levels of control and governance.</p>
+
+<p>We identify three core design values using Value Sensitive Design <a href="#ref-friedman">[Friedman et al., 2002]</a>:</p>
+<ul>
+  <li><strong>V1 &mdash; Mobility:</strong> &ldquo;I should be able to reach my agents on the go.&rdquo;</li>
+  <li><strong>V2 &mdash; Control:</strong> &ldquo;I should understand what the agents are doing and be able to supervise them.&rdquo;</li>
+  <li><strong>V3 &mdash; Ease:</strong> &ldquo;MobileAgents should be simple and intuitive.&rdquo;</li>
+</ul>
+
+<div class="figure">
+  <img src="./flow.png" alt="MobileAgents system overview">
+  <div class="figure-caption">Figure 1: System overview. Users issue a multimodal request on their mobile device. The LLM orchestrator breaks it into a plan and assigns tasks to specialised agents (ArXiv, Wikipedia, Proposal, Slack, Semantic Scholar).</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ 2 ═══ -->
+<h2 id="design">2. System Design and Implementation</h2>
+
+<h3>2.1 Prototype Overview</h3>
+
+<p>MobileAgents is a functional open-source application built with FastAPI, React, PostgreSQL, and CrewAI for agent orchestration. It features five specialised worker agents: <strong>ArXiv</strong> (paper search &amp; summarisation), <strong>Wikipedia</strong> (background research), <strong>Proposal</strong> (research proposal generation), <strong>Slack</strong> (message delivery), and <strong>Semantic Scholar</strong> (citation analysis). All system prompts are available in the paper appendix for reproducibility.</p>
+
+<h3>2.2 Input Modalities</h3>
+
+<p>We implement mobility (V1) through three input modalities. <strong>Text</strong> is the baseline modality, sent via a standard conversational interface. <strong>Voice</strong> enables hands-free control via push-to-talk. <strong>Images</strong> allow capturing physical context (e.g., a whiteboard photograph) using the phone camera.</p>
+
+<div class="phone-row">
+  <div class="figure">
+    <img src="./multi_modal.png" alt="Multimodal mode">
+    <div class="figure-caption">(a) Multimodal</div>
+  </div>
+  <div class="figure">
+    <img src="./text+images.png" alt="Text + Images mode">
+    <div class="figure-caption">(b) Text + Images</div>
+  </div>
+  <div class="figure">
+    <img src="./voice_only.png" alt="Voice-only mode (listening)">
+    <div class="figure-caption">(c) Voice-only</div>
+  </div>
+</div>
+<p class="phone-caption">Figure 2: The three input modes. (a) Multimodal with text, voice, and camera. (b) Text + Images only. (c) Voice-only with push-to-talk.</p>
+
+<h3>2.3 Transparency Configurations</h3>
+
+<p>We support control (V2) through three transparency modes, guided by established frameworks on levels of automation <a href="#ref-parasuraman">[Parasuraman et al., 2000]</a>:</p>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 1: The three transparency configurations.</div>
+  <table>
+    <thead>
+      <tr><th>Configuration</th><th>What the user sees and can do</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>C1: Black Box</strong></td><td>Agents auto-execute with full autonomy.</td></tr>
+      <tr><td><strong>C2: Plan Preview</strong></td><td>Approve the orchestrator&rsquo;s task plan before execution.</td></tr>
+      <tr><td><strong>C3: Transparency</strong></td><td>Plan approval with a real-time execution graph showing live progress.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="phone-row">
+  <div class="figure">
+    <img src="./blackbox.png" alt="C1: Black Box">
+    <div class="figure-caption">(a) C1: Black Box</div>
+  </div>
+  <div class="figure">
+    <img src="./task_plan.png" alt="C2: Plan Preview">
+    <div class="figure-caption">(b) C2: Plan Preview</div>
+  </div>
+  <div class="figure">
+    <img src="./full_control.png" alt="C3: Full Transparency">
+    <div class="figure-caption">(c) C3: Transparency</div>
+  </div>
+  <div class="figure">
+    <img src="./execution_graph.png" alt="Real-time execution graph">
+    <div class="figure-caption">(d) Execution Graph</div>
+  </div>
+</div>
+<p class="phone-caption">Figure 3: Transparency configurations. (a) Black box &mdash; agents auto-execute. (b) Plan preview &mdash; approve before running. (c) Full transparency &mdash; plan + live graph. (d) The real-time execution DAG with status indicators.</p>
+
+<p>Advanced control is available through agent on/off toggles and a natural-language <strong>constitution</strong> (inspired by Anthropic&rsquo;s Constitutional AI <a href="#ref-bai">[Bai et al., 2022]</a>) that guides orchestration policy and output stylization.</p>
+
+<h3>2.4 Agent Management and Settings</h3>
+
+<p>We address ease (V3) through simple settings and the agent management tab. Users can toggle agents on/off, inspect each agent&rsquo;s goal, tools, and system prompt, and edit the orchestrator&rsquo;s constitution. The app supports four languages, light/dark themes, and includes in-app documentation.</p>
+
+<div class="phone-row">
+  <div class="figure">
+    <img src="./agents_tab.png" alt="Agents tab with toggles">
+    <div class="figure-caption">(a) Agents tab</div>
+  </div>
+  <div class="figure">
+    <img src="./orchestrator.png" alt="Orchestrator with constitution editor">
+    <div class="figure-caption">(b) Constitution editor</div>
+  </div>
+  <div class="figure">
+    <img src="./agent_card.png" alt="ArXiv agent detail card">
+    <div class="figure-caption">(c) Agent card</div>
+  </div>
+  <div class="figure">
+    <img src="./settings.png" alt="Settings screen">
+    <div class="figure-caption">(d) Settings</div>
+  </div>
+</div>
+<p class="phone-caption">Figure 4: Agent management and settings. (a) Agent list with enable/disable toggles. (b) Orchestrator detail with editable constitution. (c) Worker agent card showing goal, tools, and backstory. (d) Settings with transparency, modality, theme, and language controls.</p>
+
+<div class="figure-row">
+  <div class="figure">
+    <img src="./slack.png" alt="Slack message posted by the agent">
+    <div class="figure-caption">Figure 5a: Slack message posted to #general by the Slack agent.</div>
+  </div>
+  <div class="figure">
+    <img src="./docs.png" alt="In-app documentation tab">
+    <div class="figure-caption">Figure 5b: In-app documentation tab.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ 3 ═══ -->
+<h2 id="evaluation">3. Research Questions and Evaluation</h2>
+
+<h3>3.1 Research Questions</h3>
+<ul>
+  <li><strong>RQ1:</strong> Is there a perceived usability/control tradeoff between black box, plan, and transparency?</li>
+  <li><strong>RQ2:</strong> Does the support of multiple modalities improve the mobile-first experience?</li>
+  <li><strong>RQ3:</strong> Are users able to guide orchestration behavior through the advanced agent controls?</li>
+</ul>
+
+<h3>3.2 Study Design</h3>
+
+<p><strong>Phase 1 &mdash; Control (RQ1).</strong> Participants complete the same research task (find recent HCI papers and distribute via Slack) under all three control configurations in counterbalanced order.</p>
+
+<p><strong>Phase 2 &mdash; Modality (RQ2).</strong> Each participant completes a fixed multi-step workflow using all three modalities &mdash; (M1) Multimodal, (M2) Text + Images, (M3) Voice-only &mdash; in counterbalanced order. All runs use black-box mode, so modality is the only variable.</p>
+
+<p><strong>Phase 3 &mdash; Orchestration (RQ3).</strong> Participants configure the system so that it never sends Slack messages without showing a draft first, and remove agents they do not want. This exploratory session tests whether the constitution and toggles can be located, understood, and utilized.</p>
+
+<h3>3.3 Participants and Metrics</h3>
+
+<p>We recruited <strong>13 volunteers</strong> with experience in LLM-based tools. Phase 1 uses 7-point Likert scales for trust, control, and satisfaction. Phase 2 uses the NASA Task Load Index <a href="#ref-hart">[Hart and Staveland, 1988]</a> and Single Ease Question (SEQ) <a href="#ref-sauro">[Sauro and Dumas, 2009]</a>. Phase 3 uses a 3-item perceived controllability scale and semi-structured interviews.</p>
+
+<!-- ═══════════════════════════════════════════════ 4 ═══ -->
+<h2 id="results">4. Results</h2>
+
+<h3>4.1 RQ1: Control &mdash; Transparency Increases Trust and Control</h3>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 2: Mean (SD) primary survey scores (1&ndash;7 Likert) by transparency configuration.</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th class="num">C1: Black Box</th><th class="num">C2: Plan</th><th class="num">C3: Transparency</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Trust</td><td class="num">4.3 (1.7)</td><td class="num">5.0 (1.5)</td><td class="num highlight-cell">5.8 (1.0)</td></tr>
+      <tr><td>Control</td><td class="num">3.2 (2.1)</td><td class="num">5.4 (1.3)</td><td class="num highlight-cell">5.7 (1.1)</td></tr>
+      <tr><td>Satisfaction</td><td class="num">4.4 (2.3)</td><td class="num">3.9 (1.1)</td><td class="num highlight-cell">5.8 (1.1)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Grouped bar chart: RQ1 primary metrics -->
+<div class="chart-wrap">
+  <div class="chart-title">Trust, Control, and Satisfaction by Transparency Configuration (1&ndash;7 Likert)</div>
+  <div class="grouped-bars">
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height:calc(4.3/7*170px);background:var(--c1)"><span class="bar-val">4.3</span></div>
+        <div class="bar" style="height:calc(5.0/7*170px);background:var(--c2)"><span class="bar-val">5.0</span></div>
+        <div class="bar" style="height:calc(5.8/7*170px);background:var(--c3)"><span class="bar-val">5.8</span></div>
+      </div>
+      <div class="bar-group-label">Trust</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height:calc(3.2/7*170px);background:var(--c1)"><span class="bar-val">3.2</span></div>
+        <div class="bar" style="height:calc(5.4/7*170px);background:var(--c2)"><span class="bar-val">5.4</span></div>
+        <div class="bar" style="height:calc(5.7/7*170px);background:var(--c3)"><span class="bar-val">5.7</span></div>
+      </div>
+      <div class="bar-group-label">Control</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height:calc(4.4/7*170px);background:var(--c1)"><span class="bar-val">4.4</span></div>
+        <div class="bar" style="height:calc(3.9/7*170px);background:var(--c2)"><span class="bar-val">3.9</span></div>
+        <div class="bar" style="height:calc(5.8/7*170px);background:var(--c3)"><span class="bar-val">5.8</span></div>
+      </div>
+      <div class="bar-group-label">Satisfaction</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background:var(--c1)"></span>C1: Black Box</span>
+    <span><span class="legend-dot" style="background:var(--c2)"></span>C2: Plan</span>
+    <span><span class="legend-dot" style="background:var(--c3)"></span>C3: Transparency</span>
+  </div>
+</div>
+
+<p>Trust and control increase monotonically from C1 to C3. C3 scores highest in satisfaction (5.8), whereas C2 performs the worst (3.9), indicating that users preferred either full autonomy or high control. Post-hoc pairwise Wilcoxon signed-rank tests (Bonferroni-corrected, k=3) confirm significant improvements in control for C2 and C3 over C1, and significant satisfaction gains for C3 over C2.</p>
+
+<div class="callout">
+  <div class="callout-label">Key Finding</div>
+  Trust and control increase monotonically with transparency. C3 (full transparency with execution graph) scores highest across all primary metrics. Users preferred either full autonomy (C1) or full transparency (C3), but not the middle ground (C2).
+</div>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 3: Post-hoc pairwise Wilcoxon signed-rank tests (Bonferroni-corrected, k=3) and Cohen&rsquo;s d. *p<sub>bon</sub> &lt; .05.</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th>Pair</th><th class="num">W</th><th class="num">p<sub>bon</sub></th><th class="num">d</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Control</td><td>C1&ndash;C2</td><td class="num">6.0</td><td class="num highlight-cell">0.041*</td><td class="num">&minus;0.88</td></tr>
+      <tr><td>Control</td><td>C1&ndash;C3</td><td class="num">3.0</td><td class="num highlight-cell">0.012*</td><td class="num">&minus;1.03</td></tr>
+      <tr><td>Control</td><td>C2&ndash;C3</td><td class="num">26.5</td><td class="num">1.000</td><td class="num">&minus;0.16</td></tr>
+      <tr><td>Satisfaction</td><td>C2&ndash;C3</td><td class="num">2.0</td><td class="num highlight-cell">0.012*</td><td class="num">&minus;1.16</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h3>4.2 RQ2: Modality &mdash; Complementary Input Modes</h3>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 4: Mean (SD) SEQ ease (1&ndash;7), NASA-TLX composite (1&ndash;10), and comfort ratings (1&ndash;7) per modality.</div>
+  <table>
+    <thead>
+      <tr><th>Metric</th><th class="num">M1: Multimodal</th><th class="num">M2: Text + Image</th><th class="num">M3: Voice-only</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>SEQ (ease)</td><td class="num">4.2 (2.0)</td><td class="num">4.5 (2.1)</td><td class="num highlight-cell">5.4 (1.6)</td></tr>
+      <tr><td>TLX composite</td><td class="num">4.2 (0.6)</td><td class="num highlight-cell">4.1 (0.9)</td><td class="num">4.6 (0.6)</td></tr>
+      <tr><td>Felt natural</td><td class="num">4.2 (1.1)</td><td class="num highlight-cell">4.9 (1.7)</td><td class="num">4.1 (2.0)</td></tr>
+      <tr><td>OK in public</td><td class="num highlight-cell">4.0 (1.6)</td><td class="num">3.3 (1.4)</td><td class="num">2.8 (1.3)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Grouped bar chart: RQ2 modality comparison -->
+<div class="chart-wrap">
+  <div class="chart-title">Modality Comparison: Ease, Naturalness, and Public Appropriateness</div>
+  <div class="grouped-bars">
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height:calc(4.2/7*170px);background:var(--m1)"><span class="bar-val">4.2</span></div>
+        <div class="bar" style="height:calc(4.5/7*170px);background:var(--m2)"><span class="bar-val">4.5</span></div>
+        <div class="bar" style="height:calc(5.4/7*170px);background:var(--m3)"><span class="bar-val">5.4</span></div>
+      </div>
+      <div class="bar-group-label">SEQ Ease</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height:calc(4.2/7*170px);background:var(--m1)"><span class="bar-val">4.2</span></div>
+        <div class="bar" style="height:calc(4.9/7*170px);background:var(--m2)"><span class="bar-val">4.9</span></div>
+        <div class="bar" style="height:calc(4.1/7*170px);background:var(--m3)"><span class="bar-val">4.1</span></div>
+      </div>
+      <div class="bar-group-label">Felt Natural</div>
+    </div>
+    <div class="bar-group">
+      <div class="bar-pair">
+        <div class="bar" style="height:calc(4.0/7*170px);background:var(--m1)"><span class="bar-val">4.0</span></div>
+        <div class="bar" style="height:calc(3.3/7*170px);background:var(--m2)"><span class="bar-val">3.3</span></div>
+        <div class="bar" style="height:calc(2.8/7*170px);background:var(--m3)"><span class="bar-val">2.8</span></div>
+      </div>
+      <div class="bar-group-label">OK in Public</div>
+    </div>
+  </div>
+  <div class="chart-legend">
+    <span><span class="legend-dot" style="background:var(--m1)"></span>Multimodal</span>
+    <span><span class="legend-dot" style="background:var(--m2)"></span>Text + Image</span>
+    <span><span class="legend-dot" style="background:var(--m3)"></span>Voice-only</span>
+  </div>
+</div>
+
+<p>No single modality dominates. Voice scored highest on ease (5.4) but also highest on cognitive load (TLX 4.6) and lowest on public appropriateness (2.8). Text + Image felt most natural (4.9). Multimodal scored best for public use (4.0). The modalities are complementary and all kept in the settings.</p>
+
+<h3>4.3 RQ3: Orchestration &mdash; Customisation Perceived as Effective</h3>
+
+<!-- Horizontal bar chart: RQ3 customisation items -->
+<div class="chart-wrap">
+  <div class="chart-title">Customisation Perceived Controllability (1&ndash;7 Likert, RQ3)</div>
+  <div class="hbar">
+    <div class="hbar-label">Controllability</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:calc(5.7/7*100%);background:var(--accent)"></div></div>
+    <div class="hbar-value">5.7*</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Effectiveness</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:calc(5.2/7*100%);background:var(--accent)"></div></div>
+    <div class="hbar-value">5.2*</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Ownership</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:calc(4.8/7*100%);background:var(--accent)"></div></div>
+    <div class="hbar-value">4.8*</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Mental Model</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:calc(4.5/7*100%);background:#bbb"></div></div>
+    <div class="hbar-value">4.5</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Adoption</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:calc(4.2/7*100%);background:#bbb"></div></div>
+    <div class="hbar-value">4.2</div>
+  </div>
+  <div class="hbar">
+    <div class="hbar-label">Discoverability</div>
+    <div class="hbar-track"><div class="hbar-fill" style="width:calc(3.8/7*100%);background:#bbb"></div></div>
+    <div class="hbar-value">3.8</div>
+  </div>
+  <div style="font-family:var(--sans);font-size:0.7rem;color:var(--text-tertiary);text-align:right;margin-top:0.5rem;">* Significantly above neutral (one-sample Wilcoxon, p &lt; .05)</div>
+</div>
+
+<p>A one-sample Wilcoxon showed controllability (p = .001), effectiveness (p = .016), and ownership (p = .036) were significantly above neutral. Discoverability (p = .545) and adoption (p = .717) did not differ from neutral, suggesting the constitution is difficult to find and use. The most trusted feature was the execution graph, and the most important missing feature was an undo functionality.</p>
+
+<h3>4.4 Qualitative Assessment</h3>
+
+<p><strong>Intervention is powerful with high observability.</strong> Participants valued the ability to act while observing real-time execution. One noted: &ldquo;The graph reveals wrong directions as they begin.&rdquo; This is especially needed for tasks involving irreversible actions like sending Slack messages.</p>
+
+<p><strong>Multimodal enables mobile.</strong> Participants strongly valued voice for on-the-go use but refused to use it in public spaces, consistent with past research <a href="#ref-porcheron">[Porcheron et al., 2018]</a>. They reported images as useful for quickly capturing notes. Text remains the standard for sensitive tasks.</p>
+
+<!-- ═══════════════════════════════════════════════ 5 ═══ -->
+<h2 id="discussion">5. Discussion and Future Work</h2>
+
+<h3>Ethical, Social, and Value-Related Reflection</h3>
+
+<p><strong>Privacy and Security.</strong> A centralized agent manager introduces risks of data storage and prompt injection <a href="#ref-greshake">[Greshake et al., 2023]</a> by malicious agents. Future work should integrate guardrails and safety mechanisms to prevent adversarial attacks.</p>
+
+<p><strong>Ethics.</strong> This application may promote unhealthy habits and work exploitation using smartphones <a href="#ref-derks">[Derks and Bakker, 2014]</a>, <a href="#ref-fujimoto">[Fujimoto et al., 2016]</a>. Furthermore, we are concerned about potential cognitive offloading <a href="#ref-gerlich">[Gerlich, 2025]</a>. Future work should research the impact of MobileAgents on human wellbeing.</p>
+
+<p><strong>Inclusivity and Access.</strong> MobileAgents supports multiple languages and themes. We aim to lower the technical barrier by providing an interface that connects external agents through MCP <a href="#ref-anthropic">[Anthropic, 2024]</a> and APIs.</p>
+
+<h3>Limitations</h3>
+
+<p>Our participants are all university students with LLM experience, which does not reflect the full target population. The single research task in Phase 1 may not generalize to other agentic workflows such as code execution or data analysis. Finally, the low statistical power (N = 13) is insufficient for conclusive results.</p>
+
+<h3>Conclusion</h3>
+
+<p>We designed a mobile agent management platform balancing automation, control, and usability. Our evaluation explores the tension between control and efficiency through oversight and multimodality. We show that different use cases benefit from different levels of control and that modalities are complementary. Based on this, we release a highly customizable open-source system targeted at technical users and propose future directions grounded in ethics.</p>
+
+<!-- ═══════════════════════ References ═══════════════════ -->
+<div class="references">
+  <h2>References</h2>
+  <ul class="ref-list">
+    <li id="ref-anthropic"><span class="ref-id">[Anthropic, 2024]</span> Anthropic. Introducing the Model Context Protocol. 2024. <a href="https://www.anthropic.com/news/model-context-protocol">anthropic.com</a>.</li>
+    <li id="ref-bai"><span class="ref-id">[Bai et al., 2022]</span> Yuntao Bai, Saurav Kadavath, et al. Constitutional AI: Harmlessness from AI Feedback. 2022. <a href="https://arxiv.org/abs/2212.08073">arXiv:2212.08073</a>.</li>
+    <li id="ref-derks"><span class="ref-id">[Derks and Bakker, 2014]</span> Daantje Derks and Arnold B. Bakker. Smartphone Use, Work&ndash;Home Interference, and Burnout: A Diary Study. <em>Applied Psychology</em>, 63(3), 411&ndash;440, 2014.</li>
+    <li id="ref-friedman"><span class="ref-id">[Friedman et al., 2002]</span> Batya Friedman, Peter Kahn, and Alan Borning. Value Sensitive Design: Theory and Methods. 2002. <a href="https://dada.cs.washington.edu/research/tr/2002/12/UW-CSE-02-12-01.pdf">UW-CSE-02-12-01</a>.</li>
+    <li id="ref-fujimoto"><span class="ref-id">[Fujimoto et al., 2016]</span> Yuka Fujimoto et al. The effect of mobile technology usage on work engagement and emotional exhaustion in Japan. <em>Journal of Business Research</em>, 69(9), 3315&ndash;3323, 2016.</li>
+    <li id="ref-gerlich"><span class="ref-id">[Gerlich, 2025]</span> Michael Gerlich. AI tools in society: Impacts on cognitive offloading and the future of critical thinking. <em>Societies</em>, 15(1), 2025. <a href="https://doi.org/10.3390/soc15010006">doi:10.3390/soc15010006</a>.</li>
+    <li id="ref-greshake"><span class="ref-id">[Greshake et al., 2023]</span> Kai Greshake, Sahar Abdelnabi, et al. Not What You&rsquo;ve Signed Up For: Compromising Real-World LLM-Integrated Applications with Indirect Prompt Injection. In <em>AISec &rsquo;23</em>, ACM, 2023. <a href="https://doi.org/10.1145/3605764.3623985">doi:10.1145/3605764.3623985</a>.</li>
+    <li id="ref-guo"><span class="ref-id">[Guo et al., 2024]</span> Taicheng Guo, Xiuying Chen, et al. Large Language Model based Multi-Agent: A Survey of Progress and Challenges. 2024. <a href="https://arxiv.org/abs/2402.01680">arXiv:2402.01680</a>.</li>
+    <li id="ref-hart"><span class="ref-id">[Hart and Staveland, 1988]</span> Sandra G. Hart and Lowell E. Staveland. Development of NASA-TLX (Task Load Index). In <em>Human Mental Workload</em>, North-Holland, 139&ndash;183, 1988.</li>
+    <li id="ref-kim"><span class="ref-id">[Kim et al., 2025]</span> Yubin Kim, Ken Gu, et al. Towards a Science of Scaling Agent Systems. 2025. <a href="https://arxiv.org/abs/2512.08296">arXiv:2512.08296</a>.</li>
+    <li id="ref-openclaw"><span class="ref-id">[OpenClaw, 2026]</span> OpenClaw &mdash; Personal AI Assistant. 2026. <a href="https://openclaw.ai/">openclaw.ai</a>.</li>
+    <li id="ref-parasuraman"><span class="ref-id">[Parasuraman et al., 2000]</span> R. Parasuraman, T. B. Sheridan, and C. D. Wickens. A model for types and levels of human interaction with automation. <em>Trans. Sys. Man Cyber. Part A</em>, 30(3), 286&ndash;297, 2000.</li>
+    <li id="ref-porcheron"><span class="ref-id">[Porcheron et al., 2018]</span> Martin Porcheron, Joel E. Fischer, Stuart Reeves, and Sarah Sharples. Voice Interfaces in Everyday Life. In <em>CHI &rsquo;18</em>, ACM, 1&ndash;12, 2018. <a href="https://doi.org/10.1145/3173574.3174214">doi:10.1145/3173574.3174214</a>.</li>
+    <li id="ref-sauro"><span class="ref-id">[Sauro and Dumas, 2009]</span> Jeff Sauro and Joseph S. Dumas. Comparison of three one-question, post-task usability questionnaires. In <em>CHI &rsquo;09</em>, ACM, 1599&ndash;1608, 2009.</li>
+    <li id="ref-shneiderman"><span class="ref-id">[Shneiderman, 2020]</span> Ben Shneiderman. Human-Centered Artificial Intelligence: Reliable, Safe, Trustworthy. 2020. <a href="https://arxiv.org/abs/2002.04087">arXiv:2002.04087</a>.</li>
+    <li id="ref-stauder"><span class="ref-id">[Stauder et al., 2026]</span> Leon Stauder, Kevin Feng, et al. The 2025 AI Agent Index: Documenting Technical and Safety Features of Deployed Agentic AI Systems. 2026. <a href="https://arxiv.org/abs/2602.17753">arXiv:2602.17753</a>.</li>
+  </ul>
+</div>
+
+<div class="paper-footer">
+  Kostadin Devedzhiev &middot; University of Cambridge &middot; 2026<br>
+  <a href="/">Back to portfolio</a>
+</div>
+
+</article>
+</body>
+</html>

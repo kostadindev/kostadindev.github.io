@@ -38,18 +38,17 @@ export const currentWork = [
 ];
 
 export const projects = [
-  // HIDDEN — uncomment when ready to publish
-  // {
-  //   title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
-  //   description: "A framework that treats humans as callable sensors that agentic AI systems can query to reduce uncertainty, shifting the human role from 'in the loop' to 'on call.' Compares a structured Human API with conversational deferral on MedQA, finding comparable accuracy (84–86.8%) but different evidence-gathering behavior, complementarity (each uniquely solving 5–6% of cases), and lower cost for structured sensing. Also sketches an online adaptive version using contextual bandits that learns action and source utility through interaction.",
-  //   tags: ["Human-AI Collaboration", "Agentic AI", "Medical AI"],
-  //   category: ["genai", "agentic", "human-ai"],
-  //   links: [
-  //     { type: "report", url: "./documents/papers/human-ai-collab/human_ai_collab_26.html" },
-  //     { type: "paper", url: "./documents/papers/human-ai-collab/paper.pdf" }
-  //   ],
-  //   image: "./documents/papers/human-ai-collab/hapi-animated-svg.svg"
-  // },
+  {
+    title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
+    description: "A framework that treats humans as callable sensors that agentic AI systems can query to reduce uncertainty, shifting the human role from 'in the loop' to 'on call.' Compares a structured Human API with conversational deferral on MedQA, finding comparable accuracy (84–86.8%) but different evidence-gathering behavior, complementarity (each uniquely solving 5–6% of cases), and lower cost for structured sensing. Also sketches an online adaptive version using contextual bandits that learns action and source utility through interaction.",
+    tags: ["Human-AI Collaboration", "Agentic AI", "Medical AI"],
+    category: ["genai", "agentic", "human-ai"],
+    links: [
+      { type: "report", url: "./documents/papers/human-ai-collab/human_ai_collab_26.html" },
+      { type: "paper", url: "./documents/papers/human-ai-collab/paper.pdf" }
+    ],
+    image: "./documents/papers/human-ai-collab/hapi-animated-svg.svg"
+  },
   {
     title: "Knowledge Base Builder: Multi-Source Knowledge Base Construction with LLMs",
     description: "A Python package that consolidates heterogeneous research artifacts — publications, code repositories, web documentation, lecture recordings, and presentation materials — into structured Markdown knowledge bases using large language models. Ingests content from 11 source types and produces output suitable for retrieval-augmented generation (RAG) systems, vector database preprocessing, and web-crawlable context files such as llms.txt.",
@@ -73,19 +72,18 @@ export const projects = [
     ],
     image: "./images/responsible-ai-cover.svg"
   },
-  // HIDDEN — uncomment when ready to publish
-  // {
-  //   title: "MobileAgents: Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go",
-  //   description: "An open-source mobile platform that lets users bring their own AI agents and manage them via text, voice, and images. Features an LLM orchestrator that decomposes multimodal requests into task plans dispatched to specialised agents, with three transparency configurations — black box, plan preview, and full transparency with a real-time execution graph. A within-subjects user study (N=13) shows trust and control increase monotonically with transparency and that input modalities are complementary.",
-  //   tags: ["Agentic AI", "HCI", "Multimodal"],
-  //   category: ["agentic", "human-ai"],
-  //   links: [
-  //     { type: "report", url: "./documents/papers/mobile_agents/mobile_agents_26.html" },
-  //     { type: "paper", url: "./documents/papers/mobile_agents/Mobile_Agent_Manager.pdf" }
-  //   ],
-  //   image: "./documents/papers/mobile_agents/flow.png",
-  //   imageFit: "contain"
-  // },
+  {
+    title: "MobileAgents: Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go",
+    description: "An open-source mobile platform that lets users bring their own AI agents and manage them via text, voice, and images. Features an LLM orchestrator that decomposes multimodal requests into task plans dispatched to specialised agents, with three transparency configurations — black box, plan preview, and full transparency with a real-time execution graph. A within-subjects user study (N=13) shows trust and control increase monotonically with transparency and that input modalities are complementary.",
+    tags: ["Agentic AI", "HCI", "Multimodal"],
+    category: ["agentic", "human-ai"],
+    links: [
+      { type: "report", url: "./documents/papers/mobile_agents/mobile_agents_26.html" },
+      { type: "paper", url: "./documents/papers/mobile_agents/Mobile_Agent_Manager.pdf" }
+    ],
+    image: "./documents/papers/mobile_agents/flow.png",
+    imageFit: "contain"
+  },
   {
     title: "Threat Explorer: Agentic Architectures and Visualization for Cybersecurity Analytics",
     description: "A conversational AI system for cybersecurity threat analysis that translates natural language queries into SQL over a 40,000-record attack dataset. Evaluates three agentic architectures — LLM Chain, ReAct, and multi-agent — across retrieval accuracy, latency, cost, and perceived quality. A within-subjects user study (N=12) with Holm–Bonferroni-corrected Wilcoxon tests shows chart-based output yields statistically significant improvements in usability, clarity, and efficiency over text-only responses.",

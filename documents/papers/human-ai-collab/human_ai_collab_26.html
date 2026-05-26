@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Source+Sans+3:wght@400;500;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --text: #1a1a1a;
+    --text-secondary: #555;
+    --text-tertiary: #888;
+    --accent: #c4704b;
+    --accent-bg: #fdf6f0;
+    --border: #e8e4df;
+    --bg: #fcfbf9;
+    --paper: #ffffff;
+    --code-bg: #f5f3ef;
+    --serif: 'Source Serif 4', 'Georgia', serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+    --mono: 'Source Code Pro', monospace;
+  }
+
+  html { font-size: 17px; scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--serif);
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(252, 251, 249, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--sans); font-size: 0.8rem;
+  }
+  .topbar a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .topbar a:hover { text-decoration: underline; }
+  .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
+  .topbar-right a { color: var(--text-secondary); font-weight: 500; }
+
+  article { max-width: 800px; margin: 0 auto; padding: 3rem 1.5rem 6rem; }
+
+  header { margin-bottom: 3rem; text-align: center; }
+  header h1 { font-size: 2.1rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.01em; margin-bottom: 1.5rem; color: var(--text); }
+  .author { font-family: var(--sans); font-size: 0.95rem; color: var(--text); font-weight: 600; margin-bottom: 0.15rem; }
+  .affiliation { font-family: var(--sans); font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+  .affiliation a { color: var(--accent); text-decoration: none; }
+  .affiliation a:hover { text-decoration: underline; }
+
+  .abstract { margin: 2.5rem 0; padding: 1.5rem 1.75rem; background: var(--accent-bg); border-radius: 8px; border-left: 3px solid var(--accent); }
+  .abstract-label { font-family: var(--sans); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.5rem; }
+  .abstract p { font-size: 0.92rem; line-height: 1.75; color: var(--text-secondary); }
+
+  .toc { margin: 2rem 0 3rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; font-family: var(--sans); }
+  .toc-label { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin-bottom: 0.75rem; }
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc > ol > li { counter-increment: toc; }
+  .toc > ol > li::before { content: counter(toc) "."; display: inline-block; width: 1.5rem; color: var(--text-tertiary); font-size: 0.82rem; }
+  .toc a { color: var(--text); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.15s; }
+  .toc a:hover { color: var(--accent); }
+  .toc li { margin-bottom: 0.3rem; }
+
+  h2 { font-size: 1.5rem; font-weight: 700; margin: 3rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--border); line-height: 1.3; }
+  h2:first-of-type { border-top: none; padding-top: 0; }
+  h3 { font-size: 1.15rem; font-weight: 600; margin: 2rem 0 0.75rem; color: var(--text); }
+  h4 { font-family: var(--sans); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-secondary); margin: 1.5rem 0 0.5rem; }
+
+  p { margin-bottom: 1.1rem; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  a[href^="#ref-"] { color: var(--text-secondary); background: rgba(196, 112, 75, 0.08); padding: 0.05em 0.35em; border-radius: 4px; font-size: 0.88em; font-family: var(--sans); font-weight: 500; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+  a[href^="#ref-"]:hover { background: rgba(196, 112, 75, 0.18); color: var(--accent); text-decoration: none; }
+  .ref-list li:target { background: var(--accent-bg); border-radius: 4px; padding-top: 0.3rem; padding-bottom: 0.3rem; margin-left: -0.5rem; padding-left: calc(2rem + 0.5rem); }
+
+  ol, ul { margin: 0.75rem 0 1.25rem 1.25rem; line-height: 1.75; }
+  li { margin-bottom: 0.35rem; }
+
+  .table-wrap { margin: 1.5rem 0 2rem; overflow-x: auto; }
+  .table-caption { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; text-align: center; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: 0.85rem; }
+  thead th { font-weight: 600; text-align: left; padding: 0.6rem 1rem; border-bottom: 2px solid var(--text); white-space: nowrap; }
+  tbody td { padding: 0.5rem 1rem; border-bottom: 1px solid var(--border); }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--accent-bg); }
+  .num { font-variant-numeric: tabular-nums; text-align: right; font-family: var(--mono); font-size: 0.82rem; }
+  .highlight-cell { font-weight: 600; color: var(--accent); }
+
+  .callout { margin: 1.5rem 0; padding: 1rem 1.25rem; background: #f0f7ff; border-left: 3px solid #4a90d9; border-radius: 4px; font-size: 0.92rem; }
+  .callout-label { font-family: var(--sans); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4a90d9; margin-bottom: 0.35rem; }
+
+  .references { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .references h2 { border-top: none; padding-top: 0; margin-top: 0; }
+  .ref-list { list-style: none; margin: 0; padding: 0; }
+  .ref-list li { font-size: 0.82rem; line-height: 1.65; margin-bottom: 0.85rem; padding-left: 2rem; text-indent: -2rem; color: var(--text-secondary); }
+  .ref-list .ref-id { font-family: var(--sans); font-weight: 600; color: var(--text-tertiary); font-size: 0.75rem; }
+  .ref-list em { font-style: italic; }
+
+  .paper-footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; font-family: var(--sans); font-size: 0.78rem; color: var(--text-tertiary); }
+  .paper-footer a { color: var(--accent); }
+
+  .figure { margin: 2rem 0; text-align: center; }
+  .figure img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .figure-caption { font-family: var(--sans); font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.6rem; font-weight: 500; }
+  .figure-row { display: flex; gap: 1rem; margin: 2rem 0; }
+  .figure-row .figure { flex: 1; margin: 0; }
+
+  .equation { margin: 1.5rem 0; text-align: center; font-family: var(--mono); font-size: 0.9rem; color: var(--text); padding: 1rem; background: var(--code-bg); border-radius: 6px; overflow-x: auto; }
+  .equation .eq-label { float: right; color: var(--text-tertiary); font-size: 0.82rem; }
+
+  .algorithm { margin: 2rem 0; padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: 8px; background: var(--paper); font-family: var(--sans); font-size: 0.85rem; }
+  .algorithm-title { font-weight: 700; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text); margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1.5px solid var(--text); }
+  .algorithm-body { line-height: 1.9; }
+  .algorithm-body .line { padding-left: 0; }
+  .algorithm-body .indent-1 { padding-left: 1.5rem; }
+  .algorithm-body .indent-2 { padding-left: 3rem; }
+  .algorithm-body .indent-3 { padding-left: 4.5rem; }
+  .algorithm-body .kw { font-weight: 600; color: var(--accent); }
+  .algorithm-body .comment { color: var(--text-tertiary); font-style: italic; }
+  .algorithm-body .math { font-family: var(--mono); font-size: 0.82rem; }
+
+  @media (max-width: 640px) {
+    html { font-size: 15.5px; }
+    article { padding: 2rem 1rem 4rem; }
+    header h1 { font-size: 1.65rem; }
+    h2 { font-size: 1.3rem; }
+    thead th, tbody td { padding: 0.4rem 0.5rem; }
+    .figure-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/">Kostadin Devedzhiev</a>
+  <div class="topbar-right">
+    <a href="./paper.pdf">PDF</a>
+  </div>
+</div>
+
+<article>
+
+<header>
+  <h1>Humans as Sensors: Cost-Aware Routing for Structured Human&ndash;AI Information Gathering</h1>
+  <div class="author">Kostadin Devedzhiev</div>
+  <div class="affiliation">
+    University of Cambridge<br>
+    Cambridge, United Kingdom<br>
+    <a href="mailto:kgd26@cam.ac.uk">kgd26@cam.ac.uk</a>
+  </div>
+</header>
+
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>
+    AI agents often lack the context needed to make informed decisions. Rather than fully deferring the decision, we propose treating humans as callable sensors that agentic systems can query to reduce uncertainty. We study two modalities, a structured Human API and Implicit (conversational deferral), and evaluate them with LLM-simulated humans on MedQA cases. We find that while they have comparable accuracy (84&ndash;86.8%), they gather largely different evidence, vary in per-turn uncertainty reduction, and are complementary (each uniquely solving 5&ndash;6% of cases). Through fixed costs proportional to the share of diagnostic information, we show that structured sensing is cheaper. Finally, our experiment reveals that accuracy in structured sensing grows sublinearly with action space, motivating the design of smaller, well-curated registries.
+  </p>
+</div>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ol>
+    <li><a href="#introduction">Introduction</a></li>
+    <li><a href="#methods">Setup and Methods</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#discussion">Discussion</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ol>
+</nav>
+
+<!-- 1. Introduction -->
+<h2 id="introduction">1. Introduction</h2>
+
+<p>AI systems often lack the necessary context for effective, confident decision-making. Critical information may exist in the world and be accessible to humans but not to models. In a hospital, a patient can describe their symptoms, and a nurse can perform laboratory tests to inform an AI diagnostic tool. We argue that <em>decision deferral</em> can be avoided by selectively querying humans for information that reduces uncertainty, which we call <strong>human sensing</strong>.</p>
+
+<p>This perspective remodels humans as <em>callable functions</em> with associated costs and expected returns. Bhatt <a href="#ref-bhatt">[2026]</a> argues that as AI agents grow more autonomous in digital environments, they increasingly depend on humans to observe and act in the physical world&mdash;shifting the human role from &ldquo;in the loop&rdquo; to &ldquo;on call.&rdquo; We formalise this intuition: the agent must select appropriate human-sensing actions from a registry to maximize information gain in a cost-aware routing problem.</p>
+
+<p>Building on the deferral framework from the human&ndash;AI collaboration literature <a href="#ref-madras">[Madras et al., 2018]</a>, <a href="#ref-mozannar">[Mozannar and Sontag, 2020]</a>, <a href="#ref-raghu">[Raghu et al., 2019]</a>, we utilize the routing rule:</p>
+
+$$\pi(x) = \arg\min_{a \in \mathcal{A}} \; r_a(x;\, h) + c(a;\, x) \tag{1}$$
+
+<p>selecting the action $a$ that minimises the risk $r_a(x;\,h)$ and cost $c(a;\,x)$ for input $x$, where $h$ denotes the human decision-maker. We expand standard deferral ($\mathcal{A} = \{a_{\text{model}},\, a_{\text{human}}\}$) to include <strong>structured human sensing actions</strong> and <strong>conversational deferral</strong>:</p>
+
+$$\mathcal{A} = \Big\{\underbrace{a_{\text{model}}}_{\text{decide alone}},\; \underbrace{a_1, \dots, a_K}_{\text{structured sensing (H-API)}},\; \underbrace{a_{\text{conv}}}_{\text{conversational deferral}}\Big\} \tag{2}$$
+
+<p>where each action $a_j$ queries a specific human source for a specific type of information at cost $c_j$. The agent&rsquo;s objective is to minimize total sensing cost $\sum_j c_j \cdot \mathbb{1}[a_j \text{ selected}]$ while reaching sufficient diagnostic certainty. This defines a <strong>multi-arm routing policy</strong> in which the agent sequentially selects sensing actions based on its evolving belief state.</p>
+
+<div class="figure">
+  <img src="./framework.png" alt="Human sensing framework: structured sensing via Human API vs. conversational deferral">
+  <div class="figure-caption">Figure 1: Human sensing framework. The AI agent receives a patient vignette and can either (1) query a structured sensing registry (Human API) for typed findings from specific sources, or (2) defer via free-form conversation. Both pathways gather evidence to inform a final diagnosis.</div>
+</div>
+
+<p>We make three main contributions:</p>
+<ol>
+  <li>We formalise human sensing as a cost-aware, multi-action extension of binary deferral and operationalise it through a structured registry of typed sensing actions.</li>
+  <li>We evaluate structured and conversational actions in terms of accuracy, cost, information overlap, per-turn uncertainty reduction, and complementarity.</li>
+  <li>We show that accuracy in structured sensing grows sublinearly with the size of the action space, and sketch an online adaptive version that learns from interaction via contextual bandits.</li>
+</ol>
+
+<!-- 2. Setup and Methods -->
+<h2 id="methods">2. Setup and Methods</h2>
+
+<p>We simulate clinical diagnosis, where diagnostic context can be acquired through priced sensing actions from sources (e.g., nurses, specialists), on <strong>MedQA-USMLE</strong> <a href="#ref-jin">[Jin et al., 2020]</a>, a 4-option MCQ medical licensing dataset. The diagnostic agent (GPT-4.1) considers age, gender, and chief complaint and uses sensing functions to reduce uncertainty for an accurate diagnosis. Humans are simulated by LLMs with access to ground-truth patient profiles.</p>
+
+<p>Each action $j$ has a fixed cost $c_j$, derived with an LLM to be proportional to the information quantity. Implicit costs are calculated by summing the costs of all sensing actions required to obtain the context. For Implicit (multi), contexts are separated by source. Concretely, the risk and cost are defined as:</p>
+
+$$r_a(x;\, h) = 1 - P(\text{correct} \mid \text{evidence from } a), \qquad c(a;\, x) = c_j \tag{3}$$
+
+<h3>2.1 Main Comparison</h3>
+
+<p>We evaluate mean accuracy, cost, and turns on 582 cases and compare human sensing (H-API) and the conversational (Implicit) against the Baseline (model alone floor) and the Baseline-Full (model with full ground-truth context ceiling). We compare the H-API across three levels of registry granularity: <strong>Fine</strong> (62 atomic sensing actions), <strong>Medium</strong> (20 actions composed of fine), and <strong>Coarse</strong> (8 broad categories).</p>
+
+<h3>2.2 Information Analysis</h3>
+
+<p>To understand the two strategies in terms of information gathering, we perform two analyses. First, we classify the set of actions corresponding to each implicit turn with an LLM judge (GPT-4.1-mini) on $N = 479$ shared cases to calculate coverage, Jaccard similarity, and novelty rate. Then, we study the per-turn information gain and uncertainty reduction by inserting diagnostic checkpoints at each sensing turn and using a separate scoring model to estimate $P(\text{correct option} \mid \text{evidence so far})$ on a subset of 100 cases.</p>
+
+<h3>2.3 Complementarity Analysis</h3>
+
+<p>Human&ndash;AI collaboration is complementary when the team outperforms either party alone <a href="#ref-bansal">[Bansal et al., 2021]</a>; formally:</p>
+
+$$R(\pi^\star) < \min(R_{\text{model}},\, R_{\text{human}}) \tag{4}$$
+
+<p>under optimal deferral. We compare the agreement between H-API (fine) and Implicit (single) on 582 shared cases. For the 76 cases where they disagree, we attempt to pick the better one based on self-reported confidence and an independent LLM judge (GPT-4.1) that picks the most plausible diagnosis based on reasoning, and compare that to an oracle that always selects the better strategy.</p>
+
+<h3>2.4 Action-Space Scaling</h3>
+
+<p>We vary the sensing registry from $k = 0$ to $k = 60$, randomly picking $k$ actions with replacement, in 5 repetitions of 50 cases each per registry size, to study how the action space affects accuracy and cost. When drawing $k$ actions uniformly with replacement from a registry of $n$ actions, the expected number of unique actions is:</p>
+
+$$\mathbb{E}[\text{unique}] = n\!\left(1 - \left(1 - \tfrac{1}{n}\right)^{\!k}\right) = 62\!\left(1 - \left(\tfrac{61}{62}\right)^{\!60}\right) \approx 38.6 \tag{5}$$
+
+<!-- 3. Results -->
+<h2 id="results">3. Results</h2>
+
+<h3>3.1 Main Comparison</h3>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 1: Collaboration strategies (N = 582 shared cases). Cost is mean sensing cost in registry points.</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Condition</th>
+        <th class="num">Acc. (%)</th>
+        <th class="num">Cost</th>
+        <th class="num">Turns</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Baseline</td>
+        <td class="num">71.8 &plusmn; 3.6</td>
+        <td class="num">0.0</td>
+        <td class="num">1.0</td>
+      </tr>
+      <tr>
+        <td>Baseline-Full</td>
+        <td class="num">92.8 &plusmn; 2.0</td>
+        <td class="num">54.2</td>
+        <td class="num">1.0</td>
+      </tr>
+      <tr style="border-top: 1px solid var(--border);">
+        <td>H-API (fine)</td>
+        <td class="num highlight-cell">85.1 &plusmn; 2.9</td>
+        <td class="num highlight-cell">2.6</td>
+        <td class="num">2.5</td>
+      </tr>
+      <tr>
+        <td>H-API (medium)</td>
+        <td class="num">84.0 &plusmn; 2.9</td>
+        <td class="num">7.0</td>
+        <td class="num">2.2</td>
+      </tr>
+      <tr>
+        <td>H-API (coarse)</td>
+        <td class="num">86.3 &plusmn; 2.6</td>
+        <td class="num">13.6</td>
+        <td class="num">2.1</td>
+      </tr>
+      <tr style="border-top: 1px solid var(--border);">
+        <td>Implicit (single)</td>
+        <td class="num">86.8 &plusmn; 2.8</td>
+        <td class="num">51.2</td>
+        <td class="num">4.3</td>
+      </tr>
+      <tr>
+        <td>Implicit (multi)</td>
+        <td class="num">83.5 &plusmn; 3.0</td>
+        <td class="num">15.6</td>
+        <td class="num">2.6</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>H-API and Implicit perform with comparable mean accuracy (83.5%&ndash;86.8%), both improving over the Baseline (71.8%) but not reaching Baseline-Full (92.8%). H-API spent fewer resources than Implicit at all granularities, showing the benefit of structured sensing in requesting targeted cost-aware actions. The total cost increases as the registry size becomes coarser.</p>
+
+<div class="figure">
+  <img src="./cost_accuracy.png" alt="Cost-accuracy Pareto frontier showing all conditions">
+  <div class="figure-caption">Figure 2: Cost-accuracy Pareto frontier. H-API (fine) achieves high accuracy at low cost, while Implicit achieves similar accuracy at ~20&times; the cost. The dashed Pareto frontier passes through H-API (coarse) and H-API (fine) between the baselines.</div>
+</div>
+
+<div class="callout">
+  <div class="callout-label">Key Finding</div>
+  H-API (fine) achieves 85.1% accuracy at a mean cost of only 2.6 registry points &mdash; roughly 20&times; cheaper than Implicit (single) at comparable accuracy, demonstrating that structured sensing is substantially more cost-efficient.
+</div>
+
+<div class="figure">
+  <img src="./cost_distribution.png" alt="Cost distribution histogram and boxplot by granularity">
+  <div class="figure-caption">Figure 3: Cost distribution. (a) Histogram of total sensing cost per case for H-API (fine), with mean 2.6 points. (b) Boxplot comparison across registry granularities: finer registries yield lower and tighter cost distributions.</div>
+</div>
+
+<h3>3.2 Information Analysis</h3>
+
+<div class="table-wrap">
+  <div class="table-caption">Table 2: Information overlap &mdash; Implicit vs. H-API (fine) (N = 479)</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th class="num">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Impl. turns / case</td>
+        <td class="num">3.7</td>
+      </tr>
+      <tr>
+        <td>Impl. actions / case</td>
+        <td class="num">4.9</td>
+      </tr>
+      <tr>
+        <td>H-API actions / case</td>
+        <td class="num">1.9</td>
+      </tr>
+      <tr style="border-top: 1px solid var(--border);">
+        <td>Coverage</td>
+        <td class="num">0.478</td>
+      </tr>
+      <tr>
+        <td>Jaccard similarity</td>
+        <td class="num">0.199</td>
+      </tr>
+      <tr>
+        <td>Novelty rate</td>
+        <td class="num">2.7%</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>The information analysis reveals that Implicit and H-API gather largely different information (Jaccard similarity of 0.199). Implicit utilizes 4.9 actions on average compared to 1.9 for H-API. They also differ in how quickly they reduce uncertainty.</p>
+
+<div class="figure">
+  <img src="./information_mapping.png" alt="Coverage, Jaccard similarity, and set composition histograms">
+  <div class="figure-caption">Figure 4: Information overlap between Implicit and H-API. (a) Coverage of H-API actions by Implicit turns (mean 0.47). (b) Jaccard similarity of action sets (mean 0.20). (c) Set composition: Implicit uses 4.1 unique actions per case vs. 1.0 for H-API, with only 0.9 shared.</div>
+</div>
+
+<div class="figure">
+  <img src="./info_complement.png" alt="Three-panel plot: confidence in correct, checkpoint accuracy, and diagnostic uncertainty over evidence turns">
+  <div class="figure-caption">Figure 5: Per-turn diagnostic dynamics. (a) P(correct) vs. evidence turns &mdash; H-API shows steady gains while Implicit stalls after turn 1. (b) Forced-diagnosis checkpoint accuracy per turn. (c) Diagnostic entropy &mdash; H-API entropy drops from 1.77 to 1.27 bits; Implicit plateaus near 1.4 bits.</div>
+</div>
+
+<div class="figure">
+  <img src="./category_comparison.png" alt="Action category distribution comparing H-API and Implicit">
+  <div class="figure-caption">Figure 6: Action category distribution. Both strategies focus primarily on patient history, but H-API allocates a larger share to physical examination (24% vs 9%), while Implicit concentrates more heavily on history (85% vs 68%).</div>
+</div>
+
+<div class="figure">
+  <img src="./cooccurrence.png" alt="Heatmap of action co-occurrence in H-API">
+  <div class="figure-caption">Figure 7: Action co-occurrence matrix for H-API (fine). The most frequent action is &ldquo;hx chief complaint&rdquo; (407 cases). Off-diagonal entries show which actions are commonly requested together.</div>
+</div>
+
+<h3>3.3 Complementarity Analysis</h3>
+
+<p>The complementarity analysis reveals H-API and Implicit agree on 80.1% of cases, each uniquely solving 5&ndash;6% of cases, resulting in an oracle selector scoring 87.8% [85.2, 90.4]. In the 76 cases where they disagree, confidence-based switching scores 47% (slightly better than a coin flip at 44%) while the LLM judge reached 60%, improving over each independently but still far from the oracle selector (88%).</p>
+
+<div class="figure">
+  <img src="./complementarity.png" alt="Three-panel complementarity analysis: agreement, overall accuracy, and switching signals">
+  <div class="figure-caption">Figure 8: Complementarity analysis. (a) Case-level agreement: 80% both correct, 5% H-API only, 7% Implicit only, 8% both wrong. (b) Overall accuracy: an oracle selector reaches 91.4%. (c) Switching signal quality on disagreement cases (N=75): the LLM judge (60%) outperforms confidence-based switching (49%) but falls short of the oracle (88%).</div>
+</div>
+
+<h3>3.4 Action-Space Scaling</h3>
+
+<p>The action-space scaling experiment for H-API shows accuracy rises sublinearly with registry size, plateauing at $87.6 \pm 3.2\%$ around $k = 30$. Cost does not grow beyond registries of 25. In all cases, the diagnostic agent utilized at most 5 actions. These results suggest that a small, well-curated registry captures most of the performance gains.</p>
+
+<div class="figure">
+  <img src="./scaling_combined.png" alt="Action-space scaling: accuracy and cost vs registry size k">
+  <div class="figure-caption">Figure 9: Action-space scaling. Accuracy (blue) rises sublinearly with registry size <em>k</em> and plateaus around k = 30. Cost (orange) stabilises beyond k = 25, indicating diminishing returns from larger registries.</div>
+</div>
+
+<div class="figure">
+  <img src="./budget_sensitivity.png" alt="Accuracy vs cost budget B">
+  <div class="figure-caption">Figure 10: Budget sensitivity. Accuracy climbs steeply from the baseline (71.8%) as the cost budget <em>B</em> increases, plateauing near the unconstrained H-API (fine) performance (85.1%) around B = 10 points.</div>
+</div>
+
+<div class="figure">
+  <img src="./risk_coverage.png" alt="Risk-coverage curve for Baseline, H-API fine, and H-API coarse">
+  <div class="figure-caption">Figure 11: Risk-coverage curve. H-API (fine) and H-API (coarse) maintain low selective risk across all coverage levels, while the Baseline&rsquo;s risk rises sharply &mdash; the flat sensing curves motivate active sensing over confidence-based routing.</div>
+</div>
+
+<!-- 4. Discussion -->
+<h2 id="discussion">4. Discussion</h2>
+
+<h3>From Deferral to Sensing</h3>
+
+<p>Unlike binary deferral <a href="#ref-mozannar">[Mozannar and Sontag, 2020]</a>, <a href="#ref-madras">[Madras et al., 2018]</a>, the agent dynamically selects <em>which</em> human sensor to query based on its current belief state. We hypothesize that structured human sensing may redefine the human role in existing workflows, yielding benefits such as reduced workload or algorithmic upskilling, but also risks cognitive offloading <a href="#ref-gerlich">[Gerlich, 2025]</a>, skill atrophy <a href="#ref-macnamara">[Macnamara et al., 2024]</a>, and meaning erosion. Future work should focus on developing human-centric designs and validating them through real-world human experiments.</p>
+
+<h3>When Sensing Hurts</h3>
+
+<p>In approximately 5% of cases, sensing decreases accuracy due to noisy or misleading responses. The optimal policy must account for when human input degrades decision-making. Identifying when to abstain from sensing is an open problem for future work.</p>
+
+<h3>Online Adaptation</h3>
+
+<p>In deployment, the fixed routing policy could be improved via online adaptation that learns from interaction. A contextual bandit <a href="#ref-li">[Li et al., 2010]</a> can learn which sensing actions to select from per-case diagnostic feedback while accumulating aggregate statistics about actions and sources that enrich the LLM&rsquo;s context over time.</p>
+
+<p>Exploration is budget-constrained: at each turn the agent restricts its choices to the <strong>budget-feasible action set</strong>:</p>
+
+$$\mathcal{A}_{\mathrm{afford}} = \{a \in \mathcal{A} : \text{cost}_t + c(a) \leq B\} \tag{6}$$
+
+<p>With probability $\epsilon_0$, the system explores by sampling from $\mathcal{A}_{\mathrm{afford}}$ with $P(a) \propto 1/(n_a + 1)$, naturally favouring under-explored actions. Thompson sampling <a href="#ref-agrawal">[Agrawal and Goyal, 2013]</a> or LinUCB <a href="#ref-li">[Li et al., 2010]</a> could replace $\epsilon$-greedy.</p>
+
+<div class="algorithm">
+  <div class="algorithm-title">Algorithm 1: LLM-driven adaptive sensing with aggregate statistics</div>
+  <div class="algorithm-body">
+    <div class="line"><span class="kw">Require:</span> LLM diagnostic agent, registry $\mathcal{A}$, budget $B$, exploration rate $\epsilon_0$</div>
+    <div class="line"><span class="kw">1:</span> Initialise $S_0 \leftarrow \emptyset$ <span class="comment">&emsp;// Empty statistics table</span></div>
+    <div class="line"><span class="kw">2:</span> <span class="kw">for</span> each new case $x_t$, $t = 1, 2, \ldots$ <span class="kw">do</span></div>
+    <div class="line indent-1"><span class="kw">3:</span> LLM receives $\text{triage}(x_t)$ + registry $\mathcal{A}$ + summary of $S_{t-1}$</div>
+    <div class="line indent-1"><span class="kw">4:</span> $\text{cost}_t \leftarrow 0$; &ensp; $\mathcal{H}_t \leftarrow \emptyset$</div>
+    <div class="line indent-1"><span class="kw">5:</span> <span class="kw">while</span> LLM chooses <strong>SENSE</strong> <span class="kw">and</span> $\text{cost}_t < B$ <span class="kw">do</span></div>
+    <div class="line indent-2"><span class="kw">6:</span> $\mathcal{A}_{\mathrm{afford}} \leftarrow \{a \in \mathcal{A} : \text{cost}_t + c(a) \leq B\}$ <span class="comment">&emsp;// Eq. 6</span></div>
+    <div class="line indent-2"><span class="kw">7:</span> <span class="kw">if</span> $U \sim \mathrm{Uniform}(0,1) < \epsilon_0$ <span class="kw">then</span></div>
+    <div class="line indent-3"><span class="kw">8:</span> $a_t \sim \mathcal{A}_{\mathrm{afford}}$ with $P(a) \propto 1/(n_a + 1)$ <span class="comment">&emsp;// Explore</span></div>
+    <div class="line indent-2"><span class="kw">9:</span> <span class="kw">else</span></div>
+    <div class="line indent-3"><span class="kw">10:</span> LLM selects $a_t \in \mathcal{A}_{\mathrm{afford}}$ <span class="comment">&emsp;// Exploit</span></div>
+    <div class="line indent-2"><span class="kw">11:</span> <span class="kw">end if</span></div>
+    <div class="line indent-2"><span class="kw">12:</span> Execute $a_t$; LLM receives response; $\text{cost}_t \leftarrow \text{cost}_t + c(a_t)$</div>
+    <div class="line indent-2"><span class="kw">13:</span> $\mathcal{H}_t \leftarrow \mathcal{H}_t \cup \{a_t\}$</div>
+    <div class="line indent-2"><span class="kw">14:</span> LLM decides <strong>SENSE</strong> again or <strong>DIAGNOSE</strong></div>
+    <div class="line indent-1"><span class="kw">15:</span> <span class="kw">end while</span></div>
+    <div class="line indent-1"><span class="kw">16:</span> LLM diagnoses $\hat{y}_t$; observe outcome $y_t$</div>
+    <div class="line indent-1"><span class="kw">17:</span> Update $S_t$: for each $a \in \mathcal{H}_t$, update $n_a \leftarrow n_a + 1$</div>
+    <div class="line"><span class="kw">18:</span> <span class="kw">end for</span></div>
+  </div>
+</div>
+
+<h3>Limitations</h3>
+
+<p>Our study has several strong limitations. Human sensors are simulated with LLMs that may not accurately represent the cognitive, functional, and physical capabilities of real people. Furthermore, we evaluate a single domain and model provider. The action registries are generated by LLMs, and the costs used are fixed points rather than real-world prices. All experiments are sensitive to the prompts, and verbalized confidence is known to be poorly calibrated <a href="#ref-xiong">[Xiong et al., 2024]</a>, <a href="#ref-groot">[Groot and Valdenegro Toro, 2024]</a>. The sample sizes are small (582 cases, 100-case information subset), limiting statistical strength. Finally, the bandit algorithm has not been validated empirically and assumes stationarity that may not hold in practice.</p>
+
+<!-- 5. Conclusion -->
+<h2 id="conclusion">5. Conclusion</h2>
+
+<p>Motivated by a transition from AI-assisted to human-assisted workflows, we proposed exposing humans as callable sensors via a structured API and studied this approach in terms of accuracy, cost, information gathering, and uncertainty reduction. The simulated experiment showed increased accuracy over the baseline and reduced cost compared to the free-form conversational interface. Additionally, we explored how the action space affects performance and found that smaller, well-curated sensing registries capture most of the accuracy gains cost-effectively. Finally, we discussed an online, adaptive version that learns action and source utility through interaction via contextual bandits. We hope our framework motivates real-world implementations and future research on it, particularly regarding its human-centric effects.</p>
+
+<!-- References -->
+<div class="references">
+  <h2>References</h2>
+  <ul class="ref-list">
+    <li id="ref-agrawal"><span class="ref-id">[Agrawal and Goyal, 2013]</span> Shipra Agrawal and Navin Goyal. Thompson sampling for contextual bandits with linear payoffs. In <em>International Conference on Machine Learning</em>, pages 127&ndash;135. PMLR, 2013.</li>
+    <li id="ref-bansal"><span class="ref-id">[Bansal et al., 2021]</span> Gagan Bansal, Tongshuang Wu, Joyce Zhou, Raymond Fok, Besmira Nushi, Ece Kamar, Marco Tulio Ribeiro, and Daniel S. Weld. Does the whole exceed its parts? The effect of AI explanations on complementary team performance. 2021. <a href="https://arxiv.org/abs/2006.14779">arXiv:2006.14779</a>.</li>
+    <li id="ref-bhatt"><span class="ref-id">[Bhatt, 2026]</span> Umang Bhatt. AI agents are recruiting humans to observe the offline world. <em>Noema Magazine</em>, March 2026. <a href="https://www.noemamag.com/ai-agents-are-recruiting-humans-to-observe-the-offline-world/">noemamag.com</a>.</li>
+    <li id="ref-gerlich"><span class="ref-id">[Gerlich, 2025]</span> Michael Gerlich. AI tools in society: Impacts on cognitive offloading and the future of critical thinking. <em>Societies</em>, 15(1), 2025. <a href="https://doi.org/10.3390/soc15010006">doi:10.3390/soc15010006</a>.</li>
+    <li id="ref-groot"><span class="ref-id">[Groot and Valdenegro Toro, 2024]</span> Tobias Groot and Matias Valdenegro Toro. Overconfidence is key: Verbalized uncertainty evaluation in large language and vision-language models. In <em>Proceedings of the 4th Workshop on Trustworthy Natural Language Processing (TrustNLP 2024)</em>, 2024. <a href="https://doi.org/10.18653/v1/2024.trustnlp-1.13">doi:10.18653/v1/2024.trustnlp-1.13</a>.</li>
+    <li id="ref-jin"><span class="ref-id">[Jin et al., 2020]</span> Di Jin, Eileen Pan, Nassim Oufattole, Wei-Hung Weng, Hanyi Fang, and Peter Szolovits. What disease does this patient have? A large-scale open domain question answering dataset from medical exams. 2020. <a href="https://arxiv.org/abs/2009.13081">arXiv:2009.13081</a>.</li>
+    <li id="ref-li"><span class="ref-id">[Li et al., 2010]</span> Lihong Li, Wei Chu, John Langford, and Robert E Schapire. A contextual-bandit approach to personalized news article recommendation. In <em>Proceedings of the 19th International Conference on World Wide Web</em>, pages 661&ndash;670, 2010.</li>
+    <li id="ref-macnamara"><span class="ref-id">[Macnamara et al., 2024]</span> Brooke N. Macnamara, Ibrahim Berber, et al. Does using artificial intelligence assistance accelerate skill decay and hinder skill development without performers&rsquo; awareness? <em>Cognitive Research: Principles and Implications</em>, 9, 2024. <a href="https://api.semanticscholar.org/CorpusID:271112024">Semantic Scholar</a>.</li>
+    <li id="ref-madras"><span class="ref-id">[Madras et al., 2018]</span> David Madras, Toniann Pitassi, and Richard Zemel. Predict responsibly: Improving fairness and accuracy by learning to defer. 2018. <a href="https://arxiv.org/abs/1711.06664">arXiv:1711.06664</a>.</li>
+    <li id="ref-mozannar"><span class="ref-id">[Mozannar and Sontag, 2020]</span> Hussein Mozannar and David Sontag. Consistent estimators for learning to defer to an expert. In <em>Proceedings of the 37th International Conference on Machine Learning</em>, volume 119, pages 7076&ndash;7087. PMLR, 2020. <a href="https://proceedings.mlr.press/v119/mozannar20b.html">proceedings.mlr.press</a>.</li>
+    <li id="ref-raghu"><span class="ref-id">[Raghu et al., 2019]</span> Maithra Raghu, Katy Blumer, Greg Corrado, Jon Kleinberg, Ziad Obermeyer, and Sendhil Mullainathan. The algorithmic automation problem: Prediction, triage, and human effort. 2019. <a href="https://arxiv.org/abs/1903.12220">arXiv:1903.12220</a>.</li>
+    <li id="ref-tang"><span class="ref-id">[Tang et al., 2026]</span> Yuanrong Tang, Huiling Peng, Bingxi Zhao, et al. Human tool: An MCP-style framework for human-agent collaboration. 2026. <a href="https://arxiv.org/abs/2602.12953">arXiv:2602.12953</a>.</li>
+    <li id="ref-xiong"><span class="ref-id">[Xiong et al., 2024]</span> Miao Xiong, Zhiyuan Hu, Xinyang Lu, et al. Can LLMs express their uncertainty? An empirical evaluation of confidence elicitation in LLMs. 2024. <a href="https://arxiv.org/abs/2306.13063">arXiv:2306.13063</a>.</li>
+  </ul>
+</div>
+
+<div class="paper-footer">
+  Kostadin Devedzhiev &middot; University of Cambridge &middot; 2026<br>
+  <a href="/">Back to portfolio</a>
+</div>
+
+</article>
+
+</body>
+</html>
