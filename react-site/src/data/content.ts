@@ -33,11 +33,9 @@ export const currentWork = [
     ],
     image: "./documents/thesis/thesis-cover.svg",
     visuals: [
-      { kind: "image", src: "./documents/thesis/thesis-cover.svg", caption: "Skill inference — a noisy prior closing on the true profile" },
-      { kind: "image", src: "./documents/papers/human-ai-collab/framework.png", bg: "#ffffff", caption: "The framework — an AI agent queries a structured human sensing registry, then decides" },
-      { kind: "image", src: "./documents/papers/human-ai-collab/cost_accuracy.png", bg: "#ffffff", caption: "Cost–accuracy frontier — structured sensing beats implicit prompting per unit cost" },
-      { kind: "image", src: "./documents/papers/human-ai-collab/risk_coverage.png", bg: "#ffffff", caption: "Selective risk vs coverage — fewer errors when the agent can defer to a human" },
-      { kind: "component", name: "skill-covariance", caption: "Skills covary — observing one moves the ones correlated with it" }
+      { kind: "image", src: "./documents/thesis/thesis-cover.svg", caption: "Skill inference — a noisy prior closing on the true profile as observations arrive" },
+      { kind: "component", name: "skill-pipeline", caption: "The skillinfer pipeline — prior → observe a task → transfer along Σ → posterior → route" },
+      { kind: "component", name: "skill-covariance", caption: "Covariance Σ — observing Mathematics transfers up to cognitive skills, down to physical ones" }
     ]
   },
   {

@@ -24,6 +24,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { currentWork } from '../data/content';
 import SectionHeader from './SectionHeader';
 import SkillCovariance from './SkillCovariance';
+import SkillPipeline from './SkillPipeline';
 
 type Visual =
   | { kind: 'image'; src: string; caption?: string; bg?: string }
@@ -31,6 +32,7 @@ type Visual =
 
 const vizRegistry: Record<string, React.ComponentType> = {
   'skill-covariance': SkillCovariance,
+  'skill-pipeline': SkillPipeline,
 };
 
 /** The visual panel of a Work card — one or more slides (images or live
@@ -63,7 +65,8 @@ function WorkVisual({ visuals, title }: { visuals: Visual[]; title: string }) {
           justifyContent: 'center',
           minHeight: { xs: 220, md: 0 },
           bgcolor: v.bg ?? 'transparent',
-          p: v.bg ? { xs: 2, md: 3 } : 0,
+          px: many ? { xs: 3, md: 5 } : v.bg ? { xs: 2, md: 3 } : 0,
+          py: v.bg ? { xs: 2, md: 3 } : 0,
           transition: 'background-color 0.3s',
         }}
       >
