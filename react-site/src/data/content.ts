@@ -21,7 +21,7 @@ export const personalInfo = {
 export const currentWork = [
   {
     title: "Ad Hoc Human–AI Orchestration via Skill Inference",
-    description: "My MPhil thesis (Cambridge, awarded with Distinction). To orchestrate ad hoc teams of humans and AI agents, an orchestrator must learn who is best at what from only a few noisy observations. I model capability as a Bayesian Gaussian belief over a skill taxonomy — each observation propagates through the skill covariance to update the whole profile, recovering calibrated skills faster than independent estimation. Released as the open-source skillinfer package, previewed in Tailor.",
+    description: "My MPhil thesis at Cambridge, awarded with Distinction. To build an ad hoc team from humans and AI agents, you first have to work out who is good at what, usually from only a handful of noisy observations. I model each individual's ability as a Bayesian belief over a taxonomy of skills, so measuring one skill also updates the skills correlated with it, not just the one you observed. That recovers well-calibrated profiles faster than scoring each skill on its own. The methods are open-sourced as [skillinfer](https://kostadindev.github.io/skillinfer) and previewed inside [Tailor](https://tailorworkflow.com).",
     tags: ["Human-AI Orchestration", "Bayesian Inference", "Agentic AI"],
     links: [
       { type: "thesis", url: "./documents/thesis/thesis.pdf" },
@@ -347,14 +347,14 @@ export const news = [
     date: "Jul 2026",
     location: "Oxford, UK",
     title: "Oxford Human–Algorithm Interaction (HAI) Workshop 2026",
-    description: "Presented my thesis, *Ad Hoc Human–AI Orchestration via Skill Inference*, at the HAI Workshop (6–8 July, Saïd Business School) on human–AI decision synergy. [Slides](documents/thesis/presentation.pdf)",
+    description: "Gave a talk on my thesis, *Ad Hoc Human–AI Orchestration via Skill Inference*, at the Oxford HAI Workshop (6–8 July, Saïd Business School). [Slides](documents/thesis/presentation.pdf)",
     link: "https://www.sbs.ox.ac.uk/events/human-algorithm-interaction-workshop-2026",
   },
   {
     date: "Jun 2026",
     location: "Cambridge, UK",
     title: "CHIA Annual Conference 2026 — AI for Good",
-    description: "Presented my thesis poster, *Ad Hoc Human–AI Orchestration via Skill Inference*, at the Centre for Human-Inspired AI annual conference (The Cambridge Union). [Poster](documents/thesis/poster.pdf)",
+    description: "Presented my thesis poster, *Ad Hoc Human–AI Orchestration via Skill Inference*, at CHIA's annual conference in the Cambridge Union. [Poster](documents/thesis/poster.pdf)",
     link: "https://www.chia.cam.ac.uk/",
   },
   {
