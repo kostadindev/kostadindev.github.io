@@ -12,7 +12,7 @@ export default function Education() {
         <Stack spacing={3} sx={{ mb: 6 }} className="reveal-stagger">
           {education.map((edu) => (
             <Card
-              key={edu.institution}
+              key={`${edu.institution} · ${edu.degree}`}
               elevation={0}
               sx={{
                 bgcolor: 'background.paper',

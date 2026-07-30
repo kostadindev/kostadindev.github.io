@@ -70,7 +70,7 @@ export default function RoutingDiagram({ avatar }: { avatar: string }) {
 
       {/* the graph */}
       <Box sx={{ p: 1 }}>
-        <svg viewBox="0 0 600 340" width="100%" style={{ display: 'block' }} role="img" aria-label="Kosta and Claude, each with a different skill profile, are routed by orchestration into a hybrid team of both">
+        <svg viewBox="0 0 600 340" width="100%" style={{ display: 'block' }} role="img" aria-label="Kosta and Claude, each with a different skill profile, are routed by orchestration into an ad hoc team of both">
           <defs>
             <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
               <circle cx="1.5" cy="1.5" r="1.1" fill={INK} opacity="0.06" />
@@ -94,8 +94,8 @@ export default function RoutingDiagram({ avatar }: { avatar: string }) {
           {/* edges: candidates → orchestration */}
           <path className="edge-line" d="M250,90 C 282,96 290,142 300,150" fill="none" stroke={ORANGE} strokeWidth="2.5" markerEnd="url(#arrow-o)" />
           <path className="edge-line" d="M250,246 C 282,240 290,196 300,190" fill="none" stroke={AGENT} strokeWidth="2.5" markerEnd="url(#arrow-a)" />
-          {/* edge: orchestration → team */}
-          <path d="M452,164 L482,164" fill="none" stroke={INK} strokeWidth="2" strokeDasharray="1 5" strokeLinecap="round" markerEnd="url(#arrow-k)" />
+          {/* edge: orchestration → the assembled team */}
+          <path d="M446,166 L487,166" fill="none" stroke={INK} strokeWidth="2" strokeDasharray="1 5" strokeLinecap="round" markerEnd="url(#arrow-k)" />
 
           {/* KOSTA candidate — the headshot + skill profile */}
           <image href={avatar} x="18" y="34" width="106" height="112" clipPath="url(#human-clip)" preserveAspectRatio="xMidYMin slice" />
@@ -121,18 +121,18 @@ export default function RoutingDiagram({ avatar }: { avatar: string }) {
           {skillRows(CLAUDE_SKILL, 212, AGENT)}
 
           {/* ORCHESTRATION junction */}
-          <rect x="300" y="116" width="150" height="96" rx="16" fill="#fff" stroke={INK} strokeWidth="2" />
-          <text x="375" y="150" textAnchor="middle" fontFamily="'Space Grotesk', sans-serif" fontSize="16.5" fontWeight="600" fill={INK}>orchestration</text>
-          <text x="375" y="170" textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="10.5" letterSpacing="0.02em" fill={MUTED}>infer skills &#183; route</text>
-          <text x="375" y="189" textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="9" fill={AGENT}>good at what &#183; likes what?</text>
+          <rect x="298" y="124" width="148" height="84" rx="16" fill="#fff" stroke={INK} strokeWidth="2" />
+          <text x="372" y="161" textAnchor="middle" fontFamily="'Space Grotesk', sans-serif" fontSize="16.5" fontWeight="600" fill={INK}>orchestration</text>
+          <text x="372" y="181" textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="10" letterSpacing="0.02em" fill={MUTED}>infer skills &#183; route</text>
 
-          {/* HYBRID TEAM — Kosta + Claude working together */}
-          <text x="526" y="108" textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="10" letterSpacing="0.12em" fill={MUTED}>HYBRID TEAM</text>
-          <rect x="486" y="126" width="80" height="76" rx="14" fill="#fff" stroke={INK} strokeWidth="1.5" />
-          <line x1="512" y1="164" x2="540" y2="164" stroke={INK} strokeWidth="1.6" />
-          <circle cx="512" cy="164" r="7" fill={ORANGE} />
-          <circle cx="540" cy="164" r="7" fill={AGENT} />
-          <text x="526" y="224" textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="11.5" fill={INK}>Kosta + Claude</text>
+          {/* THE PAYOFF — the ad hoc team both belong to */}
+          <rect x="486" y="118" width="102" height="96" rx="18" fill={ORANGE} opacity="0.06" />
+          <rect x="490" y="122" width="94" height="88" rx="15" fill="#fff" stroke={ORANGE} strokeWidth="2.5" />
+          <text x="537" y="145" textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" letterSpacing="0.14em" fill={MUTED}>AD HOC TEAM</text>
+          <line x1="525" y1="171" x2="549" y2="171" stroke={INK} strokeWidth="2" />
+          <circle cx="525" cy="171" r="8.5" fill={ORANGE} />
+          <circle cx="549" cy="171" r="8.5" fill={AGENT} />
+          <text x="537" y="200" textAnchor="middle" fontFamily="'IBM Plex Mono', monospace" fontSize="10.5" fill={INK}>Kosta + Claude</text>
         </svg>
       </Box>
     </Box>

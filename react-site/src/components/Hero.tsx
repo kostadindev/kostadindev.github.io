@@ -5,7 +5,6 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CodeIcon from '@mui/icons-material/Code';
 import SchoolIcon from '@mui/icons-material/School';
 import SvgIcon from '@mui/material/SvgIcon';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckIcon from '@mui/icons-material/Check';
@@ -60,7 +59,7 @@ export default function Hero() {
         position: 'relative',
         overflow: 'hidden',
         bgcolor: 'var(--paper)',
-        pt: { xs: 11, md: 3 },
+        pt: { xs: 9, md: 3 },
         pb: { xs: 6, md: 4 },
       }}
     >
@@ -253,22 +252,6 @@ export default function Hero() {
           </Stack>
         </Box>
       </Container>
-
-      <IconButton
-        href="#news"
-        aria-label="Scroll to news"
-        sx={{
-          position: 'absolute', bottom: 24, left: '50%', transform: 'translateX(-50%)',
-          color: 'grey.400', display: { xs: 'none', md: 'inline-flex' },
-          animation: 'bounce 2.5s ease-in-out infinite',
-          '@keyframes bounce': {
-            '0%, 100%': { transform: 'translateX(-50%) translateY(0)' },
-            '50%': { transform: 'translateX(-50%) translateY(-8px)' },
-          },
-        }}
-      >
-        <KeyboardArrowDownIcon />
-      </IconButton>
     </Box>
   );
 }
