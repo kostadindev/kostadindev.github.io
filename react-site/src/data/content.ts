@@ -170,15 +170,16 @@ export const education = [
   {
     institution: "University of Cambridge",
     degree: "Doctor of Philosophy in Human-Inspired AI",
-    details: ["Cambridge AI Research Society", "In Progress"],
+    details: ["Trustworthy AI Lab", "Cambridge AI Research Society", "In Progress"],
     link: "https://www.chia.cam.ac.uk/",
     logo: "https://www.cam.ac.uk/sites/default/files/secondary-logo-stacked.png"
   },
   {
     institution: "University of Cambridge",
     degree: "Master of Philosophy in Human-Inspired AI",
-    details: ["Cambridge AI Research Society", "Awarded with Distinction"],
+    details: ["Trustworthy AI Lab", "Cambridge AI Research Society", "Awarded with Distinction (82.6/100)"],
     link: "https://www.chia.cam.ac.uk/",
+    transcript: "./documents/cambridge_transcript.pdf",
     logo: "https://www.cam.ac.uk/sites/default/files/secondary-logo-stacked.png"
   },
   {

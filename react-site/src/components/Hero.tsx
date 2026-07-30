@@ -218,7 +218,7 @@ export default function Hero() {
             </Typography>
 
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2, lineHeight: 1.8 }}>
-              I'm a postgraduate student at the{' '}
+              I'm a PhD student at the{' '}
               <Link href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener">
                 Centre for Human-Inspired AI (CHIA)
               </Link>
