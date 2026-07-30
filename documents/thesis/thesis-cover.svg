@@ -15,7 +15,7 @@
 
   <rect width="900" height="560" fill="url(#bg)"/>
   <text x="44" y="48" fill="#b98a3f" font-size="13" font-weight="700" letter-spacing="3">SKILL INFERENCE</text>
-  <text x="44" y="70" fill="#8a8f98" font-size="13.5">Each observation updates the whole profile — beliefs sharpen toward the truth (dotted)</text>
+  <text x="44" y="70" fill="#8a8f98" font-size="13.5">Each observation updates a person's whole skill profile — sharpening toward the truth (dotted)</text>
 
   <!-- progress dots -->
   <text x="792" y="48" text-anchor="end" fill="#a89a80" font-size="11" letter-spacing="1">OBSERVATIONS</text>
@@ -137,6 +137,14 @@
       <text x="36" y="17.5" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">y = 0.72</text>
     </g>
   </g>
+
+  <!-- human subject at the centre of the profile -->
+  <g filter="url(#soft)">
+    <circle cx="450" cy="252" r="23" fill="#ffffff" stroke="#e6d7bf" stroke-width="1.5"/>
+    <circle cx="450" cy="246.5" r="6.2" fill="#d4851f"/>
+    <path d="M438.5 263.5 a11.5 9.5 0 0 1 23 0 Z" fill="#d4851f"/>
+  </g>
+  <text x="450" y="252" dy="34" text-anchor="middle" fill="#a8825a" font-size="10.5" font-weight="600" letter-spacing="1.5">HUMAN EXPERT</text>
 
   <!-- legend -->
   <g font-size="13.5" fill="#5f636b">
