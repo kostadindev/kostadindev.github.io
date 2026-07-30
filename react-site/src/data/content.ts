@@ -371,6 +371,8 @@ export const travelCountries = {
     { id: "705", name: "Slovenia" },
     { id: "191", name: "Croatia" },
     { id: "826", name: "United Kingdom" },
+    { id: "724", name: "Spain" },
+    { id: "470", name: "Malta" },
   ],
   northAmerica: [
     { id: "840", name: "United States" },
