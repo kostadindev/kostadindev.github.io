@@ -53,32 +53,34 @@ function App() {
         palette: {
           mode: 'light',
           primary: {
-            main: '#d4851f',
-            light: '#e89a3c',
-            dark: '#b8720f',
+            main: '#E8590C',
+            light: '#F5814A',
+            dark: '#C4470A',
           },
           background: {
-            default: '#faf9f7',
+            default: '#FFFDFB',
             paper: '#ffffff',
           },
           text: {
-            primary: '#1a1a1a',
-            secondary: '#5a5a5a',
+            primary: '#17181C',
+            secondary: '#5C5B54',
           },
+          divider: 'rgba(23,24,28,0.10)',
         },
         typography: {
-          fontFamily: '"DM Sans", "Helvetica", "Arial", sans-serif',
-          h1: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
-          h2: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
-          h3: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
-          h4: { fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 },
-          h5: { fontWeight: 500 },
+          fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
+          h1: { fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.02em' },
+          h2: { fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.02em' },
+          h3: { fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.015em' },
+          h4: { fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.01em' },
+          h5: { fontFamily: '"Space Grotesk", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.01em' },
           h6: { fontWeight: 600 },
-          body1: { lineHeight: 1.75, letterSpacing: '0.01em' },
-          body2: { lineHeight: 1.7, letterSpacing: '0.01em' },
+          body1: { lineHeight: 1.75, letterSpacing: '0' },
+          body2: { lineHeight: 1.7, letterSpacing: '0' },
+          button: { fontFamily: '"Space Grotesk", "Inter", sans-serif' },
         },
         shape: {
-          borderRadius: 16,
+          borderRadius: 12,
         },
         components: {
           MuiButton: {
@@ -86,25 +88,26 @@ function App() {
               root: {
                 textTransform: 'none',
                 fontWeight: 600,
-                letterSpacing: '0.02em',
-                borderRadius: 10,
+                letterSpacing: '0',
+                borderRadius: 8,
               },
             },
           },
           MuiChip: {
             styleOverrides: {
               root: {
+                fontFamily: '"IBM Plex Mono", monospace',
                 fontWeight: 500,
-                borderRadius: 8,
-                fontSize: '0.78rem',
-                letterSpacing: '0.02em',
+                borderRadius: 6,
+                fontSize: '0.72rem',
+                letterSpacing: '0',
               },
             },
           },
           MuiCard: {
             styleOverrides: {
               root: {
-                borderRadius: 16,
+                borderRadius: 14,
                 transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
               },
             },

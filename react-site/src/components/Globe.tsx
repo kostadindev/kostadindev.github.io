@@ -4,6 +4,7 @@ import { OrbitControls, Line, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import earcut from 'earcut';
 import { travelCountries } from '../data/content';
+import SectionHeader from './SectionHeader';
 import {
   Box,
   Container,
@@ -302,19 +303,19 @@ const COUNTRY_LABELS: { id: string; name: string; lat: number; lng: number }[] =
 function PinMarker({ lat, lng, name, label }: { lat: number; lng: number; name: string; label: string }) {
   const position = useMemo(() => latLngToVector3(lat, lng, RADIUS + 0.015), [lat, lng]);
   const labelPos = useMemo(() => latLngToVector3(lat, lng, RADIUS + 0.06), [lat, lng]);
-  const pinColor = label === 'Native' ? '#d4851f' : label === 'Current' ? '#7c8cf8' : '#e89a3c';
+  const pinColor = label === 'Native' ? '#E8590C' : label === 'Current' ? '#7c8cf8' : '#e89a3c';
 
   return (
     <group>
       <GlobePoint position={position} color={pinColor} size={0.045} pulseSpeed={label === 'Current' ? 2 : 0} />
       <Html position={labelPos} center style={{ pointerEvents: 'none' }}>
         <div style={{
-          color: '#1a1a1a',
+          color: '#17181C',
           fontSize: 10,
           fontWeight: 700,
-          fontFamily: 'DM Sans, sans-serif',
+          fontFamily: 'Inter, sans-serif',
           whiteSpace: 'nowrap',
-          textShadow: '0 0 3px #faf9f7, 0 0 6px #faf9f7',
+          textShadow: '0 0 3px #FFFDFB, 0 0 6px #FFFDFB',
         }}>
           {name}
         </div>
@@ -332,9 +333,9 @@ function CountryLabel({ lat, lng, name }: { lat: number; lng: number; name: stri
         color: '#6b5a3e',
         fontSize: 8,
         fontWeight: 500,
-        fontFamily: 'DM Sans, sans-serif',
+        fontFamily: 'Inter, sans-serif',
         whiteSpace: 'nowrap',
-        textShadow: '0 0 2px #faf9f7, 0 0 4px #faf9f7',
+        textShadow: '0 0 2px #FFFDFB, 0 0 4px #FFFDFB',
         opacity: 0.85,
       }}>
         {name}
@@ -425,7 +426,7 @@ function GlobeMesh({ countries, states }: { countries: CountryData[]; states: Co
               <Line
                 key={`state-outline-${state.id}-${pi}-${ri}`}
                 points={ring.coords3D}
-                color="#d4851f"
+                color="#E8590C"
                 lineWidth={2.5}
                 transparent
                 opacity={0.9}
@@ -447,7 +448,7 @@ function GlobeMesh({ countries, states }: { countries: CountryData[]; states: Co
 
       {/* Arcs from Sofia */}
       {arcs.map((arc) => (
-        <Arc key={arc.key} start={arc.start} end={arc.end} color="#d4851f" />
+        <Arc key={arc.key} start={arc.start} end={arc.end} color="#E8590C" />
       ))}
     </group>
   );
@@ -487,25 +488,9 @@ export default function Globe() {
   ];
 
   return (
-    <Box id="travel" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#faf9f7' }}>
+    <Box id="travel" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFFDFB' }}>
       <Container maxWidth="md">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          Beyond Work
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
-        />
+        <SectionHeader index="08" label="Off the clock" title="Beyond work" />
 
         {/* Hobbies */}
         <Grid container spacing={3} justifyContent="center" sx={{ mb: 6 }}>
@@ -525,23 +510,9 @@ export default function Globe() {
         </Grid>
 
         {/* Travel subheading */}
-        <Typography
-          variant="h4"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.5rem', md: '1.8rem' } }}
-        >
-          Travel
-        </Typography>
-        <Box
-          sx={{
-            width: 30,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 2,
-            borderRadius: 2,
-          }}
-        />
+        <Box sx={{ mt: 5 }}>
+          <SectionHeader index="08.1" label="On the map" title="Travel" />
+        </Box>
         <Typography
           variant="body1"
           textAlign="center"
@@ -564,7 +535,7 @@ export default function Globe() {
               label={`${r.label} (${r.count})`}
               size="small"
               sx={{
-                bgcolor: 'rgba(212, 133, 31, 0.08)',
+                bgcolor: 'rgba(232, 89, 12, 0.08)',
                 color: 'primary.dark',
                 fontWeight: 500,
               }}

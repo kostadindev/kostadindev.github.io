@@ -1,28 +1,13 @@
 import { Box, Container, Typography, Card, CardContent, Chip, Stack, Button } from '@mui/material';
 import ArticleIcon from '@mui/icons-material/Article';
 import { publications } from '../data/content';
+import SectionHeader from './SectionHeader';
 
 export default function Publications() {
   return (
-    <Box id="publications" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#f5f3ef' }}>
+    <Box id="publications" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
       <Container maxWidth="md">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          Publications
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
-        />
+        <SectionHeader index="03" label="Peer-reviewed" title="Publications" />
 
         <Stack spacing={3} className="reveal-stagger">
           {publications.map((pub) => (
@@ -35,7 +20,7 @@ export default function Publications() {
                 borderColor: 'rgba(0,0,0,0.06)',
                 '&:hover': {
                   borderColor: 'primary.light',
-                  boxShadow: '0 8px 32px rgba(212, 133, 31, 0.08)',
+                  boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                 },
               }}
             >
@@ -47,7 +32,7 @@ export default function Publications() {
                       label={tag}
                       size="small"
                       sx={{
-                        bgcolor: 'rgba(212, 133, 31, 0.08)',
+                        bgcolor: 'rgba(232, 89, 12, 0.08)',
                         color: 'primary.dark',
                       }}
                     />
@@ -82,7 +67,7 @@ export default function Publications() {
                     color: 'text.primary',
                     '&:hover': {
                       borderColor: 'primary.main',
-                      bgcolor: 'rgba(212, 133, 31, 0.04)',
+                      bgcolor: 'rgba(232, 89, 12, 0.04)',
                     },
                   }}
                 >

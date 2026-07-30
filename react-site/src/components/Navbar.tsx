@@ -25,27 +25,44 @@ export default function Navbar() {
         position="fixed"
         elevation={0}
         sx={{
-          bgcolor: trigger ? 'rgba(250, 249, 247, 0.85)' : 'transparent',
+          bgcolor: trigger ? 'rgba(255, 253, 251, 0.82)' : 'transparent',
           backdropFilter: trigger ? 'blur(20px) saturate(180%)' : 'none',
-          borderBottom: trigger ? '1px solid rgba(0,0,0,0.06)' : '1px solid transparent',
+          borderBottom: trigger ? '1px solid #DBD8CF' : '1px solid transparent',
           transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
         <Toolbar sx={{ maxWidth: 1200, width: '100%', mx: 'auto', px: { xs: 2, md: 4 } }}>
+          {/* wordmark */}
+          <Box
+            component="a"
+            href="#about"
+            sx={{ display: 'flex', alignItems: 'center', gap: 1, textDecoration: 'none' }}
+          >
+            <Box sx={{ width: 11, height: 11, borderRadius: '50%', bgcolor: '#E8590C' }} />
+            <Box
+              className="mono"
+              sx={{ fontSize: '1.18rem', fontWeight: 600, letterSpacing: '0.01em', color: '#17181C' }}
+            >
+              kostadin<Box component="span" sx={{ color: '#9A998F' }}>.dev</Box>
+            </Box>
+          </Box>
+
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.25 }}>
             {navItems.map((item) => (
               <Button
                 key={item.name}
                 href={item.href}
                 sx={{
                   color: 'text.primary',
-                  fontSize: '0.85rem',
+                  fontFamily: '"IBM Plex Mono", monospace',
+                  fontSize: '0.78rem',
                   fontWeight: 500,
-                  px: 2,
+                  letterSpacing: '0.02em',
+                  px: 1.75,
                   borderRadius: 2,
-                  '&:hover': { color: 'primary.main', bgcolor: 'rgba(212, 133, 31, 0.06)' },
+                  '&:hover': { color: 'primary.main', bgcolor: 'rgba(232, 89, 12, 0.06)' },
                 }}
               >
                 {item.name}
@@ -56,13 +73,13 @@ export default function Navbar() {
               target="_blank"
               sx={{
                 ml: 1.5,
-                bgcolor: '#1a1a1a',
+                bgcolor: '#E8590C',
                 color: '#fff',
                 borderRadius: 2,
                 px: 2.5,
                 py: 0.8,
-                fontSize: '0.85rem',
-                '&:hover': { bgcolor: '#333' },
+                fontSize: '0.82rem',
+                '&:hover': { bgcolor: '#C4470A' },
               }}
             >
               Resume
@@ -105,7 +122,7 @@ export default function Navbar() {
                 fullWidth
                 href={personalInfo.cvUrl}
                 target="_blank"
-                sx={{ bgcolor: '#1a1a1a', '&:hover': { bgcolor: '#333' } }}
+                sx={{ bgcolor: '#17181C', '&:hover': { bgcolor: '#2C2D33' } }}
               >
                 Resume
               </Button>

@@ -1,28 +1,13 @@
 import { Box, Container, Typography, Card, CardContent, Stack, Chip, Grid, Avatar, Link } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { experience, teaching } from '../data/content';
+import SectionHeader from './SectionHeader';
 
 export default function Experience() {
   return (
-    <Box id="experience" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#f5f3ef' }}>
+    <Box id="experience" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
       <Container maxWidth="md">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          Work Experience
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
-        />
+        <SectionHeader index="05" label="Industry & research" title="Work experience" />
 
         <Stack spacing={3} sx={{ mb: 6 }} className="reveal-stagger">
           {experience.map((job) => (
@@ -35,7 +20,7 @@ export default function Experience() {
                 borderColor: 'rgba(0,0,0,0.06)',
                 '&:hover': {
                   borderColor: 'primary.light',
-                  boxShadow: '0 8px 32px rgba(212, 133, 31, 0.08)',
+                  boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                 },
               }}
             >
@@ -74,12 +59,12 @@ export default function Experience() {
                         <Chip
                           label={job.location}
                           size="small"
-                          sx={{ bgcolor: 'rgba(212, 133, 31, 0.08)', color: 'primary.dark' }}
+                          sx={{ bgcolor: 'rgba(232, 89, 12, 0.08)', color: 'primary.dark' }}
                         />
                         <Chip
                           label={job.period}
                           size="small"
-                          sx={{ bgcolor: 'rgba(212, 133, 31, 0.08)', color: 'primary.dark' }}
+                          sx={{ bgcolor: 'rgba(232, 89, 12, 0.08)', color: 'primary.dark' }}
                         />
                       </Stack>
                     </Stack>
@@ -103,23 +88,9 @@ export default function Experience() {
           ))}
         </Stack>
 
-        <Typography
-          variant="h4"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.5rem', md: '1.8rem' } }}
-        >
-          Teaching Experience
-        </Typography>
-        <Box
-          sx={{
-            width: 30,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
-        />
+        <Box sx={{ mt: 5 }}>
+          <SectionHeader index="05.1" label="Mentoring" title="Teaching experience" />
+        </Box>
 
         <Grid container spacing={2} className="reveal-stagger">
           {teaching.map((role) => (
@@ -133,7 +104,7 @@ export default function Experience() {
                   borderColor: 'rgba(0,0,0,0.06)',
                   '&:hover': {
                     borderColor: 'primary.light',
-                    boxShadow: '0 8px 32px rgba(212, 133, 31, 0.08)',
+                    boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                   },
                 }}
               >

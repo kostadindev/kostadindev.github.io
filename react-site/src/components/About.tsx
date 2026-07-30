@@ -29,7 +29,7 @@ const stats = [
 
 export default function About() {
   return (
-    <Box id="about" sx={{ py: { xs: 6, md: 8 } }}>
+    <Box id="about" sx={{ py: { xs: 4.5, md: 6 } }}>
       <Container maxWidth="md">
         <Grid container spacing={2.5} justifyContent="center" className="reveal-stagger">
           {stats.map((stat) => (
@@ -49,7 +49,7 @@ export default function About() {
                     '&:hover': {
                       borderColor: 'primary.light',
                       transform: 'translateY(-6px)',
-                      boxShadow: '0 16px 40px rgba(212, 133, 31, 0.1)',
+                      boxShadow: '0 16px 40px rgba(232, 89, 12, 0.1)',
                     },
                   }}
                 >

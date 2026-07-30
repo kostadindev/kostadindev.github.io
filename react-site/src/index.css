@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Loop — design tokens */
+  --ink: #17181C;
+  --ink-soft: #5C5B54;
+  --paper: #FFFDFB;
+  --panel: #FFF6F0;
+  --well: #FBF4EF;
+  --orange: #E8590C;       /* primary / human signal */
+  --orange-dark: #C4470A;
+  --orange-tint: rgba(232, 89, 12, 0.08);
+  --agent: #D97757;        /* agent signal — signature diagram only */
+  --hairline: #DBD8CF;
+}
 
 html {
   scroll-behavior: smooth;
@@ -6,14 +20,21 @@ html {
 
 body {
   margin: 0;
+  background: var(--paper);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mono utility — eyebrows, labels, IDs, data */
+.mono {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.04em;
 }
 
 /* Scroll reveal animations */
 .reveal {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(28px);
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -45,8 +66,39 @@ body {
   transform: translateY(0);
 }
 
+/* Signature — routing edge pulse (human ↔ agent → orchestration) */
+@keyframes edge-flow {
+  0%   { stroke-dashoffset: 28; }
+  100% { stroke-dashoffset: 0; }
+}
+
+.edge-line {
+  stroke-dasharray: 4 6;
+  animation: edge-flow 1.4s linear infinite;
+}
+
+@keyframes node-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50%      { transform: scale(1.12); opacity: 0.4; }
+}
+
+.node-ping {
+  transform-origin: center;
+  animation: node-pulse 2.4s ease-in-out infinite;
+}
+
+/* Hero name — resolve on load */
+@keyframes name-resolve {
+  0%   { opacity: 0; letter-spacing: 0.18em; filter: blur(6px); }
+  100% { opacity: 1; letter-spacing: -0.02em; filter: blur(0); }
+}
+
+.name-resolve {
+  animation: name-resolve 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -54,10 +106,19 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(128, 128, 128, 0.3);
-  border-radius: 3px;
+  background: rgba(23, 24, 28, 0.18);
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(128, 128, 128, 0.5);
+  background: rgba(23, 24, 28, 0.32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edge-line, .node-ping, .name-resolve,
+  .reveal, .reveal-stagger > * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
 }

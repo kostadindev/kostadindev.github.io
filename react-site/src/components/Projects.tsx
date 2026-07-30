@@ -27,6 +27,7 @@ import SlideshowIcon from '@mui/icons-material/Slideshow';
 import ImageIcon from '@mui/icons-material/Image';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { projects } from '../data/content';
+import SectionHeader from './SectionHeader';
 
 const DockerIcon = () => (
   <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
@@ -75,27 +76,11 @@ export default function Projects() {
   const hasMore = filtered.length > INITIAL_COUNT;
 
   return (
-    <Box id="projects" sx={{ py: { xs: 6, md: 8 } }}>
+    <Box id="projects" sx={{ py: { xs: 4.5, md: 6 } }}>
       <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          Past Projects
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
-        />
+        <SectionHeader index="06" label="Archive" title="Past projects" />
 
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 4, flexWrap: 'wrap' }}>
           <ToggleButtonGroup
             value={filter}
             exclusive
@@ -112,10 +97,10 @@ export default function Projects() {
                 fontWeight: 500,
                 textTransform: 'none',
                 '&.Mui-selected': {
-                  bgcolor: '#1a1a1a',
+                  bgcolor: '#17181C',
                   color: 'white',
-                  borderColor: '#1a1a1a',
-                  '&:hover': { bgcolor: '#333' },
+                  borderColor: '#17181C',
+                  '&:hover': { bgcolor: '#2C2D33' },
                 },
               },
             }}
@@ -158,7 +143,7 @@ export default function Projects() {
                       : (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 'contain' : 'cover',
                     bgcolor: (project as any).imageFit === 'cover'
                       ? 'transparent'
-                      : (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? '#faf9f7' : 'transparent',
+                      : (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? '#FFFDFB' : 'transparent',
                     p: (project as any).imageFit === 'cover'
                       ? 0
                       : (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 1 : 0,
@@ -180,7 +165,7 @@ export default function Projects() {
                             sx={{
                               border: '1px solid',
                               borderColor: 'rgba(0,0,0,0.08)',
-                              '&:hover': { bgcolor: '#1a1a1a', color: 'white', borderColor: '#1a1a1a' },
+                              '&:hover': { bgcolor: '#17181C', color: 'white', borderColor: '#17181C' },
                               transition: 'all 0.2s',
                             }}
                           >
@@ -198,7 +183,7 @@ export default function Projects() {
                         label={tag}
                         size="small"
                         sx={{
-                          bgcolor: 'rgba(212, 133, 31, 0.08)',
+                          bgcolor: 'rgba(232, 89, 12, 0.08)',
                           color: 'primary.dark',
                         }}
                       />

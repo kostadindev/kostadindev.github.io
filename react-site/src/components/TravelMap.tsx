@@ -38,7 +38,7 @@ const allIds = new Set(
 const totalCountries = allIds.size;
 
 function getFill(id: string) {
-  if (id === NATIVE_ID) return '#d4851f'; // dark amber for native
+  if (id === NATIVE_ID) return '#E8590C'; // dark amber for native
   if (LIVED_IDS.has(id)) return '#e89a3c'; // brand orange for lived in
   if (allIds.has(id)) return '#f4c76b'; // soft gold for visited
   return '#eaeaec';
@@ -46,7 +46,7 @@ function getFill(id: string) {
 
 function getHoverFill(id: string) {
   if (id === NATIVE_ID) return '#b8720f';
-  if (LIVED_IDS.has(id)) return '#d4851f';
+  if (LIVED_IDS.has(id)) return '#E8590C';
   if (allIds.has(id)) return '#e89a3c';
   return '#d6d6da';
 }
@@ -76,7 +76,7 @@ export default function TravelMap() {
   }, []);
 
   return (
-    <Box id="travel" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#faf9f7' }}>
+    <Box id="travel" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#FFFDFB' }}>
       <Container maxWidth="md">
         <Typography
           variant="h3"
@@ -117,7 +117,7 @@ export default function TravelMap() {
               label={`${r.label} (${r.count})`}
               size="small"
               sx={{
-                bgcolor: 'rgba(212, 133, 31, 0.08)',
+                bgcolor: 'rgba(232, 89, 12, 0.08)',
                 color: 'primary.dark',
                 fontWeight: 500,
               }}
@@ -277,7 +277,7 @@ export default function TravelMap() {
           sx={{ mt: 3, mb: 2 }}
         >
           {[
-            { color: '#d4851f', label: 'Native' },
+            { color: '#E8590C', label: 'Native' },
             { color: '#e89a3c', label: 'Lived' },
             { color: '#f4c76b', label: 'Visited' },
           ].map((item) => (

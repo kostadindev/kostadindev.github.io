@@ -27,7 +27,7 @@ export default function Footer() {
         py: 4,
         borderTop: '1px solid',
         borderColor: 'rgba(0,0,0,0.06)',
-        bgcolor: '#faf9f7',
+        bgcolor: '#FFFDFB',
       }}
     >
       <Container maxWidth="lg">
@@ -42,8 +42,9 @@ export default function Footer() {
               variant="h6"
               fontWeight={700}
               sx={{
-                fontFamily: '"DM Serif Display", Georgia, serif',
-                fontWeight: 400,
+                fontFamily: '"Space Grotesk", sans-serif',
+                fontWeight: 600,
+                letterSpacing: '-0.01em',
                 fontSize: '1.2rem',
               }}
             >
@@ -67,7 +68,7 @@ export default function Footer() {
                   borderColor: 'rgba(0,0,0,0.08)',
                   width: 36,
                   height: 36,
-                  '&:hover': { bgcolor: '#1a1a1a', color: 'white', borderColor: '#1a1a1a' },
+                  '&:hover': { bgcolor: '#17181C', color: 'white', borderColor: '#17181C' },
                   transition: 'all 0.2s',
                 }}
               >

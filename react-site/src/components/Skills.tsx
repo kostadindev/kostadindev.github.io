@@ -8,6 +8,7 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import CloudIcon from '@mui/icons-material/Cloud';
 import { skills } from '../data/content';
+import SectionHeader from './SectionHeader';
 
 const categoryIcons: Record<string, React.ReactNode> = {
   'Programming Languages': <CodeIcon sx={{ fontSize: 18 }} />,
@@ -22,25 +23,9 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 export default function Skills() {
   return (
-    <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: '#f5f3ef' }}>
+    <Box sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
       <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          Technical Skills
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
-        />
+        <SectionHeader index="07" label="Stack" title="Technical skills" />
 
         <Grid container spacing={2} className="reveal-stagger">
           {Object.entries(skills).map(([category, skillList]) => (
@@ -51,12 +36,12 @@ export default function Skills() {
                   bgcolor: 'background.paper',
                   border: '1px solid',
                   borderColor: 'rgba(0,0,0,0.06)',
-                  borderRadius: 4,
+                  borderRadius: '14px',
                   p: 2.5,
                   transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                   '&:hover': {
                     borderColor: 'primary.light',
-                    boxShadow: '0 8px 32px rgba(212, 133, 31, 0.08)',
+                    boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                   },
                 }}
               >
@@ -86,12 +71,12 @@ export default function Skills() {
                         label={skill}
                         size="small"
                         sx={{
-                          bgcolor: 'rgba(212, 133, 31, 0.06)',
+                          bgcolor: 'rgba(232, 89, 12, 0.06)',
                           color: 'text.primary',
                           fontWeight: 500,
                           transition: 'all 0.2s',
                           '&:hover': {
-                            bgcolor: 'rgba(212, 133, 31, 0.15)',
+                            bgcolor: 'rgba(232, 89, 12, 0.15)',
                             transform: 'translateY(-1px)',
                           },
                         }}

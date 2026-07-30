@@ -9,18 +9,20 @@ export default {
     extend: {
       colors: {
         accent: {
-          DEFAULT: '#e89a3c',
-          light: '#f4c76b',
-          dark: '#d4851f',
+          DEFAULT: '#E8590C',
+          light: '#F5814A',
+          dark: '#C4470A',
         },
-        surface: {
-          DEFAULT: '#ffffff',
-          dark: '#0f172a',
-        }
+        agent: '#D97757',
+        ink: '#17181C',
+        paper: '#FFFDFB',
+        panel: '#FFF6F0',
+        hairline: '#DBD8CF',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'monospace'],
       },
       animation: {
         'fade-in': 'fadeIn 0.6s ease-out forwards',

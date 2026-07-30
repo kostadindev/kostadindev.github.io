@@ -55,7 +55,7 @@ export const currentWork = [
 export const projects = [
   {
     title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
-    description: "A framework that treats humans as callable sensors that agentic AI systems can query to reduce uncertainty, shifting the human role from 'in the loop' to 'on call.' Compares a structured Human API with conversational deferral on MedQA, finding comparable accuracy (84–86.8%) but different evidence-gathering behavior, complementarity (each uniquely solving 5–6% of cases), and lower cost for structured sensing. Also sketches an online adaptive version using contextual bandits that learns action and source utility through interaction.",
+    description: "Treats people as sensors an AI can call when it's unsure, moving the human from 'in the loop' to 'on call.' On MedQA, a structured Human API matches conversational deferral on accuracy (84–87%) but gathers evidence differently, costs less, and each solves cases the other misses. A bandit version learns who to ask over time.",
     tags: ["Human-AI Collaboration", "Agentic AI", "Medical AI"],
     category: ["genai", "agentic", "human-ai"],
     links: [
@@ -66,7 +66,7 @@ export const projects = [
   },
   {
     title: "Knowledge Base Builder: Multi-Source Knowledge Base Construction with LLMs",
-    description: "A Python package that consolidates heterogeneous research artifacts — publications, code repositories, web documentation, lecture recordings, and presentation materials — into structured Markdown knowledge bases using large language models. Ingests content from 11 source types and produces output suitable for retrieval-augmented generation (RAG) systems, vector database preprocessing, and web-crawlable context files such as llms.txt.",
+    description: "A Python package that turns scattered research material (papers, repos, docs, lecture recordings, slides) into clean Markdown knowledge bases with an LLM. Reads 11 source types and outputs files ready for RAG, vector databases, or an llms.txt.",
     tags: ["GenAI", "RAG"],
     category: ["genai", "nlp"],
     links: [
@@ -78,7 +78,7 @@ export const projects = [
   },
   {
     title: "Fairness and Transparency Analysis of Hospital Readmission Prediction",
-    description: "An analysis of fairness and transparency in a Random Forest classifier for 30-day hospital readmission prediction using the Diabetes 130-Hospitals dataset. Evaluates group fairness via Demographic Parity and Equalized Odds using Fairlearn, and employs SHAP and LIME for transparency, reducing disparities by 74.5% using Exponentiated Gradient intervention.",
+    description: "Audits a 30-day hospital readmission model on the Diabetes 130-Hospitals data. Checks demographic parity and equalized odds with Fairlearn, explains predictions with SHAP and LIME, and cuts group disparities by 74% with an Exponentiated Gradient fix.",
     tags: ["Responsible AI", "Fairness", "Transparency"],
     category: ["human-ai"],
     links: [
@@ -89,7 +89,7 @@ export const projects = [
   },
   {
     title: "MobileAgents: Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go",
-    description: "An open-source mobile platform that lets users bring their own AI agents and manage them via text, voice, and images. Features an LLM orchestrator that decomposes multimodal requests into task plans dispatched to specialised agents, with three transparency configurations — black box, plan preview, and full transparency with a real-time execution graph. A within-subjects user study (N=13) shows trust and control increase monotonically with transparency and that input modalities are complementary.",
+    description: "An open-source mobile app for running your own team of AI agents by text, voice, or image. An LLM orchestrator breaks each request into a plan and hands tasks to the right agents, with three levels of transparency from black box to a live execution graph. In a study (N=13), trust and control rose with each level, and the three input modes complemented each other.",
     tags: ["Agentic AI", "HCI", "Multimodal"],
     category: ["agentic", "human-ai"],
     links: [
@@ -101,7 +101,7 @@ export const projects = [
   },
   {
     title: "Threat Explorer: Agentic Architectures and Visualization for Cybersecurity Analytics",
-    description: "A conversational AI system for cybersecurity threat analysis that translates natural language queries into SQL over a 40,000-record attack dataset. Evaluates three agentic architectures — LLM Chain, ReAct, and multi-agent — across retrieval accuracy, latency, cost, and perceived quality. A within-subjects user study (N=12) with Holm–Bonferroni-corrected Wilcoxon tests shows chart-based output yields statistically significant improvements in usability, clarity, and efficiency over text-only responses.",
+    description: "A chat tool for threat analysis that turns plain questions into SQL over a 40,000-record attack dataset. Compares three agent designs (LLM chain, ReAct, and multi-agent) on accuracy, latency, and cost. In a study (N=12), answers with charts beat text-only ones on usability, clarity, and speed.",
     tags: ["Cybersecurity", "Agentic AI", "RAG"],
     category: ["genai", "agentic", "human-ai"],
     links: [

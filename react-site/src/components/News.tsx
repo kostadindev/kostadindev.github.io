@@ -3,6 +3,7 @@ import { Box, Container, Typography, Stack, Link, Pagination, Tooltip } from '@m
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import SlideshowOutlinedIcon from '@mui/icons-material/SlideshowOutlined';
 import { news } from '../data/content';
+import SectionHeader from './SectionHeader';
 
 const PAGE_SIZE = 5;
 
@@ -54,25 +55,9 @@ export default function News() {
   const paginatedNews = news.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
-    <Box id="news" sx={{ py: { xs: 5, md: 6 } }}>
+    <Box id="news" sx={{ py: { xs: 4, md: 4.5 } }}>
       <Container maxWidth="md">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          News
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 3,
-            borderRadius: 2,
-          }}
-        />
+        <SectionHeader index="01" label="Recent" title="News" />
 
         <Stack spacing={0} divider={<Box sx={{ borderBottom: '1px solid', borderColor: 'rgba(0,0,0,0.05)' }} />} className="reveal">
           {paginatedNews.map((item) => (

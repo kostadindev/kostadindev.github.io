@@ -20,6 +20,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { currentWork } from '../data/content';
+import SectionHeader from './SectionHeader';
 
 const CopyableCommand = ({ command }: { command: string }) => {
   const [copied, setCopied] = useState(false);
@@ -35,7 +36,7 @@ const CopyableCommand = ({ command }: { command: string }) => {
       sx={{
         display: 'flex',
         alignItems: 'center',
-        bgcolor: '#f8f7f5',
+        bgcolor: '#FBF4EF',
         borderRadius: 2,
         overflow: 'hidden',
         border: '1px solid',
@@ -47,7 +48,7 @@ const CopyableCommand = ({ command }: { command: string }) => {
           flex: 1,
           px: 2,
           py: 1.5,
-          fontFamily: '"Fira Code", "Consolas", monospace',
+          fontFamily: '"IBM Plex Mono", monospace',
           fontSize: '0.85rem',
           color: '#1e293b',
           overflow: 'auto',
@@ -127,27 +128,16 @@ export default function CurrentWork() {
     <Box
       id="work"
       sx={{
-        py: { xs: 6, md: 8 },
-        bgcolor: '#f5f3ef',
+        py: { xs: 4.5, md: 6 },
+        bgcolor: '#FFF6F0',
       }}
     >
       <Container maxWidth="lg">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          Work
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
+        <SectionHeader
+          index="02"
+          label="Work"
+          title="Research & building"
+          subtitle="My thesis and the platform I'm building from it. Both start from the same question: who is good at what, and who likes doing what."
         />
 
         <Stack spacing={5} className="reveal-stagger">
@@ -175,7 +165,7 @@ export default function CurrentWork() {
                   height: { xs: 220, md: 'auto' },
                   alignSelf: 'stretch',
                   minHeight: { md: 340 },
-                  bgcolor: '#f8f7f5',
+                  bgcolor: '#FBF4EF',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -208,7 +198,7 @@ export default function CurrentWork() {
                           sx={{
                             border: '1px solid',
                             borderColor: 'rgba(0,0,0,0.08)',
-                            '&:hover': { bgcolor: '#1a1a1a', color: 'white', borderColor: '#1a1a1a' },
+                            '&:hover': { bgcolor: '#17181C', color: 'white', borderColor: '#17181C' },
                             transition: 'all 0.2s',
                           }}
                         >
@@ -226,7 +216,7 @@ export default function CurrentWork() {
                       label={tag}
                       size="small"
                       sx={{
-                        bgcolor: 'rgba(212, 133, 31, 0.08)',
+                        bgcolor: 'rgba(232, 89, 12, 0.08)',
                         color: 'primary.dark',
                         fontWeight: 500,
                       }}

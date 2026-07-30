@@ -1,27 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 780" preserveAspectRatio="xMidYMid meet" font-family="Inter, system-ui, -apple-system, sans-serif">
   <defs>
     <radialGradient id="postFill" cx="0.5" cy="0.45" r="0.65">
-      <stop offset="0" stop-color="#d4851f" stop-opacity="0.28"/>
-      <stop offset="1" stop-color="#d4851f" stop-opacity="0.10"/>
+      <stop offset="0" stop-color="#E8590C" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#E8590C" stop-opacity="0.10"/>
     </radialGradient>
     <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#d4851f" flood-opacity="0.22"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="#E8590C" flood-opacity="0.22"/>
     </filter>
   </defs>
 
-  <rect width="900" height="780" fill="#f8f7f5"/>
-  <text x="46" y="46" fill="#b98a3f" font-size="17" font-weight="700" letter-spacing="3">SKILL INFERENCE</text>
+  <rect width="900" height="780" fill="#FFFDFB"/>
+  <text x="46" y="46" fill="#C4470A" font-size="17" font-weight="700" letter-spacing="3">SKILL INFERENCE</text>
   <text x="46" y="74" fill="#8a8f98" font-size="17">Observe one skill and the whole profile updates, closing in on the true skills (dotted)</text>
 
   <text x="766" y="52" text-anchor="end" fill="#a89a80" font-size="14" letter-spacing="1">OBSERVATIONS</text>
   <circle cx="782" cy="46" r="6" fill="#e3ddce">
-    <animate attributeName="fill" dur="9s" repeatCount="indefinite" keyTimes="0;0.16;0.20;0.94;1" values="#e3ddce;#e3ddce;#d4851f;#d4851f;#e3ddce"/>
+    <animate attributeName="fill" dur="9s" repeatCount="indefinite" keyTimes="0;0.16;0.20;0.94;1" values="#e3ddce;#e3ddce;#E8590C;#E8590C;#e3ddce"/>
   </circle>
   <circle cx="806" cy="46" r="6" fill="#e3ddce">
-    <animate attributeName="fill" dur="9s" repeatCount="indefinite" keyTimes="0;0.38;0.42;0.94;1" values="#e3ddce;#e3ddce;#d4851f;#d4851f;#e3ddce"/>
+    <animate attributeName="fill" dur="9s" repeatCount="indefinite" keyTimes="0;0.38;0.42;0.94;1" values="#e3ddce;#e3ddce;#E8590C;#E8590C;#e3ddce"/>
   </circle>
   <circle cx="830" cy="46" r="6" fill="#e3ddce">
-    <animate attributeName="fill" dur="9s" repeatCount="indefinite" keyTimes="0;0.60;0.64;0.94;1" values="#e3ddce;#e3ddce;#d4851f;#d4851f;#e3ddce"/>
+    <animate attributeName="fill" dur="9s" repeatCount="indefinite" keyTimes="0;0.60;0.64;0.94;1" values="#e3ddce;#e3ddce;#E8590C;#E8590C;#e3ddce"/>
   </circle>
 
   <g fill="none" stroke="#e7e1d6" stroke-width="1.4">
@@ -55,7 +55,7 @@
   <polygon points="450.0,227.6 549.8,304.2 602.9,404.0 547.0,501.0 450.0,549.0 380.7,473.3 391.2,404.0 414.0,368.0" fill="none" stroke="#4b4b4b" stroke-width="2" stroke-dasharray="2 6" stroke-linejoin="round" stroke-linecap="round" opacity="0.4"/>
   <polygon points="450.0,306.0 519.3,334.7 551.9,404.0 516.5,470.5 450.0,502.0 387.6,466.4 352.0,404.0 383.5,337.5" fill="#9aa0a8" fill-opacity="0.08" stroke="#9aa0a8" stroke-width="2.4" stroke-dasharray="7 6" stroke-linejoin="round"/>
 
-  <polygon fill="url(#postFill)" stroke="#d4851f" stroke-width="3.6" stroke-linejoin="round" filter="url(#soft)" points="450.0,306.0 519.3,334.7 551.9,404.0 516.5,470.5 450.0,502.0 387.6,466.4 352.0,404.0 383.5,337.5">
+  <polygon fill="url(#postFill)" stroke="#E8590C" stroke-width="3.6" stroke-linejoin="round" filter="url(#soft)" points="450.0,306.0 519.3,334.7 551.9,404.0 516.5,470.5 450.0,502.0 387.6,466.4 352.0,404.0 383.5,337.5">
     <animate attributeName="points" dur="9s" repeatCount="indefinite" calcMode="spline"
       keyTimes="0;0.08;0.20;0.30;0.42;0.52;0.64;0.86;1"
       keySplines="0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1;0.4 0 0.2 1"
@@ -64,53 +64,53 @@
 
   <g>
     <animate attributeName="opacity" dur="9s" repeatCount="indefinite" keyTimes="0;0.16;0.20;0.94;1" values="0;0;1;1;0"/>
-    <circle cx="450.0" cy="227.6" r="7" fill="#d4851f" opacity="0.5">
+    <circle cx="450.0" cy="227.6" r="7" fill="#E8590C" opacity="0.5">
       <animate attributeName="r" dur="1.6s" repeatCount="indefinite" values="7;24;7"/>
       <animate attributeName="opacity" dur="1.6s" repeatCount="indefinite" values="0.5;0;0.5"/>
     </circle>
-    <polygon points="450.0,212.6 453.8,222.3 464.3,223.0 456.2,229.6 458.8,239.7 450.0,234.1 441.2,239.7 443.8,229.6 435.7,223.0 446.2,222.3" fill="#d4851f" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="450.0,212.6 453.8,222.3 464.3,223.0 456.2,229.6 458.8,239.7 450.0,234.1 441.2,239.7 443.8,229.6 435.7,223.0 446.2,222.3" fill="#E8590C" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
     <g transform="translate(474.0,210.6)">
-      <rect x="0" y="0" width="96" height="34" rx="17.0" fill="#d4851f"/>
+      <rect x="0" y="0" width="96" height="34" rx="17.0" fill="#E8590C"/>
       <text x="48.0" y="23" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">y = 0.90</text>
     </g>
   </g>
   <g>
     <animate attributeName="opacity" dur="9s" repeatCount="indefinite" keyTimes="0;0.38;0.42;0.94;1" values="0;0;1;1;0"/>
-    <circle cx="395.1" cy="404.0" r="7" fill="#d4851f" opacity="0.5">
+    <circle cx="395.1" cy="404.0" r="7" fill="#E8590C" opacity="0.5">
       <animate attributeName="r" dur="1.6s" repeatCount="indefinite" values="7;24;7"/>
       <animate attributeName="opacity" dur="1.6s" repeatCount="indefinite" values="0.5;0;0.5"/>
     </circle>
-    <polygon points="395.1,389.0 398.9,398.7 409.4,399.4 401.3,406.0 403.9,416.1 395.1,410.5 386.3,416.1 388.9,406.0 380.9,399.4 391.3,398.7" fill="#d4851f" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="395.1,389.0 398.9,398.7 409.4,399.4 401.3,406.0 403.9,416.1 395.1,410.5 386.3,416.1 388.9,406.0 380.9,399.4 391.3,398.7" fill="#E8590C" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
     <g transform="translate(285.1,387.0)">
-      <rect x="0" y="0" width="96" height="34" rx="17.0" fill="#d4851f"/>
+      <rect x="0" y="0" width="96" height="34" rx="17.0" fill="#E8590C"/>
       <text x="48.0" y="23" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">y = 0.28</text>
     </g>
   </g>
   <g>
     <animate attributeName="opacity" dur="9s" repeatCount="indefinite" keyTimes="0;0.60;0.64;0.94;1" values="0;0;1;1;0"/>
-    <circle cx="549.8" cy="503.8" r="7" fill="#d4851f" opacity="0.5">
+    <circle cx="549.8" cy="503.8" r="7" fill="#E8590C" opacity="0.5">
       <animate attributeName="r" dur="1.6s" repeatCount="indefinite" values="7;24;7"/>
       <animate attributeName="opacity" dur="1.6s" repeatCount="indefinite" values="0.5;0;0.5"/>
     </circle>
-    <polygon points="549.8,488.8 553.6,498.5 564.1,499.2 556.0,505.8 558.6,515.9 549.8,510.3 541.0,515.9 543.6,505.8 535.5,499.2 546.0,498.5" fill="#d4851f" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+    <polygon points="549.8,488.8 553.6,498.5 564.1,499.2 556.0,505.8 558.6,515.9 549.8,510.3 541.0,515.9 543.6,505.8 535.5,499.2 546.0,498.5" fill="#E8590C" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
     <g transform="translate(565.8,509.8)">
-      <rect x="0" y="0" width="96" height="34" rx="17.0" fill="#d4851f"/>
+      <rect x="0" y="0" width="96" height="34" rx="17.0" fill="#E8590C"/>
       <text x="48.0" y="23" text-anchor="middle" fill="#ffffff" font-size="18" font-weight="700">y = 0.72</text>
     </g>
   </g>
 
   <g filter="url(#soft)">
-    <circle cx="450" cy="404" r="29" fill="#ffffff" stroke="#e6d7bf" stroke-width="1.6"/>
+    <circle cx="450" cy="404" r="29" fill="#ffffff" stroke="#FBE1D3" stroke-width="1.6"/>
     <g>
       <animate attributeName="opacity" dur="4.5s" repeatCount="indefinite" keyTimes="0;0.42;0.5;0.92;1" values="1;1;0;0;1"/>
-      <circle cx="450" cy="397" r="7.6" fill="#d4851f"/>
-      <path d="M435.5 419 a14.5 12 0 0 1 29 0 Z" fill="#d4851f"/>
+      <circle cx="450" cy="397" r="7.6" fill="#E8590C"/>
+      <path d="M435.5 419 a14.5 12 0 0 1 29 0 Z" fill="#E8590C"/>
     </g>
     <g>
       <animate attributeName="opacity" dur="4.5s" repeatCount="indefinite" keyTimes="0;0.42;0.5;0.92;1" values="0;0;1;1;0"/>
-      <line x1="450" y1="392" x2="450" y2="387" stroke="#d4851f" stroke-width="2"/>
-      <circle cx="450" cy="386" r="2.3" fill="#d4851f"/>
-      <rect x="438" y="394" width="24" height="19" rx="5.5" fill="#d4851f"/>
+      <line x1="450" y1="392" x2="450" y2="387" stroke="#E8590C" stroke-width="2"/>
+      <circle cx="450" cy="386" r="2.3" fill="#E8590C"/>
+      <rect x="438" y="394" width="24" height="19" rx="5.5" fill="#E8590C"/>
       <circle cx="444" cy="404" r="2.5" fill="#ffffff"/>
       <circle cx="456" cy="404" r="2.5" fill="#ffffff"/>
     </g>
@@ -122,9 +122,9 @@
     <text x="200" y="756" text-anchor="start">Prior</text>
     <line x1="300" y1="750" x2="342" y2="750" stroke="#4b4b4b" stroke-width="2" stroke-dasharray="2 4"/>
     <text x="350" y="756" text-anchor="start">Target (true)</text>
-    <line x1="520" y1="750" x2="562" y2="750" stroke="#d4851f" stroke-width="4"/>
+    <line x1="520" y1="750" x2="562" y2="750" stroke="#E8590C" stroke-width="4"/>
     <text x="570" y="756" text-anchor="start">Posterior</text>
-    <polygon points="722.0,741.0 724.2,746.9 730.6,747.2 725.6,751.2 727.3,757.3 722.0,753.8 716.7,757.3 718.4,751.2 713.4,747.2 719.8,746.9" fill="#d4851f"/>
+    <polygon points="722.0,741.0 724.2,746.9 730.6,747.2 725.6,751.2 727.3,757.3 722.0,753.8 716.7,757.3 718.4,751.2 713.4,747.2 719.8,746.9" fill="#E8590C"/>
     <text x="740" y="756" text-anchor="start">Observation</text>
   </g>
 </svg>

@@ -1,28 +1,13 @@
 import { Box, Container, Typography, Card, CardContent, Avatar, Stack, Link, Grid, Button } from '@mui/material';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { education, certificates } from '../data/content';
+import SectionHeader from './SectionHeader';
 
 export default function Education() {
   return (
-    <Box id="education" sx={{ py: { xs: 6, md: 8 } }}>
+    <Box id="education" sx={{ py: { xs: 4.5, md: 6 } }}>
       <Container maxWidth="md">
-        <Typography
-          variant="h3"
-          textAlign="center"
-          sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
-        >
-          Education
-        </Typography>
-        <Box
-          sx={{
-            width: 40,
-            height: 3,
-            bgcolor: 'primary.main',
-            mx: 'auto',
-            mb: 4,
-            borderRadius: 2,
-          }}
-        />
+        <SectionHeader index="04" label="Training" title="Education" />
 
         <Stack spacing={3} sx={{ mb: 6 }} className="reveal-stagger">
           {education.map((edu) => (
@@ -35,7 +20,7 @@ export default function Education() {
                 borderColor: 'rgba(0,0,0,0.06)',
                 '&:hover': {
                   borderColor: 'primary.light',
-                  boxShadow: '0 8px 32px rgba(212, 133, 31, 0.08)',
+                  boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                 },
               }}
             >
@@ -91,9 +76,9 @@ export default function Education() {
           ))}
         </Stack>
 
-        <Typography variant="h5" textAlign="center" sx={{ mb: 4, fontFamily: '"DM Serif Display", Georgia, serif', fontWeight: 400 }}>
-          Certifications
-        </Typography>
+        <Box sx={{ mt: 5 }}>
+          <SectionHeader index="04.1" label="Credentials" title="Certifications" />
+        </Box>
 
         <Grid container spacing={2} justifyContent="center" className="reveal-stagger">
           {certificates.map((cert) => (
@@ -115,7 +100,7 @@ export default function Education() {
                     '&:hover': {
                       borderColor: 'primary.light',
                       transform: 'translateY(-4px)',
-                      boxShadow: '0 12px 32px rgba(212, 133, 31, 0.1)',
+                      boxShadow: '0 12px 32px rgba(232, 89, 12, 0.1)',
                     },
                   }}
                   imgProps={{ style: { objectFit: 'contain' } }}
@@ -142,7 +127,7 @@ export default function Education() {
               '&:hover': {
                 borderColor: 'primary.main',
                 color: 'primary.main',
-                bgcolor: 'rgba(212, 133, 31, 0.04)',
+                bgcolor: 'rgba(232, 89, 12, 0.04)',
               },
             }}
           >
