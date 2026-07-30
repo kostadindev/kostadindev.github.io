@@ -25,6 +25,7 @@ import SummarizeIcon from '@mui/icons-material/Summarize';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import ImageIcon from '@mui/icons-material/Image';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { projects } from '../data/content';
 
 const DockerIcon = () => (
@@ -50,6 +51,7 @@ const linkIcon: Record<string, React.ReactElement> = {
   thesis: <MenuBookIcon fontSize="small" />,
   poster: <ImageIcon fontSize="small" />,
   presentation: <SlideshowIcon fontSize="small" />,
+  docs: <AutoStoriesIcon fontSize="small" />,
 };
 
 const filters = [
@@ -151,9 +153,15 @@ export default function Projects() {
                   sx={{
                     width: '100%',
                     height: 260,
-                    objectFit: (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 'contain' : 'cover',
-                    bgcolor: (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? '#faf9f7' : 'transparent',
-                    p: (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 1 : 0,
+                    objectFit: (project as any).imageFit === 'cover'
+                      ? 'cover'
+                      : (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 'contain' : 'cover',
+                    bgcolor: (project as any).imageFit === 'cover'
+                      ? 'transparent'
+                      : (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? '#faf9f7' : 'transparent',
+                    p: (project as any).imageFit === 'cover'
+                      ? 0
+                      : (project as any).imageFit === 'contain' || project.image.endsWith('.svg') ? 1 : 0,
                   }}
                 />
                 <CardContent sx={{ flex: 1, p: 3 }}>

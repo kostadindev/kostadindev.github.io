@@ -2,7 +2,7 @@
 
 ## 🧑‍💻 Professional Summary
 
-**PhD student in Human-Inspired AI** at the **Centre for Human-Inspired AI (CHIA), University of Cambridge**, part of the **Trustworthy AI Lab** advised by **Professor Umang Bhatt**.
+**PhD student in Human-Inspired AI** at the **Centre for Human-Inspired AI (CHIA), University of Cambridge**, part of the **Trustworthy AI Lab**, co-supervised by **Professor Umang Bhatt** and **Professor Adrian Weller**.
 
 Research focus: **human-AI interaction** — designing multi-agent systems where AI agents and humans collaborate under real-world conditions such as varying expertise, cost, and availability. Building **Tailor**, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.
 

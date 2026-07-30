@@ -12,8 +12,16 @@ const ICON_LABELS: Record<string, React.ReactNode> = {
 };
 
 function renderDescription(text: string) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*[^*]+\*)/g);
   return parts.map((part, i) => {
+    const italic = part.match(/^\*([^*]+)\*$/);
+    if (italic) {
+      return (
+        <Box key={i} component="em" sx={{ fontStyle: 'italic' }}>
+          {italic[1]}
+        </Box>
+      );
+    }
     const match = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
     if (match) {
       const label = match[1];

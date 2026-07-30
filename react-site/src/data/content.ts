@@ -5,7 +5,7 @@ export const personalInfo = {
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
-    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the Trustworthy AI Lab advised by Professor Umang Bhatt. My research focuses on human-AI interaction — designing multi-agent systems where AI agents and humans collaborate under real-world conditions, such as varying expertise, costs, and availability. I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
+    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the Trustworthy AI Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. My research focuses on human-AI interaction — designing multi-agent systems where AI agents and humans collaborate under real-world conditions, such as varying expertise, costs, and availability. I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
     `Previously, I worked as a Software Engineer at Stellar Cyber in San Jose, California, where I developed AI-driven interfaces for threat hunting and human-augmented autonomous cybersecurity operations powered by agentic AI.`,
     `In my free time, I enjoy being outdoors in nature, going to music festivals, and playing racquet sports.`
   ],
@@ -46,10 +46,13 @@ export const projects = [
     links: [
       { type: "thesis", url: "./documents/thesis/thesis.pdf" },
       { type: "poster", url: "./documents/thesis/poster.pdf" },
-      { type: "presentation", url: "./documents/thesis/presentation.pdf" }
+      { type: "presentation", url: "./documents/thesis/presentation.pdf" },
+      { type: "docs", url: "https://kostadindev.github.io/skillinfer" },
+      { type: "github", url: "https://github.com/kostadindev/skillinfer" },
+      { type: "pypi", url: "https://pypi.org/project/skillinfer/" }
     ],
     image: "./documents/thesis/thesis-cover.svg",
-    imageFit: "contain"
+    imageFit: "cover"
   },
   {
     title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
@@ -341,6 +344,20 @@ export const teaching = [
 ];
 
 export const news = [
+  {
+    date: "Jul 2026",
+    location: "Oxford, UK",
+    title: "Oxford Human–Algorithm Interaction (HAI) Workshop 2026",
+    description: "Presented my thesis, *Ad Hoc Human–AI Orchestration via Skill Inference*, at the HAI Workshop (6–8 July, Saïd Business School) on human–AI decision synergy. [Slides](documents/thesis/presentation.pdf)",
+    link: "https://www.sbs.ox.ac.uk/events/human-algorithm-interaction-workshop-2026",
+  },
+  {
+    date: "Jun 2026",
+    location: "Cambridge, UK",
+    title: "CHIA Annual Conference 2026 — AI for Good",
+    description: "Presented my thesis poster, *Ad Hoc Human–AI Orchestration via Skill Inference*, at the Centre for Human-Inspired AI annual conference (The Cambridge Union). [Poster](documents/thesis/poster.pdf)",
+    link: "https://www.chia.cam.ac.uk/",
+  },
   {
     date: "Mar 2026",
     location: "London, UK",

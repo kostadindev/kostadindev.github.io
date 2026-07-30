@@ -226,9 +226,13 @@ export default function Hero() {
               <Link href="https://trace-lab.ai/" target="_blank" rel="noopener">
                 Trustworthy AI Lab
               </Link>{' '}
-              advised by{' '}
+              co-supervised by{' '}
               <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener">
                 Professor Umang Bhatt
+              </Link>{' '}
+              and{' '}
+              <Link href="http://mlg.eng.cam.ac.uk/adrian/" target="_blank" rel="noopener">
+                Professor Adrian Weller
               </Link>
               . My research focuses on <strong>human-AI interaction</strong> — designing
               multi-agent systems where AI agents and humans collaborate under real-world conditions.
