@@ -4,9 +4,19 @@
 
 ## Summary
 
-Software Engineer specializing in Natural Language Processing and User Interface Design, with a passion for developing intelligent interactive systems. Dedicated to creating human-inspired AI and enhancing human-machine interaction through language, speech, vision, and innovative interfaces.
+PhD student in Human-Inspired AI at the Centre for Human-Inspired AI (CHIA), University of Cambridge, part of the Trustworthy AI Lab advised by Professor Umang Bhatt. Research focuses on human-AI interaction — designing multi-agent systems where AI agents and humans collaborate under real-world conditions such as varying expertise, cost, and availability. Previously a Software Engineer at Stellar Cyber building AI-driven interfaces for threat hunting and human-augmented autonomous cybersecurity operations.
 
 ## Education
+
+**University of Cambridge** Cambridge, UK | Present
+
+*   PhD in Human-Inspired AI — in progress
+    *   Trustworthy AI Lab · Cambridge AI Research Society
+
+**University of Cambridge** Cambridge, UK
+
+*   MPhil in Human-Inspired AI — Awarded with Distinction (82.6/100)
+    *   Trustworthy AI Lab · Cambridge AI Research Society
 
 **Stony Brook University** Stony Brook, NY | August 2018 – May 2022
 
@@ -17,15 +27,15 @@ Software Engineer specializing in Natural Language Processing and User Interface
 
 ## Research Interests
 
+*   Human-AI Interaction
+*   Agentic & Multi-Agent AI Systems
+*   Trustworthy & Responsible AI
+*   Human-in-the-Loop and Human-on-Call Systems
 *   Natural Language Processing
-*   User Interface Design
-*   Intelligent Interactive Systems
-*   Human-Inspired AI
-*   Human-Machine Interaction
 
 ## Work and Research Experience
 
-### Software Engineer, Stellar Cyber San Jose, CA | May 2022 – Present
+### Software Engineer, Stellar Cyber San Jose, CA | May 2022 – September 2025
 
 *   Developed the chat interface, session management, and visualization suite for the Open XDR Investigator, a GenAI-powered cybersecurity copilot that enables data summarization and multi-chart visualizations of Elasticsearch queries and aggregations, all driven by natural language prompts.
 *   Implemented bidirectional WebSocket communication, reducing average response times by 70% through parallel data and LLM requests, and providing real-time progress updates.

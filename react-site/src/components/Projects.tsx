@@ -22,6 +22,9 @@ import LanguageIcon from '@mui/icons-material/Language';
 import DescriptionIcon from '@mui/icons-material/Description';
 import ArticleIcon from '@mui/icons-material/Article';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
+import ImageIcon from '@mui/icons-material/Image';
 import { projects } from '../data/content';
 
 const DockerIcon = () => (
@@ -44,6 +47,9 @@ const linkIcon: Record<string, React.ReactElement> = {
   report: <SummarizeIcon fontSize="small" />,
   docker: <DockerIcon />,
   pypi: <PythonIcon />,
+  thesis: <MenuBookIcon fontSize="small" />,
+  poster: <ImageIcon fontSize="small" />,
+  presentation: <SlideshowIcon fontSize="small" />,
 };
 
 const filters = [

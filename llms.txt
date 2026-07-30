@@ -2,16 +2,23 @@
 
 ## 🧑‍💻 Professional Summary
 
-**Software Engineer** at **Stellar Cyber** with expertise in:
-- Natural Language Processing (NLP)
-- Human-Centered AI
-- UI/UX Design
-- Intelligent Interactive Systems  
-Focused on building AI interfaces that enhance human-machine interaction through language, vision, and reasoning.
+**PhD student in Human-Inspired AI** at the **Centre for Human-Inspired AI (CHIA), University of Cambridge**, part of the **Trustworthy AI Lab** advised by **Professor Umang Bhatt**.
+
+Research focus: **human-AI interaction** — designing multi-agent systems where AI agents and humans collaborate under real-world conditions such as varying expertise, cost, and availability. Building **Tailor**, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.
+
+Previously a **Software Engineer at Stellar Cyber**, building AI-driven interfaces for threat hunting and human-augmented autonomous cybersecurity operations powered by agentic AI.
 
 ---
 
 ## 🎓 Education
+
+### **University of Cambridge**
+- **PhD in Human-Inspired AI** — in progress
+- Trustworthy AI Lab · Cambridge AI Research Society
+
+### **University of Cambridge**
+- **MPhil in Human-Inspired AI** — Awarded with **Distinction (82.6/100)**
+- Trustworthy AI Lab · Cambridge AI Research Society
 
 ### **Stony Brook University**
 - **B.S. in Computer Science & Applied Mathematics and Statistics**
@@ -25,93 +32,118 @@ Focused on building AI interfaces that enhance human-machine interaction through
 
 ---
 
-## 🔬 Work & Research Experience
+## 🔬 Current Work
 
-### **Stellar Cyber** | *Software Engineer* (2022–Present)
-- Developed **Open XDR Investigator**, a GenAI cybersecurity assistant with Elasticsearch and multi-chart visualization via natural language.
-- Built **WebSocket pipelines** for real-time communication and reduced response time by 70%.
-- Created **GPT-based agents** for log analysis, metrics evaluation, and more.
-- Designed and maintained **Mixpanel-based analytics**, driving UX improvements.
-- Achieved over 90% test coverage; reduced bugs by 34% YoY.
+### **Tailor**
+- A human-AI orchestration platform for designing workflows where AI agents and humans collaborate seamlessly.
+- Visual workflow builder, specialized AI agents, human-in-the-loop review, and four levels of governance controls — from autonomous AI to human-led — built for regulated industries (healthcare, finance, legal).
+- [tailorworkflow.com](https://tailorworkflow.com)
 
-### **Stony Brook University** | *NLP Research Assistant*
+### **MARL-Align**
+- A multi-agent reinforcement learning framework for LLM value alignment.
+- Formalizes alignment as a decentralized POMDP and uses social welfare functions to train group-personalized language models, balancing individual user preferences with collective societal welfare through fairness-aware optimization.
+
+---
+
+## 💼 Work & Research Experience
+
+### **Stellar Cyber** | *Software Engineer* (May 2022 – Sep 2025)
+- Built autonomous SOC AI agents for security triage — headliner at RSA 2025 & Black Hat 2025.
+- Built the chat UI, session management, and visualization suite for **Open XDR Investigator**, a GenAI cybersecurity copilot (RSA 2024, Black Hat 2024).
+- Implemented bidirectional WebSocket pipelines with parallel data + LLM requests, reducing response times by 70%.
+- Built knowledge-enriched GPTs for log analysis, metrics evaluation, and data source classification.
+- Maintained 90%+ test coverage; reduced bug filings by 34% year-over-year.
+
+### **Stony Brook University** | *NLP Research Assistant* (2021–2022)
 - Designed **Recursive QA**, an annotation framework based on parse tree-derived QA tasks.
-- Developed a full-stack annotation web app with user management and analytics.
-- Reached 80% agreement rate and 25-second annotation speed.
+- Built a full-stack annotation web app; reached 80% agreement rate and ~30-second annotation speed.
 
-### **University of Hawaii at Hilo**
-- Created **semi-automatic image annotation tool** for invasive species identification via drone imagery and CNNs.
-- Developed API for **holographic fan** control; built Data Viz lab website.
+### **University of Hawaii at Hilo** | *AI Research Assistant* (2020)
+- Built a semi-automatic image annotation tool for invasive species identification via drone imagery and CNNs.
+- Developed an API for holographic fan display control; built the Data Viz lab website.
 
-### **Vivansa** | *Software Engineering Intern*
-- Improved CRM UI and resolved database inconsistencies via structured data cleaning.
-
----
-
-## 🧑‍🏫 Teaching Experience
-
-- **Stony Brook TA** – AMS 210: Applied Linear Algebra
-- **UH Hilo Grader** – Linear Algebra & Intro to Computer Science
+### **Vivansa** | *Software Engineering Intern* (2019)
+- Improved CRM frontend and resolved database inconsistencies through structured data cleaning.
 
 ---
 
-## 📚 Publication
+## 🧑‍🏫 Teaching & Mentorship
 
-### *Motional EMF in Ellipses*
+- **UniHawk** – AI Innovation & Leadership Mentor, week-long AI bootcamp (Kuwait City, 2025)
+- **Stony Brook University** – TA, AMS 210: Applied Linear Algebra
+- **University of Hawaii at Hilo** – Grader, Linear Algebra & Intro to Computer Science
+
+---
+
+## 📚 Selected Publications & Working Papers
+
+### *Motional EMF Generated by Squeezing an Elliptical Conducting Loop*
 - **European Journal of Physics (2020)**
-- Developed numerical models for EMF induced in deformed elliptical loops.
-- DOI: [10.1088/1361-6404/ABB066](https://doi.org/10.1088/1361-6404/ABB066)
+- DOI: [10.1088/1361-6404/abb066](https://doi.org/10.1088/1361-6404/abb066)
+
+### *Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering*
+- Treats humans as callable sensors that agentic AI systems query to reduce uncertainty — shifting the human role from "in the loop" to "on call."
+
+### *MobileAgents: Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go*
+- Open-source mobile platform for managing AI agents via text, voice, and images, with configurable transparency levels.
+
+### *Threat Explorer: Agentic Architectures and Visualization for Cybersecurity Analytics*
+- Conversational AI system translating natural language to SQL over a 40,000-record attack dataset; compares LLM Chain, ReAct, and multi-agent architectures.
 
 ---
 
 ## 💡 Projects
 
-### **GONEXT**
-- Real-time League of Legends assistant powered by GPT-4o and Riot API.
-- Provides strategies, synergies, and matchups based on live game data.
-- [GitHub](https://github.com/kostadindev/GONEXT)
+### **GONEXT.lol**
+- League of Legends analytics platform on a multi-agent LLM architecture with transparent reasoning (thinking trail + MCP logs).
+- [gonext.lol](https://gonext.lol) · [GitHub](https://github.com/KostadinDev/gonext)
 
 ### **Knowledge Base Builder**
-- Converts documents, websites, and GitHub content into Markdown for RAG and LLMs.
-- [GitHub](https://github.com/kostadindev/knowledge-base-builder)
+- Consolidates heterogeneous research artifacts into structured Markdown knowledge bases for RAG systems and llms.txt files.
+- [PyPI](https://pypi.org/project/knowledge-base-builder/) · [GitHub](https://github.com/kostadindev/knowledge-base-builder)
+
+### **League of Legends MCP Server**
+- Open-source Model Context Protocol server with 35+ tools exposing Riot Games API data to LLMs.
+- [GitHub](https://github.com/kostadindev/League-of-Legends-MCP) · [PyPI](https://pypi.org/project/league-mcp/)
 
 ### **Recursive QA**
-- NLP annotation framework using QA pairs from parse trees.
-- [GitHub](https://github.com/kostadindev/Recursive-QA)
+- NLP annotation framework using QA pairs generated from constituency parse trees.
+- [GitHub](https://github.com/KostadinDev/Recursive-QA)
 
 ### **Deep Gestures**
-- Real-time CNN for gesture recognition on Arduino BLE microcontrollers.
-
-### **I Want to Redistrict**
-- Web app visualizing fair districting plans using US Census data and stochastic algorithms.
+- Real-time gesture recognition on the Arduino Nano 33 BLE Sense microcontroller.
+- [GitHub](https://github.com/KostadinDev/deep-gestures)
 
 ---
 
 ## 🧠 Research Interests
 
-- Human-Machine Interaction
-- Human-Inspired AI
-- Prompt Engineering
-- NLP Annotation Interfaces
-- Interactive AI Systems
+- Human-AI Interaction
+- Agentic & Multi-Agent AI Systems
+- Trustworthy & Responsible AI
+- Human-in-the-Loop and Human-on-Call Systems
+- Natural Language Processing
 
 ---
 
 ## 🛠 Technical Skills
 
-- **Languages**: Python, JavaScript, TypeScript, Java, C
+- **Languages**: Python, JavaScript, TypeScript
 - **Frontend**: React, Angular, Tailwind
-- **Backend**: FastAPI, Flask, Node.js, Express
+- **Backend & APIs**: FastAPI, Node.js, Express, Flask
 - **Databases**: MongoDB, PostgreSQL, Redis, Elasticsearch, Pinecone
-- **ML/DL**: Pandas, NumPy, Scikit-learn, TensorFlow, PyTorch
+- **Data Science & ML**: Pandas, NumPy, Scikit-learn, Plotly
+- **Deep Learning**: PyTorch, Hugging Face
+- **AI Frameworks**: LangChain, LangGraph
 - **DevOps**: Docker
-- **Certifications**: IBM Generative AI with LLMs
+- **Certifications**: IBM Generative AI Engineering · MCP: Build Rich-Context AI Apps with Anthropic · AI Agents in LangGraph
 
 ---
 
 ## 🌐 Online Presence
 
 - **Portfolio**: [kostadindev.github.io](https://kostadindev.github.io/)
-- **GitHub**: [github.com/kostadindev](https://github.com/kostadindev)
-- **LinkedIn**: [linkedin.com/in/kostadin-devedzhiev-23674b162](https://www.linkedin.com/in/kostadin-devedzhiev-23674b162/)
-- **LeetCode**: [leetcode.com/kostadindev](https://leetcode.com/kostadindev)
+- **GitHub**: [github.com/KostadinDev](https://github.com/KostadinDev)
+- **LinkedIn**: [linkedin.com/in/kostadin-dev](https://www.linkedin.com/in/kostadin-dev/)
+- **Google Scholar**: [scholar.google.com/citations?user=hJlCT-0AAAAJ](https://scholar.google.com/citations?user=hJlCT-0AAAAJ&hl=en)
+- **ORCID**: [0009-0008-2508-2766](https://orcid.org/0009-0008-2508-2766)

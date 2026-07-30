@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
   email: "kostadin.g.devedzhiev@gmail.com",
-  tagline: "Human-AI Interaction | Trustworthy AI Lab, University of Cambridge",
+  tagline: "PhD Student, Human-AI Interaction | Trustworthy AI Lab, Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
@@ -38,6 +38,19 @@ export const currentWork = [
 ];
 
 export const projects = [
+  {
+    title: "Ad Hoc Human–AI Orchestration via Skill Inference",
+    description: "My MPhil thesis (Cambridge, awarded with Distinction). Orchestrating ad hoc teams of human experts and AI agents requires knowing who is best at what — yet a newly onboarded person or freshly released agent has unknown, unverified strengths. I model capability as a Bayesian Gaussian belief over a skill taxonomy and exploit the fact that skills correlate (e.g. programming requires critical thinking): sequential, noisy observations update the full skill profile by propagating through the skill covariance. Experiments across human, AI, and hybrid populations show skill inference recovers calibrated skill profiles faster than independent estimation. Released as the open-source skillinfer package, previewed in the Tailor platform.",
+    tags: ["Human-AI Orchestration", "Bayesian Inference", "Agentic AI"],
+    category: ["agentic", "human-ai"],
+    links: [
+      { type: "thesis", url: "./documents/thesis/thesis.pdf" },
+      { type: "poster", url: "./documents/thesis/poster.pdf" },
+      { type: "presentation", url: "./documents/thesis/presentation.pdf" }
+    ],
+    image: "./documents/thesis/thesis-cover.svg",
+    imageFit: "contain"
+  },
   {
     title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
     description: "A framework that treats humans as callable sensors that agentic AI systems can query to reduce uncertainty, shifting the human role from 'in the loop' to 'on call.' Compares a structured Human API with conversational deferral on MedQA, finding comparable accuracy (84–86.8%) but different evidence-gathering behavior, complementarity (each uniquely solving 5–6% of cases), and lower cost for structured sensing. Also sketches an online adaptive version using contextual bandits that learns action and source utility through interaction.",
