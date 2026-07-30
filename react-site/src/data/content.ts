@@ -21,7 +21,7 @@ export const personalInfo = {
 export const currentWork = [
   {
     title: "Ad Hoc Human–AI Orchestration via Skill Inference",
-    description: "My MPhil thesis (Cambridge, awarded with Distinction). Orchestrating ad hoc teams of human experts and AI agents requires knowing who is best at what — yet a newly onboarded person or freshly released agent has unknown, unverified strengths. I model capability as a Bayesian Gaussian belief over a skill taxonomy and exploit the fact that skills correlate (e.g. programming requires critical thinking): sequential, noisy observations update the full skill profile by propagating through the skill covariance. Experiments across human, AI, and hybrid populations show skill inference recovers calibrated skill profiles faster than independent estimation. Released as the open-source skillinfer package, previewed in the Tailor platform.",
+    description: "My MPhil thesis (Cambridge, awarded with Distinction). To orchestrate ad hoc teams of humans and AI agents, an orchestrator must learn who is best at what from only a few noisy observations. I model capability as a Bayesian Gaussian belief over a skill taxonomy — each observation propagates through the skill covariance to update the whole profile, recovering calibrated skills faster than independent estimation. Released as the open-source skillinfer package, previewed in Tailor.",
     tags: ["Human-AI Orchestration", "Bayesian Inference", "Agentic AI"],
     links: [
       { type: "thesis", url: "./documents/thesis/thesis.pdf" },
