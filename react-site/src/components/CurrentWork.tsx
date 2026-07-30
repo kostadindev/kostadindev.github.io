@@ -14,6 +14,10 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LanguageIcon from '@mui/icons-material/Language';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ImageIcon from '@mui/icons-material/Image';
+import SlideshowIcon from '@mui/icons-material/Slideshow';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { currentWork } from '../data/content';
 
 const CopyableCommand = ({ command }: { command: string }) => {
@@ -85,6 +89,10 @@ const iconMap: Record<string, React.ReactNode> = {
   website: <LanguageIcon fontSize="small" />,
   docker: <DockerIcon />,
   pypi: <PythonIcon />,
+  thesis: <MenuBookIcon fontSize="small" />,
+  poster: <ImageIcon fontSize="small" />,
+  presentation: <SlideshowIcon fontSize="small" />,
+  docs: <AutoStoriesIcon fontSize="small" />,
 };
 
 export default function CurrentWork() {
@@ -102,7 +110,7 @@ export default function CurrentWork() {
           textAlign="center"
           sx={{ mb: 1, fontSize: { xs: '1.8rem', md: '2.4rem' } }}
         >
-          Current Work
+          Work
         </Typography>
         <Box
           sx={{
@@ -161,7 +169,7 @@ export default function CurrentWork() {
                   <Typography variant="h4" sx={{ fontSize: { xs: '1.5rem', md: '1.8rem' } }}>
                     {project.title}
                   </Typography>
-                  <Stack direction="row" spacing={0.5}>
+                  <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 0.5, flexShrink: 0, justifyItems: 'center' }}>
                     {project.links.map((link) => (
                       <IconButton
                         key={link.type}
@@ -178,7 +186,7 @@ export default function CurrentWork() {
                         {iconMap[link.type]}
                       </IconButton>
                     ))}
-                  </Stack>
+                  </Box>
                 </Stack>
 
                 <Stack direction="row" spacing={1} sx={{ mb: 3 }} flexWrap="wrap" useFlexGap>

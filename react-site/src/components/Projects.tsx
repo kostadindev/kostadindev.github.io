@@ -169,7 +169,7 @@ export default function Projects() {
                     <Typography variant="h5" fontWeight={600} sx={{ fontSize: '1.2rem' }}>
                       {project.title}
                     </Typography>
-                    <Stack direction="row" spacing={0.5}>
+                    <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 0.5, flexShrink: 0, justifyItems: 'center' }}>
                       {project.links.map((link) => (
                         <Tooltip key={link.url} title={link.type} arrow>
                           <IconButton
@@ -188,7 +188,7 @@ export default function Projects() {
                           </IconButton>
                         </Tooltip>
                       ))}
-                    </Stack>
+                    </Box>
                   </Stack>
 
                   <Stack direction="row" spacing={1} sx={{ mb: 2 }} flexWrap="wrap" useFlexGap>

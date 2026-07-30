@@ -20,29 +20,9 @@ export const personalInfo = {
 
 export const currentWork = [
   {
-    title: "Tailor",
-    description: "A human-AI orchestration platform for designing workflows where AI agents and humans collaborate seamlessly. Features a visual workflow builder, specialized AI agents, human-in-the-loop review, and four levels of governance controls — from autonomous AI to human-led — built for regulated industries like healthcare, finance, and legal.",
-    tags: ["Human-AI Orchestration", "Agentic AI", "Human-in-the-Loop"],
-    links: [
-      { type: "website", url: "https://tailorworkflow.com" }
-    ],
-    image: "./images/tailor-cover.png"
-  },
-  {
-    title: "MARL-Align",
-    description: "A multi-agent reinforcement learning framework for LLM value alignment. Formalizes alignment as a decentralized POMDP and uses social welfare functions to train group-personalized language models. Evaluated on politically polarizing conversations, balancing individual user preferences with collective societal welfare through fairness-aware optimization.",
-    tags: ["MARL", "LLM Alignment", "Social Choice Theory"],
-    links: [],
-    image: "./images/marl-align-cover.jpg"
-  }
-];
-
-export const projects = [
-  {
     title: "Ad Hoc Human–AI Orchestration via Skill Inference",
     description: "My MPhil thesis (Cambridge, awarded with Distinction). Orchestrating ad hoc teams of human experts and AI agents requires knowing who is best at what — yet a newly onboarded person or freshly released agent has unknown, unverified strengths. I model capability as a Bayesian Gaussian belief over a skill taxonomy and exploit the fact that skills correlate (e.g. programming requires critical thinking): sequential, noisy observations update the full skill profile by propagating through the skill covariance. Experiments across human, AI, and hybrid populations show skill inference recovers calibrated skill profiles faster than independent estimation. Released as the open-source skillinfer package, previewed in the Tailor platform.",
     tags: ["Human-AI Orchestration", "Bayesian Inference", "Agentic AI"],
-    category: ["agentic", "human-ai"],
     links: [
       { type: "thesis", url: "./documents/thesis/thesis.pdf" },
       { type: "poster", url: "./documents/thesis/poster.pdf" },
@@ -51,9 +31,28 @@ export const projects = [
       { type: "github", url: "https://github.com/kostadindev/skillinfer" },
       { type: "pypi", url: "https://pypi.org/project/skillinfer/" }
     ],
-    image: "./documents/thesis/thesis-cover.svg",
-    imageFit: "cover"
+    image: "./documents/thesis/thesis-cover.svg"
   },
+  {
+    title: "Tailor",
+    description: "A human-AI orchestration platform for designing workflows where AI agents and humans collaborate seamlessly. Features a visual workflow builder, specialized AI agents, human-in-the-loop review, and four levels of governance controls — from autonomous AI to human-led — built for regulated industries like healthcare, finance, and legal.",
+    tags: ["Human-AI Orchestration", "Agentic AI", "Human-in-the-Loop"],
+    links: [
+      { type: "website", url: "https://tailorworkflow.com" }
+    ],
+    image: "./images/tailor-cover.png"
+  }
+  // Hidden for now — restore to show again:
+  // {
+  //   title: "MARL-Align",
+  //   description: "A multi-agent reinforcement learning framework for LLM value alignment. Formalizes alignment as a decentralized POMDP and uses social welfare functions to train group-personalized language models. Evaluated on politically polarizing conversations, balancing individual user preferences with collective societal welfare through fairness-aware optimization.",
+  //   tags: ["MARL", "LLM Alignment", "Social Choice Theory"],
+  //   links: [],
+  //   image: "./images/marl-align-cover.jpg"
+  // }
+];
+
+export const projects = [
   {
     title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
     description: "A framework that treats humans as callable sensors that agentic AI systems can query to reduce uncertainty, shifting the human role from 'in the loop' to 'on call.' Compares a structured Human API with conversational deferral on MedQA, finding comparable accuracy (84–86.8%) but different evidence-gathering behavior, complementarity (each uniquely solving 5–6% of cases), and lower cost for structured sensing. Also sketches an online adaptive version using contextual bandits that learns action and source utility through interaction.",
