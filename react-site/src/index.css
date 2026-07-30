@@ -97,6 +97,31 @@ body {
   animation: name-resolve 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Hero routing diagram — one-time orchestrated load:
+   candidates fade in → edges route → orchestration → the ad hoc team pops. */
+@keyframes rd-fade-in {
+  from { opacity: 0; transform: translateY(9px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes rd-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes rd-pop-in {
+  0%   { opacity: 0; transform: scale(0.9); }
+  70%  { transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.rd-in   { opacity: 0; transform-box: fill-box; animation: rd-fade-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rd-edge { opacity: 0; animation: rd-fade 0.5s ease-out both; }
+.rd-pop  { opacity: 0; transform-box: fill-box; transform-origin: center; animation: rd-pop-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.rd-d1 { animation-delay: 0.15s; }
+.rd-d2 { animation-delay: 0.30s; }
+.rd-d3 { animation-delay: 0.60s; }
+.rd-d4 { animation-delay: 0.85s; }
+.rd-d5 { animation-delay: 1.10s; }
+.rd-d6 { animation-delay: 1.30s; }
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -116,9 +141,11 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .edge-line, .node-ping, .name-resolve,
+  .rd-in, .rd-edge, .rd-pop,
   .reveal, .reveal-stagger > * {
     animation: none !important;
     transition: none !important;
   }
-  .reveal, .reveal-stagger > * { opacity: 1; transform: none; }
+  .reveal, .reveal-stagger > *,
+  .rd-in, .rd-edge, .rd-pop { opacity: 1; transform: none; }
 }

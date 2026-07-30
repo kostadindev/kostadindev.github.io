@@ -31,7 +31,14 @@ export const currentWork = [
       { type: "github", url: "https://github.com/kostadindev/skillinfer" },
       { type: "pypi", url: "https://pypi.org/project/skillinfer/" }
     ],
-    image: "./documents/thesis/thesis-cover.svg"
+    image: "./documents/thesis/thesis-cover.svg",
+    visuals: [
+      { kind: "image", src: "./documents/thesis/thesis-cover.svg", caption: "Skill inference — a noisy prior closing on the true profile" },
+      { kind: "image", src: "./documents/papers/human-ai-collab/framework.png", bg: "#ffffff", caption: "The framework — an AI agent queries a structured human sensing registry, then decides" },
+      { kind: "image", src: "./documents/papers/human-ai-collab/cost_accuracy.png", bg: "#ffffff", caption: "Cost–accuracy frontier — structured sensing beats implicit prompting per unit cost" },
+      { kind: "image", src: "./documents/papers/human-ai-collab/risk_coverage.png", bg: "#ffffff", caption: "Selective risk vs coverage — fewer errors when the agent can defer to a human" },
+      { kind: "component", name: "skill-covariance", caption: "Skills covary — observing one moves the ones correlated with it" }
+    ]
   },
   {
     title: "Tailor",

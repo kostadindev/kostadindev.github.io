@@ -19,8 +19,121 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ImageIcon from '@mui/icons-material/Image';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { currentWork } from '../data/content';
 import SectionHeader from './SectionHeader';
+import SkillCovariance from './SkillCovariance';
+
+type Visual =
+  | { kind: 'image'; src: string; caption?: string; bg?: string }
+  | { kind: 'component'; name: string; caption?: string; bg?: string };
+
+const vizRegistry: Record<string, React.ComponentType> = {
+  'skill-covariance': SkillCovariance,
+};
+
+/** The visual panel of a Work card — one or more slides (images or live
+ *  visualizations) you can page through. Single-visual cards show no controls. */
+function WorkVisual({ visuals, title }: { visuals: Visual[]; title: string }) {
+  const [i, setI] = useState(0);
+  const many = visuals.length > 1;
+  const v = visuals[Math.min(i, visuals.length - 1)];
+  const go = (d: number) => setI((p) => (p + d + visuals.length) % visuals.length);
+  const Comp = v.kind === 'component' ? vizRegistry[v.name] : null;
+
+  return (
+    <Box
+      sx={{
+        width: { xs: '100%', md: '50%' },
+        alignSelf: 'stretch',
+        minHeight: { md: 340 },
+        bgcolor: '#FBF4EF',
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          minHeight: { xs: 220, md: 0 },
+          bgcolor: v.bg ?? 'transparent',
+          p: v.bg ? { xs: 2, md: 3 } : 0,
+          transition: 'background-color 0.3s',
+        }}
+      >
+        {v.kind === 'image' ? (
+          <Box component="img" src={v.src} alt={v.caption ?? title} sx={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+        ) : Comp ? (
+          <Comp />
+        ) : null}
+      </Box>
+
+      {many && (
+        <>
+          <IconButton
+            onClick={() => go(-1)}
+            aria-label="Previous visual"
+            size="small"
+            sx={{
+              position: 'absolute', left: 8, top: '46%', transform: 'translateY(-50%)',
+              bgcolor: 'rgba(255,255,255,0.82)', border: '1px solid rgba(0,0,0,0.08)', color: '#17181C',
+              '&:hover': { bgcolor: '#fff', color: 'primary.main' },
+            }}
+          >
+            <ChevronLeftIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            onClick={() => go(1)}
+            aria-label="Next visual"
+            size="small"
+            sx={{
+              position: 'absolute', right: 8, top: '46%', transform: 'translateY(-50%)',
+              bgcolor: 'rgba(255,255,255,0.82)', border: '1px solid rgba(0,0,0,0.08)', color: '#17181C',
+              '&:hover': { bgcolor: '#fff', color: 'primary.main' },
+            }}
+          >
+            <ChevronRightIcon fontSize="small" />
+          </IconButton>
+        </>
+      )}
+
+      {(many || v.caption) && (
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ px: 2, py: 1.25, borderTop: '1px solid rgba(0,0,0,0.06)', bgcolor: 'rgba(255,255,255,0.55)' }}
+        >
+          <Typography className="mono" sx={{ fontSize: '0.68rem', color: 'var(--ink-soft)', pr: 1, lineHeight: 1.4 }}>
+            {v.caption}
+          </Typography>
+          {many && (
+            <Stack direction="row" spacing={0.75} sx={{ flexShrink: 0 }}>
+              {visuals.map((_, k) => (
+                <Box
+                  key={k}
+                  component="button"
+                  onClick={() => setI(k)}
+                  aria-label={`Show visual ${k + 1} of ${visuals.length}`}
+                  sx={{
+                    width: k === i ? 18 : 7, height: 7, borderRadius: 4, p: 0, border: 'none', cursor: 'pointer',
+                    bgcolor: k === i ? 'primary.main' : 'rgba(0,0,0,0.18)', transition: 'all 0.25s',
+                  }}
+                />
+              ))}
+            </Stack>
+          )}
+        </Stack>
+      )}
+    </Box>
+  );
+}
 
 const CopyableCommand = ({ command }: { command: string }) => {
   const [copied, setCopied] = useState(false);
@@ -159,30 +272,10 @@ export default function CurrentWork() {
                 },
               }}
             >
-              <Box
-                sx={{
-                  width: { xs: '100%', md: '50%' },
-                  height: { xs: 220, md: 'auto' },
-                  alignSelf: 'stretch',
-                  minHeight: { md: 340 },
-                  bgcolor: '#FBF4EF',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  overflow: 'hidden',
-                }}
-              >
-                <Box
-                  component="img"
-                  src={project.image}
-                  alt={project.title}
-                  sx={{
-                    maxWidth: '100%',
-                    maxHeight: '100%',
-                    objectFit: 'contain',
-                  }}
-                />
-              </Box>
+              <WorkVisual
+                title={project.title}
+                visuals={((project as any).visuals as Visual[]) ?? [{ kind: 'image', src: project.image }]}
+              />
               <CardContent sx={{ flex: 1, p: { xs: 3, md: 5 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
                 <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
                   <Typography variant="h4" sx={{ fontSize: { xs: '1.5rem', md: '1.8rem' } }}>
