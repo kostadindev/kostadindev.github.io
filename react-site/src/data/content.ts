@@ -57,9 +57,25 @@ export const currentWork = [
   // }
 ];
 
-export const projects = [
+export interface Project {
+  /** Canonical full title. Text before the first colon is used as the display name. */
+  title: string;
+  /** Overrides the derived display name when the pre-colon title is still too long. */
+  shortTitle?: string;
+  /** One scannable line for the archive index. Keep under ~70 characters. */
+  tagline: string;
+  description: string;
+  tags: string[];
+  category: string[];
+  links: { type: string; url: string }[];
+  image: string;
+  imageFit?: string;
+}
+
+export const projects: Project[] = [
   {
     title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
+    tagline: "Cost-aware routing for structured human–AI information gathering",
     description: "Treats people as sensors an AI can call when it's unsure, moving the human from 'in the loop' to 'on call.' On MedQA, a structured Human API matches conversational deferral on accuracy (84–87%) but gathers evidence differently, costs less, and each solves cases the other misses. A bandit version learns who to ask over time.",
     tags: ["Human-AI Collaboration", "Agentic AI", "Medical AI"],
     category: ["genai", "agentic", "human-ai"],
@@ -71,6 +87,7 @@ export const projects = [
   },
   {
     title: "Knowledge Base Builder: Multi-Source Knowledge Base Construction with LLMs",
+    tagline: "Multi-source knowledge base construction with LLMs",
     description: "A Python package that turns scattered research material (papers, repos, docs, lecture recordings, slides) into clean Markdown knowledge bases with an LLM. Reads 11 source types and outputs files ready for RAG, vector databases, or an llms.txt.",
     tags: ["GenAI", "RAG"],
     category: ["genai", "nlp"],
@@ -83,6 +100,8 @@ export const projects = [
   },
   {
     title: "Fairness and Transparency Analysis of Hospital Readmission Prediction",
+    shortTitle: "Hospital Readmission Fairness Audit",
+    tagline: "Demographic parity, equalized odds, and SHAP/LIME across 130 hospitals",
     description: "Audits a 30-day hospital readmission model on the Diabetes 130-Hospitals data. Checks demographic parity and equalized odds with Fairlearn, explains predictions with SHAP and LIME, and cuts group disparities by 74% with an Exponentiated Gradient fix.",
     tags: ["Responsible AI", "Fairness", "Transparency"],
     category: ["human-ai"],
@@ -94,6 +113,7 @@ export const projects = [
   },
   {
     title: "MobileAgents: Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go",
+    tagline: "Mobile multimodal interface for controlling teams of AI agents",
     description: "An open-source mobile app for running your own team of AI agents by text, voice, or image. An LLM orchestrator breaks each request into a plan and hands tasks to the right agents, with three levels of transparency from black box to a live execution graph. In a study (N=13), trust and control rose with each level, and the three input modes complemented each other.",
     tags: ["Agentic AI", "HCI", "Multimodal"],
     category: ["agentic", "human-ai"],
@@ -106,6 +126,7 @@ export const projects = [
   },
   {
     title: "Threat Explorer: Agentic Architectures and Visualization for Cybersecurity Analytics",
+    tagline: "Agentic architectures and visualization for cybersecurity analytics",
     description: "A chat tool for threat analysis that turns plain questions into SQL over a 40,000-record attack dataset. Compares three agent designs (LLM chain, ReAct, and multi-agent) on accuracy, latency, and cost. In a study (N=12), answers with charts beat text-only ones on usability, clarity, and speed.",
     tags: ["Cybersecurity", "Agentic AI", "RAG"],
     category: ["genai", "agentic", "human-ai"],
@@ -118,6 +139,7 @@ export const projects = [
   },
   {
     title: "GONEXT.lol",
+    tagline: "Multi-agent League of Legends analytics with a visible thinking trail",
     description: "A League of Legends analytics platform built on a multi-agent LLM architecture. It provides transparent reasoning via a thinking trail and MCP logs, calculating detailed aggregate statistics from match history. The system offers context-aware strategies and optimized item builds based on live game states, while supporting dynamic conversational inquiries about anything game related, patches, players, and tournaments.",
     tags: ["GenAI", "Agentic AI", "RAG"],
     category: ["genai", "agentic"],
@@ -129,14 +151,16 @@ export const projects = [
   },
   {
     title: "Symbiotic Learning",
+    tagline: "Human-in-the-loop annotation of invasive species in drone imagery",
     description: "A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing to the conservation of Hawaii's ecosystems.",
     tags: ["Computer Vision", "Human-in-the-Loop", "Ecological Conservation"],
     category: ["cv", "human-ai"],
     links: [{ type: "article", url: "https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" }],
-    image: "https://hilo.hawaii.edu/chancellor/stories/wp-content/uploads/2020/08/Project-2-800x471.jpg"
+    image: "./images/symbiotic-learning.jpg"
   },
   {
     title: "I Want to Redistrict",
+    tagline: "Statistical districting analysis for detecting gerrymandering",
     description: "A political science application developed to create and evaluate state districting plans through statistical analysis. Its primary purpose is to identify gerrymandering and support the generation of equitable district maps using 2020 Census data.",
     tags: ["High Performance Computing", "Human-in-the-Loop", "Political Science"],
     category: ["hpc", "human-ai"],
@@ -145,6 +169,7 @@ export const projects = [
   },
   {
     title: "Deep Gestures",
+    tagline: "Gesture recognition on an Arduino Nano 33 BLE Sense",
     description: "A comprehensive pipeline for gesture recognition on the Arduino Nano 33 BLE Sense microcontroller. The pipeline leverages the device's integrated 3D accelerometer, gyroscope, and magnetometer sensors.",
     tags: ["Computer Vision", "IoT"],
     category: ["cv", "iot"],
@@ -153,6 +178,7 @@ export const projects = [
   },
   {
     title: "Recursive QA",
+    tagline: "NLP annotation as question answering over constituency parse trees",
     description: "An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs.",
     tags: ["NLP", "Human-in-the-Loop"],
     category: ["nlp", "human-ai"],
@@ -161,6 +187,7 @@ export const projects = [
   },
   {
     title: "League of Legends MCP Server",
+    tagline: "35+ MCP tools exposing Riot Games API data to LLMs",
     description: "This open-source Model Context Protocol (MCP) server empowers LLMs with comprehensive access to League of Legends game data through the Riot Games API. It features over 35 tools and resources for retrieving player statistics, match history, champion information, tournament data, and real-time game monitoring.",
     tags: ["MCP", "Agentic AI", "GenAI"],
     category: ["mcp", "agentic"],
@@ -169,7 +196,7 @@ export const projects = [
       { type: "docker", url: "https://hub.docker.com/r/kostadindev/league-mcp" },
       { type: "pypi", url: "https://pypi.org/project/league-mcp/" }
     ],
-    image: "https://github.com/user-attachments/assets/81ff5484-f747-431d-ac9c-c04933339b82"
+    image: "./images/league-mcp-cover.gif"
   }
 ];
 
