@@ -4,7 +4,7 @@ const stats = [
   {
     label: 'University',
     value: 'Cambridge',
-    logo: 'https://www.cam.ac.uk/sites/default/files/secondary-logo-stacked.png',
+    logo: './images/cambridge-logo.png',
     link: 'https://www.cam.ac.uk/',
   },
   {

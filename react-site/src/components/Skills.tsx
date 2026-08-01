@@ -23,7 +23,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 export default function Skills() {
   return (
-    <Box sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
+    <Box sx={{ py: { xs: 4.5, md: 6 } }}>
       <Container maxWidth="lg">
         <SectionHeader index="07" label="Stack" title="Technical skills" />
 

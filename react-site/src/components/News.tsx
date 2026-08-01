@@ -55,7 +55,7 @@ export default function News() {
   const paginatedNews = news.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   return (
-    <Box id="news" sx={{ py: { xs: 4, md: 4.5 } }}>
+    <Box id="news" sx={{ py: { xs: 4.5, md: 6 } }}>
       <Container maxWidth="lg">
         <SectionHeader index="01" label="Recent" title="News" />
 

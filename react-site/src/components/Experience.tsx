@@ -5,7 +5,7 @@ import SectionHeader from './SectionHeader';
 
 export default function Experience() {
   return (
-    <Box id="experience" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
+    <Box id="experience" sx={{ py: { xs: 4.5, md: 6 } }}>
       <Container maxWidth="lg">
         <SectionHeader index="05" label="Industry & research" title="Work experience" />
 
@@ -31,11 +31,14 @@ export default function Experience() {
                     alt={job.company}
                     variant="rounded"
                     sx={{
-                      width: 160,
-                      height: 160,
+                      // See Education.tsx: 160px forced a ~210px floor on every
+                      // card regardless of how many bullets it held.
+                      width: 104,
+                      height: 104,
+                      flexShrink: 0,
                       bgcolor: 'white',
-                      p: 2,
-                      borderRadius: 3,
+                      p: 1.25,
+                      borderRadius: 2.5,
                       display: { xs: 'none', sm: 'flex' },
                     }}
                     imgProps={{ style: { objectFit: 'contain' } }}

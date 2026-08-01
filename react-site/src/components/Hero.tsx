@@ -16,7 +16,7 @@ const ORANGE = '#E8590C';
 const HAIRLINE = '#DBD8CF';
 
 const affiliations = [
-  { label: 'University', value: 'Cambridge', logo: 'https://www.cam.ac.uk/sites/default/files/secondary-logo-stacked.png', link: 'https://www.cam.ac.uk/' },
+  { label: 'University', value: 'Cambridge', logo: './images/cambridge-logo.png', link: 'https://www.cam.ac.uk/' },
   { label: 'College', value: "Queens' College", logo: './images/queens-cover.png', link: 'https://www.queens.cam.ac.uk/', title: "Queens'\nCollege" },
   { label: 'Department', value: 'CHIA', logo: './images/chia-cover.png', link: 'https://www.chia.cam.ac.uk/' },
   { label: 'Lab', value: 'Trustworthy AI Lab', logo: './images/trace-cover.jpeg', link: 'https://trace-lab.ai/' },

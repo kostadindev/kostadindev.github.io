@@ -83,6 +83,10 @@ const LIST_MAX_H = 648;
 // Height of the fade drawn over a scrollable edge.
 const FADE_H = 28;
 
+// The section tint. The edge fades must resolve to exactly this colour, so both
+// read from one constant — hardcoding it twice is how they silently drift apart.
+const SECTION_BG = '#FFF6F0';
+
 /** "Threat Explorer: Agentic Architectures…" → "Threat Explorer" */
 function displayTitle(p: Project) {
   return p.shortTitle ?? p.title.split(':')[0].trim();
@@ -228,7 +232,7 @@ export default function Projects() {
   const active = visible.find((p) => p.title === activeTitle) ?? visible[0];
 
   return (
-    <Box id="projects" sx={{ py: { xs: 4.5, md: 6 } }}>
+    <Box id="projects" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: SECTION_BG }}>
       <Container maxWidth="lg">
         <SectionHeader index="06" label="Archive" title="Past projects" />
 
@@ -438,7 +442,7 @@ export default function Projects() {
                   pointerEvents: 'none',
                   opacity: edges[edge] ? 1 : 0,
                   transition: 'opacity 0.2s',
-                  background: `linear-gradient(to ${edge === 'top' ? 'bottom' : 'top'}, #FAF9F7, rgba(250,249,247,0))`,
+                  background: `linear-gradient(to ${edge === 'top' ? 'bottom' : 'top'}, ${SECTION_BG}, ${SECTION_BG}00)`,
                 }}
               />
             ))}

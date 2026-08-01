@@ -219,7 +219,7 @@ export const education = [
     degree: "Doctor of Philosophy in Human-Inspired AI",
     details: ["Trustworthy AI Lab", "Cambridge AI Research Society", "In Progress"],
     link: "https://www.chia.cam.ac.uk/",
-    logo: "https://www.cam.ac.uk/sites/default/files/secondary-logo-stacked.png"
+    logo: "./images/cambridge-logo.png"
   },
   {
     institution: "University of Cambridge",
@@ -227,7 +227,7 @@ export const education = [
     details: ["Trustworthy AI Lab", "Cambridge AI Research Society", "Awarded with Distinction (82.6/100)"],
     link: "https://www.chia.cam.ac.uk/",
     transcript: "./documents/cambridge_transcript.pdf",
-    logo: "https://www.cam.ac.uk/sites/default/files/secondary-logo-stacked.png"
+    logo: "./images/cambridge-logo.png"
   },
   {
     institution: "Stony Brook University",
@@ -238,14 +238,14 @@ export const education = [
       "Summa Cum Laude | 3.89/4.00 GPA"
     ],
     transcript: "./documents/sbu_transcript.pdf",
-    logo: "https://images.credly.com/images/24977e6c-4f52-4579-b04f-0a39ae6cb39e/blob.png"
+    logo: "./images/stony-brook-logo.png"
   },
   {
     institution: "University of Hawaii at Hilo",
     degree: "National Student Exchange Program",
     details: ["Computer Science Major | GPA: 3.97/4.00"],
     transcript: "./documents/uhh_transcript.pdf",
-    logo: "https://studyhawaii.org/wp-content/uploads/2017/11/Hilo.jpg"
+    logo: "./images/hawaii-hilo-logo.jpg"
   }
 ];
 
@@ -263,17 +263,17 @@ export const skills = {
 export const certificates = [
   {
     title: "IBM Generative AI Engineering",
-    image: "https://images.credly.com/size/160x160/images/468eaf1a-197c-44e2-9bd1-2f75bb7b5feb/Coursera_20IBM_20Generative_20AI_20Engineering_20Prof_20Cert.png",
+    image: "./images/cert-ibm-genai.png",
     link: "https://www.credly.com/users/kostadin-devedzhiev.e059b079"
   },
   {
     title: "MCP: Build Rich-Context AI Apps with Anthropic",
-    image: "https://learn.deeplearning.ai/assets/dlai-logo.png",
+    image: "./images/cert-deeplearning-ai.png",
     link: "https://learn.deeplearning.ai/accomplishments/b1ee6756-bc7a-45e1-83e8-ff376ae07c8c"
   },
   {
     title: "AI Agents in LangGraph",
-    image: "https://learn.deeplearning.ai/assets/dlai-logo.png",
+    image: "./images/cert-deeplearning-ai.png",
     link: "https://learn.deeplearning.ai/accomplishments/896e518d-07f3-4161-80b8-cb7d58ccc1c3"
   }
 ];
@@ -298,7 +298,7 @@ export const experience = [
     company: "Stony Brook University",
     location: "Stony Brook, NY",
     period: "August 2021 – May 2022",
-    logo: "https://images.credly.com/images/24977e6c-4f52-4579-b04f-0a39ae6cb39e/blob.png",
+    logo: "./images/stony-brook-logo.png",
     highlights: [
       "Invented Recursive QA — turned the soul-crushing task of formal annotation into a guided Q&A game.",
       "Wrangled parse trees into question-answer pairs and pruned duplicates with Levenshtein-flavored clustering.",
@@ -311,7 +311,7 @@ export const experience = [
     company: "University of Hawaii at Hilo",
     location: "Hilo, HI",
     period: "June 2020 – August 2020",
-    logo: "https://studyhawaii.org/wp-content/uploads/2017/11/Hilo.jpg",
+    logo: "./images/hawaii-hilo-logo.jpg",
     highlights: [
       "Tuned a CNN to spot invasive species from drone footage — helping keep Hawaii's ecosystems in check, one frame at a time.",
       "Made an annotation tool that gets smarter as you use it — the more you label, the more it helps. Symbiosis, literally."
@@ -322,7 +322,7 @@ export const experience = [
     company: "Vivansa",
     location: "Sofia, Bulgaria",
     period: "June 2019 – August 2019",
-    logo: "https://i0.wp.com/vivansa.com/wp-content/uploads/Vivansa_4_logo_full_transparent_801x229.png?fit=801%2C229&ssl=1",
+    logo: "./images/vivansa-logo.png",
     highlights: [
       "Overhauled a CRM's frontend — better components, happier users.",
       "Played database detective — found bad data, cleaned it up, and made sure it wouldn't sneak back in."
@@ -333,7 +333,7 @@ export const experience = [
     company: "University of Hawaii at Hilo",
     location: "Hilo, HI",
     period: "March 2020 – May 2020",
-    logo: "https://studyhawaii.org/wp-content/uploads/2017/11/Hilo.jpg",
+    logo: "./images/hawaii-hilo-logo.jpg",
     highlights: [
       "Built an API for a hologram display — yes, actual holograms you can walk around.",
       "Made the Data Viz lab's website — a portfolio for a portfolio, very meta.",

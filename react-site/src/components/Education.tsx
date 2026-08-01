@@ -5,7 +5,7 @@ import SectionHeader from './SectionHeader';
 
 export default function Education() {
   return (
-    <Box id="education" sx={{ py: { xs: 4.5, md: 6 } }}>
+    <Box id="education" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
       <Container maxWidth="lg">
         <SectionHeader index="04" label="Training" title="Education" />
 
@@ -25,17 +25,23 @@ export default function Education() {
               }}
             >
               <CardContent sx={{ p: { xs: 2.5, md: 3 } }}>
-                <Stack direction="row" spacing={3} alignItems="center">
+                {/* flex-start, matching Experience: centring made the logo sit at a
+                    different height in every card once the text lengths varied. */}
+                <Stack direction="row" spacing={{ xs: 2, md: 3 }} alignItems="flex-start">
                   <Avatar
                     src={edu.logo}
                     alt={edu.institution}
                     variant="rounded"
                     sx={{
-                      width: { xs: 100, md: 160 },
-                      height: { xs: 100, md: 160 },
+                      // Was 160px, which set a ~210px floor on every card via
+                      // CardContent's padding — so a 3-line entry was as tall
+                      // as a 5-line one. Content drives the height now.
+                      width: { xs: 68, md: 104 },
+                      height: { xs: 68, md: 104 },
+                      flexShrink: 0,
                       bgcolor: 'white',
-                      p: 2,
-                      borderRadius: 3,
+                      p: 1.25,
+                      borderRadius: 2.5,
                     }}
                     imgProps={{ style: { objectFit: 'contain' } }}
                   />
@@ -80,21 +86,29 @@ export default function Education() {
           <SectionHeader index="04.1" label="Credentials" title="Certifications" />
         </Box>
 
-        <Grid container spacing={2} justifyContent="center" className="reveal-stagger">
+        {/* Named cards rather than bare 130px logo tiles. Two of the three
+            certificates only have a wide company wordmark for artwork, which
+            contained into a square tile read as an empty broken box. With the
+            title alongside, the logo is a mark instead of the whole message. */}
+        <Grid container spacing={2} className="reveal-stagger">
           {certificates.map((cert) => (
-            <Grid key={cert.title}>
-              <Link href={cert.link} target="_blank" rel="noopener">
-                <Avatar
-                  src={cert.image}
-                  alt={cert.title}
-                  variant="rounded"
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={cert.title}>
+              <Link
+                href={cert.link}
+                target="_blank"
+                rel="noopener"
+                sx={{ textDecoration: 'none', display: 'block', height: '100%' }}
+              >
+                <Stack
+                  direction="row"
+                  spacing={2}
+                  alignItems="center"
                   sx={{
-                    width: 130,
-                    height: 130,
+                    height: '100%',
+                    p: 2,
                     bgcolor: 'background.paper',
                     border: '1px solid',
                     borderColor: 'rgba(0,0,0,0.06)',
-                    p: 2,
                     borderRadius: 3,
                     transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                     '&:hover': {
@@ -103,14 +117,34 @@ export default function Education() {
                       boxShadow: '0 12px 32px rgba(232, 89, 12, 0.1)',
                     },
                   }}
-                  imgProps={{ style: { objectFit: 'contain' } }}
-                />
+                >
+                  <Avatar
+                    src={cert.image}
+                    alt=""
+                    variant="rounded"
+                    sx={{
+                      width: 52,
+                      height: 52,
+                      flexShrink: 0,
+                      bgcolor: 'white',
+                      p: 0.75,
+                      borderRadius: 2,
+                    }}
+                    imgProps={{ style: { objectFit: 'contain' } }}
+                  />
+                  <Typography
+                    variant="body2"
+                    sx={{ color: 'text.primary', fontWeight: 500, lineHeight: 1.45 }}
+                  >
+                    {cert.title}
+                  </Typography>
+                </Stack>
               </Link>
             </Grid>
           ))}
         </Grid>
 
-        <Box sx={{ textAlign: 'center', mt: 3 }}>
+        <Box sx={{ mt: 3 }}>
           <Button
             href="https://www.credly.com/users/kostadin-devedzhiev.e059b079"
             target="_blank"
