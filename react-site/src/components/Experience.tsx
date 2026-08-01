@@ -6,7 +6,7 @@ import SectionHeader from './SectionHeader';
 export default function Experience() {
   return (
     <Box id="experience" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <SectionHeader index="05" label="Industry & research" title="Work experience" />
 
         <Stack spacing={3} sx={{ mb: 6 }} className="reveal-stagger">

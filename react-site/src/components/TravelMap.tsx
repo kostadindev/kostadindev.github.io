@@ -77,7 +77,7 @@ export default function TravelMap() {
 
   return (
     <Box id="travel" sx={{ py: { xs: 8, md: 12 }, bgcolor: '#FFFDFB' }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Typography
           variant="h3"
           textAlign="center"

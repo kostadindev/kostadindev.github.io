@@ -6,7 +6,7 @@ import SectionHeader from './SectionHeader';
 export default function Education() {
   return (
     <Box id="education" sx={{ py: { xs: 4.5, md: 6 } }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <SectionHeader index="04" label="Training" title="Education" />
 
         <Stack spacing={3} sx={{ mb: 6 }} className="reveal-stagger">

@@ -56,7 +56,7 @@ export default function News() {
 
   return (
     <Box id="news" sx={{ py: { xs: 4, md: 4.5 } }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <SectionHeader index="01" label="Recent" title="News" />
 
         <Stack spacing={0} divider={<Box sx={{ borderBottom: '1px solid', borderColor: 'rgba(0,0,0,0.05)' }} />} className="reveal">

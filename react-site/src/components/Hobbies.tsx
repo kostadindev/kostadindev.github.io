@@ -37,7 +37,7 @@ const hobbies = [
 export default function Hobbies() {
   return (
     <Box sx={{ py: { xs: 4.5, md: 6 } }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Typography
           variant="h3"
           textAlign="center"

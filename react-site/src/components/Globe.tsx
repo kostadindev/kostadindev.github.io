@@ -489,7 +489,7 @@ export default function Globe() {
 
   return (
     <Box id="travel" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFFDFB' }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <SectionHeader index="08" label="Off the clock" title="Beyond work" />
 
         {/* Hobbies */}

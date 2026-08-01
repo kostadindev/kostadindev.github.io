@@ -30,7 +30,7 @@ const stats = [
 export default function About() {
   return (
     <Box id="about" sx={{ py: { xs: 4.5, md: 6 } }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container spacing={2.5} justifyContent="center" className="reveal-stagger">
           {stats.map((stat) => (
             <Grid size={{ xs: 6, sm: 6, md: 3 }} key={stat.label}>

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   Box,
   Collapse,
@@ -21,7 +21,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import ImageIcon from '@mui/icons-material/Image';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import { projects } from '../data/content';
+import { projects, type Project } from '../data/content';
 import SectionHeader from './SectionHeader';
 
 const DockerIcon = () => (
@@ -67,14 +67,144 @@ const CATEGORY_LABELS: Record<string, string> = {
 // tail categories stay reachable through "All" and their co-assigned category.
 const MIN_PER_FILTER = 2;
 
+// Every figure sits on the same paper canvas and is contained rather than
+// cropped, so a 300x131 SVG and a 1500x670 screenshot read as one system.
+const FIGURE_BG = '#FFFDFB';
+
+// Clears the sticky navbar when the pane pins.
+const STICKY_TOP = 92;
+
+// Roughly the pane's natural height (430px figure + caption + copy + links), so
+// the two columns stay level. Capping here is what makes the section a fixed
+// block: it stays this tall at 11 projects or at 40, and the selected row can
+// never scroll away from the figure it belongs to.
+const LIST_MAX_H = 648;
+
+// Height of the fade drawn over a scrollable edge.
+const FADE_H = 28;
+
 /** "Threat Explorer: Agentic Architectures…" → "Threat Explorer" */
-function displayTitle(p: (typeof projects)[number]) {
+function displayTitle(p: Project) {
   return p.shortTitle ?? p.title.split(':')[0].trim();
+}
+
+function LinkButtons({ links, onClick }: { links: Project['links']; onClick?: (e: React.MouseEvent) => void }) {
+  return (
+    <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.5 }}>
+      {links.map((link) => (
+        <Tooltip key={link.url} title={link.type} arrow>
+          <IconButton
+            component="a"
+            href={link.url}
+            target="_blank"
+            rel="noopener"
+            size="small"
+            onClick={onClick}
+            sx={{
+              border: '1px solid',
+              borderColor: 'rgba(0,0,0,0.08)',
+              '&:hover': { bgcolor: '#17181C', color: 'white', borderColor: '#17181C' },
+              transition: 'all 0.2s',
+            }}
+          >
+            {linkIcon[link.type] || <LanguageIcon sx={{ fontSize: '1.05rem' }} />}
+          </IconButton>
+        </Tooltip>
+      ))}
+    </Stack>
+  );
+}
+
+function TagList({ tags, dense = false }: { tags: string[]; dense?: boolean }) {
+  return (
+    <Stack direction="row" sx={{ flexWrap: 'wrap', gap: dense ? 0.4 : 0.5 }}>
+      {tags.map((tag) => (
+        <Chip
+          key={tag}
+          label={tag}
+          size="small"
+          sx={{
+            height: dense ? 20 : 21,
+            bgcolor: 'rgba(232, 89, 12, 0.08)',
+            color: 'primary.dark',
+            '& .MuiChip-label': {
+              px: dense ? 0.8 : 0.9,
+              fontSize: dense ? '0.68rem' : '0.7rem',
+            },
+          }}
+        />
+      ))}
+    </Stack>
+  );
+}
+
+function Figure({ project, maxHeight }: { project: Project; maxHeight: object | number }) {
+  return (
+    <Box
+      sx={{
+        borderRadius: '10px',
+        border: '1px solid rgba(0,0,0,0.07)',
+        bgcolor: FIGURE_BG,
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        component="img"
+        // Keyed by src so swapping projects remounts the img and the fade replays.
+        key={project.image}
+        src={project.image}
+        alt={`${displayTitle(project)} figure`}
+        loading="lazy"
+        sx={{
+          display: 'block',
+          width: '100%',
+          maxHeight,
+          objectFit: 'contain',
+          p: { xs: 1, md: 1.5 },
+          boxSizing: 'border-box',
+          animation: 'figureIn 0.28s ease-out',
+          '@keyframes figureIn': {
+            from: { opacity: 0, transform: 'translateY(4px)' },
+            to: { opacity: 1, transform: 'none' },
+          },
+        }}
+      />
+    </Box>
+  );
 }
 
 export default function Projects() {
   const [filter, setFilter] = useState('all');
+  // Desktop: which project the sticky figure pane is showing.
+  const [activeTitle, setActiveTitle] = useState(projects[0].title);
+  // Mobile: which row is expanded (no pane to put the figure in).
   const [openTitle, setOpenTitle] = useState<string | null>(null);
+
+  // Edge fades are only drawn where there is actually more list to reach, so a
+  // fully-scrolled or short (filtered) list has no misleading gradient.
+  const listRef = useRef<HTMLDivElement>(null);
+  const [edges, setEdges] = useState({ top: false, bottom: false });
+
+  const syncEdges = useCallback(() => {
+    const el = listRef.current;
+    if (!el) return;
+    // clientHeight is 0 and scroll is unclamped while the column is display:none
+    // at mobile widths, which would light up both fades.
+    if (el.clientHeight === 0) {
+      setEdges({ top: false, bottom: false });
+      return;
+    }
+    const max = el.scrollHeight - el.clientHeight;
+    setEdges({ top: el.scrollTop > 2, bottom: max > 2 && el.scrollTop < max - 2 });
+  }, []);
+
+  // Layout effect so the fade is correct on first paint rather than one frame late.
+  useLayoutEffect(syncEdges, [syncEdges, filter]);
+
+  useEffect(() => {
+    window.addEventListener('resize', syncEdges);
+    return () => window.removeEventListener('resize', syncEdges);
+  }, [syncEdges]);
 
   // Derived from the data so the chips can never drift out of sync with content.ts.
   const filters = useMemo(() => {
@@ -93,12 +223,16 @@ export default function Projects() {
     (p) => filter === 'all' || p.category.includes(filter)
   );
 
+  // Falling back to the first visible row means a filter change can never leave
+  // the pane showing a project that is no longer in the list.
+  const active = visible.find((p) => p.title === activeTitle) ?? visible[0];
+
   return (
     <Box id="projects" sx={{ py: { xs: 4.5, md: 6 } }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <SectionHeader index="06" label="Archive" title="Past projects" />
 
-        <Box sx={{ mb: 1 }}>
+        <Box sx={{ mb: 2.5 }}>
           <ToggleButtonGroup
             value={filter}
             exclusive
@@ -141,115 +275,209 @@ export default function Projects() {
         </Box>
 
         <Stack
-          className="reveal-stagger"
-          divider={<Box sx={{ borderBottom: '1px solid', borderColor: 'rgba(0,0,0,0.07)' }} />}
-          sx={{ borderTop: '1px solid', borderColor: 'rgba(0,0,0,0.07)' }}
+          direction={{ xs: 'column', md: 'row' }}
+          spacing={{ xs: 0, md: 5 }}
+          // stretch, not flex-start: a short filtered list (Computer Vision is
+          // only 2 rows) would otherwise leave the index floating in a void
+          // next to a much taller pane. Stretching lets the divider below run
+          // the full height so the empty space reads as a panel, not a bug.
+          alignItems="stretch"
         >
-          {visible.map((project) => {
-            const open = openTitle === project.title;
-            return (
-              <Box
-                key={project.title}
-                onClick={() => setOpenTitle(open ? null : project.title)}
-                sx={{
-                  py: 2,
-                  px: { xs: 1, md: 1.5 },
-                  mx: { xs: -1, md: -1.5 },
-                  cursor: 'pointer',
-                  transition: 'background-color 0.18s',
-                  '&:hover': { bgcolor: 'rgba(232,89,12,0.035)' },
-                  '&:hover .project-title': { color: 'primary.dark' },
-                }}
-              >
-                <Stack direction="row" alignItems="flex-start" spacing={2}>
-                  <Box sx={{ flex: 1, minWidth: 0 }}>
-                    <Typography
-                      className="project-title"
-                      sx={{
-                        fontSize: '1.05rem',
-                        fontWeight: 600,
-                        color: '#17181C',
-                        lineHeight: 1.35,
-                        transition: 'color 0.18s',
-                      }}
-                    >
-                      {displayTitle(project)}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: 'var(--ink-soft)', mt: 0.35, lineHeight: 1.5 }}
-                    >
-                      {project.tagline}
-                    </Typography>
-                    <Stack
-                      direction="row"
-                      sx={{ mt: 0.85, flexWrap: 'wrap', gap: 0.5 }}
-                    >
-                      {project.tags.map((tag) => (
-                        <Chip
-                          key={tag}
-                          label={tag}
-                          size="small"
-                          sx={{
-                            height: 21,
-                            bgcolor: 'rgba(232, 89, 12, 0.08)',
-                            color: 'primary.dark',
-                            '& .MuiChip-label': { px: 0.9, fontSize: '0.7rem' },
-                          }}
-                        />
-                      ))}
-                    </Stack>
-                  </Box>
+          {/* Index column */}
+          <Box
+            sx={{
+              position: 'relative',
+              width: { xs: '100%', md: '43%' },
+              flexShrink: 0,
+              borderRight: { xs: 'none', md: '1px solid rgba(0,0,0,0.07)' },
+              pr: { xs: 0, md: 2.5 },
+            }}
+            // Deliberately not .reveal: that class starts at opacity 0 and
+            // depends on App's one-shot IntersectionObserver, which only
+            // observes nodes present at mount. Any remount would leave the
+            // whole archive permanently invisible.
+          >
+            <Box
+              ref={listRef}
+              onScroll={syncEdges}
+              sx={{
+                borderTop: '1px solid',
+                borderColor: 'rgba(0,0,0,0.07)',
+                // Uncapped on mobile: the accordion expands inline there and
+                // must not be trapped inside a scroller.
+                maxHeight: { xs: 'none', md: LIST_MAX_H },
+                overflowY: { xs: 'visible', md: 'auto' },
+                scrollbarGutter: 'stable',
+                '&::-webkit-scrollbar': { width: 6 },
+                '&::-webkit-scrollbar-thumb': {
+                  bgcolor: 'rgba(0,0,0,0.16)',
+                  borderRadius: 3,
+                },
+                '&::-webkit-scrollbar-thumb:hover': { bgcolor: 'rgba(0,0,0,0.28)' },
+                '&::-webkit-scrollbar-track': { bgcolor: 'transparent' },
+              }}
+            >
+            {visible.map((project) => {
+              const open = openTitle === project.title;
+              const isActive = active?.title === project.title;
+              return (
+                <Box
+                  key={project.title}
+                  onMouseEnter={() => setActiveTitle(project.title)}
+                  onFocus={() => setActiveTitle(project.title)}
+                  onClick={() => {
+                    setActiveTitle(project.title);
+                    setOpenTitle(open ? null : project.title);
+                  }}
+                  tabIndex={0}
+                  sx={{
+                    position: 'relative',
+                    py: 1.5,
+                    pl: 1.5,
+                    pr: 1,
+                    cursor: 'pointer',
+                    borderBottom: '1px solid',
+                    borderColor: 'rgba(0,0,0,0.07)',
+                    transition: 'background-color 0.18s',
+                    outline: 'none',
+                    // The accent bar only reads as "selected" where a pane exists.
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      bottom: 0,
+                      width: '2px',
+                      bgcolor: 'primary.main',
+                      opacity: { xs: 0, md: isActive ? 1 : 0 },
+                      transition: 'opacity 0.18s',
+                    },
+                    bgcolor: { xs: 'transparent', md: isActive ? 'rgba(232,89,12,0.04)' : 'transparent' },
+                    '&:hover': { bgcolor: 'rgba(232,89,12,0.05)' },
+                    '&:focus-visible': { bgcolor: 'rgba(232,89,12,0.05)' },
+                  }}
+                >
+                  <Stack direction="row" alignItems="flex-start" spacing={1}>
+                    <Box sx={{ flex: 1, minWidth: 0 }}>
+                      <Typography
+                        sx={{
+                          fontSize: '1rem',
+                          fontWeight: 600,
+                          color: isActive ? 'primary.dark' : '#17181C',
+                          lineHeight: 1.35,
+                          transition: 'color 0.18s',
+                        }}
+                      >
+                        {displayTitle(project)}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: 'var(--ink-soft)', mt: 0.3, lineHeight: 1.45, fontSize: '0.855rem' }}
+                      >
+                        {project.tagline}
+                      </Typography>
+                      {/* Tags stay on every row at every width: they are the
+                          fastest way to scan the archive for a topic, which
+                          matters more than keeping rows to two lines. */}
+                      <Box sx={{ mt: 0.75 }}>
+                        <TagList tags={project.tags} dense />
+                      </Box>
+                    </Box>
 
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    sx={{ flexShrink: 0, flexWrap: 'wrap', justifyContent: 'flex-end', gap: 0.5, maxWidth: 160 }}
-                  >
-                    {project.links.map((link) => (
-                      <Tooltip key={link.url} title={link.type} arrow>
-                        <IconButton
-                          component="a"
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener"
-                          size="small"
-                          onClick={(e) => e.stopPropagation()}
-                          sx={{
-                            border: '1px solid',
-                            borderColor: 'rgba(0,0,0,0.08)',
-                            '&:hover': { bgcolor: '#17181C', color: 'white', borderColor: '#17181C' },
-                            transition: 'all 0.2s',
-                          }}
-                        >
-                          {linkIcon[link.type] || <LanguageIcon sx={{ fontSize: '1.05rem' }} />}
-                        </IconButton>
-                      </Tooltip>
-                    ))}
+                    {/* Chevron is the mobile accordion affordance only. */}
                     <KeyboardArrowDownIcon
                       sx={{
+                        display: { xs: 'block', md: 'none' },
                         fontSize: '1.2rem',
-                        ml: 0.25,
+                        flexShrink: 0,
                         color: 'var(--ink-soft)',
                         transform: open ? 'rotate(180deg)' : 'none',
                         transition: 'transform 0.2s',
                       }}
                     />
                   </Stack>
-                </Stack>
 
-                <Collapse in={open} unmountOnExit>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ lineHeight: 1.7, mt: 1.5, maxWidth: 660 }}
-                  >
-                    {project.description}
-                  </Typography>
-                </Collapse>
+                  {/* Mobile-only inline detail. On md+ the pane owns this. */}
+                  <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                    <Collapse in={open} unmountOnExit>
+                      <Box sx={{ mt: 1.5 }}>
+                        <Figure project={project} maxHeight={260} />
+                        <Typography
+                          variant="body2"
+                          color="text.secondary"
+                          sx={{ lineHeight: 1.7, mt: 1.5 }}
+                        >
+                          {project.description}
+                        </Typography>
+                        {project.links.length > 0 && (
+                          <Box sx={{ mt: 1.5 }}>
+                            <LinkButtons links={project.links} onClick={(e) => e.stopPropagation()} />
+                          </Box>
+                        )}
+                      </Box>
+                    </Collapse>
+                  </Box>
+                </Box>
+              );
+            })}
+            </Box>
+
+            {/* Edge fades: shown only when there is more list in that direction,
+                and never on mobile where the column is not a scroller. */}
+            {(['top', 'bottom'] as const).map((edge) => (
+              <Box
+                key={edge}
+                aria-hidden
+                sx={{
+                  display: { xs: 'none', md: 'block' },
+                  position: 'absolute',
+                  left: 0,
+                  right: (theme) => theme.spacing(2.5),
+                  [edge]: 0,
+                  height: FADE_H,
+                  pointerEvents: 'none',
+                  opacity: edges[edge] ? 1 : 0,
+                  transition: 'opacity 0.2s',
+                  background: `linear-gradient(to ${edge === 'top' ? 'bottom' : 'top'}, #FAF9F7, rgba(250,249,247,0))`,
+                }}
+              />
+            ))}
+          </Box>
+
+          {/* Sticky figure pane — one large slot serving all 11 rows. */}
+          {active && (
+            <Box sx={{ display: { xs: 'none', md: 'block' }, flex: 1, minWidth: 0 }}>
+              <Box sx={{ position: 'sticky', top: STICKY_TOP }}>
+                <Figure project={active} maxHeight={430} />
+                <Typography
+                  className="mono"
+                  sx={{
+                    mt: 1.75,
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.14em',
+                    textTransform: 'uppercase',
+                    color: 'var(--ink-soft)',
+                  }}
+                >
+                  {displayTitle(active)}
+                </Typography>
+                {/* No tags here: the selected row already shows them, right
+                    alongside. Repeating them would just be noise. */}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{ lineHeight: 1.7, mt: 0.85 }}
+                >
+                  {active.description}
+                </Typography>
+                {active.links.length > 0 && (
+                  <Box sx={{ mt: 1.75 }}>
+                    <LinkButtons links={active.links} />
+                  </Box>
+                )}
               </Box>
-            );
-          })}
+            </Box>
+          )}
         </Stack>
       </Container>
     </Box>

@@ -6,7 +6,7 @@ import SectionHeader from './SectionHeader';
 export default function Publications() {
   return (
     <Box id="publications" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFF6F0' }}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <SectionHeader index="03" label="Peer-reviewed" title="Publications" />
 
         <Stack spacing={3} className="reveal-stagger">
