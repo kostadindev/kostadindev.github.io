@@ -33,11 +33,17 @@ export default function Education() {
                     alt={edu.institution}
                     variant="rounded"
                     sx={{
-                      // Was 160px, which set a ~210px floor on every card via
-                      // CardContent's padding — so a 3-line entry was as tall
-                      // as a 5-line one. Content drives the height now.
-                      width: { xs: 68, md: 104 },
-                      height: { xs: 68, md: 104 },
+                      // Was 160px square, which set a ~210px floor on every card
+                      // via CardContent's padding — a 3-line entry came out as
+                      // tall as a 5-line one. Landscape rather than square so
+                      // wide wordmarks get the width they need: Hawaii is 2.36:1
+                      // and rendered 84x36 in a square box, wasting half of it.
+                      // Wide AND tall: contain draws a square logo at min(W,H), so
+                      // shrinking the height to gain width just penalises the
+                      // square marks (most of them). Height holds them at 84px
+                      // while the extra width lets Hawaii's 2.36:1 mark breathe.
+                      width: { xs: 96, md: 148 },
+                      height: { xs: 76, md: 104 },
                       flexShrink: 0,
                       bgcolor: 'white',
                       p: 1.25,
@@ -123,11 +129,14 @@ export default function Education() {
                     alt=""
                     variant="rounded"
                     sx={{
-                      width: 52,
-                      height: 52,
+                      // Landscape: the two DeepLearning.AI marks are 4.45:1
+                      // wordmarks and rendered 40x9 inside a square tile, which
+                      // is what made those cards look broken.
+                      width: 96,
+                      height: 48,
                       flexShrink: 0,
                       bgcolor: 'white',
-                      p: 0.75,
+                      p: 0.5,
                       borderRadius: 2,
                     }}
                     imgProps={{ style: { objectFit: 'contain' } }}

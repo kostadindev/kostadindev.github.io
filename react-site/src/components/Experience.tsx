@@ -31,9 +31,10 @@ export default function Experience() {
                     alt={job.company}
                     variant="rounded"
                     sx={{
-                      // See Education.tsx: 160px forced a ~210px floor on every
-                      // card regardless of how many bullets it held.
-                      width: 104,
+                      // See Education.tsx: 160px square forced a ~210px floor on
+                      // every card, and squeezed Vivansa's 3.5:1 wordmark down to
+                      // 84x24. Landscape box, so wide logos read at full width.
+                      width: 148,
                       height: 104,
                       flexShrink: 0,
                       bgcolor: 'white',
