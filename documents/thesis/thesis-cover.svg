@@ -9,7 +9,6 @@
     </filter>
   </defs>
 
-  <rect width="900" height="780" fill="#FFFDFB"/>
   <text x="46" y="46" fill="#C4470A" font-size="17" font-weight="700" letter-spacing="3">SKILL INFERENCE</text>
   <text x="46" y="74" fill="#8a8f98" font-size="17">Observe one skill and the whole profile updates, closing in on the true skills (dotted)</text>
 

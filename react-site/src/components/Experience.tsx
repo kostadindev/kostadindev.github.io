@@ -37,7 +37,7 @@ export default function Experience() {
                       width: 148,
                       height: 104,
                       flexShrink: 0,
-                      bgcolor: 'white',
+                      bgcolor: 'transparent',
                       p: 1.25,
                       borderRadius: 2.5,
                       display: { xs: 'none', sm: 'flex' },

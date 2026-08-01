@@ -45,7 +45,7 @@ export default function Education() {
                       width: { xs: 96, md: 148 },
                       height: { xs: 76, md: 104 },
                       flexShrink: 0,
-                      bgcolor: 'white',
+                      bgcolor: 'transparent',
                       p: 1.25,
                       borderRadius: 2.5,
                     }}
@@ -135,7 +135,7 @@ export default function Education() {
                       width: 96,
                       height: 48,
                       flexShrink: 0,
-                      bgcolor: 'white',
+                      bgcolor: 'transparent',
                       p: 0.5,
                       borderRadius: 2,
                     }}
