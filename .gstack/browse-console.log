@@ -1,0 +1,63 @@
+[2026-08-01T15:47:50.146Z] [debug] [vite] connecting...
+[2026-08-01T15:47:50.172Z] [debug] [vite] connected.
+[2026-08-01T15:47:50.201Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T15:48:08.053Z] [log] [vite] server connection lost. Polling for restart...
+[2026-08-01T15:48:09.093Z] [debug] [vite] connecting...
+[2026-08-01T15:48:09.564Z] [debug] [vite] connected.
+[2026-08-01T15:48:09.618Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T15:54:45.780Z] [debug] [vite] hot updated: /src/components/SkillPipeline.tsx
+[2026-08-01T15:55:20.043Z] [debug] [vite] hot updated: /src/components/SkillCovariance.tsx
+[2026-08-01T15:55:46.555Z] [debug] [vite] connecting...
+[2026-08-01T15:55:46.617Z] [debug] [vite] connected.
+[2026-08-01T15:55:46.618Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T15:56:07.242Z] [debug] [vite] hot updated: /src/components/SkillPipeline.tsx
+[2026-08-01T15:56:50.646Z] [debug] [vite] connecting...
+[2026-08-01T15:56:50.654Z] [debug] [vite] connected.
+[2026-08-01T15:56:50.654Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T15:59:00.911Z] [debug] [vite] hot updated: /src/components/Education.tsx
+[2026-08-01T15:59:04.928Z] [debug] [vite] hot updated: /src/components/Experience.tsx
+[2026-08-01T15:59:07.891Z] [debug] [vite] hot updated: /src/components/Education.tsx
+[2026-08-01T15:59:32.212Z] [debug] [vite] connecting...
+[2026-08-01T15:59:32.226Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T15:59:32.242Z] [debug] [vite] connected.
+[2026-08-01T16:00:21.034Z] [debug] [vite] hot updated: /src/components/Education.tsx
+[2026-08-01T16:00:22.235Z] [debug] [vite] hot updated: /src/components/Experience.tsx
+[2026-08-01T16:00:23.326Z] [debug] [vite] hot updated: /src/components/Education.tsx
+[2026-08-01T16:00:54.958Z] [debug] [vite] connecting...
+[2026-08-01T16:00:54.971Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T16:00:54.987Z] [debug] [vite] connected.
+[2026-08-01T16:02:09.438Z] [debug] [vite] connecting...
+[2026-08-01T16:02:09.478Z] [debug] [vite] connected.
+[2026-08-01T16:02:09.484Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T16:13:13.992Z] [debug] [vite] connecting...
+[2026-08-01T16:13:14.004Z] [debug] [vite] connected.
+[2026-08-01T16:13:14.051Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Navbar.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Education.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Footer.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Publications.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/News.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Skills.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Experience.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Hero.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/Projects.tsx
+[2026-08-01T16:19:33.052Z] [debug] [vite] hot updated: /src/components/CurrentWork.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Navbar.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Education.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Footer.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Publications.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/News.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Skills.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Experience.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Hero.tsx
+[2026-08-01T16:19:54.353Z] [debug] [vite] hot updated: /src/components/Projects.tsx
+[2026-08-01T16:19:54.354Z] [debug] [vite] hot updated: /src/components/CurrentWork.tsx
+[2026-08-01T16:19:54.357Z] [debug] [vite] hot updated: /src/components/Hero.tsx
+[2026-08-01T16:20:55.224Z] [debug] [vite] connecting...
+[2026-08-01T16:20:55.253Z] [debug] [vite] connected.
+[2026-08-01T16:20:55.258Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[2026-08-01T16:21:46.022Z] [debug] [vite] hot updated: /src/components/Education.tsx
+[2026-08-01T16:21:46.078Z] [debug] [vite] hot updated: /src/components/Experience.tsx
+[2026-08-01T16:22:11.697Z] [debug] [vite] connecting...
+[2026-08-01T16:22:11.716Z] [debug] [vite] connected.
+[2026-08-01T16:22:11.719Z] [info] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -42,6 +42,9 @@
   \llap{\contour{white}{#1}}%
 }
 
+% hyperlink rendered with the same visible underline as the DOI link
+\newcommand{\resumeLink}[2]{\href{#1}{\myuline{#2}}}
+
 % custom font: helvetica-style
 \usepackage{tgheros}
 \renewcommand*\familydefault{\sfdefault}
@@ -107,7 +110,7 @@
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=2pt, itemsep=1pt, parsep=0pt, partopsep=0pt]}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0pt}}
 
 \color{text-grey}
@@ -122,48 +125,91 @@
     \textbf{\Huge Kostadin Devedzhiev} \\ \vspace{5pt}
     \small \faPhone* \texttt{+44 7950 483811} \hspace{1pt} $|$
     \hspace{1pt} \faEnvelope \hspace{2pt} \href{mailto:kostadin.g.devedzhiev@gmail.com}{\texttt{kostadin.g.devedzhiev@gmail.com}} \hspace{1pt} $|$
-    \hspace{1pt} \faGlobe \hspace{2pt} \href{https://kostadindev.github.io/}{\texttt{kostadindev.github.io}}
+    \hspace{1pt} \faGlobe \hspace{2pt} \href{https://kostadindev.github.io/}{\texttt{kostadindev.github.io}} \hspace{1pt} $|$
+    \hspace{1pt} \faLinkedin \hspace{2pt} \href{https://www.linkedin.com/in/kostadin-dev/}{\texttt{kostadin-dev}}
     \\ \vspace{-3pt}
 \end{center}
 
 %----------SUMMARY----------
 \section{SUMMARY}
-\small{MPhil researcher at the University of Cambridge specialising in human--AI orchestration and multi-agent systems. Three years of industry experience building AI-driven security products at Stellar Cyber, with a track record of shipping LLM-powered features showcased at RSA and Black Hat. Research interests span interactive machine learning, active learning, human-in-the-loop frameworks, and responsible AI deployment.}
+\small{PhD student at the University of Cambridge (CHIA, Trustworthy AI Lab) researching \textbf{human--AI orchestration}. Previously three years at Stellar Cyber building AI security products shown at RSA and Black Hat.}
 
 %-----------EDUCATION-----------
 \section{EDUCATION}
   \resumeSubHeadingListStart
     \resumeSubheading
-      {University of Cambridge}{Oct. 2025 -- Jun. 2026}
-      {MPhil in Human-Inspired Artificial Intelligence $\cdot$ Homerton College}{Cambridge, UK}
+      {University of Cambridge}{Oct 2026 -- Present}
+      {PhD in Human-Inspired Artificial Intelligence $\cdot$ Queens' College}{Cambridge, UK}
       \resumeItemListStart
-        \resumeItem{Centre for Human-Inspired AI (CHIA), TRACE Lab; supervised by Prof.\ Umang Bhatt}
+        \resumeItem{\textbf{Human--AI orchestration:} multi-agent systems in which AI agents and people work together under varying expertise, cost, and availability.}
+        \resumeItem{\resumeLink{https://www.chia.cam.ac.uk/}{Centre for Human-Inspired AI (CHIA)}, Trustworthy AI Lab; co-supervised by Prof.\ Umang Bhatt and Prof.\ Adrian Weller}
+        \resumeItem{Cambridge AI Research Society}
       \resumeItemListEnd
 
     \resumeSubheading
-      {Stony Brook University}{Aug. 2018 -- May 2022}
+      {University of Cambridge}{Oct 2025 -- Jun 2026}
+      {MPhil in Human-Inspired Artificial Intelligence $\cdot$ Homerton College}{Cambridge, UK}
+      \resumeItemListStart
+        \resumeItem{\textbf{Awarded with Distinction} $\cdot$ 82.6\,/\,100}
+        \resumeItem{Centre for Human-Inspired AI (CHIA), Trustworthy AI Lab; supervised by Prof.\ Umang Bhatt}
+        \resumeItem{Thesis: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Stony Brook University}{Aug 2018 -- May 2022}
       {BS in Computer Science \& Applied Mathematics and Statistics}{Stony Brook, NY}
       \resumeItemListStart
         \resumeItem{Specialisation: AI \& Data Science $\cdot$ CS Honors Program $\cdot$ GPA 3.89\,/\,4.00 $\cdot$ Summa Cum Laude}
       \resumeItemListEnd
 
     \resumeSubheading
-      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Aug. 2019 -- May 2020}
+      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Aug 2019 -- May 2020}
       {National Student Exchange Program $\cdot$ Computer Science}{Hilo, HI}
       \resumeItemListStart
         \resumeItem{GPA 3.97\,/\,4.00}
       \resumeItemListEnd
   \resumeSubHeadingListEnd
 
-%-----------EXPERIENCE-----------
-\section{EXPERIENCE}
+%-----------RESEARCH EXPERIENCE-----------
+\section{RESEARCH EXPERIENCE}
   \resumeSubHeadingListStart
 
     \resumeSubheading
-      {Stellar Cyber}{May 2022 -- Sep. 2025}
+      {University of Cambridge}{Jul 2026 -- Sep 2026}
+      {Research Assistant, Centre for Human-Inspired AI (CHIA)}{Cambridge, UK}
+      \resumeItemListStart
+        \resumeItem{Research on \textbf{Hybrid Workforces}, a collaboration between CHIA and \textbf{Accenture Singapore}.}
+        \resumeItem{Developing skill inference, the Human API, and orchestration controls.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Stony Brook University}{Aug 2021 -- May 2022}
+      {NLP Research Assistant}{Stony Brook, NY}
+      \resumeItemListStart
+        \resumeItem{Designed \textbf{\resumeLink{https://github.com/KostadinDev/Recursive-QA}{Recursive QA}}, a framework for generating formal-representation annotations of natural-language specifications via guided question-answering over constituency parse trees.}
+        \resumeItem{Reduced redundant annotation options using affinity clustering on Levenshtein distance; achieved \textbf{>80\% inter-annotator agreement} with experienced users completing annotations in $\sim$30\,s.}
+        \resumeItem{Built a full-stack annotation tool with account management, work-history tracking, and graph visualisations.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Jun 2020 -- Aug 2020}
+      {AI Research Assistant}{Hilo, HI}
+      \resumeItemListStart
+        \resumeItem{Developed an IoU\,/\,F1-based threshold estimation heuristic to optimise real-time CNN proposal acceptance for \textbf{invasive-species detection} in drone imagery.}
+        \resumeItem{Enhanced a human-in-the-loop semi-automatic annotation tool that progressively increases AI assistance as model accuracy improves during training.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------PROFESSIONAL EXPERIENCE-----------
+\section{PROFESSIONAL EXPERIENCE}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Stellar Cyber}{May 2022 -- Sep 2025}
       {Software Engineer}{San Jose, CA}
       \resumeItemListStart
-        \resumeItem{Architected a \textbf{multi-agent autonomous SOC system} that triages security cases by correlating alerts with LLMs and generating analyst-ready summaries; featured as Stellar's flagship demo at \textbf{RSA 2025} and \textbf{Black Hat 2025}.}
+        \resumeItem{Architected a \textbf{multi-agent autonomous SOC system} that triages security cases by correlating alerts with LLMs and generating analyst-ready summaries; featured as Stellar's flagship demo at \textbf{\resumeLink{https://stellarcyber.ai/news/press-releases/stellar-cyber-debuts-the-human-augmented-autonomous-soc-powered-by-agentic-ai-at-rsac-2025/}{RSA 2025}} and \textbf{\resumeLink{https://stellarcyber.ai/stellar-cyber-improves-soc-operations-with-human-augmented-autonomous-cybersecurity-blackhat-2025/}{Black Hat 2025}}.}
         \resumeItem{Built the chat interface, session management, and multi-chart visualisation suite for \textbf{Open XDR Investigator}, a GenAI copilot translating natural-language prompts into Elasticsearch queries; headlined \textbf{RSA 2024} and \textbf{Black Hat 2024}.}
         \resumeItem{Implemented bidirectional WebSocket communication with parallel data and LLM requests, \textbf{cutting average response times by 70\%} and enabling real-time progress streaming.}
         \resumeItem{Developed knowledge-enriched GPT agents for log analysis, product metrics, connector normalisation, and data-source classification, each capable of visualisations, API calls, and script execution.}
@@ -172,31 +218,14 @@
       \resumeItemListEnd
 
     \resumeSubheading
-      {Stony Brook University}{Aug. 2021 -- May 2022}
-      {NLP Research Assistant}{Stony Brook, NY}
-      \resumeItemListStart
-        \resumeItem{Designed \textbf{Recursive QA}, a framework for generating formal-representation annotations of natural-language specifications via guided question-answering over constituency parse trees.}
-        \resumeItem{Reduced redundant annotation options using affinity clustering on Levenshtein distance; achieved \textbf{>80\% inter-annotator agreement} with experienced users completing annotations in $\sim$30\,s.}
-        \resumeItem{Built a full-stack annotation tool with account management, work-history tracking, and graph visualisations.}
-      \resumeItemListEnd
-
-    \resumeSubheading
-      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Jun. 2020 -- Aug. 2020}
-      {AI Research Assistant}{Hilo, HI}
-      \resumeItemListStart
-        \resumeItem{Developed an IoU\,/\,F1-based threshold estimation heuristic to optimise real-time CNN proposal acceptance for \textbf{invasive-species detection} in drone imagery.}
-        \resumeItem{Enhanced a human-in-the-loop semi-automatic annotation tool that progressively increases AI assistance as model accuracy improves during training.}
-      \resumeItemListEnd
-
-    \resumeSubheading
-      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Mar. 2020 -- May 2020}
+      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Mar 2020 -- May 2020}
       {Creative Electronic Media Assistant}{Hilo, HI}
       \resumeItemListStart
         \resumeItem{Built a hologram display API and developed the Data Visualisation Lab website.}
       \resumeItemListEnd
 
     \resumeSubheading
-      {Vivansa}{Jun. 2019 -- Aug. 2019}
+      {Vivansa}{Jun 2019 -- Aug 2019}
       {Software Engineering Intern}{Sofia, Bulgaria}
       \resumeItemListStart
         \resumeItem{Improved CRM front-end components and resolved erroneous database entries through root-cause analysis and automated data-cleaning procedures.}
@@ -209,10 +238,33 @@
     \resumeSubHeadingListStart
 
       \resumeProjectHeading
-          {\textbf{Tailor} -- \small{Human-AI Orchestration Platform}}{}
+          {\textbf{\resumeLink{https://kostadindev.github.io/documents/thesis/thesis.pdf}{Ad Hoc Human--AI Orchestration via Skill Inference}} -- \small{MPhil Thesis}}{}
           \resumeItemListStart
-            \resumeItem{Visual workflow builder for composing AI agents with human-in-the-loop review steps and governance controls, designed for regulated industries.}
-            \resumeItem{Presented at the \textbf{IndiaAI Research Symposium} (Feb.\ 2026).}
+            \resumeItem{Models each teammate's ability as a \textbf{Bayesian belief over a taxonomy of skills}. Because the skills are correlated, measuring one also updates the others, so profiles converge on fewer observations than scoring each skill separately.}
+            \resumeItem{Released as \textbf{\resumeLink{https://kostadindev.github.io/skillinfer}{skillinfer}}, an open-source Python package on \resumeLink{https://pypi.org/project/skillinfer/}{PyPI} with source on \resumeLink{https://github.com/kostadindev/skillinfer}{GitHub}, and previewed in Tailor.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{\resumeLink{https://tailorworkflow.com}{Tailor}} -- \small{Human-AI Orchestration Platform}}{}
+          \resumeItemListStart
+            \resumeItem{Visual workflow builder that combines AI agents with human review steps and four levels of governance control, built for regulated industries.}
+          \resumeItemListEnd
+
+% Hidden to keep the section focused on human--AI orchestration.
+% Delete the surrounding comment environment to restore any of these.
+\begin{comment}
+      \resumeProjectHeading
+          {\textbf{Humans as Sensors} -- \small{Cost-Aware Routing for Human--AI Information Gathering}}{}
+          \resumeItemListStart
+            \resumeItem{Reframes people as sensors an AI queries when uncertain, moving the human from \textit{in the loop} to \textit{on call}. On MedQA, a structured Human API matches conversational deferral (\textbf{84--87\% accuracy}) at lower cost while solving a different subset of cases.}
+            \resumeItem{Extended with a bandit formulation that learns whom to ask over time.}
+          \resumeItemListEnd
+
+      \resumeProjectHeading
+          {\textbf{MobileAgents} -- \small{Mobile Multimodal Interface for Teams of AI Agents}}{}
+          \resumeItemListStart
+            \resumeItem{Open-source mobile app for directing agent teams by text, voice, or image; an LLM orchestrator decomposes each request and delegates to specialised agents.}
+            \resumeItem{User study (\textbf{N=13}) found trust and perceived control rose with each of three transparency levels, from black box to live execution graph.}
           \resumeItemListEnd
 
       \resumeProjectHeading
@@ -233,11 +285,11 @@
           \resumeItemListStart
             \resumeItem{Ingests 11 source types to construct knowledge bases using LLM-powered extraction and structuring.}
           \resumeItemListEnd
-
       \resumeProjectHeading
           {\textbf{Threat Explorer} -- \small{Agentic Architectures for Cybersecurity}}{}
           \resumeItemListStart
-            \resumeItem{Agentic system for cybersecurity investigation with a user study evaluating analyst workflows.}
+            \resumeItem{Chat tool that turns plain-language questions into SQL over a 40,000-record attack dataset; benchmarks three agent designs (LLM chain, ReAct, multi-agent) on accuracy, latency, and cost.}
+            \resumeItem{User study (\textbf{N=12}) showed chart-augmented answers outperformed text-only ones on usability, clarity, and speed.}
           \resumeItemListEnd
 
       \resumeProjectHeading
@@ -264,6 +316,7 @@
           \resumeItemListStart
             \resumeItem{Trained and deployed a gesture recognition model on an Arduino Nano 33 BLE microcontroller.}
           \resumeItemListEnd
+\end{comment}
 
     \resumeSubHeadingListEnd
 
@@ -273,36 +326,40 @@
   \item\small{P-M Binder, \textbf{K.\,G.\,Devedzhiev}, A.\,T.\,Runyan. \textit{Motional emf generated by squeezing an elliptical conducting loop.} European Journal of Physics, 2020. \href{https://doi.org/10.1088/1361-6404/ABB066}{\myuline{doi:10.1088/1361-6404/ABB066}}}
 \resumeSubHeadingListEnd
 
+%-----------TALKS & PRESENTATIONS-----------
+\section{TALKS \& PRESENTATIONS}
+\resumeSubHeadingListStart
+  \item\small{\textbf{\resumeLink{https://www.sbs.ox.ac.uk/events/human-algorithm-interaction-workshop-2026}{Oxford Human--Algorithm Interaction (HAI) Workshop 2026}}, Sa\"id Business School, Oxford (Jul 2026) -- Talk: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}
+  \item\small{\textbf{\resumeLink{https://www.chia.cam.ac.uk/}{CHIA Annual Conference 2026: AI for Good}}, Cambridge Union (Jun 2026) -- Poster: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}
+  \item\small{\textbf{\resumeLink{https://ico.org.uk/global/know-your-data/}{ICO Technical Workshop: Know Your Data}}, Information Commissioner's Office, London (Mar 2026) -- Participant; AI transparency and personal data in foundation-model training.}
+\resumeSubHeadingListEnd
+
 %-----------TEACHING & MENTORSHIP-----------
 \section{TEACHING \& MENTORSHIP}
 \resumeSubHeadingListStart
-  \item\small{\textbf{AI Leadership Mentor}, UniHawk (Kuwait City, Dec.\ 2025) -- Mentored high-school students through a week-long AI app-building bootcamp.}
-  \item\small{\textbf{Teaching Assistant}, Stony Brook University (Aug.\ 2020 -- May 2021) -- AMS 210: Applied Linear Algebra; held weekly office hours and graded coursework.}
-  \item\small{\textbf{Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo (Oct.\ 2019 -- May 2020) -- MATH 311: Linear Algebra; CS 150: Intro to Computer Science.}
+  \item\small{\textbf{AI Leadership Mentor}, \resumeLink{https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/}{UniHawk} (Kuwait City, Dec 2025) -- Mentored high-school students through a week-long AI app-building bootcamp.}
+  \item\small{\textbf{Teaching Assistant}, Stony Brook University (Aug 2020 -- May 2021) -- AMS 210: Applied Linear Algebra; held weekly office hours and graded coursework.}
+  \item\small{\textbf{Linear Algebra Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo (Mar 2020 -- May 2020) -- MATH 311: Linear Algebra.}
+  \item\small{\textbf{Computer Science Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo (Oct 2019 -- Dec 2019) -- CS 150: Introduction to Computer Science.}
 \resumeSubHeadingListEnd
 
 %-----------CERTIFICATIONS-----------
 \section{CERTIFICATIONS}
 \resumeSubHeadingListStart
-  \item\small{\textbf{IBM Generative AI Engineering} -- IBM}
-  \item\small{\textbf{MCP: Build Rich-Context AI Apps with Anthropic} -- Anthropic}
-  \item\small{\textbf{AI Agents in LangGraph} -- DeepLearning.AI}
+  \item\small{\textbf{\resumeLink{https://www.credly.com/users/kostadin-devedzhiev.e059b079}{IBM Generative AI Engineering}} -- IBM}
 \resumeSubHeadingListEnd
 
 %-----------SKILLS-----------
 \section{SKILLS}
- \begin{itemize}[leftmargin=0in, label={}]
-    \small{\item{
-     \textbf{Domains}{: Full-Stack Development, Machine Learning, NLP, Human-Computer Interaction, Data Science}\vspace{2pt} \\
-     \textbf{Languages}{: Python, JavaScript, TypeScript, C}\vspace{2pt} \\
-     \textbf{Frontend}{: React, Angular, Tailwind}\vspace{2pt} \\
-     \textbf{Backend \& APIs}{: FastAPI, NodeJS, Express, Flask}\vspace{2pt} \\
-     \textbf{Databases}{: MongoDB, Elasticsearch, Pinecone, PostgreSQL, Redis}\vspace{2pt} \\
-     \textbf{Data Science \& ML}{: PyTorch, Hugging Face, Pandas, NumPy, Scikit-learn, Plotly}\vspace{2pt} \\
-     \textbf{AI Frameworks}{: LangChain, LangGraph}\vspace{2pt} \\
-     \textbf{DevOps}{: Docker}
-    }}
- \end{itemize}
+\vspace{2pt}
+{\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.15in}@{\hspace{6pt}}X@{}}
+  \textbf{Domains}       & Machine Learning, NLP, Human-Computer Interaction, Data Science, Full-Stack Development \\[3pt]
+  \textbf{Languages}     & Python, JavaScript, TypeScript, C \\[3pt]
+  \textbf{ML \& AI}      & PyTorch, Hugging Face, Scikit-learn, LangChain, LangGraph, Pandas, NumPy, Plotly \\[3pt]
+  \textbf{Web}           & React, Angular, Tailwind, FastAPI, Node.js, Express, Flask \\[3pt]
+  \textbf{Data \& Infra} & PostgreSQL, MongoDB, Elasticsearch, Pinecone, Redis, Docker \\
+\end{tabularx}}
 
 %-------------------------------------------
 \end{document}
