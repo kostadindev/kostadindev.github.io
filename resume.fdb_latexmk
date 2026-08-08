@@ -1,7 +1,8 @@
 # Fdb version 4
-["pdflatex"] 1786197713.98911 "/Users/kostadindev/repos/kostadindev.github.io/resume.tex" "resume.pdf" "resume" 1786197714.95795 0
-  "/Users/kostadindev/repos/kostadindev.github.io/resume.tex" 1786197712.79604 17615 04f8025444d7aebbe8a3507e84fcf129 ""
+["pdflatex"] 1786204151.56785 "/Users/kostadindev/repos/kostadindev.github.io/resume.tex" "resume.pdf" "resume" 1786204152.35521 0
+  "/Users/kostadindev/repos/kostadindev.github.io/resume.tex" 1786204150.42174 19355 1c972e62b9ab4655e8ece45c8aec229c ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fira/fir_i3ioen.enc" 1570828436 2862 216913a462814c3772679fedc1bbde0e ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5brands0.enc" 1622837620 2920 d63721872b8c77041b88e51b8f7c291d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc" 1622837620 3042 0e2b14b9be7d01075a4c4591d5d1781b ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free2.enc" 1622837620 2906 e48aa7c95dea478a2e011bcb4f7878c9 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc" 1529098226 2457 aaabbccba4df2a7f7371410ee4e075a3 ""
@@ -12,6 +13,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fira/FiraMono-Regular-tlf-t1--base.tfm" 1556836886 1308 3f752c2e3482e516a5cd9566aee5363e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fira/FiraMono-Regular-tlf-t1.tfm" 1556836886 1360 b5ed0751c774e228ef2b3805818d255f ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fontawesome5/fa5brands0.tfm" 1651520503 1380 a61d7c2860b3f6d342213a6b9b229e9e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fontawesome5/fa5free1solid.tfm" 1622837620 1316 1c2ee668ea88be9bd4f39690662cc344 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fontawesome5/fa5free2solid.tfm" 1622837620 1340 b21002f38a477f345fa9dc96a5613e2b ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/latex-fonts/lasy10.tfm" 1136768653 520 82a3d37183f34b6eb363a161dfc002c2 ""
@@ -24,6 +26,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/fira/FiraMono-Regular.pfb" 1559682857 192962 8eef27b162fb2864c33843b9ad6cdbc2 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Brands-Regular.pfb" 1651520503 204258 177851ae99767090543ae24e73c92f2f ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb" 1651520503 295323 d099723373a00cc17d5ae0c9738bb5b3 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb" 1257299502 112164 176018dd42fcc60204173fa10e357da5 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb" 1257299502 110045 c159829aa6d7d99f1777bb40c90b8157 ""
@@ -73,6 +76,7 @@
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/fontawesome5-generic-helper.sty" 1651520503 1796 6d3390e7a3f2a0f63ce89532aa30ac20 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/fontawesome5-mapping.def" 1651520503 107808 07e47606922c76b1824e149c54155c4c ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/fontawesome5.sty" 1651520503 8112 16dbb19fca3f2df864fea49874356f35 ""
+  "/usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomebrands0.fd" 1651520503 1206 b35c804e364d46e802702be118632c48 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd" 1651520503 980 1b42613a5245ed252c04030af746d737 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomefree2.fd" 1651520503 980 38ce61da47d1ba16e56a2e312b56a515 ""
   "/usr/local/texlive/2025/texmf-dist/tex/latex/fontaxes/fontaxes.sty" 1595539507 14310 41fdb35c51be792ddf00696848d0cfef ""
@@ -112,9 +116,9 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1771785913 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "resume.aux" 1786197714.85626 1405 74722506db6d1b96444f3a2bae73a04c "pdflatex"
-  "resume.out" 1786197714.85713 1215 165bcc62006c5099542ad834cbcdb367 "pdflatex"
-  "resume.tex" 1786197712.79604 17615 04f8025444d7aebbe8a3507e84fcf129 ""
+  "resume.aux" 1786204152.24843 1405 df64e238832c28e38bc5215a5107960c "pdflatex"
+  "resume.out" 1786204152.24963 1215 165bcc62006c5099542ad834cbcdb367 "pdflatex"
+  "resume.tex" 1786204150.42174 19355 1c972e62b9ab4655e8ece45c8aec229c ""
   (generated)
   "resume.aux"
   "resume.log"

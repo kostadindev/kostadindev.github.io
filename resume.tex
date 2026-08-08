@@ -42,8 +42,10 @@
   \llap{\contour{white}{#1}}%
 }
 
-% hyperlink rendered with the same visible underline as the DOI link
-\newcommand{\resumeLink}[2]{\href{#1}{\myuline{#2}}}
+% Visible hyperlink. Uses plain \uline rather than \myuline: the latter's
+% phantom+\llap trick emits the text twice, so PDF text extraction (and any
+% ATS parsing the resume) sees "skillinfer skillinfer".
+\newcommand{\resumeLink}[2]{\href{#1}{\uline{#2}}}
 
 % custom font: helvetica-style
 \usepackage{tgheros}
@@ -61,7 +63,7 @@
 \addtolength{\evensidemargin}{0in}
 \addtolength{\textwidth}{1in}
 \addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.0in}
+\addtolength{\textheight}{1.15in}
 
 \urlstyle{same}
 
@@ -71,15 +73,16 @@
 
 % sans serif sections
 \titleformat {\section}{
-    \bfseries \vspace{2pt} \raggedright \large
-}{}{0em}{}[\color{light-grey} {\titlerule[2pt]} \vspace{-4pt}]
+    \bfseries \vspace{0pt} \raggedright \large
+}{}{0em}{}[\color{light-grey} {\titlerule[2pt]} \vspace{-5pt}]
 
 %-------------------------
 % Custom commands
-\newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-1pt}}
-  }
+% No trailing space or \vspace inside the item body: on a bullet whose last
+% line fills the measure, that material is pushed onto an extra glyph-free
+% line, adding a stray 12pt gap. Item spacing is handled by enumitem instead.
+\newcommand{\resumeItem}[1]{%
+  \item\small{#1}%
 }
 
 \newcommand{\resumeSubheading}[4]{
@@ -106,11 +109,18 @@
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
 
+% single-line entry with a right-aligned date; left column wraps
+\newcommand{\resumeDatedItem}[2]{%
+  \begin{tabularx}{\textwidth}{@{}X@{\hspace{10pt}}r@{}}
+    {\small #1} & {\color{dark-grey}\small #2}\\
+  \end{tabularx}\vspace{1pt}%
+}
+
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, topsep=0pt, partopsep=0pt, itemsep=2pt, parsep=0pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=2pt, itemsep=1pt, parsep=0pt, partopsep=0pt]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=1pt, itemsep=0pt, parsep=0pt, partopsep=0pt]}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0pt}}
 
 \color{text-grey}
@@ -132,13 +142,13 @@
 
 %----------SUMMARY----------
 \section{SUMMARY}
-\small{PhD student at the University of Cambridge (CHIA, Trustworthy AI Lab) researching \textbf{human--AI orchestration}. Previously three years at Stellar Cyber building AI security products shown at RSA and Black Hat.}
+\small{Incoming PhD student at the University of Cambridge (CHIA, Trustworthy AI Lab) researching \textbf{human--AI orchestration}. Previously three years at Stellar Cyber building AI security products shown at RSA and Black Hat.}
 
 %-----------EDUCATION-----------
 \section{EDUCATION}
   \resumeSubHeadingListStart
     \resumeSubheading
-      {University of Cambridge}{Oct 2026 -- Present}
+      {University of Cambridge}{From Oct 2026}
       {PhD in Human-Inspired Artificial Intelligence $\cdot$ Queens' College}{Cambridge, UK}
       \resumeItemListStart
         \resumeItem{\textbf{Human--AI orchestration:} multi-agent systems in which AI agents and people work together under varying expertise, cost, and availability.}
@@ -175,7 +185,7 @@
   \resumeSubHeadingListStart
 
     \resumeSubheading
-      {University of Cambridge}{Jul 2026 -- Sep 2026}
+      {University of Cambridge}{Jul 2026 -- Present}
       {Research Assistant, Centre for Human-Inspired AI (CHIA)}{Cambridge, UK}
       \resumeItemListStart
         \resumeItem{Research on \textbf{Hybrid Workforces}, a collaboration between CHIA and \textbf{Accenture Singapore}.}
@@ -221,7 +231,7 @@
       {University of Hawai\kern.05em`\kern.05emi at Hilo}{Mar 2020 -- May 2020}
       {Creative Electronic Media Assistant}{Hilo, HI}
       \resumeItemListStart
-        \resumeItem{Built a hologram display API and developed the Data Visualisation Lab website.}
+        \resumeItem{Built a hologram display API and developed the Data Visualization Lab website.}
       \resumeItemListEnd
 
     \resumeSubheading
@@ -245,7 +255,7 @@
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{\resumeLink{https://tailorworkflow.com}{Tailor}} -- \small{Human-AI Orchestration Platform}}{}
+          {\textbf{\resumeLink{https://tailorworkflow.com}{Tailor}} -- \small{Human--AI Orchestration Platform}}{}
           \resumeItemListStart
             \resumeItem{Visual workflow builder that combines AI agents with human review steps and four levels of governance control, built for regulated industries.}
           \resumeItemListEnd
@@ -322,26 +332,23 @@
 
 %-----------PUBLICATION-----------
 \section{PUBLICATION}
-\resumeSubHeadingListStart
-  \item\small{P-M Binder, \textbf{K.\,G.\,Devedzhiev}, A.\,T.\,Runyan. \textit{Motional emf generated by squeezing an elliptical conducting loop.} European Journal of Physics, 2020. \href{https://doi.org/10.1088/1361-6404/ABB066}{\myuline{doi:10.1088/1361-6404/ABB066}}}
-\resumeSubHeadingListEnd
+\vspace{2pt}
+\resumeDatedItem{P-M Binder, \textbf{K.\,G.\,Devedzhiev}, A.\,T.\,Runyan. \textit{Motional emf generated by squeezing an elliptical conducting loop.} European Journal of Physics. \resumeLink{https://doi.org/10.1088/1361-6404/abb066}{doi:10.1088/1361-6404/abb066}}{2020}
 
 %-----------TALKS & PRESENTATIONS-----------
 \section{TALKS \& PRESENTATIONS}
-\resumeSubHeadingListStart
-  \item\small{\textbf{\resumeLink{https://www.sbs.ox.ac.uk/events/human-algorithm-interaction-workshop-2026}{Oxford Human--Algorithm Interaction (HAI) Workshop 2026}}, Sa\"id Business School, Oxford (Jul 2026) -- Talk: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}
-  \item\small{\textbf{\resumeLink{https://www.chia.cam.ac.uk/}{CHIA Annual Conference 2026: AI for Good}}, Cambridge Union (Jun 2026) -- Poster: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}
-  \item\small{\textbf{\resumeLink{https://ico.org.uk/global/know-your-data/}{ICO Technical Workshop: Know Your Data}}, Information Commissioner's Office, London (Mar 2026) -- Participant; AI transparency and personal data in foundation-model training.}
-\resumeSubHeadingListEnd
+\vspace{2pt}
+\resumeDatedItem{\textbf{Oxford Human--Algorithm Interaction (HAI) Workshop 2026}, Sa\"id Business School, Oxford -- Talk: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}{Jul 2026}
+\resumeDatedItem{\textbf{CHIA Annual Conference 2026: AI for Good}, Cambridge Union -- Poster: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}{Jun 2026}
+\resumeDatedItem{\textbf{ICO Technical Workshop: Know Your Data}, Information Commissioner's Office, London -- Participant; AI transparency and personal data in foundation-model training.}{Mar 2026}
 
 %-----------TEACHING & MENTORSHIP-----------
 \section{TEACHING \& MENTORSHIP}
-\resumeSubHeadingListStart
-  \item\small{\textbf{AI Leadership Mentor}, \resumeLink{https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/}{UniHawk} (Kuwait City, Dec 2025) -- Mentored high-school students through a week-long AI app-building bootcamp.}
-  \item\small{\textbf{Teaching Assistant}, Stony Brook University (Aug 2020 -- May 2021) -- AMS 210: Applied Linear Algebra; held weekly office hours and graded coursework.}
-  \item\small{\textbf{Linear Algebra Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo (Mar 2020 -- May 2020) -- MATH 311: Linear Algebra.}
-  \item\small{\textbf{Computer Science Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo (Oct 2019 -- Dec 2019) -- CS 150: Introduction to Computer Science.}
-\resumeSubHeadingListEnd
+\vspace{2pt}
+\resumeDatedItem{\textbf{AI Leadership Mentor}, \resumeLink{https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/}{UniHawk}, Kuwait City -- Mentored high-school students through a week-long AI app-building bootcamp.}{Dec 2025}
+\resumeDatedItem{\textbf{Teaching Assistant}, Stony Brook University -- AMS 210: Applied Linear Algebra; held weekly office hours and graded coursework.}{Aug 2020 -- May 2021}
+\resumeDatedItem{\textbf{Linear Algebra Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo -- MATH 311: Linear Algebra.}{Mar 2020 -- May 2020}
+\resumeDatedItem{\textbf{Computer Science Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo -- CS 150: Intro to Computer Science.}{Oct 2019 -- Dec 2019}
 
 %-----------CERTIFICATIONS-----------
 \section{CERTIFICATIONS}
@@ -354,10 +361,10 @@
 \vspace{2pt}
 {\small
 \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.15in}@{\hspace{6pt}}X@{}}
-  \textbf{Domains}       & Machine Learning, NLP, Human-Computer Interaction, Data Science, Full-Stack Development \\[3pt]
-  \textbf{Languages}     & Python, JavaScript, TypeScript, C \\[3pt]
-  \textbf{ML \& AI}      & PyTorch, Hugging Face, Scikit-learn, LangChain, LangGraph, Pandas, NumPy, Plotly \\[3pt]
-  \textbf{Web}           & React, Angular, Tailwind, FastAPI, Node.js, Express, Flask \\[3pt]
+  \textbf{Domains}       & Machine Learning, NLP, Human-Computer Interaction, Data Science, Full-Stack Development \\[1.5pt]
+  \textbf{Languages}     & Python, JavaScript, TypeScript, C \\[1.5pt]
+  \textbf{ML \& AI}      & PyTorch, Hugging Face, Scikit-learn, LangChain, LangGraph, Pandas, NumPy, Plotly \\[1.5pt]
+  \textbf{Web}           & React, Angular, Tailwind, FastAPI, Node.js, Express, Flask \\[1.5pt]
   \textbf{Data \& Infra} & PostgreSQL, MongoDB, Elasticsearch, Pinecone, Redis, Docker \\
 \end{tabularx}}
 

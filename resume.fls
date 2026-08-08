@@ -199,6 +199,10 @@ INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomefree
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomefree1.fd
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fontawesome5/fa5free1solid.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomebrands0.fd
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomebrands0.fd
+INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/fontawesome5/ufontawesomebrands0.fd
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fontawesome5/fa5brands0.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ec-qhvb.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ec-qhvb.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ec-qhvri.tfm
@@ -213,10 +217,12 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/fira/FiraMono-Regular-t
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/fira/FiraMono-Regular-tlf-t1--base.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fira/fir_i3ioen.enc
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5brands0.enc
 INPUT resume.aux
 INPUT ./resume.out
 INPUT ./resume.out
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/fira/FiraMono-Regular.pfb
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Brands-Regular.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/fontawesome5/FontAwesome5Free-Solid.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
