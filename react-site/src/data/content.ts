@@ -457,6 +457,7 @@ export const travelCountries = {
   ],
   asia: [
     { id: "704", name: "Vietnam" },
+    { id: "702", name: "Singapore" },
   ],
   southAmerica: [
     { id: "604", name: "Peru" },
