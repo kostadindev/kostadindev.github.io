@@ -18,7 +18,7 @@ import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import HikingIcon from '@mui/icons-material/Hiking';
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
-const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json';
 const US_STATES_URL = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 const HIGHLIGHT_STATE_IDS = new Set(['36', '15']); // New York, Hawaii
 

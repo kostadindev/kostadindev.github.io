@@ -11,7 +11,7 @@ import {
 } from 'react-simple-maps';
 import { travelCountries } from '../data/content';
 
-const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+const GEO_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json';
 
 const regions = [
   { key: 'europe' as const, label: 'Europe', count: travelCountries.europe.length },
