@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /trips/
 
 Sitemap: https://kostadindev.github.io/sitemap.xml
