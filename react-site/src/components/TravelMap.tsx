@@ -18,6 +18,7 @@ const regions = [
   { key: 'northAmerica' as const, label: 'N. America', count: travelCountries.northAmerica.length },
   { key: 'caribbean' as const, label: 'Caribbean', count: travelCountries.caribbean.length },
   { key: 'middleEast' as const, label: 'Middle East', count: travelCountries.middleEast.length },
+  { key: 'asia' as const, label: 'Asia', count: travelCountries.asia.length },
   { key: 'southAmerica' as const, label: 'S. America', count: travelCountries.southAmerica.length },
 ];
 
