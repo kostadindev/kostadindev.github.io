@@ -35,6 +35,7 @@ const regions = [
   { key: 'europe' as const, label: 'Europe', count: travelCountries.europe.length },
   { key: 'northAmerica' as const, label: 'N. America', count: travelCountries.northAmerica.length },
   { key: 'caribbean' as const, label: 'Caribbean', count: travelCountries.caribbean.length },
+  { key: 'asia' as const, label: 'Asia', count: travelCountries.asia.length },
   { key: 'middleEast' as const, label: 'Middle East', count: travelCountries.middleEast.length },
   { key: 'southAmerica' as const, label: 'S. America', count: travelCountries.southAmerica.length },
 ];
@@ -295,6 +296,7 @@ const COUNTRY_LABELS: { id: string; name: string; lat: number; lng: number }[] =
   { id: '044', name: 'Bahamas', lat: 25.0, lng: -77.4 },
   { id: '630', name: 'Puerto Rico', lat: 18.2, lng: -66.6 },
   { id: '414', name: 'Kuwait', lat: 29.3, lng: 47.5 },
+  { id: '458', name: 'Malaysia', lat: 4.2, lng: 101.9 },
   { id: '604', name: 'Peru', lat: -9.2, lng: -75.0 },
   { id: '076', name: 'Brazil', lat: -14.2, lng: -51.9 },
   { id: '170', name: 'Colombia', lat: 4.6, lng: -74.3 },
