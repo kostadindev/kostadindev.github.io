@@ -296,6 +296,8 @@ const COUNTRY_LABELS: { id: string; name: string; lat: number; lng: number }[] =
   { id: '044', name: 'Bahamas', lat: 25.0, lng: -77.4 },
   { id: '630', name: 'Puerto Rico', lat: 18.2, lng: -66.6 },
   { id: '414', name: 'Kuwait', lat: 29.3, lng: 47.5 },
+  { id: '458', name: 'Malaysia', lat: 4.2, lng: 101.9 },
+  { id: '410', name: 'South Korea', lat: 36.5, lng: 127.9 },
   { id: '604', name: 'Peru', lat: -9.2, lng: -75.0 },
   { id: '076', name: 'Brazil', lat: -14.2, lng: -51.9 },
   { id: '170', name: 'Colombia', lat: 4.6, lng: -74.3 },
