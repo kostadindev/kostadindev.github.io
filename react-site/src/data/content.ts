@@ -460,6 +460,7 @@ export const travelCountries = {
     { id: "702", name: "Singapore" },
     { id: "458", name: "Malaysia" },
     { id: "410", name: "South Korea" },
+    { id: "392", name: "Japan" },
   ],
   southAmerica: [
     { id: "604", name: "Peru" },
