@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+
+# Local tooling (Claude Code settings, worktrees; gstack browser logs)
+.claude/
+.gstack/
+
+# LaTeX build artifacts (resume.tex -> resume.pdf)
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.nav
+*.snm
+
+# Dependencies
+node_modules/
