@@ -8,7 +8,7 @@ import SvgIcon from '@mui/material/SvgIcon';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CheckIcon from '@mui/icons-material/Check';
-import { personalInfo, experience } from '../data/content';
+import { personalInfo } from '../data/content';
 import RoutingDiagram from './RoutingDiagram';
 
 const INK = '#17181C';
@@ -19,12 +19,12 @@ const affiliations = [
   { label: 'University', value: 'Cambridge', logo: './images/cambridge-logo.png', link: 'https://www.cam.ac.uk/' },
   { label: 'College', value: "Queens' College", logo: './images/queens-cover.png', link: 'https://www.queens.cam.ac.uk/', title: "Queens'\nCollege" },
   { label: 'Department', value: 'CHIA', logo: './images/chia-cover.png', link: 'https://www.chia.cam.ac.uk/' },
-  { label: 'Lab', value: 'Trustworthy AI Lab', logo: './images/trace-cover.png', link: 'https://trace-lab.ai/' },
+  { label: 'Lab', value: 'TRACE Lab', logo: './images/trace-cover.png', link: 'https://trace-lab.ai/' },
   {
     label: 'Work experience',
     value: 'Stellar Cyber',
     link: 'https://stellarcyber.ai/',
-    logo: experience[0].logo,
+    logo: './images/stellar-cyber-logo.png',
   },
 ];
 
@@ -96,16 +96,15 @@ export default function Hero() {
               className="mono"
               sx={{ fontSize: { xs: '0.8rem', md: '0.85rem' }, color: 'var(--ink-soft)', mb: 3 }}
             >
-              Trustworthy AI Lab &middot; University of Cambridge
+              TRACE Lab &middot; University of Cambridge
             </Typography>
 
             <Typography variant="body1" sx={{ color: 'var(--ink-soft)', fontSize: '1rem', maxWidth: 520, mb: 2, textWrap: 'pretty' }}>
               I study how{' '}
-              <Box component="span" sx={{ color: ORANGE, fontWeight: 600 }}>humans</Box> and{' '}
-              <Box component="span" sx={{ color: 'var(--agent)', fontWeight: 600 }}>AI agents</Box> work
-              as one team, not just to move faster but so people stay in control and outcomes stay{' '}
-              <Box component="span" sx={{ color: INK, fontWeight: 600 }}>safe and fair</Box>. It comes down to one hard question:{' '}
-              <Box component="span" sx={{ color: INK, fontWeight: 600 }}>who is good at what, and who likes doing what</Box>.
+              <Box component="span" sx={{ color: ORANGE, fontWeight: 600 }}>people</Box> and{' '}
+              <Box component="span" sx={{ color: 'var(--agent)', fontWeight: 600 }}>AI agents</Box> can
+              work together. My research looks at how to decide who should do each task, based on what
+              each person or agent is good at.
             </Typography>
 
             <Typography variant="body2" sx={{ color: 'var(--ink-soft)', maxWidth: 520, mb: 3.5, textWrap: 'pretty' }}>
@@ -121,11 +120,11 @@ export default function Hero() {
               <Link href="http://mlg.eng.cam.ac.uk/adrian/" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
                 Professor Adrian Weller
               </Link>
-              . Before the PhD I built AI interfaces at{' '}
+              . Before the PhD I was a software engineer at{' '}
               <Link href="https://stellarcyber.ai" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
                 Stellar Cyber
               </Link>
-              {' '}for autonomous security.
+              , working on AI tools for security analysts.
             </Typography>
 
             <Stack direction="row" spacing={1.5} sx={{ mb: 3.5 }} flexWrap="wrap" useFlexGap>

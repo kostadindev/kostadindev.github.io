@@ -1,6 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1786204151.56785 "/Users/kostadindev/repos/kostadindev.github.io/resume.tex" "resume.pdf" "resume" 1786204152.35521 0
-  "/Users/kostadindev/repos/kostadindev.github.io/resume.tex" 1786204150.42174 19355 1c972e62b9ab4655e8ece45c8aec229c ""
+["pdflatex"] 1790868333.79075 "resume.tex" "resume.pdf" "resume" 1790868334.2333 0
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fira/fir_i3ioen.enc" 1570828436 2862 216913a462814c3772679fedc1bbde0e ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5brands0.enc" 1622837620 2920 d63721872b8c77041b88e51b8f7c291d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/fontawesome5/fa5free1.enc" 1622837620 3042 0e2b14b9be7d01075a4c4591d5d1781b ""
@@ -116,9 +115,9 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1771785913 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1741450574 3345740 46b66fdb0378f7bf5921b5eabf1762b8 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "resume.aux" 1786204152.24843 1405 df64e238832c28e38bc5215a5107960c "pdflatex"
-  "resume.out" 1786204152.24963 1215 165bcc62006c5099542ad834cbcdb367 "pdflatex"
-  "resume.tex" 1786204150.42174 19355 1c972e62b9ab4655e8ece45c8aec229c ""
+  "resume.aux" 1790868334.18031 1405 df64e238832c28e38bc5215a5107960c "pdflatex"
+  "resume.out" 1790868334.18068 1215 165bcc62006c5099542ad834cbcdb367 "pdflatex"
+  "resume.tex" 1790868204.75691 19325 0f4ea1e50b30d64022ad5d6a95f73cf4 ""
   (generated)
   "resume.aux"
   "resume.log"

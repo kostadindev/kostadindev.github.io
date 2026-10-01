@@ -15,7 +15,7 @@ const stats = [
   },
   {
     label: 'Lab',
-    value: 'Trustworthy AI Lab',
+    value: 'TRACE Lab',
     logo: './images/trace-cover.png',
     link: 'https://trace-lab.ai/',
   },

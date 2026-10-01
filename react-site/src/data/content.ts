@@ -1,12 +1,12 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
   email: "kostadin.g.devedzhiev@gmail.com",
-  tagline: "PhD Student, Human-AI Interaction | Trustworthy AI Lab, Cambridge",
+  tagline: "PhD Student, Human-AI Interaction | TRACE Lab, Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
-    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the Trustworthy AI Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. My research focuses on human-AI interaction — designing multi-agent systems where AI agents and humans collaborate under real-world conditions, such as varying expertise, costs, and availability. I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
-    `Previously, I worked as a Software Engineer at Stellar Cyber in San Jose, California, where I developed AI-driven interfaces for threat hunting and human-augmented autonomous cybersecurity operations powered by agentic AI.`,
+    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the TRACE Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. My research is on human–AI interaction: systems where people and AI agents work together when their skills, costs and availability differ. I am also a research assistant on Hybrid Workforces, a collaboration between CHIA and Accenture Singapore, and I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
+    `Before that, I was a software engineer at Stellar Cyber in San Jose, California, working on AI tools for security analysts.`,
     `In my free time, I enjoy being outdoors in nature, going to music festivals, and playing racquet sports.`
   ],
   socials: [
@@ -21,7 +21,7 @@ export const personalInfo = {
 export const currentWork = [
   {
     title: "Ad Hoc Human–AI Orchestration via Skill Inference",
-    description: "My MPhil thesis at Cambridge, awarded with Distinction. To build an ad hoc team from humans and AI agents, you first have to work out who is good at what, usually from only a handful of noisy observations. I model each individual's ability as a Bayesian belief over a taxonomy of skills, so measuring one skill also updates the skills correlated with it, not just the one you observed. That recovers well-calibrated profiles faster than scoring each skill on its own. The methods are open-sourced as [skillinfer](https://kostadindev.github.io/skillinfer) and previewed inside [Tailor](https://tailorworkflow.com).",
+    description: "My MPhil thesis at Cambridge (Distinction). It estimates what people and AI models are good at from a few observations. Each person's ability is modelled as a Bayesian belief over a taxonomy of skills. Because skills are correlated, one observation also updates related skills, so profiles become accurate with fewer observations than scoring each skill separately. The method is released as [skillinfer](https://kostadindev.github.io/skillinfer) and used in [Tailor](https://tailorworkflow.com).",
     tags: ["Human-AI Orchestration", "Bayesian Inference", "Agentic AI"],
     links: [
       { type: "thesis", url: "./documents/thesis/thesis.pdf" },
@@ -33,14 +33,14 @@ export const currentWork = [
     ],
     image: "./documents/thesis/thesis-cover.svg",
     visuals: [
-      { kind: "image", src: "./documents/thesis/thesis-cover.svg", caption: "Skill inference — a noisy prior closing on the true profile as observations arrive" },
-      { kind: "component", name: "skill-pipeline", caption: "The skillinfer pipeline — prior → observe a task → transfer along Σ → posterior → route" },
-      { kind: "component", name: "skill-covariance", caption: "Covariance Σ — observing Mathematics transfers up to cognitive skills, down to physical ones" }
+      { kind: "image", src: "./documents/thesis/thesis-cover.svg", caption: "Skill inference: the estimate moves toward the true profile as observations arrive" },
+      { kind: "component", name: "skill-pipeline", caption: "The skillinfer pipeline: prior, observe a task, update related skills, posterior, assign the task" },
+      { kind: "component", name: "skill-covariance", caption: "Skill covariance: observing Mathematics also updates related skills" }
     ]
   },
   {
     title: "Tailor",
-    description: "A human-AI orchestration platform for designing workflows where AI agents and humans collaborate seamlessly. Features a visual workflow builder, specialized AI agents, human-in-the-loop review, and four levels of governance controls — from autonomous AI to human-led — built for regulated industries like healthcare, finance, and legal.",
+    description: "A platform for building workflows that combine AI agents with human review. It has a visual workflow builder and four levels of human control, from fully automated to human-led. It is aimed at regulated fields such as healthcare, finance and law.",
     tags: ["Human-AI Orchestration", "Agentic AI", "Human-in-the-Loop"],
     links: [
       { type: "website", url: "https://tailorworkflow.com" }
@@ -76,7 +76,7 @@ export const projects: Project[] = [
   {
     title: "Humans as Sensors: Cost-Aware Routing for Structured Human–AI Information Gathering",
     tagline: "Cost-aware routing for structured human–AI information gathering",
-    description: "Treats people as sensors an AI can call when it's unsure, moving the human from 'in the loop' to 'on call.' On MedQA, a structured Human API matches conversational deferral on accuracy (84–87%) but gathers evidence differently, costs less, and each solves cases the other misses. A bandit version learns who to ask over time.",
+    description: "An AI asks specific people for information when it is unsure. On MedQA, asking through a structured Human API reaches the same accuracy as open conversation (84–87%), costs less, and solves different cases. A bandit version learns whom to ask over time.",
     tags: ["Human-AI Collaboration", "Agentic AI", "Medical AI"],
     category: ["genai", "agentic", "human-ai"],
     links: [
@@ -88,7 +88,7 @@ export const projects: Project[] = [
   {
     title: "Knowledge Base Builder: Multi-Source Knowledge Base Construction with LLMs",
     tagline: "Multi-source knowledge base construction with LLMs",
-    description: "A Python package that turns scattered research material (papers, repos, docs, lecture recordings, slides) into clean Markdown knowledge bases with an LLM. Reads 11 source types and outputs files ready for RAG, vector databases, or an llms.txt.",
+    description: "A Python package that uses an LLM to turn papers, repositories, documents, recordings and slides into Markdown knowledge bases. It reads 11 source types, and the output can be used for RAG, vector databases or an llms.txt file.",
     tags: ["GenAI", "RAG"],
     category: ["genai", "nlp"],
     links: [
@@ -102,7 +102,7 @@ export const projects: Project[] = [
     title: "Fairness and Transparency Analysis of Hospital Readmission Prediction",
     shortTitle: "Hospital Readmission Fairness Audit",
     tagline: "Demographic parity, equalized odds, and SHAP/LIME across 130 hospitals",
-    description: "Audits a 30-day hospital readmission model on the Diabetes 130-Hospitals data. Checks demographic parity and equalized odds with Fairlearn, explains predictions with SHAP and LIME, and cuts group disparities by 74% with an Exponentiated Gradient fix.",
+    description: "Audits a 30-day hospital readmission model on the Diabetes 130-Hospitals dataset. Measures demographic parity and equalized odds with Fairlearn, explains predictions with SHAP and LIME, and reduces group disparities by 74% with Exponentiated Gradient.",
     tags: ["Responsible AI", "Fairness", "Transparency"],
     category: ["human-ai"],
     links: [
@@ -114,7 +114,7 @@ export const projects: Project[] = [
   {
     title: "MobileAgents: Mobile Multimodal Interface for Controlling Teams of AI Agents On the Go",
     tagline: "Mobile multimodal interface for controlling teams of AI agents",
-    description: "An open-source mobile app for running your own team of AI agents by text, voice, or image. An LLM orchestrator breaks each request into a plan and hands tasks to the right agents, with three levels of transparency from black box to a live execution graph. In a study (N=13), trust and control rose with each level, and the three input modes complemented each other.",
+    description: "An open-source mobile app for directing a team of AI agents by text, voice or image. An LLM orchestrator splits each request into tasks and assigns them to agents. The app offers three levels of transparency, from black box to a live execution graph. In a study (N=13), trust and sense of control increased with each level.",
     tags: ["Agentic AI", "HCI", "Multimodal"],
     category: ["agentic", "human-ai"],
     links: [
@@ -127,7 +127,7 @@ export const projects: Project[] = [
   {
     title: "Threat Explorer: Agentic Architectures and Visualization for Cybersecurity Analytics",
     tagline: "Agentic architectures and visualization for cybersecurity analytics",
-    description: "A chat tool for threat analysis that turns plain questions into SQL over a 40,000-record attack dataset. Compares three agent designs (LLM chain, ReAct, and multi-agent) on accuracy, latency, and cost. In a study (N=12), answers with charts beat text-only ones on usability, clarity, and speed.",
+    description: "A chat tool that turns plain-language questions into SQL over a 40,000-record attack dataset. It compares three agent designs (LLM chain, ReAct and multi-agent) on accuracy, latency and cost. In a study (N=12), answers with charts scored higher than text-only answers on usability, clarity and speed.",
     tags: ["Cybersecurity", "Agentic AI", "RAG"],
     category: ["genai", "agentic", "human-ai"],
     links: [
@@ -140,7 +140,7 @@ export const projects: Project[] = [
   {
     title: "GONEXT.lol",
     tagline: "Multi-agent League of Legends analytics with a visible thinking trail",
-    description: "A League of Legends analytics platform built on a multi-agent LLM architecture. It provides transparent reasoning via a thinking trail and MCP logs, calculating detailed aggregate statistics from match history. The system offers context-aware strategies and optimized item builds based on live game states, while supporting dynamic conversational inquiries about anything game related, patches, players, and tournaments.",
+    description: "A League of Legends analytics platform built on a multi-agent LLM system. It shows its reasoning step by step, computes statistics from match history, and suggests strategies and item builds from the live game state. Users can also ask questions about patches, players and tournaments.",
     tags: ["GenAI", "Agentic AI", "RAG"],
     category: ["genai", "agentic"],
     links: [
@@ -152,7 +152,7 @@ export const projects: Project[] = [
   {
     title: "Symbiotic Learning",
     tagline: "Human-in-the-loop annotation of invasive species in drone imagery",
-    description: "A human-in-the-loop image annotation system created to identify and classify invasive species in aerial drone imagery, contributing to the conservation of Hawaii's ecosystems.",
+    description: "A human-in-the-loop tool for labelling invasive species in drone images, built to support conservation work in Hawaii.",
     tags: ["Computer Vision", "Human-in-the-Loop", "Ecological Conservation"],
     category: ["cv", "human-ai"],
     links: [{ type: "article", url: "https://hilo.hawaii.edu/chancellor/stories/2020/08/11/students-research-into-artificial-intelligence/" }],
@@ -161,7 +161,7 @@ export const projects: Project[] = [
   {
     title: "I Want to Redistrict",
     tagline: "Statistical districting analysis for detecting gerrymandering",
-    description: "A political science application developed to create and evaluate state districting plans through statistical analysis. Its primary purpose is to identify gerrymandering and support the generation of equitable district maps using 2020 Census data.",
+    description: "An application that creates and evaluates state districting plans from 2020 Census data, to detect gerrymandering and produce fairer district maps.",
     tags: ["High Performance Computing", "Human-in-the-Loop", "Political Science"],
     category: ["hpc", "human-ai"],
     links: [],
@@ -170,7 +170,7 @@ export const projects: Project[] = [
   {
     title: "Deep Gestures",
     tagline: "Gesture recognition on an Arduino Nano 33 BLE Sense",
-    description: "A comprehensive pipeline for gesture recognition on the Arduino Nano 33 BLE Sense microcontroller. The pipeline leverages the device's integrated 3D accelerometer, gyroscope, and magnetometer sensors.",
+    description: "A gesture recognition pipeline for the Arduino Nano 33 BLE Sense, using its built-in accelerometer, gyroscope and magnetometer.",
     tags: ["Computer Vision", "IoT"],
     category: ["cv", "iot"],
     links: [{ type: "github", url: "https://github.com/KostadinDev/deep-gestures" }],
@@ -179,7 +179,7 @@ export const projects: Project[] = [
   {
     title: "Recursive QA",
     tagline: "NLP annotation as question answering over constituency parse trees",
-    description: "An NLP annotation framework that replaces conventional labeling processes with an intuitive question-answering method. Leveraging constituency parse trees, the system guides annotators by generating targeted question-answer pairs.",
+    description: "An NLP annotation framework that replaces labelling with guided questions. It generates question–answer pairs from constituency parse trees to walk annotators through each sentence.",
     tags: ["NLP", "Human-in-the-Loop"],
     category: ["nlp", "human-ai"],
     links: [{ type: "github", url: "https://github.com/KostadinDev/Recursive-QA" }],
@@ -188,7 +188,7 @@ export const projects: Project[] = [
   {
     title: "League of Legends MCP Server",
     tagline: "35+ MCP tools exposing Riot Games API data to LLMs",
-    description: "This open-source Model Context Protocol (MCP) server empowers LLMs with comprehensive access to League of Legends game data through the Riot Games API. It features over 35 tools and resources for retrieving player statistics, match history, champion information, tournament data, and real-time game monitoring.",
+    description: "An open-source MCP server that gives LLMs access to League of Legends data through the Riot Games API, with over 35 tools for player statistics, match history, champions, tournaments and live games.",
     tags: ["MCP", "Agentic AI", "GenAI"],
     category: ["mcp", "agentic"],
     links: [
@@ -217,14 +217,14 @@ export const education = [
   {
     institution: "University of Cambridge",
     degree: "Doctor of Philosophy in Human-Inspired AI",
-    details: ["Trustworthy AI Lab", "Cambridge AI Research Society", "In Progress"],
+    details: ["TRACE Lab · Queens' College", "Co-supervised by Umang Bhatt and Adrian Weller", "October 2026 – Present"],
     link: "https://www.chia.cam.ac.uk/",
     logo: "./images/cambridge-logo.png"
   },
   {
     institution: "University of Cambridge",
     degree: "Master of Philosophy in Human-Inspired AI",
-    details: ["Trustworthy AI Lab", "Cambridge AI Research Society", "Awarded with Distinction (82.6/100)"],
+    details: ["TRACE Lab · Homerton College", "Cambridge AI Research Society", "Awarded with Distinction (82.6/100)"],
     link: "https://www.chia.cam.ac.uk/",
     transcript: "./documents/cambridge_transcript.pdf",
     logo: "./images/cambridge-logo.png"
@@ -280,17 +280,28 @@ export const certificates = [
 
 export const experience = [
   {
+    title: "Research Assistant",
+    company: "University of Cambridge (CHIA)",
+    location: "Cambridge, UK",
+    period: "July 2026 – Present",
+    logo: "./images/cambridge-logo.png",
+    highlights: [
+      "Research on Hybrid Workforces, a collaboration between CHIA and Accenture Singapore.",
+      "Writing the first paper: how to split work between people and AI agents, using skill inference, a Human API for agents to ask people for input or sign-off, and dynamic controls for how much work stays with people."
+    ]
+  },
+  {
     title: "Software Engineer",
     company: "Stellar Cyber",
     location: "San Jose, CA",
     period: "May 2022 – September 2025",
     logo: "./images/stellar-cyber-logo.png",
     highlights: [
-      "Taught AI agents to do security triage so analysts could sleep — shipped the autonomous SOC headliner at RSA 2025 & Black Hat 2025.",
-      "Gave a cybersecurity copilot the gift of charts — built the chat UI, sessions, and viz suite for Open XDR Investigator (RSA 2024, Black Hat 2024).",
-      "Wired up bidirectional WebSockets and parallelized data + LLM calls — 70% faster responses, zero drama.",
-      "Built GPTs that read logs, crunch metrics, and classify data sources — basically gave spreadsheets a personality.",
-      "Kept 90%+ test coverage and cut bug reports 34% YoY — because shipping bugs is someone else's hobby."
+      "Designed a multi-agent system that triages security cases, correlating alerts with LLMs and writing summaries for analysts. Shown as the main demo at RSA 2025 and Black Hat 2025.",
+      "Built the chat interface, session management and charts for Open XDR Investigator, an AI assistant that turns questions into Elasticsearch queries (RSA 2024, Black Hat 2024).",
+      "Added two-way WebSocket communication and parallel data and LLM requests, cutting average response time by 70%.",
+      "Built GPT-based agents for log analysis, product metrics, connector normalisation and data-source classification.",
+      "Kept test coverage above 90% on my components and reduced bug reports by 34% year over year."
     ]
   },
   {
@@ -300,10 +311,10 @@ export const experience = [
     period: "August 2021 – May 2022",
     logo: "./images/stony-brook-logo.png",
     highlights: [
-      "Invented Recursive QA — turned the soul-crushing task of formal annotation into a guided Q&A game.",
-      "Wrangled parse trees into question-answer pairs and pruned duplicates with Levenshtein-flavored clustering.",
-      "Built a full-stack app around the framework — accounts, history, graphs, the works.",
-      "Got annotators to agree 80%+ of the time and finish in ~30 seconds — turns out good UX beats good intentions."
+      "Designed Recursive QA, a framework that turns formal annotation into guided question answering.",
+      "Generated question–answer pairs from parse trees and removed duplicates with clustering on Levenshtein distance.",
+      "Built a full-stack app for the framework with accounts, work history and graphs.",
+      "Reached over 80% inter-annotator agreement, with experienced users finishing an annotation in about 30 seconds."
     ]
   },
   {
@@ -313,8 +324,8 @@ export const experience = [
     period: "June 2020 – August 2020",
     logo: "./images/hawaii-hilo-logo.png",
     highlights: [
-      "Tuned a CNN to spot invasive species from drone footage — helping keep Hawaii's ecosystems in check, one frame at a time.",
-      "Made an annotation tool that gets smarter as you use it — the more you label, the more it helps. Symbiosis, literally."
+      "Tuned a CNN to detect invasive species in drone footage.",
+      "Built an annotation tool that gives more AI help as the model improves."
     ]
   },
   {
@@ -324,8 +335,8 @@ export const experience = [
     period: "June 2019 – August 2019",
     logo: "./images/vivansa-logo.png",
     highlights: [
-      "Overhauled a CRM's frontend — better components, happier users.",
-      "Played database detective — found bad data, cleaned it up, and made sure it wouldn't sneak back in."
+      "Improved the front-end components of a CRM.",
+      "Found and fixed incorrect database entries and added automated data cleaning."
     ]
   },
   {
@@ -335,9 +346,9 @@ export const experience = [
     period: "March 2020 – May 2020",
     logo: "./images/hawaii-hilo-logo.png",
     highlights: [
-      "Built an API for a hologram display — yes, actual holograms you can walk around.",
-      "Made the Data Viz lab's website — a portfolio for a portfolio, very meta.",
-      "Kept lab computers and 3D printers alive — part IT, part paramedic."
+      "Built an API for a hologram display.",
+      "Built the Data Visualization Lab website.",
+      "Maintained the lab's computers and 3D printers."
     ]
   }
 ];
@@ -348,7 +359,7 @@ export const teaching = [
     institution: "UniHawk",
     location: "Kuwait City, Kuwait",
     period: "December 2025",
-    description: "Mentored high schoolers through a week-long AI bootcamp in Kuwait — by day four they were shipping their own apps.",
+    description: "Mentored high-school students through a week-long AI app-building bootcamp.",
     link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/"
   },
   {
@@ -356,25 +367,39 @@ export const teaching = [
     institution: "Stony Brook University",
     location: "Stony Brook, NY",
     period: "August 2020 – May 2021",
-    description: "TA for Applied Linear Algebra across two semesters — weekly office hours, grading, and a lot of eigenvalue explanations."
+    description: "Teaching assistant for Applied Linear Algebra for two semesters: weekly office hours and grading."
   },
   {
     title: "Linear Algebra Grader",
     institution: "University of Hawaii at Hilo",
     location: "Hilo, HI",
     period: "March 2020 – May 2020",
-    description: "Graded exams and homework for MATH 311: Linear Algebra, and helped students through the rough patches."
+    description: "Graded exams and homework for MATH 311: Linear Algebra."
   },
   {
     title: "Computer Science Grader",
     institution: "University of Hawaii at Hilo",
     location: "Hilo, HI",
     period: "October 2019 – December 2019",
-    description: "Graded assignments for CS 150 and helped students debug their first programs."
+    description: "Graded assignments for CS 150: Introduction to Computer Science."
   }
 ];
 
 export const news = [
+  {
+    date: "Oct 2026",
+    location: "Cambridge, UK",
+    title: "Started my PhD at Cambridge",
+    description: "Began my PhD in Human-Inspired AI at CHIA and Queens' College, in the TRACE Lab, co-supervised by Umang Bhatt and Adrian Weller.",
+    link: "https://trace-lab.ai/",
+  },
+  {
+    date: "Jul 2026",
+    location: "Cambridge, UK",
+    title: "Research Assistant on Hybrid Workforces",
+    description: "Joined CHIA as a research assistant on Hybrid Workforces, a collaboration with Accenture Singapore on how people and AI agents should share work.",
+    link: "https://www.chia.cam.ac.uk/",
+  },
   {
     date: "Jul 2026",
     location: "Oxford, UK",
@@ -400,14 +425,14 @@ export const news = [
     date: "Feb 2026",
     location: "New Delhi, India",
     title: "IndiaAI Research Symposium",
-    description: "[Tailor](https://tailorworkflow.com) presented on behalf of Trustworthy AI Lab and Cambridge at the Impact Summit.",
+    description: "Presented [Tailor](https://tailorworkflow.com) for the TRACE Lab at the IndiaAI Impact Summit.",
     link: "https://impact.indiaai.gov.in/events/research-symposium",
   },
   {
     date: "Dec 2025",
     location: "Kuwait City, Kuwait",
     title: "AI Innovation & Leadership Bootcamp",
-    description: "Mentored teens through a 4-day bootcamp building AI apps, organized by A Learning Lab.",
+    description: "Mentored high-school students at an AI app-building bootcamp run by A Learning Lab.",
     link: "https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/",
   },
   {
@@ -461,6 +486,7 @@ export const travelCountries = {
     { id: "458", name: "Malaysia" },
     { id: "410", name: "South Korea" },
     { id: "392", name: "Japan" },
+    { id: "156", name: "China" },
   ],
   southAmerica: [
     { id: "604", name: "Peru" },

@@ -253,7 +253,7 @@ export default function CurrentWork() {
           index="02"
           label="Work"
           title="Research & building"
-          subtitle="My thesis and the platform I'm building from it. Both start from the same question: who is good at what, and who likes doing what."
+          subtitle="My MPhil thesis and the platform I built alongside it."
         />
 
         <Stack spacing={5} className="reveal-stagger">
