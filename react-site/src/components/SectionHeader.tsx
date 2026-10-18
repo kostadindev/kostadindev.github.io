@@ -1,16 +1,19 @@
 import { Box, Typography, Stack } from '@mui/material';
 
 interface Props {
-  index?: string;       // unused, kept for call-site compatibility
+  index: string;        // e.g. "02"
   label: string;        // mono eyebrow, e.g. "WORK"
   title: string;
   subtitle?: string;
 }
 
-export default function SectionHeader({ label, title, subtitle }: Props) {
+export default function SectionHeader({ index, label, title, subtitle }: Props) {
   return (
     <Box sx={{ mb: { xs: 3, md: 3.5 } }}>
       <Stack direction="row" alignItems="center" spacing={1.5} sx={{ mb: 1.5 }}>
+        <Typography className="mono" sx={{ fontSize: '0.72rem', fontWeight: 600, color: '#E8590C', letterSpacing: '0.08em' }}>
+          [{index}]
+        </Typography>
         <Typography className="mono" sx={{ fontSize: '0.72rem', fontWeight: 500, color: 'var(--ink-soft)', letterSpacing: '0.16em', textTransform: 'uppercase' }}>
           {label}
         </Typography>

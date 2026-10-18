@@ -20,6 +20,7 @@ export default function Experience() {
                 borderColor: 'rgba(0,0,0,0.06)',
                 '&:hover': {
                   borderColor: 'primary.light',
+                  boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                 },
               }}
             >
@@ -107,6 +108,7 @@ export default function Experience() {
                   borderColor: 'rgba(0,0,0,0.06)',
                   '&:hover': {
                     borderColor: 'primary.light',
+                    boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                   },
                 }}
               >

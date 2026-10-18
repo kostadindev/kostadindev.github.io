@@ -41,6 +41,7 @@ export default function Skills() {
                   transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                   '&:hover': {
                     borderColor: 'primary.light',
+                    boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
                   },
                 }}
               >
@@ -76,6 +77,7 @@ export default function Skills() {
                           transition: 'all 0.2s',
                           '&:hover': {
                             bgcolor: 'rgba(232, 89, 12, 0.15)',
+                            transform: 'translateY(-1px)',
                           },
                         }}
                       />
