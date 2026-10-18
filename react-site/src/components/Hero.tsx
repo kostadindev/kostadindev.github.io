@@ -1,255 +1,122 @@
-import { useState } from 'react';
-import { Box, Container, Typography, Button, Stack, IconButton, Tooltip, Link } from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import CodeIcon from '@mui/icons-material/Code';
-import SchoolIcon from '@mui/icons-material/School';
-import SvgIcon from '@mui/material/SvgIcon';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import CheckIcon from '@mui/icons-material/Check';
+import { Box, Container, Typography, Stack, Link } from '@mui/material';
 import { personalInfo } from '../data/content';
-import RoutingDiagram from './RoutingDiagram';
 
 const INK = '#17181C';
-const ORANGE = '#E8590C';
 const HAIRLINE = '#DBD8CF';
 
 const affiliations = [
-  { label: 'University', value: 'Cambridge', logo: './images/cambridge-logo.png', link: 'https://www.cam.ac.uk/' },
-  { label: 'College', value: "Queens' College", logo: './images/queens-cover.png', link: 'https://www.queens.cam.ac.uk/', title: "Queens'\nCollege" },
-  { label: 'Department', value: 'CHIA', logo: './images/chia-cover.png', link: 'https://www.chia.cam.ac.uk/' },
-  { label: 'Lab', value: 'TRACE Lab', logo: './images/trace-cover.png', link: 'https://trace-lab.ai/' },
-  {
-    label: 'Work experience',
-    value: 'Stellar Cyber',
-    link: 'https://stellarcyber.ai/',
-    logo: './images/stellar-cyber-logo.png',
-  },
+  { value: 'University of Cambridge', logo: './images/cambridge-logo.png', link: 'https://www.cam.ac.uk/' },
+  { value: "Queens' College", logo: './images/queens-cover.png', link: 'https://www.queens.cam.ac.uk/' },
+  { value: 'Centre for Human-Inspired AI', logo: './images/chia-cover.png', link: 'https://www.chia.cam.ac.uk/' },
+  { value: 'TRACE Lab', logo: './images/trace-cover.png', link: 'https://trace-lab.ai/' },
+  { value: 'Stellar Cyber', logo: './images/stellar-cyber-logo.png', link: 'https://stellarcyber.ai/' },
 ];
 
-const iconMap: Record<string, React.ReactNode> = {
-  github: <GitHubIcon fontSize="small" />,
-  linkedin: <LinkedInIcon fontSize="small" />,
-  code: <CodeIcon fontSize="small" />,
-  scholar: <SchoolIcon fontSize="small" />,
-  orcid: (
-    <SvgIcon viewBox="0 0 24 24" sx={{ fontSize: 20 }}>
-      <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-1.847-1.238-3.722-3.806-3.722h-2.513z" />
-    </SvgIcon>
-  ),
+const links = [
+  { label: 'Email', href: `mailto:${personalInfo.email}` },
+  { label: 'CV', href: personalInfo.cvUrl },
+  ...personalInfo.socials
+    .filter((s) => ['scholar', 'github', 'linkedin'].includes(s.icon))
+    .map((s) => ({ label: s.name, href: s.url })),
+];
+
+const textLink = {
+  color: INK,
+  textDecorationColor: HAIRLINE,
+  textUnderlineOffset: '3px',
+  '&:hover': { textDecorationColor: INK },
 };
 
 export default function Hero() {
-  const [copied, setCopied] = useState<string | null>(null);
-
-  const handleCopyEmail = (email: string) => {
-    navigator.clipboard.writeText(email);
-    setCopied(email);
-    setTimeout(() => setCopied(null), 2000);
-  };
-
   return (
-    <Box
-      id="about"
-      sx={{
-        minHeight: { md: '88vh' },
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        bgcolor: 'var(--paper)',
-        pt: { xs: 9, md: 3 },
-        pb: { xs: 6, md: 4 },
-      }}
-    >
-      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+    <Box id="about" component="section" sx={{ bgcolor: 'var(--paper)', pt: { xs: 6, md: 10 }, pb: { xs: 5, md: 7 } }}>
+      <Container maxWidth="lg">
         <Box
           sx={{
             display: 'grid',
-            gridTemplateColumns: { xs: '1fr', md: '1.05fr 0.95fr' },
-            gap: { xs: 5, md: 7 },
-            alignItems: 'center',
+            gridTemplateColumns: { xs: '1fr', md: '1fr auto' },
+            gap: { xs: 4, md: 8 },
+            alignItems: 'start',
           }}
         >
-          {/* LEFT — identity */}
-          <Box sx={{ textAlign: 'left' }}>
-            <Stack direction="row" alignItems="center" spacing={1.2} sx={{ mb: 2.5 }}>
-              <Box sx={{ width: 7, height: 7, borderRadius: '50%', bgcolor: ORANGE }} />
-              <Typography
-                className="mono"
-                sx={{ fontSize: '0.72rem', fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: INK }}
-              >
-                PhD Student · Human&ndash;AI Orchestration
-              </Typography>
-            </Stack>
-
+          <Box>
             <Typography
               variant="h1"
-              className="name-resolve"
-              sx={{ color: INK, fontSize: { xs: '2.1rem', sm: '2.7rem', md: '3.05rem' }, lineHeight: 1.05, mb: 1.5, whiteSpace: { md: 'nowrap' } }}
+              sx={{ color: INK, fontSize: { xs: '2.1rem', sm: '2.6rem', md: '3rem' }, lineHeight: 1.1, mb: 1.25 }}
             >
-              Kostadin Devedzhiev
+              {personalInfo.name}
             </Typography>
 
-            <Typography
-              className="mono"
-              sx={{ fontSize: { xs: '0.8rem', md: '0.85rem' }, color: 'var(--ink-soft)', mb: 3 }}
-            >
-              TRACE Lab &middot; University of Cambridge
+            <Typography sx={{ color: 'var(--ink-soft)', fontSize: '1rem', mb: 3.5 }}>
+              PhD student, Centre for Human-Inspired AI, University of Cambridge
             </Typography>
 
-            <Typography variant="body1" sx={{ color: 'var(--ink-soft)', fontSize: '1rem', maxWidth: 520, mb: 2, textWrap: 'pretty' }}>
-              I study how{' '}
-              <Box component="span" sx={{ color: ORANGE, fontWeight: 600 }}>people</Box> and{' '}
-              <Box component="span" sx={{ color: 'var(--agent)', fontWeight: 600 }}>AI agents</Box> can
-              work together. My research looks at how to decide who should do each task, based on what
-              each person or agent is good at.
+            <Typography variant="body1" sx={{ color: INK, maxWidth: 560, mb: 2, textWrap: 'pretty' }}>
+              I study how people and AI agents can work together. My research looks at how to decide
+              who should do each task, based on what each person or agent is good at.
             </Typography>
 
-            <Typography variant="body2" sx={{ color: 'var(--ink-soft)', maxWidth: 520, mb: 3.5, textWrap: 'pretty' }}>
-              I'm at Cambridge's{' '}
-              <Link href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
-                Centre for Human-Inspired AI
-              </Link>
-              , supervised by{' '}
-              <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
-                Professor Umang Bhatt
-              </Link>{' '}
+            <Typography variant="body1" sx={{ color: 'var(--ink-soft)', maxWidth: 560, mb: 3.5, textWrap: 'pretty' }}>
+              I am part of the{' '}
+              <Link href="https://trace-lab.ai/" target="_blank" rel="noopener" sx={textLink}>TRACE Lab</Link>,
+              supervised by{' '}
+              <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener" sx={textLink}>Umang Bhatt</Link>{' '}
               and{' '}
-              <Link href="http://mlg.eng.cam.ac.uk/adrian/" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
-                Professor Adrian Weller
-              </Link>
-              . Before the PhD I was a software engineer at{' '}
-              <Link href="https://stellarcyber.ai" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
-                Stellar Cyber
-              </Link>
-              , working on AI tools for security analysts.
+              <Link href="http://mlg.eng.cam.ac.uk/adrian/" target="_blank" rel="noopener" sx={textLink}>Adrian Weller</Link>.
+              Before the PhD I was a software engineer at{' '}
+              <Link href="https://stellarcyber.ai" target="_blank" rel="noopener" sx={textLink}>Stellar Cyber</Link>,
+              working on AI tools for security analysts.
             </Typography>
 
-            <Stack direction="row" spacing={1.5} sx={{ mb: 3.5 }} flexWrap="wrap" useFlexGap>
-              <Button
-                href="#work"
-                sx={{
-                  bgcolor: ORANGE, color: '#fff', px: 3, py: 1.1, fontSize: '0.9rem',
-                  '&:hover': { bgcolor: 'var(--orange-dark)', transform: 'translateY(-2px)' },
-                  transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-                }}
-              >
-                View my work
-              </Button>
-              <Button
-                href={`mailto:${personalInfo.email}`}
-                sx={{
-                  bgcolor: 'transparent', color: INK, border: '1.5px solid', borderColor: HAIRLINE,
-                  px: 3, py: 1.1, fontSize: '0.9rem',
-                  '&:hover': { borderColor: ORANGE, color: ORANGE, bgcolor: 'var(--orange-tint)' },
-                  transition: 'all 0.3s cubic-bezier(0.16,1,0.3,1)',
-                }}
-              >
-                Get in touch
-              </Button>
-            </Stack>
-
-            {/* socials + contact */}
-            <Stack direction="row" spacing={1.25} alignItems="center" flexWrap="wrap" useFlexGap>
-              {personalInfo.socials.map((social) => (
-                <Tooltip key={social.name} title={social.name} arrow>
-                  <IconButton
-                    href={social.url} target="_blank" rel="noopener"
-                    sx={{
-                      color: 'var(--ink-soft)', width: 36, height: 36, borderRadius: 2,
-                      '&:hover': { color: ORANGE, bgcolor: 'var(--orange-tint)' },
-                      transition: 'all 0.2s',
-                    }}
-                  >
-                    {iconMap[social.icon]}
-                  </IconButton>
-                </Tooltip>
-              ))}
-              {[
-                { email: 'kgd26@cam.ac.uk', color: INK },
-              ].map(({ email, color }) => (
-                <Stack key={email} direction="row" alignItems="center" spacing={0.25}>
-                  <Typography
-                    component="a"
-                    href={`mailto:${email}`}
-                    className="mono"
-                    sx={{ fontSize: '0.8rem', color, textDecoration: 'none', '&:hover': { color: ORANGE } }}
-                  >
-                    {email}
-                  </Typography>
-                  <Tooltip title={copied === email ? 'Copied!' : 'Copy email'}>
-                    <IconButton
-                      onClick={() => handleCopyEmail(email)} size="small"
-                      sx={{ color: copied === email ? 'success.main' : 'grey.400', '&:hover': { color: ORANGE } }}
-                    >
-                      {copied === email ? <CheckIcon sx={{ fontSize: 14 }} /> : <ContentCopyIcon sx={{ fontSize: 14 }} />}
-                    </IconButton>
-                  </Tooltip>
-                </Stack>
-              ))}
-              <Stack direction="row" alignItems="center" spacing={0.3}>
-                <LocationOnIcon sx={{ fontSize: 15, color: 'var(--ink-soft)' }} />
-                <Typography className="mono" sx={{ fontSize: '0.78rem', color: 'var(--ink-soft)' }}>
-                  Cambridge, UK
-                </Typography>
-              </Stack>
-            </Stack>
-          </Box>
-
-          {/* RIGHT — signature: the routing diagram */}
-          <Box sx={{ width: '100%' }}>
-            <RoutingDiagram avatar={personalInfo.avatar} />
-          </Box>
-        </Box>
-
-        {/* Affiliations strip */}
-        <Box sx={{ mt: { xs: 4.5, md: 5 }, pt: 3, borderTop: '1px solid', borderColor: HAIRLINE }}>
-          <Typography className="mono" sx={{ fontSize: '0.68rem', letterSpacing: '0.16em', textTransform: 'uppercase', color: 'var(--ink-soft)', mb: 2 }}>
-            Affiliations
-          </Typography>
-          <Stack direction="row" spacing={{ xs: 4, md: 7 }} alignItems="flex-end" flexWrap="wrap" useFlexGap>
-            {affiliations.map((a) => (
-              <Tooltip key={a.label} title={a.value} arrow>
+            <Stack direction="row" spacing={2.5} flexWrap="wrap" useFlexGap>
+              {links.map((l) => (
                 <Link
-                  href={a.link} target="_blank" rel="noopener" underline="none"
-                  sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', textAlign: 'center', opacity: 0.92, transition: 'all 0.25s', '&:hover': { opacity: 1, transform: 'translateY(-2px)' } }}
+                  key={l.label}
+                  href={l.href}
+                  target={l.href.startsWith('mailto:') ? undefined : '_blank'}
+                  rel="noopener"
+                  sx={{ ...textLink, fontSize: '0.95rem', fontWeight: 500 }}
                 >
-                  <Box
-                    component="img"
-                    src={a.logo}
-                    alt={a.value}
-                    sx={{ height: { xs: a.title ? 64 : 84, md: a.title ? 92 : 120 }, width: 'auto', maxWidth: 320, objectFit: 'contain' }}
-                  />
-                  {a.title && (
-                    <Typography
-                      sx={{
-                        mt: 0.6,
-                        fontFamily: 'Georgia, "Times New Roman", serif',
-                        textTransform: 'uppercase',
-                        fontWeight: 500,
-                        letterSpacing: '0.08em',
-                        lineHeight: 1.18,
-                        color: INK,
-                        whiteSpace: 'pre-line',
-                        fontSize: { xs: '0.68rem', md: '0.82rem' },
-                      }}
-                    >
-                      {a.title}
-                    </Typography>
-                  )}
-                  <Typography
-                    className="mono"
-                    sx={{ mt: 1.25, fontSize: '0.68rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--ink-soft)' }}
-                  >
-                    {a.label}
-                  </Typography>
+                  {l.label}
                 </Link>
-              </Tooltip>
-            ))}
-          </Stack>
+              ))}
+            </Stack>
+          </Box>
+
+          <Box
+            component="img"
+            src={personalInfo.avatar}
+            alt={personalInfo.name}
+            sx={{
+              width: { xs: 160, md: 240 },
+              height: { xs: 160, md: 240 },
+              objectFit: 'cover',
+              objectPosition: 'top',
+              borderRadius: '6px',
+              order: { xs: -1, md: 0 },
+            }}
+          />
         </Box>
+
+        <Stack
+          direction="row"
+          spacing={{ xs: 3, md: 5 }}
+          alignItems="center"
+          flexWrap="wrap"
+          useFlexGap
+          sx={{ mt: { xs: 5, md: 7 }, pt: 3, borderTop: '1px solid', borderColor: HAIRLINE }}
+        >
+          {affiliations.map((a) => (
+            <Link key={a.value} href={a.link} target="_blank" rel="noopener" title={a.value} sx={{ display: 'flex', opacity: 0.55, '&:hover': { opacity: 1 } }}>
+              <Box
+                component="img"
+                src={a.logo}
+                alt={a.value}
+                sx={{ height: { xs: 26, md: 32 }, width: 'auto', filter: 'grayscale(1)', transition: 'filter 0.2s', 'a:hover > &': { filter: 'none' } }}
+              />
+            </Link>
+          ))}
+        </Stack>
       </Container>
     </Box>
   );

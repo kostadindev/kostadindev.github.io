@@ -31,22 +31,6 @@ function LazyOnVisible({ children, rootMargin = '200px' }: { children: React.Rea
 }
 
 function App() {
-  // Scroll-reveal observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
-    );
-    document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   const theme = useMemo(
     () =>
       createTheme({

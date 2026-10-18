@@ -49,7 +49,6 @@ export default function About() {
                     '&:hover': {
                       borderColor: 'primary.light',
                       transform: 'translateY(-6px)',
-                      boxShadow: '0 16px 40px rgba(232, 89, 12, 0.1)',
                     },
                   }}
                 >

@@ -269,8 +269,6 @@ export default function CurrentWork() {
                 border: '1px solid',
                 borderColor: 'rgba(0,0,0,0.06)',
                 '&:hover': {
-                  transform: 'translateY(-6px)',
-                  boxShadow: '0 24px 60px rgba(0,0,0,0.08)',
                   borderColor: 'rgba(0,0,0,0.04)',
                 },
               }}
