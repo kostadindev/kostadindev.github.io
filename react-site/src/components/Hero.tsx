@@ -82,20 +82,21 @@ export default function Hero() {
             </Typography>
 
             <Typography sx={{ fontSize: '1rem', color: 'var(--ink-soft)', mb: 3 }}>
-              PhD student, TRACE Lab, University of Cambridge
+              PhD student, Trustworthy AI Lab, University of Cambridge
             </Typography>
 
             <Typography variant="body1" sx={{ color: 'var(--ink-soft)', fontSize: '1rem', maxWidth: 520, mb: 2, textWrap: 'pretty' }}>
-              I study how people and AI agents can work together. My research looks at how to decide who should do each task, based on what
-              each person or agent is good at.
+              I develop orchestration algorithms for human–AI systems, combining task allocation, skill inference and online learning.
+              My research focuses on pro-human orchestration: optimising how work is distributed while treating human participation
+              as an explicit constraint, not a by-product of maximising output.
             </Typography>
 
-            <Typography variant="body2" sx={{ color: 'var(--ink-soft)', maxWidth: 520, mb: 3.5, textWrap: 'pretty' }}>
-              I'm at Cambridge's{' '}
+            <Typography variant="body1" sx={{ color: 'var(--ink-soft)', fontSize: '1rem', maxWidth: 520, mb: 3.5, textWrap: 'pretty' }}>
+              I'm a PhD student at Cambridge's{' '}
               <Link href="https://www.chia.cam.ac.uk/" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
                 Centre for Human-Inspired AI
               </Link>
-              , supervised by{' '}
+              {' '}(CHIA), supervised by{' '}
               <Link href="https://umangsbhatt.github.io/" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
                 Professor Umang Bhatt
               </Link>{' '}
@@ -103,11 +104,11 @@ export default function Hero() {
               <Link href="http://mlg.eng.cam.ac.uk/adrian/" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
                 Professor Adrian Weller
               </Link>
-              . Before Cambridge I was a software engineer at{' '}
+              . Before Cambridge, I was a software engineer at{' '}
               <Link href="https://stellarcyber.ai" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
                 Stellar Cyber
               </Link>
-              , working on AI tools for security analysts.
+              , where I built AI tools for security analysts.
             </Typography>
 
             <Stack direction="row" spacing={1.5} sx={{ mb: 3.5 }} flexWrap="wrap" useFlexGap>

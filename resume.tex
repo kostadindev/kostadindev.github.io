@@ -17,6 +17,7 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
+\usepackage{needspace}
 
 % fontawesome
 \usepackage{fontawesome5}
@@ -62,8 +63,8 @@
 \addtolength{\oddsidemargin}{-0.5in}
 \addtolength{\evensidemargin}{0in}
 \addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.15in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.4in}
 
 \urlstyle{same}
 
@@ -74,7 +75,8 @@
 % sans serif sections
 \titleformat {\section}{
     \bfseries \vspace{0pt} \raggedright \large
-}{}{0em}{}[\color{light-grey} {\titlerule[2pt]} \vspace{-5pt}]
+}{}{0em}{}[\color{light-grey} {\titlerule[2pt]}]
+\titlespacing*{\section}{0pt}{8pt}{4pt}
 
 %-------------------------
 % Custom commands
@@ -90,7 +92,7 @@
     \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
       \textbf{#1} & {\color{dark-grey}\small #2}\vspace{1pt}\\
       \textit{#3} & {\color{dark-grey} \small #4}\\
-    \end{tabular*}\vspace{-4pt}
+    \end{tabular*}\vspace{1pt}
 }
 
 \newcommand{\resumeSubSubheading}[2]{
@@ -104,7 +106,7 @@
     \item
     \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
       #1 & {\color{dark-grey}\small #2} \\
-    \end{tabular*}\vspace{-4pt}
+    \end{tabular*}\vspace{1pt}
 }
 
 \newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
@@ -113,17 +115,18 @@
 \newcommand{\resumeDatedItem}[2]{%
   \begin{tabularx}{\textwidth}{@{}X@{\hspace{10pt}}r@{}}
     {\small #1} & {\color{dark-grey}\small #2}\\
-  \end{tabularx}\vspace{1pt}%
+  \end{tabularx}\vspace{2pt}%
 }
 
 \renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, topsep=0pt, partopsep=0pt, itemsep=2pt, parsep=0pt]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0in, label={}, topsep=0pt, partopsep=0pt, itemsep=4pt, parsep=0pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=1pt, itemsep=0pt, parsep=0pt, partopsep=0pt]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[topsep=1.5pt, itemsep=0.5pt, parsep=0pt, partopsep=0pt]}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0pt}}
 
 \color{text-grey}
+\frenchspacing
 
 %-------------------------------------------
 %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -133,16 +136,17 @@
 %----------HEADING----------
 \begin{center}
     \textbf{\Huge Kostadin Devedzhiev} \\ \vspace{5pt}
-    \small \faPhone* \texttt{+44 7950 483811} \hspace{1pt} $|$
-    \hspace{1pt} \faEnvelope \hspace{2pt} \href{mailto:kostadin.g.devedzhiev@gmail.com}{\texttt{kostadin.g.devedzhiev@gmail.com}} \hspace{1pt} $|$
-    \hspace{1pt} \faGlobe \hspace{2pt} \href{https://kostadindev.github.io/}{\texttt{kostadindev.github.io}} \hspace{1pt} $|$
-    \hspace{1pt} \faLinkedin \hspace{2pt} \href{https://www.linkedin.com/in/kostadin-dev/}{\texttt{kostadin-dev}}
+    \small \faMapMarker* \hspace{2pt} Cambridge, UK \hspace{1pt} $|$ \hspace{1pt} \faPhone* \hspace{2pt} \texttt{+44 7950 483811} \hspace{1pt} $|$
+    \hspace{1pt} \faEnvelope \hspace{2pt} \href{mailto:kostadin.g.devedzhiev@gmail.com}{\texttt{kostadin.g.devedzhiev@gmail.com}} \\ \vspace{1pt}
+    \small \faGlobe \hspace{2pt} \href{https://kostadindev.github.io/}{\texttt{kostadindev.github.io}} \hspace{1pt} $|$
+    \hspace{1pt} \faLinkedin \hspace{2pt} \href{https://www.linkedin.com/in/kostadin-dev/}{\texttt{kostadin-dev}} \hspace{1pt} $|$
+    \hspace{1pt} \faGithub \hspace{2pt} \href{https://github.com/kostadindev}{\texttt{kostadindev}}
     \\ \vspace{-3pt}
 \end{center}
 
 %----------SUMMARY----------
 \section{SUMMARY}
-\small{PhD student at the University of Cambridge (CHIA, TRACE Lab) researching \textbf{human--AI orchestration}. Previously three years at Stellar Cyber building AI security products shown at RSA and Black Hat.}
+\small{First-year PhD student at the University of Cambridge's Centre for Human-Inspired AI (CHIA), developing orchestration algorithms for human--AI systems, combining task allocation, skill inference and online learning. My research focuses on pro-human orchestration: optimising how work is distributed while treating human participation as an explicit constraint, not a by-product of maximising output. I developed \resumeLink{https://kostadindev.github.io/skillinfer}{skillinfer}, an open-source Python package, and previously spent three years at Stellar Cyber building human--AI multi-agent security products, demonstrated at RSA and Black Hat.}
 
 %-----------EDUCATION-----------
 \section{EDUCATION}
@@ -151,64 +155,31 @@
       {University of Cambridge}{Oct 2026 -- Present}
       {PhD in Human-Inspired Artificial Intelligence $\cdot$ Queens' College}{Cambridge, UK}
       \resumeItemListStart
-        \resumeItem{\textbf{Human--AI orchestration:} multi-agent systems in which AI agents and people work together under varying expertise, cost, and availability.}
-        \resumeItem{\resumeLink{https://www.chia.cam.ac.uk/}{Centre for Human-Inspired AI (CHIA)}, TRACE Lab; co-supervised by Prof.\ Umang Bhatt and Prof.\ Adrian Weller}
-        \resumeItem{Cambridge AI Research Society}
+        \resumeItem{Research on how to split work between people and AI agents when they differ in skill, cost and availability.}
+        \resumeItem{\resumeLink{https://www.chia.cam.ac.uk/}{CHIA}, \resumeLink{https://trace-lab.ai/}{Trustworthy AI (TRACE) Lab}. Co-supervised by Prof.\ Umang Bhatt and Prof.\ Adrian Weller.}
       \resumeItemListEnd
 
     \resumeSubheading
       {University of Cambridge}{Oct 2025 -- Jun 2026}
       {MPhil in Human-Inspired Artificial Intelligence $\cdot$ Homerton College}{Cambridge, UK}
       \resumeItemListStart
-        \resumeItem{\textbf{Awarded with Distinction} $\cdot$ 82.6\,/\,100}
-        \resumeItem{Centre for Human-Inspired AI (CHIA), TRACE Lab; supervised by Prof.\ Umang Bhatt}
-        \resumeItem{Thesis: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}}
+        \resumeItem{Distinction (82.6/100). CHIA, TRACE Lab. Supervised by Prof.\ Umang Bhatt.}
+        \resumeItem{Thesis: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Stony Brook University}{Aug 2018 -- May 2022}
-      {BS in Computer Science \& Applied Mathematics and Statistics}{Stony Brook, NY}
+      {BS, Computer Science and Applied Mathematics \& Statistics}{Stony Brook, NY}
       \resumeItemListStart
-        \resumeItem{Specialisation: AI \& Data Science $\cdot$ CS Honors Program $\cdot$ GPA 3.89\,/\,4.00 $\cdot$ Summa Cum Laude}
+        \resumeItem{Specialisation in AI and Data Science $\cdot$ CS Honors Program $\cdot$ GPA 3.89/4.00 $\cdot$ Summa Cum Laude.}
       \resumeItemListEnd
 
     \resumeSubheading
       {University of Hawai\kern.05em`\kern.05emi at Hilo}{Aug 2019 -- May 2020}
       {National Student Exchange Program $\cdot$ Computer Science}{Hilo, HI}
       \resumeItemListStart
-        \resumeItem{GPA 3.97\,/\,4.00}
+        \resumeItem{GPA 3.97/4.00.}
       \resumeItemListEnd
-  \resumeSubHeadingListEnd
-
-%-----------RESEARCH EXPERIENCE-----------
-\section{RESEARCH EXPERIENCE}
-  \resumeSubHeadingListStart
-
-    \resumeSubheading
-      {University of Cambridge}{Jul 2026 -- Present}
-      {Research Assistant, Centre for Human-Inspired AI (CHIA)}{Cambridge, UK}
-      \resumeItemListStart
-        \resumeItem{Research on \textbf{Hybrid Workforces}, a collaboration between CHIA and \textbf{Accenture Singapore}.}
-        \resumeItem{Developing skill inference, the Human API, and orchestration controls.}
-      \resumeItemListEnd
-
-    \resumeSubheading
-      {Stony Brook University}{Aug 2021 -- May 2022}
-      {NLP Research Assistant}{Stony Brook, NY}
-      \resumeItemListStart
-        \resumeItem{Designed \textbf{\resumeLink{https://github.com/KostadinDev/Recursive-QA}{Recursive QA}}, a framework for generating formal-representation annotations of natural-language specifications via guided question-answering over constituency parse trees.}
-        \resumeItem{Reduced redundant annotation options using affinity clustering on Levenshtein distance; achieved \textbf{>80\% inter-annotator agreement} with experienced users completing annotations in $\sim$30\,s.}
-        \resumeItem{Built a full-stack annotation tool with account management, work-history tracking, and graph visualisations.}
-      \resumeItemListEnd
-
-    \resumeSubheading
-      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Jun 2020 -- Aug 2020}
-      {AI Research Assistant}{Hilo, HI}
-      \resumeItemListStart
-        \resumeItem{Developed an IoU\,/\,F1-based threshold estimation heuristic to optimise real-time CNN proposal acceptance for \textbf{invasive-species detection} in drone imagery.}
-        \resumeItem{Enhanced a human-in-the-loop semi-automatic annotation tool that progressively increases AI assistance as model accuracy improves during training.}
-      \resumeItemListEnd
-
   \resumeSubHeadingListEnd
 
 %-----------PROFESSIONAL EXPERIENCE-----------
@@ -219,153 +190,116 @@
       {Stellar Cyber}{May 2022 -- Sep 2025}
       {Software Engineer}{San Jose, CA}
       \resumeItemListStart
-        \resumeItem{Architected a \textbf{multi-agent autonomous SOC system} that triages security cases by correlating alerts with LLMs and generating analyst-ready summaries; featured as Stellar's flagship demo at \textbf{\resumeLink{https://stellarcyber.ai/news/press-releases/stellar-cyber-debuts-the-human-augmented-autonomous-soc-powered-by-agentic-ai-at-rsac-2025/}{RSA 2025}} and \textbf{\resumeLink{https://stellarcyber.ai/stellar-cyber-improves-soc-operations-with-human-augmented-autonomous-cybersecurity-blackhat-2025/}{Black Hat 2025}}.}
-        \resumeItem{Built the chat interface, session management, and multi-chart visualisation suite for \textbf{Open XDR Investigator}, a GenAI copilot translating natural-language prompts into Elasticsearch queries; headlined \textbf{RSA 2024} and \textbf{Black Hat 2024}.}
-        \resumeItem{Implemented bidirectional WebSocket communication with parallel data and LLM requests, \textbf{cutting average response times by 70\%} and enabling real-time progress streaming.}
-        \resumeItem{Developed knowledge-enriched GPT agents for log analysis, product metrics, connector normalisation, and data-source classification, each capable of visualisations, API calls, and script execution.}
-        \resumeItem{Owned the product analytics framework (Mixpanel), producing reports that informed UX redesigns, storage optimisation, and behavioural segmentation.}
-        \resumeItem{Maintained \textbf{>90\% test coverage} on owned components, \textbf{reducing bug filings by 34\%} year-over-year.}
+        \resumeItem{Designed and built a human-augmented multi-agent security operations system in which large language model (LLM) agents triage security cases by correlating alerts and generating summaries, and analysts review and act on them. Featured in Stellar Cyber's main demos at \resumeLink{https://stellarcyber.ai/news/press-releases/stellar-cyber-debuts-the-human-augmented-autonomous-soc-powered-by-agentic-ai-at-rsac-2025/}{RSA 2025} and \resumeLink{https://stellarcyber.ai/stellar-cyber-improves-soc-operations-with-human-augmented-autonomous-cybersecurity-blackhat-2025/}{Black Hat 2025}.}
+        \resumeItem{Built the chat interface, session management and chart visualisations for Open XDR Investigator, an LLM copilot that converts natural-language questions into Elasticsearch queries. Demonstrated at RSA and Black Hat 2024.}
+        \resumeItem{Implemented bidirectional WebSocket streaming with parallel data and LLM requests, \textbf{reducing average query response time by 70\%}.}
+        \resumeItem{Built retrieval-augmented LLM agents for log analysis, product metrics, connector normalisation and data-source classification, with support for chart generation, API calls and script execution.}
+        \resumeItem{Maintained \textbf{over 90\% test coverage} across owned components. Bug filings \textbf{fell by 34\%} year on year.}
       \resumeItemListEnd
 
     \resumeSubheading
       {University of Hawai\kern.05em`\kern.05emi at Hilo}{Mar 2020 -- May 2020}
       {Creative Electronic Media Assistant}{Hilo, HI}
       \resumeItemListStart
-        \resumeItem{Built a hologram display API and developed the Data Visualization Lab website.}
+        \resumeItem{Built an API for a hologram display and developed the Data Visualization Lab website.}
       \resumeItemListEnd
 
     \resumeSubheading
       {Vivansa}{Jun 2019 -- Aug 2019}
       {Software Engineering Intern}{Sofia, Bulgaria}
       \resumeItemListStart
-        \resumeItem{Improved CRM front-end components and resolved erroneous database entries through root-cause analysis and automated data-cleaning procedures.}
+        \resumeItem{Improved CRM front-end components and fixed erroneous database records through root-cause analysis and automated data-cleaning procedures.}
       \resumeItemListEnd
 
   \resumeSubHeadingListEnd
 
-%-----------PROJECTS-----------
-\section{RESEARCH \& PROJECTS}
+%-----------RESEARCH EXPERIENCE-----------
+\section{RESEARCH EXPERIENCE}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {University of Cambridge}{Jul 2026 -- Sep 2026}
+      {Research Assistant, Centre for Human-Inspired AI (CHIA)}{Cambridge, UK}
+      \resumeItemListStart
+        \resumeItem{Researched task allocation between people and AI agents through Hybrid Workforces, a collaboration between CHIA and Accenture Singapore.}
+        \resumeItem{Developed Bayesian skill inference to estimate the capabilities of human and AI agents, alongside a Human API that lets agents request input from people through an explicit interface.}
+      \resumeItemListEnd
+
+    \Needspace{7\baselineskip}
+    \resumeSubheading
+      {Stony Brook University}{Aug 2021 -- May 2022}
+      {Research Assistant, Natural Language Processing}{Stony Brook, NY}
+      \resumeItemListStart
+        \resumeItem{Designed \resumeLink{https://github.com/KostadinDev/Recursive-QA}{Recursive QA}, a tool that converts English requirements into formal specifications by guiding annotators through questions based on constituency parse trees.}
+        \resumeItem{Used affinity clustering based on Levenshtein distance to reduce redundant answer options, achieving \textbf{over 80\% inter-annotator agreement}. Experienced users completed annotations in about 30 seconds.}
+        \resumeItem{Built the full-stack annotation application, including user accounts, work history and graph visualisations.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {University of Hawai\kern.05em`\kern.05emi at Hilo}{Jun 2020 -- Aug 2020}
+      {AI Research Assistant}{Hilo, HI}
+      \resumeItemListStart
+        \resumeItem{Developed a heuristic for estimating IoU/F1 thresholds to control proposal acceptance in real-time CNN-based invasive-species detection from drone imagery.}
+        \resumeItem{Built a human-in-the-loop annotation tool that increased AI assistance as the model improved during training.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------PUBLICATIONS-----------
+\section{PUBLICATIONS}
+\resumeDatedItem{P.-M.\ Binder, \textbf{K.\,G.\,Devedzhiev}, A.\,T.\,Runyan. \textit{Motional emf generated by squeezing an elliptical conducting loop.} European Journal of Physics. \resumeLink{https://doi.org/10.1088/1361-6404/abb066}{doi:10.1088/1361-6404/abb066}}{2020}
+
+%-----------TALKS & PRESENTATIONS-----------
+\Needspace{4\baselineskip}
+\section{TALKS \& PRESENTATIONS}
+\resumeDatedItem{\textbf{Talk}, Oxford Human--Algorithm Interaction Workshop, Sa\"id Business School -- \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}{Jul 2026}
+\resumeDatedItem{\textbf{Poster}, CHIA Annual Conference, Cambridge Union -- \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}{Jun 2026}
+
+%-----------PROJECTS & SOFTWARE-----------
+\Needspace{6\baselineskip}
+\section{PROJECTS \& SOFTWARE}
     \resumeSubHeadingListStart
 
       \resumeProjectHeading
-          {\textbf{\resumeLink{https://kostadindev.github.io/documents/thesis/thesis.pdf}{Ad Hoc Human--AI Orchestration via Skill Inference}} -- \small{MPhil Thesis}}{}
+          {\textbf{Ad Hoc Human--AI Orchestration via Skill Inference} -- \small{MPhil thesis}}{\resumeLink{https://kostadindev.github.io/documents/thesis/thesis.pdf}{thesis}}
           \resumeItemListStart
-            \resumeItem{Models each teammate's ability as a \textbf{Bayesian belief over a taxonomy of skills}. Because the skills are correlated, measuring one also updates the others, so profiles converge on fewer observations than scoring each skill separately.}
-            \resumeItem{Released as \textbf{\resumeLink{https://kostadindev.github.io/skillinfer}{skillinfer}}, an open-source Python package on \resumeLink{https://pypi.org/project/skillinfer/}{PyPI} with source on \resumeLink{https://github.com/kostadindev/skillinfer}{GitHub}, and previewed in Tailor.}
+            \resumeItem{Represented each teammate's skill profile as a Bayesian belief over a skill taxonomy. Because skills are correlated, observations about one skill update beliefs about others, \textbf{reducing the number of observations} needed to estimate a profile.}
+            \resumeItem{Released as \resumeLink{https://kostadindev.github.io/skillinfer}{skillinfer}, an open-source Python package on \resumeLink{https://pypi.org/project/skillinfer/}{PyPI}, with source code on \resumeLink{https://github.com/kostadindev/skillinfer}{GitHub}. Used in Tailor.}
           \resumeItemListEnd
 
       \resumeProjectHeading
-          {\textbf{\resumeLink{https://tailorworkflow.com}{Tailor}} -- \small{Human--AI Orchestration Platform}}{}
+          {\textbf{Tailor} -- \small{Human--AI orchestration platform}}{\resumeLink{https://tailorworkflow.com}{tailorworkflow.com}}
           \resumeItemListStart
-            \resumeItem{Visual workflow builder that combines AI agents with human review steps and four levels of governance control, built for regulated industries.}
+            \resumeItem{Built a prototype visual workflow editor for combining AI agents with human review steps, with four levels of human control ranging from fully automated to human-led workflows.}
+            \resumeItem{Uses \emph{skillinfer} to profile people and agents and route each step to whoever is best placed to do it.}
           \resumeItemListEnd
-
-% Hidden to keep the section focused on human--AI orchestration.
-% Delete the surrounding comment environment to restore any of these.
-\begin{comment}
-      \resumeProjectHeading
-          {\textbf{Humans as Sensors} -- \small{Cost-Aware Routing for Human--AI Information Gathering}}{}
-          \resumeItemListStart
-            \resumeItem{Reframes people as sensors an AI queries when uncertain, moving the human from \textit{in the loop} to \textit{on call}. On MedQA, a structured Human API matches conversational deferral (\textbf{84--87\% accuracy}) at lower cost while solving a different subset of cases.}
-            \resumeItem{Extended with a bandit formulation that learns whom to ask over time.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{MobileAgents} -- \small{Mobile Multimodal Interface for Teams of AI Agents}}{}
-          \resumeItemListStart
-            \resumeItem{Open-source mobile app for directing agent teams by text, voice, or image; an LLM orchestrator decomposes each request and delegates to specialised agents.}
-            \resumeItem{User study (\textbf{N=13}) found trust and perceived control rose with each of three transparency levels, from black box to live execution graph.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{MARL-Align} -- \small{Multi-Agent RL for LLM Value Alignment}}{}
-          \resumeItemListStart
-            \resumeItem{Multi-agent reinforcement learning framework that aligns LLM outputs using social welfare functions.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{GONEXT} -- \small{In-game GenAI Assistant for League of Legends}}{}
-          \resumeItemListStart
-            \resumeItem{Delivers real-time strategy recommendations by feeding live game state (allies, enemies, items, matchups) to LLMs. Released an \textbf{open-source MCP server} wrapping all Riot Games LoL APIs.}
-            \resumeItem{Production-hardened with caching, rate limiting, and optimised LLM chains.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{Knowledge Base Builder} -- \small{Multi-Source KB Construction with LLMs}}{}
-          \resumeItemListStart
-            \resumeItem{Ingests 11 source types to construct knowledge bases using LLM-powered extraction and structuring.}
-          \resumeItemListEnd
-      \resumeProjectHeading
-          {\textbf{Threat Explorer} -- \small{Agentic Architectures for Cybersecurity}}{}
-          \resumeItemListStart
-            \resumeItem{Chat tool that turns plain-language questions into SQL over a 40,000-record attack dataset; benchmarks three agent designs (LLM chain, ReAct, multi-agent) on accuracy, latency, and cost.}
-            \resumeItem{User study (\textbf{N=12}) showed chart-augmented answers outperformed text-only ones on usability, clarity, and speed.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{Fairness and Transparency Analysis} -- \small{Hospital Readmission Prediction}}{}
-          \resumeItemListStart
-            \resumeItem{Analysed fairness in hospital readmission models; achieved \textbf{74.5\% disparity reduction} through bias-mitigation techniques.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{Symbiotic Learning} -- \small{Human-in-the-Loop Image Annotation}}{}
-          \resumeItemListStart
-            \resumeItem{Semi-automatic annotation tool for ecological conservation that progressively increases AI assistance as model accuracy improves.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{I Want to Redistrict} -- \small{Senior Software Engineering Capstone}}{}
-          \resumeItemListStart
-            \resumeItem{Processed 2020 US Census data on a supercomputer to generate viable state districting plans via stochastic graph algorithms, optimising for political fairness and compactness.}
-            \resumeItem{Built a web application for visual and statistical analysis of equitable districting results.}
-          \resumeItemListEnd
-
-      \resumeProjectHeading
-          {\textbf{Deep Gestures} -- \small{Gesture Recognition on Arduino Nano 33}}{}
-          \resumeItemListStart
-            \resumeItem{Trained and deployed a gesture recognition model on an Arduino Nano 33 BLE microcontroller.}
-          \resumeItemListEnd
-\end{comment}
 
     \resumeSubHeadingListEnd
 
-%-----------PUBLICATION-----------
-\section{PUBLICATION}
-\vspace{2pt}
-\resumeDatedItem{P-M Binder, \textbf{K.\,G.\,Devedzhiev}, A.\,T.\,Runyan. \textit{Motional emf generated by squeezing an elliptical conducting loop.} European Journal of Physics. \resumeLink{https://doi.org/10.1088/1361-6404/abb066}{doi:10.1088/1361-6404/abb066}}{2020}
-
-%-----------TALKS & PRESENTATIONS-----------
-\section{TALKS \& PRESENTATIONS}
-\vspace{2pt}
-\resumeDatedItem{\textbf{Oxford Human--Algorithm Interaction (HAI) Workshop 2026}, Sa\"id Business School, Oxford -- Talk: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}{Jul 2026}
-\resumeDatedItem{\textbf{CHIA Annual Conference 2026: AI for Good}, Cambridge Union -- Poster: \textit{Ad Hoc Human--AI Orchestration via Skill Inference}.}{Jun 2026}
-\resumeDatedItem{\textbf{ICO Technical Workshop: Know Your Data}, Information Commissioner's Office, London -- Participant; AI transparency and personal data in foundation-model training.}{Mar 2026}
-
 %-----------TEACHING & MENTORSHIP-----------
 \section{TEACHING \& MENTORSHIP}
-\vspace{2pt}
-\resumeDatedItem{\textbf{AI Leadership Mentor}, \resumeLink{https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/}{UniHawk}, Kuwait City -- Mentored high-school students through a week-long AI app-building bootcamp.}{Dec 2025}
-\resumeDatedItem{\textbf{Teaching Assistant}, Stony Brook University -- AMS 210: Applied Linear Algebra; held weekly office hours and graded coursework.}{Aug 2020 -- May 2021}
+\resumeDatedItem{\textbf{AI Leadership Mentor}, \resumeLink{https://alearninglab.com/conferences/ai-innovation-leadership-bootcamp-kuwait/}{UniHawk}, Kuwait City -- Mentored high-school students in a week-long AI app development bootcamp.}{Dec 2025}
+\resumeDatedItem{\textbf{Teaching Assistant}, Stony Brook University -- AMS 210: Applied Linear Algebra. Weekly office hours and grading.}{Aug 2020 -- May 2021}
 \resumeDatedItem{\textbf{Linear Algebra Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo -- MATH 311: Linear Algebra.}{Mar 2020 -- May 2020}
 \resumeDatedItem{\textbf{Computer Science Grader}, University of Hawai\kern.05em`\kern.05emi at Hilo -- CS 150: Intro to Computer Science.}{Oct 2019 -- Dec 2019}
 
-%-----------CERTIFICATIONS-----------
-\section{CERTIFICATIONS}
-\resumeSubHeadingListStart
-  \item\small{\textbf{\resumeLink{https://www.credly.com/users/kostadin-devedzhiev.e059b079}{IBM Generative AI Engineering}} -- IBM}
-\resumeSubHeadingListEnd
+%-----------HONOURS & FELLOWSHIPS-----------
+\section{HONOURS \& FELLOWSHIPS}
+\resumeDatedItem{\textbf{Alignment Fellowship} (technical track), \resumeLink{https://caish.org/}{Cambridge AI Safety Hub}.}{2026}
+\resumeDatedItem{\textbf{MPhil with Distinction} (82.6/100), University of Cambridge.}{2026}
+\resumeDatedItem{\textbf{Summa Cum Laude}, Stony Brook University.}{2022}
 
 %-----------SKILLS-----------
+\Needspace{8\baselineskip}
 \section{SKILLS}
-\vspace{2pt}
 {\small
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.15in}@{\hspace{6pt}}X@{}}
-  \textbf{Domains}       & Machine Learning, NLP, Human-Computer Interaction, Data Science, Full-Stack Development \\[1.5pt]
-  \textbf{Languages}     & Python, JavaScript, TypeScript, C \\[1.5pt]
-  \textbf{ML \& AI}      & PyTorch, Hugging Face, Scikit-learn, LangChain, LangGraph, Pandas, NumPy, Plotly \\[1.5pt]
-  \textbf{Web}           & React, Angular, Tailwind, FastAPI, Node.js, Express, Flask \\[1.5pt]
-  \textbf{Data \& Infra} & PostgreSQL, MongoDB, Elasticsearch, Pinecone, Redis, Docker \\
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{1.3in}@{\hspace{6pt}}X@{}}
+  \textbf{Research}         & Human--AI orchestration, multi-agent systems, Bayesian skill modelling, human--AI collaboration, HCI \\[1.5pt]
+  \textbf{Programming}      & Python, TypeScript, JavaScript, C \\[1.5pt]
+  \textbf{Machine learning} & PyTorch, Hugging Face, scikit-learn, LangChain, LangGraph, pandas, NumPy \\[1.5pt]
+  \textbf{Data \& infra}    & PostgreSQL, MongoDB, Elasticsearch, Pinecone, Redis, Docker \\[1.5pt]
+  \textbf{Web}              & React, Angular, Tailwind CSS, FastAPI, Node.js, Express, Flask \\[1.5pt]
+  \textbf{Languages}        & Bulgarian (native), English (fluent) \\
 \end{tabularx}}
 
 %-------------------------------------------

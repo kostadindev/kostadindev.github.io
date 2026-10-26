@@ -1,12 +1,12 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
   email: "kostadin.g.devedzhiev@gmail.com",
-  tagline: "PhD Student, Human-AI Interaction | TRACE Lab, Cambridge",
+  tagline: "PhD Student, Trustworthy AI Lab, University of Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
-    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, where I am part of the TRACE Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. My research is on human–AI interaction: systems where people and AI agents work together when their skills, costs and availability differ. I am also a research assistant on Hybrid Workforces, a collaboration between CHIA and Accenture Singapore, and I am building Tailor, a platform for designing workflows with built-in human oversight and governance controls for regulated industries.`,
-    `Before that, I was a software engineer at Stellar Cyber in San Jose, California, working on AI tools for security analysts.`,
+    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, in the TRACE Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. I develop orchestration algorithms for human–AI systems, combining task allocation, skill inference and online learning. My research focuses on pro-human orchestration: optimising how work is distributed while treating human participation as an explicit constraint, not a by-product of maximising output.`,
+    `I am also a research assistant on Hybrid Workforces, a collaboration between CHIA and Accenture Singapore, and I am building Tailor, a platform for workflows with human oversight in regulated industries. Before Cambridge, I was a software engineer at Stellar Cyber in San Jose, California, working on tools for security analysts.`,
     `In my free time, I enjoy being outdoors in nature, going to music festivals, and playing racquet sports.`
   ],
   socials: [
@@ -282,8 +282,8 @@ export const experience = [
   {
     title: "Research Assistant",
     company: "University of Cambridge (CHIA)",
-    location: "Cambridge, UK",
-    period: "July 2026 – Present",
+    location: "Singapore",
+    period: "July 2026 – September 2026",
     logo: "./images/cambridge-logo.png",
     highlights: [
       "Research on Hybrid Workforces, a collaboration between CHIA and Accenture Singapore.",
@@ -386,6 +386,13 @@ export const teaching = [
 ];
 
 export const news = [
+  {
+    date: "Oct 2026",
+    location: "Cambridge, UK",
+    title: "CAISH Alignment Fellowship",
+    description: "Selected for the Cambridge AI Safety Hub's Alignment Fellowship, Technical track: a reading group on how LLMs are trained to follow instructions and why that fails, interpretability, evaluating models for reliability and deception, and oversight and safe deployment.",
+    link: "https://caish.org/",
+  },
   {
     date: "Oct 2026",
     location: "Cambridge, UK",
