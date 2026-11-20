@@ -5,8 +5,8 @@ export const personalInfo = {
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
-    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, in the TRACE Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. I develop orchestration algorithms for human–AI systems, combining task allocation, skill inference and online learning. My research focuses on pro-human orchestration: optimising how work is distributed while treating human participation as an explicit constraint, not a by-product of maximising output.`,
-    `I am also a research assistant on Hybrid Workforces, a collaboration between CHIA and Accenture Singapore, and I am building Tailor, a platform for workflows with human oversight in regulated industries. Before Cambridge, I was a software engineer at Stellar Cyber in San Jose, California, working on tools for security analysts.`,
+    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, in the TRACE Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. I study multi-agent human–AI systems, with a focus on AI security and safety. My research on pro-human orchestration argues that, as AI agents become more capable and take on more work, human–AI systems should involve people more than output maximisation suggests, so that they develop and maintain their skills, knowledge and autonomy. I am also developing budgeted monitoring for agent swarms, which selects parts of the communication graph to inspect jointly based on its topology.`,
+    `Before Cambridge, I was a software engineer at Stellar Cyber in San Jose, California, where I built AI security tools, including a multi-agent autonomous security triage system and a language-driven security data visualisation interface, presented at RSA and Black Hat.`,
     `In my free time, I enjoy being outdoors in nature, going to music festivals, and playing racquet sports.`
   ],
   socials: [

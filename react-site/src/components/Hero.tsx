@@ -86,9 +86,10 @@ export default function Hero() {
             </Typography>
 
             <Typography variant="body1" sx={{ color: 'var(--ink-soft)', fontSize: '1rem', maxWidth: 520, mb: 2, textWrap: 'pretty' }}>
-              I develop orchestration algorithms for human–AI systems, combining task allocation, skill inference and online learning.
-              My research focuses on pro-human orchestration: optimising how work is distributed while treating human participation
-              as an explicit constraint, not a by-product of maximising output.
+              I study multi-agent human–AI systems, with a focus on AI security and safety. My research on pro-human orchestration
+              argues that, as AI agents become more capable and take on more work, human–AI systems should involve people more than
+              output maximisation suggests, so that they develop and maintain their skills, knowledge and autonomy. I am also developing
+              budgeted monitoring for agent swarms, which selects parts of the communication graph to inspect jointly based on its topology.
             </Typography>
 
             <Typography variant="body1" sx={{ color: 'var(--ink-soft)', fontSize: '1rem', maxWidth: 520, mb: 3.5, textWrap: 'pretty' }}>
@@ -108,7 +109,8 @@ export default function Hero() {
               <Link href="https://stellarcyber.ai" target="_blank" rel="noopener" sx={{ color: INK, textDecorationColor: HAIRLINE }}>
                 Stellar Cyber
               </Link>
-              , where I built AI tools for security analysts.
+              , where I built AI security tools, including a multi-agent autonomous security triage system and a language-driven
+              security data visualisation interface, presented at RSA and Black Hat.
             </Typography>
 
             <Stack direction="row" spacing={1.5} sx={{ mb: 3.5 }} flexWrap="wrap" useFlexGap>
