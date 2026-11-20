@@ -2,17 +2,17 @@ import { useRef, useMemo, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Line, Html } from '@react-three/drei';
 import * as THREE from 'three';
+import { alpha } from '@mui/material/styles';
 import earcut from 'earcut';
 import { travelCountries } from '../data/content';
-import SectionHeader from './SectionHeader';
+import SectionHeader, { Section } from './SectionHeader';
+import Highlight from './Highlight';
 import {
   Box,
-  Container,
   Typography,
   Stack,
   Chip,
   Grid,
-  Link,
 } from '@mui/material';
 import SportsTennisIcon from '@mui/icons-material/SportsTennis';
 import HikingIcon from '@mui/icons-material/Hiking';
@@ -30,6 +30,30 @@ const allIds = new Set(
 );
 
 const totalCountries = allIds.size;
+
+// The map's colour key, defined once and used by the globe, the legend and the
+// country chips. These colours carry meaning (where I am from, lived, visited).
+const TRAVEL_COLORS = {
+  native: '#c97a1a',
+  lived: '#e89a3c',
+  visited: '#f0b95a',
+  current: '#7c8cf8',
+  route: '#E8590C', // arcs from Sofia and highlighted state outlines
+  land: '#e8e6e1', // countries not visited
+  ocean: '#c8d8e8',
+  visitedOutline: '#b8720f',
+  landOutline: '#bbb8b0',
+  pinLabel: '#17181C',
+  countryLabel: '#6b5a3e',
+  labelHalo: '#FFFFFF',
+} as const;
+
+const LEGEND = [
+  { color: TRAVEL_COLORS.native, label: 'Native' },
+  { color: TRAVEL_COLORS.lived, label: 'Lived' },
+  { color: TRAVEL_COLORS.visited, label: 'Visited' },
+  { color: TRAVEL_COLORS.current, label: 'Current' },
+];
 
 const regions = [
   { key: 'europe' as const, label: 'Europe', count: travelCountries.europe.length },
@@ -152,10 +176,10 @@ function parseStates(topo: any): CountryData[] {
 }
 
 function getCountryColor(id: string): string {
-  if (id === NATIVE_ID) return '#c97a1a';
-  if (LIVED_IDS.has(id)) return '#e89a3c';
-  if (allIds.has(id)) return '#f0b95a';
-  return '#e8e6e1'; // warm light grey for non-visited land
+  if (id === NATIVE_ID) return TRAVEL_COLORS.native;
+  if (LIVED_IDS.has(id)) return TRAVEL_COLORS.lived;
+  if (allIds.has(id)) return TRAVEL_COLORS.visited;
+  return TRAVEL_COLORS.land;
 }
 
 function getCountryFillOpacity(id: string): number {
@@ -307,19 +331,18 @@ const COUNTRY_LABELS: { id: string; name: string; lat: number; lng: number }[] =
 function PinMarker({ lat, lng, name, label }: { lat: number; lng: number; name: string; label: string }) {
   const position = useMemo(() => latLngToVector3(lat, lng, RADIUS + 0.015), [lat, lng]);
   const labelPos = useMemo(() => latLngToVector3(lat, lng, RADIUS + 0.06), [lat, lng]);
-  const pinColor = label === 'Native' ? '#E8590C' : label === 'Current' ? '#7c8cf8' : '#e89a3c';
+  const pinColor = label === 'Native' ? TRAVEL_COLORS.route : label === 'Current' ? TRAVEL_COLORS.current : TRAVEL_COLORS.lived;
 
   return (
     <group>
       <GlobePoint position={position} color={pinColor} size={0.045} pulseSpeed={label === 'Current' ? 2 : 0} />
       <Html position={labelPos} center style={{ pointerEvents: 'none' }}>
         <div style={{
-          color: '#17181C',
+          color: TRAVEL_COLORS.pinLabel,
           fontSize: 10,
-          fontWeight: 700,
-          fontFamily: 'Inter, sans-serif',
+          fontWeight: 600,
           whiteSpace: 'nowrap',
-          textShadow: '0 0 3px #FFFDFB, 0 0 6px #FFFDFB',
+          textShadow: `0 0 3px ${TRAVEL_COLORS.labelHalo}, 0 0 6px ${TRAVEL_COLORS.labelHalo}`,
         }}>
           {name}
         </div>
@@ -334,12 +357,11 @@ function CountryLabel({ lat, lng, name }: { lat: number; lng: number; name: stri
   return (
     <Html position={position} center style={{ pointerEvents: 'none' }}>
       <div style={{
-        color: '#6b5a3e',
+        color: TRAVEL_COLORS.countryLabel,
         fontSize: 8,
         fontWeight: 500,
-        fontFamily: 'Inter, sans-serif',
         whiteSpace: 'nowrap',
-        textShadow: '0 0 2px #FFFDFB, 0 0 4px #FFFDFB',
+        textShadow: `0 0 2px ${TRAVEL_COLORS.labelHalo}, 0 0 4px ${TRAVEL_COLORS.labelHalo}`,
         opacity: 0.85,
       }}>
         {name}
@@ -385,7 +407,7 @@ function GlobeMesh({ countries, states }: { countries: CountryData[]; states: Co
       <mesh>
         <sphereGeometry args={[RADIUS, 64, 64]} />
         <meshPhysicalMaterial
-          color="#c8d8e8"
+          color={TRAVEL_COLORS.ocean}
           roughness={1}
           metalness={0}
           clearcoat={0.05}
@@ -412,7 +434,7 @@ function GlobeMesh({ countries, states }: { countries: CountryData[]; states: Co
               <Line
                 key={`outline-${country.id}-${pi}-${ri}`}
                 points={ring.coords3D}
-                color={allIds.has(country.id) ? '#b8720f' : '#bbb8b0'}
+                color={allIds.has(country.id) ? TRAVEL_COLORS.visitedOutline : TRAVEL_COLORS.landOutline}
                 lineWidth={allIds.has(country.id) ? 1.2 : 0.3}
                 transparent
                 opacity={allIds.has(country.id) ? 0.7 : 0.3}
@@ -430,7 +452,7 @@ function GlobeMesh({ countries, states }: { countries: CountryData[]; states: Co
               <Line
                 key={`state-outline-${state.id}-${pi}-${ri}`}
                 points={ring.coords3D}
-                color="#E8590C"
+                color={TRAVEL_COLORS.route}
                 lineWidth={2.5}
                 transparent
                 opacity={0.9}
@@ -452,7 +474,7 @@ function GlobeMesh({ countries, states }: { countries: CountryData[]; states: Co
 
       {/* Arcs from Sofia */}
       {arcs.map((arc) => (
-        <Arc key={arc.key} start={arc.start} end={arc.end} color="#E8590C" />
+        <Arc key={arc.key} start={arc.start} end={arc.end} color={TRAVEL_COLORS.route} />
       ))}
     </group>
   );
@@ -482,30 +504,26 @@ export default function Globe() {
       text: (
         <>
           Favourite artist:{' '}
-          <Link href="https://open.spotify.com/album/763xbIwmR5A5EzoVreGlUG" target="_blank" rel="noopener"
-            sx={{ fontWeight: 600, color: 'primary.main', textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+          <Highlight href="https://open.spotify.com/album/763xbIwmR5A5EzoVreGlUG">
             Subtronics
-          </Link>.
+          </Highlight>.
         </>
       ),
     },
   ];
 
   return (
-    <Box id="travel" sx={{ py: { xs: 4.5, md: 6 }, bgcolor: '#FFFDFB' }}>
-      <Container maxWidth="lg">
-        <SectionHeader index="08" label="Off the clock" title="Beyond work" />
+    <Section id="travel">
+        <SectionHeader title="Beyond work" />
 
         {/* Hobbies */}
-        <Grid container spacing={3} justifyContent="center" sx={{ mb: 6 }}>
+        <Grid container spacing={3} sx={{ mb: 6 }}>
           {hobbies.map((hobby) => (
             <Grid size={{ xs: 12, sm: 4 }} key={hobby.label}>
-              <Stack spacing={1} alignItems="center" textAlign="center">
-                <Box sx={{ color: 'primary.main' }}>{hobby.icon}</Box>
-                <Typography variant="subtitle2" fontWeight={600} sx={{ fontSize: '0.85rem' }}>
-                  {hobby.label}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
+              <Stack spacing={0.75} alignItems="center" textAlign="center">
+                <Box sx={{ color: 'primary.dark', display: 'flex' }}>{hobby.icon}</Box>
+                <Typography variant="h3">{hobby.label}</Typography>
+                <Typography variant="body1" color="text.secondary">
                   {hobby.text}
                 </Typography>
               </Stack>
@@ -513,48 +531,23 @@ export default function Globe() {
           ))}
         </Grid>
 
-        {/* Travel subheading */}
-        <Box sx={{ mt: 5 }}>
-          <SectionHeader index="08.1" label="On the map" title="Travel" />
-        </Box>
-        <Typography
-          variant="body1"
-          textAlign="center"
-          sx={{ color: 'text.secondary', mb: 4, maxWidth: 520, mx: 'auto' }}
-        >
+        <SectionHeader title="Travel" level="h3" />
+        <Typography variant="body1" color="text.secondary" textAlign="center" sx={{ mb: 2 }}>
           {totalCountries} countries across four continents.
         </Typography>
 
-        <Stack
-          direction="row"
-          spacing={1}
-          justifyContent="center"
-          flexWrap="wrap"
-          useFlexGap
-          sx={{ mb: 3 }}
-        >
+        <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap" useFlexGap sx={{ mb: 2 }}>
           {regions.map((r) => (
             <Chip
               key={r.key}
               label={`${r.label} (${r.count})`}
-              size="small"
-              sx={{
-                bgcolor: 'rgba(232, 89, 12, 0.08)',
-                color: 'primary.dark',
-                fontWeight: 500,
-              }}
+              variant="filled"
+              sx={{ bgcolor: (t) => alpha(t.palette.primary.main, 0.08), color: 'primary.dark' }}
             />
           ))}
         </Stack>
 
-        <Box
-          sx={{
-            position: 'relative',
-            height: { xs: 350, md: 500 },
-            borderRadius: 3,
-            overflow: 'hidden',
-          }}
-        >
+        <Box sx={{ position: 'relative', height: { xs: 340, sm: 460 }, borderRadius: 1, overflow: 'hidden' }}>
           <Canvas
             camera={{ position: [0, 0, 5.2], fov: 45 }}
             gl={{ antialias: true, alpha: true }}
@@ -575,54 +568,29 @@ export default function Globe() {
           </Canvas>
         </Box>
 
-        <Stack
-          direction="row"
-          spacing={3}
-          justifyContent="center"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          {[
-            { color: '#c97a1a', label: 'Native' },
-            { color: '#e89a3c', label: 'Lived' },
-            { color: '#f0b95a', label: 'Visited' },
-            { color: '#7c8cf8', label: 'Current' },
-          ].map((item) => (
+        <Stack direction="row" spacing={3} justifyContent="center" flexWrap="wrap" useFlexGap sx={{ mt: 2, mb: 2 }}>
+          {LEGEND.map((item) => (
             <Stack key={item.label} direction="row" alignItems="center" spacing={0.75}>
               <Box sx={{ width: 12, height: 12, borderRadius: '50%', bgcolor: item.color }} />
-              <Typography variant="caption" sx={{ color: 'grey.600' }}>
+              <Typography variant="caption" color="text.secondary">
                 {item.label}
               </Typography>
             </Stack>
           ))}
         </Stack>
 
-        <Stack
-          direction="row"
-          spacing={1.5}
-          flexWrap="wrap"
-          useFlexGap
-          justifyContent="center"
-          sx={{ mt: 1 }}
-        >
+        <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap justifyContent="center">
           {Object.values(travelCountries)
             .flat()
-            .map((c) => (
-              <Chip
-                key={c.id}
-                label={c.name}
-                size="small"
-                variant={NATIVE_ID === c.id || LIVED_IDS.has(c.id) ? 'filled' : 'outlined'}
-                sx={{
-                  borderColor: NATIVE_ID === c.id ? 'primary.main' : LIVED_IDS.has(c.id) ? 'primary.light' : 'rgba(232, 154, 60, 0.3)',
-                  bgcolor: NATIVE_ID === c.id ? 'primary.main' : LIVED_IDS.has(c.id) ? 'primary.light' : 'transparent',
-                  color: NATIVE_ID === c.id || LIVED_IDS.has(c.id) ? 'white' : 'grey.700',
-                  fontSize: 12,
-                  fontWeight: NATIVE_ID === c.id || LIVED_IDS.has(c.id) ? 600 : 400,
-                }}
-              />
-            ))}
+            .map((c) => {
+              const fill = NATIVE_ID === c.id ? TRAVEL_COLORS.native : LIVED_IDS.has(c.id) ? TRAVEL_COLORS.lived : undefined;
+              return fill ? (
+                <Chip key={c.id} label={c.name} variant="filled" sx={{ bgcolor: fill, color: 'common.white' }} />
+              ) : (
+                <Chip key={c.id} label={c.name} sx={{ borderColor: alpha(TRAVEL_COLORS.visited, 0.6) }} />
+              );
+            })}
         </Stack>
-      </Container>
-    </Box>
+    </Section>
   );
 }

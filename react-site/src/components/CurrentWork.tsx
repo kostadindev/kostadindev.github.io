@@ -1,42 +1,29 @@
 import { useState } from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  Card,
-  CardContent,
-  Chip,
-  Stack,
-  IconButton,
-  Tooltip,
-  Link,
-} from '@mui/material';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LanguageIcon from '@mui/icons-material/Language';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import CheckIcon from '@mui/icons-material/Check';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import ImageIcon from '@mui/icons-material/Image';
-import SlideshowIcon from '@mui/icons-material/Slideshow';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
+import { cn } from '@/lib/utils';
 import { currentWork } from '../data/content';
-import SectionHeader from './SectionHeader';
+import Highlight from './Highlight';
+import { LinkIcon } from './icons';
+import SectionHeader, { Section } from './SectionHeader';
 import SkillCovariance from './SkillCovariance';
 import SkillPipeline from './SkillPipeline';
+import { Meta } from './typography';
 
 type Visual =
-  | { kind: 'image'; src: string; caption?: string; bg?: string }
-  | { kind: 'component'; name: string; caption?: string; bg?: string };
+  | { kind: 'image'; src: string; caption?: string }
+  | { kind: 'component'; name: string; caption?: string };
 
 const vizRegistry: Record<string, React.ComponentType> = {
   'skill-covariance': SkillCovariance,
   'skill-pipeline': SkillPipeline,
 };
 
-/** The visual panel of a Work card — one or more slides (images or live
- *  visualizations) you can page through. Single-visual cards show no controls. */
+/** The visual of a work card: one or more slides (images or live diagrams)
+ *  shown at the card's full width. Single-visual cards show no controls. */
 function WorkVisual({ visuals, title }: { visuals: Visual[]; title: string }) {
   const [i, setI] = useState(0);
   const many = visuals.length > 1;
@@ -45,297 +32,138 @@ function WorkVisual({ visuals, title }: { visuals: Visual[]; title: string }) {
   const Comp = v.kind === 'component' ? vizRegistry[v.name] : null;
 
   return (
-    <Box
-      sx={{
-        width: { xs: '100%', md: '50%' },
-        alignSelf: 'stretch',
-        minHeight: { md: 340 },
-        bgcolor: '#FBF4EF',
-        position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        overflow: 'hidden',
-      }}
-    >
-      <Box
-        sx={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          minHeight: { xs: 220, md: 0 },
-          bgcolor: v.bg ?? 'transparent',
-          px: many ? { xs: 3, md: 5 } : v.bg ? { xs: 2, md: 3 } : 0,
-          py: v.bg ? { xs: 2, md: 3 } : 0,
-          transition: 'background-color 0.3s',
-        }}
-      >
+    <figure className="border-b bg-muted/40">
+      <div className="relative flex aspect-[16/10] items-center justify-center">
         {v.kind === 'image' ? (
-          <Box component="img" src={v.src} alt={v.caption ?? title} sx={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+          <img src={v.src} alt={v.caption ?? title} className="size-full object-contain p-4" />
         ) : Comp ? (
           <Comp />
         ) : null}
-      </Box>
-
-      {many && (
-        <>
-          <IconButton
-            onClick={() => go(-1)}
-            aria-label="Previous visual"
-            size="small"
-            sx={{
-              position: 'absolute', left: 8, top: '46%', transform: 'translateY(-50%)',
-              bgcolor: 'rgba(255,255,255,0.82)', border: '1px solid rgba(0,0,0,0.08)', color: '#17181C',
-              '&:hover': { bgcolor: '#fff', color: 'primary.main' },
-            }}
-          >
-            <ChevronLeftIcon fontSize="small" />
-          </IconButton>
-          <IconButton
-            onClick={() => go(1)}
-            aria-label="Next visual"
-            size="small"
-            sx={{
-              position: 'absolute', right: 8, top: '46%', transform: 'translateY(-50%)',
-              bgcolor: 'rgba(255,255,255,0.82)', border: '1px solid rgba(0,0,0,0.08)', color: '#17181C',
-              '&:hover': { bgcolor: '#fff', color: 'primary.main' },
-            }}
-          >
-            <ChevronRightIcon fontSize="small" />
-          </IconButton>
-        </>
-      )}
-
+        {many && (
+          <>
+            <Button variant="outline" size="icon" onClick={() => go(-1)} aria-label="Previous visual" className="absolute left-3">
+              <ChevronLeft />
+            </Button>
+            <Button variant="outline" size="icon" onClick={() => go(1)} aria-label="Next visual" className="absolute right-3">
+              <ChevronRight />
+            </Button>
+          </>
+        )}
+      </div>
       {(many || v.caption) && (
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="space-between"
-          sx={{ px: 2, py: 1.25, borderTop: '1px solid rgba(0,0,0,0.06)', bgcolor: 'rgba(255,255,255,0.55)' }}
-        >
-          <Typography className="mono" sx={{ fontSize: '0.68rem', color: 'var(--ink-soft)', pr: 1, lineHeight: 1.4 }}>
-            {v.caption}
-          </Typography>
+        <figcaption className="flex items-center justify-between gap-4 border-t bg-background px-6 py-2">
+          <Meta>{v.caption}</Meta>
           {many && (
-            <Stack direction="row" spacing={0.75} sx={{ flexShrink: 0 }}>
+            <div className="flex shrink-0">
               {visuals.map((_, k) => (
-                <Box
+                <button
                   key={k}
-                  component="button"
                   onClick={() => setI(k)}
                   aria-label={`Show visual ${k + 1} of ${visuals.length}`}
-                  sx={{
-                    width: k === i ? 18 : 7, height: 7, borderRadius: 4, p: 0, border: 'none', cursor: 'pointer',
-                    bgcolor: k === i ? 'primary.main' : 'rgba(0,0,0,0.18)', transition: 'all 0.25s',
-                  }}
-                />
+                  aria-current={k === i}
+                  className="flex size-6 items-center justify-center rounded-full"
+                >
+                  <span className={cn('size-2 rounded-full', k === i ? 'bg-accent-mark' : 'bg-border')} />
+                </button>
               ))}
-            </Stack>
+            </div>
           )}
-        </Stack>
+        </figcaption>
       )}
-    </Box>
+    </figure>
   );
 }
 
-const CopyableCommand = ({ command }: { command: string }) => {
+function CopyableCommand({ command }: { command: string }) {
   const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
+  const copy = () => {
     navigator.clipboard.writeText(command);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        alignItems: 'center',
-        bgcolor: '#FBF4EF',
-        borderRadius: 2,
-        overflow: 'hidden',
-        border: '1px solid',
-        borderColor: 'rgba(0,0,0,0.08)',
-      }}
-    >
-      <Box
-        sx={{
-          flex: 1,
-          px: 2,
-          py: 1.5,
-          fontFamily: '"IBM Plex Mono", monospace',
-          fontSize: '0.85rem',
-          color: '#1e293b',
-          overflow: 'auto',
-        }}
-      >
-        <Box component="span" sx={{ color: 'primary.main', mr: 1 }}>$</Box>
+    <div className="flex items-center rounded-md border bg-muted/40">
+      <code className="flex-1 overflow-x-auto px-4 py-2 whitespace-nowrap">
+        <span className="mr-2 text-muted-foreground">$</span>
         {command}
-      </Box>
-      <Tooltip title={copied ? 'Copied!' : 'Copy'}>
-        <IconButton
-          onClick={handleCopy}
-          size="small"
-          sx={{
-            mr: 1,
-            color: copied ? '#16a34a' : 'grey.500',
-            '&:hover': { color: copied ? '#16a34a' : 'grey.700' },
-          }}
-        >
-          {copied ? <CheckIcon fontSize="small" /> : <ContentCopyIcon fontSize="small" />}
-        </IconButton>
-      </Tooltip>
-    </Box>
+      </code>
+      <Button variant="ghost" size="sm" onClick={copy} className="mr-1">
+        {copied ? 'Copied' : 'Copy'}
+      </Button>
+    </div>
   );
-};
-
-const DockerIcon = () => (
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-    <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.185.185 0 00-.185-.186h-2.12a.186.186 0 00-.185.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.082.185.185.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.376 11.376 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.248 12.248 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288Z"/>
-  </svg>
-);
-
-const PythonIcon = () => (
-  <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-    <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
-  </svg>
-);
+}
 
 function renderDescription(text: string) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\))/g);
-  return parts.map((part, i) => {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, i) => {
     const m = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
-    if (m) {
-      return (
-        <Link
-          key={i}
-          href={m[2]}
-          target="_blank"
-          rel="noopener"
-          sx={{
-            color: 'primary.main',
-            fontWeight: 600,
-            textDecoration: 'none',
-            '&:hover': { textDecoration: 'underline' },
-          }}
-        >
-          {m[1]}
-        </Link>
-      );
-    }
-    return part;
+    return m ? (
+      <Highlight key={i} href={m[2]}>
+        {m[1]}
+      </Highlight>
+    ) : (
+      part
+    );
   });
 }
 
-const iconMap: Record<string, React.ReactNode> = {
-  github: <GitHubIcon fontSize="small" />,
-  website: <LanguageIcon fontSize="small" />,
-  docker: <DockerIcon />,
-  pypi: <PythonIcon />,
-  thesis: <MenuBookIcon fontSize="small" />,
-  poster: <ImageIcon fontSize="small" />,
-  presentation: <SlideshowIcon fontSize="small" />,
-  docs: <AutoStoriesIcon fontSize="small" />,
-};
+export function LinkButtons({ links }: { links: { type: string; url: string }[] }) {
+  return (
+    <div className="flex flex-wrap gap-1">
+      {links.map((link) => (
+        <Tooltip key={link.url}>
+          <TooltipTrigger asChild>
+            <Button asChild variant="ghost" size="icon" className="text-muted-foreground">
+              <a href={link.url} target="_blank" rel="noopener" aria-label={link.type}>
+                <LinkIcon type={link.type} />
+              </a>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent className="capitalize">{link.type}</TooltipContent>
+        </Tooltip>
+      ))}
+    </div>
+  );
+}
 
 export default function CurrentWork() {
   return (
-    <Box
-      id="work"
-      sx={{
-        py: { xs: 4.5, md: 6 },
-        bgcolor: '#FFF6F0',
-      }}
-    >
-      <Container maxWidth="lg">
-        <SectionHeader
-          index="02"
-          label="Work"
-          title="Research & building"
-          subtitle="My MPhil thesis and the platform I built alongside it."
-        />
+    <Section id="work">
+      <SectionHeader id="work-title" title="Research & building" subtitle="My MPhil thesis and the platform I built alongside it." />
 
-        <Stack spacing={5} className="reveal-stagger">
-          {currentWork.map((project, index) => (
-            <Card
-              key={project.title}
-              elevation={0}
-              sx={{
-                display: 'flex',
-                flexDirection: { xs: 'column', md: index % 2 === 0 ? 'row' : 'row-reverse' },
-                bgcolor: 'background.paper',
-                overflow: 'hidden',
-                border: '1px solid',
-                borderColor: 'rgba(0,0,0,0.06)',
-                '&:hover': {
-                  transform: 'translateY(-6px)',
-                  boxShadow: '0 24px 60px rgba(0,0,0,0.08)',
-                  borderColor: 'rgba(0,0,0,0.04)',
-                },
-              }}
-            >
-              <WorkVisual
-                title={project.title}
-                visuals={((project as any).visuals as Visual[]) ?? [{ kind: 'image', src: project.image }]}
-              />
-              <CardContent sx={{ flex: 1, p: { xs: 3, md: 5 }, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <Stack direction="row" justifyContent="space-between" alignItems="flex-start" sx={{ mb: 2 }}>
-                  <Typography variant="h4" sx={{ fontSize: { xs: '1.5rem', md: '1.8rem' } }}>
-                    {project.title}
-                  </Typography>
-                  <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, auto)', gap: 0.5, flexShrink: 0, justifyItems: 'center' }}>
-                    {project.links.map((link) => (
-                      <Tooltip key={link.type} title={link.type} arrow>
-                        <IconButton
-                          href={link.url}
-                          target="_blank"
-                          size="small"
-                          sx={{
-                            border: '1px solid',
-                            borderColor: 'rgba(0,0,0,0.08)',
-                            '&:hover': { bgcolor: '#17181C', color: 'white', borderColor: '#17181C' },
-                            transition: 'all 0.2s',
-                          }}
-                        >
-                          {iconMap[link.type]}
-                        </IconButton>
-                      </Tooltip>
-                    ))}
-                  </Box>
-                </Stack>
-
-                <Stack direction="row" spacing={1} sx={{ mb: 3 }} flexWrap="wrap" useFlexGap>
+      <div className="grid gap-8">
+        {currentWork.map((project) => {
+          const p = project as typeof project & { visuals?: Visual[]; commands?: string[] };
+          return (
+            <Card key={project.title} className="gap-0 overflow-hidden py-0">
+              <WorkVisual title={project.title} visuals={p.visuals ?? [{ kind: 'image', src: project.image }]} />
+              <CardHeader className="pt-6">
+                <CardTitle className="text-lg leading-snug">
+                  <h3>{project.title}</h3>
+                </CardTitle>
+                <div className="flex flex-wrap gap-1.5 pt-1">
                   {project.tags.map((tag) => (
-                    <Chip
-                      key={tag}
-                      label={tag}
-                      size="small"
-                      sx={{
-                        bgcolor: 'rgba(232, 89, 12, 0.08)',
-                        color: 'primary.dark',
-                        fontWeight: 500,
-                      }}
-                    />
+                    <Badge key={tag} variant="outline">
+                      {tag}
+                    </Badge>
                   ))}
-                </Stack>
-
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-                  {renderDescription(project.description)}
-                </Typography>
-
-                {(project as any).commands && (
-                  <Stack spacing={1.5}>
-                    {(project as any).commands.map((cmd: string) => (
+                </div>
+              </CardHeader>
+              <CardContent className="grid gap-4 pt-4 pb-6">
+                <CardDescription className="text-base leading-7">{renderDescription(project.description)}</CardDescription>
+                {p.commands && (
+                  <div className="grid gap-2">
+                    {p.commands.map((cmd) => (
                       <CopyableCommand key={cmd} command={cmd} />
                     ))}
-                  </Stack>
+                  </div>
                 )}
+                <LinkButtons links={project.links} />
               </CardContent>
             </Card>
-          ))}
-        </Stack>
-      </Container>
-    </Box>
+          );
+        })}
+      </div>
+    </Section>
   );
 }

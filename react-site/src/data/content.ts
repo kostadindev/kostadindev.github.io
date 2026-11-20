@@ -1,11 +1,11 @@
 export const personalInfo = {
   name: "Kostadin Devedzhiev",
-  email: "kostadin.g.devedzhiev@gmail.com",
+  email: "kgd26@cam.ac.uk",
   tagline: "PhD Student, Trustworthy AI Lab, University of Cambridge",
   cvUrl: "./documents/cv.pdf",
   avatar: "./images/headshot.jpg",
   bio: [
-    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, in the TRACE Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. I study multi-agent human–AI systems, with a focus on AI security and safety. My research on pro-human orchestration argues that, as AI agents become more capable and take on more work, human–AI systems should involve people more than output maximisation suggests, so that they develop and maintain their skills, knowledge and autonomy. I am also developing budgeted monitoring for agent swarms, which selects parts of the communication graph to inspect jointly based on its topology.`,
+    `I'm a PhD student at the Centre for Human-Inspired AI (CHIA), University of Cambridge, in the TRACE Lab, co-supervised by Professor Umang Bhatt and Professor Adrian Weller. I study multi-agent human–AI systems, with a focus on AI security and safety.`,
     `Before Cambridge, I was a software engineer at Stellar Cyber in San Jose, California, where I built AI security tools, including a multi-agent autonomous security triage system and a language-driven security data visualisation interface, presented at RSA and Black Hat.`,
     `In my free time, I enjoy being outdoors in nature, going to music festivals, and playing racquet sports.`
   ],
@@ -14,7 +14,6 @@ export const personalInfo = {
     { name: "GitHub", url: "https://github.com/KostadinDev", icon: "github" },
     { name: "Google Scholar", url: "https://scholar.google.com/citations?user=hJlCT-0AAAAJ&hl=en", icon: "scholar" },
     { name: "ORCID", url: "https://orcid.org/0009-0008-2508-2766", icon: "orcid" },
-    { name: "LeetCode", url: "https://leetcode.com/u/user9852My/", icon: "code" },
   ]
 };
 
@@ -219,7 +218,7 @@ export const education = [
     degree: "Doctor of Philosophy in Human-Inspired AI",
     details: ["TRACE Lab · Queens' College", "Co-supervised by Umang Bhatt and Adrian Weller", "October 2026 – Present"],
     link: "https://www.chia.cam.ac.uk/",
-    logo: "./images/cambridge-logo.png"
+    logo: "./images/cambridge-logo-trim.png"
   },
   {
     institution: "University of Cambridge",
@@ -227,7 +226,7 @@ export const education = [
     details: ["TRACE Lab · Homerton College", "Cambridge AI Research Society", "Awarded with Distinction (82.6/100)"],
     link: "https://www.chia.cam.ac.uk/",
     transcript: "./documents/cambridge_transcript.pdf",
-    logo: "./images/cambridge-logo.png"
+    logo: "./images/cambridge-logo-trim.png"
   },
   {
     institution: "Stony Brook University",
@@ -238,14 +237,14 @@ export const education = [
       "Summa Cum Laude | 3.89/4.00 GPA"
     ],
     transcript: "./documents/sbu_transcript.pdf",
-    logo: "./images/stony-brook-logo.png"
+    logo: "./images/stony-brook-logo-trim.png"
   },
   {
     institution: "University of Hawaii at Hilo",
     degree: "National Student Exchange Program",
     details: ["Computer Science Major | GPA: 3.97/4.00"],
     transcript: "./documents/uhh_transcript.pdf",
-    logo: "./images/hawaii-hilo-logo.png"
+    logo: "./images/hawaii-hilo-logo-trim.png"
   }
 ];
 
@@ -263,20 +262,12 @@ export const skills = {
 export const certificates = [
   {
     title: "IBM Generative AI Engineering",
-    image: "./images/cert-ibm-genai.png",
+    image: "./images/cert-ibm-genai-trim.png",
     link: "https://www.credly.com/users/kostadin-devedzhiev.e059b079"
-  },
-  {
-    title: "MCP: Build Rich-Context AI Apps with Anthropic",
-    image: "./images/cert-deeplearning-ai.png",
-    link: "https://learn.deeplearning.ai/accomplishments/b1ee6756-bc7a-45e1-83e8-ff376ae07c8c"
-  },
-  {
-    title: "AI Agents in LangGraph",
-    image: "./images/cert-deeplearning-ai.png",
-    link: "https://learn.deeplearning.ai/accomplishments/896e518d-07f3-4161-80b8-cb7d58ccc1c3"
   }
 ];
+
+export const moreCertificatesUrl = "https://www.linkedin.com/in/kostadin-dev/details/certifications/";
 
 export const experience = [
   {
@@ -284,7 +275,7 @@ export const experience = [
     company: "University of Cambridge (CHIA)",
     location: "Singapore",
     period: "July 2026 – September 2026",
-    logo: "./images/cambridge-logo.png",
+    logo: "./images/cambridge-logo-trim.png",
     highlights: [
       "Research on Hybrid Workforces, a collaboration between CHIA and Accenture Singapore.",
       "Writing the first paper: how to split work between people and AI agents, using skill inference, a Human API for agents to ask people for input or sign-off, and dynamic controls for how much work stays with people."
@@ -295,7 +286,7 @@ export const experience = [
     company: "Stellar Cyber",
     location: "San Jose, CA",
     period: "May 2022 – September 2025",
-    logo: "./images/stellar-cyber-logo.png",
+    logo: "./images/stellar-cyber-logo-trim.png",
     highlights: [
       "Designed a multi-agent system that triages security cases, correlating alerts with LLMs and writing summaries for analysts. Shown as the main demo at RSA 2025 and Black Hat 2025.",
       "Built the chat interface, session management and charts for Open XDR Investigator, an AI assistant that turns questions into Elasticsearch queries (RSA 2024, Black Hat 2024).",
@@ -309,7 +300,7 @@ export const experience = [
     company: "Stony Brook University",
     location: "Stony Brook, NY",
     period: "August 2021 – May 2022",
-    logo: "./images/stony-brook-logo.png",
+    logo: "./images/stony-brook-logo-trim.png",
     highlights: [
       "Designed Recursive QA, a framework that turns formal annotation into guided question answering.",
       "Generated question–answer pairs from parse trees and removed duplicates with clustering on Levenshtein distance.",
@@ -322,7 +313,7 @@ export const experience = [
     company: "University of Hawaii at Hilo",
     location: "Hilo, HI",
     period: "June 2020 – August 2020",
-    logo: "./images/hawaii-hilo-logo.png",
+    logo: "./images/hawaii-hilo-logo-trim.png",
     highlights: [
       "Tuned a CNN to detect invasive species in drone footage.",
       "Built an annotation tool that gives more AI help as the model improves."
@@ -333,7 +324,7 @@ export const experience = [
     company: "Vivansa",
     location: "Sofia, Bulgaria",
     period: "June 2019 – August 2019",
-    logo: "./images/vivansa-logo.png",
+    logo: "./images/vivansa-logo-trim.png",
     highlights: [
       "Improved the front-end components of a CRM.",
       "Found and fixed incorrect database entries and added automated data cleaning."
@@ -344,7 +335,7 @@ export const experience = [
     company: "University of Hawaii at Hilo",
     location: "Hilo, HI",
     period: "March 2020 – May 2020",
-    logo: "./images/hawaii-hilo-logo.png",
+    logo: "./images/hawaii-hilo-logo-trim.png",
     highlights: [
       "Built an API for a hologram display.",
       "Built the Data Visualization Lab website.",
@@ -390,7 +381,7 @@ export const news = [
     date: "Oct 2026",
     location: "Cambridge, UK",
     title: "CAISH Alignment Fellowship",
-    description: "Selected for the Cambridge AI Safety Hub's Alignment Fellowship, Technical track: a reading group on how LLMs are trained to follow instructions and why that fails, interpretability, evaluating models for reliability and deception, and oversight and safe deployment.",
+    description: "Selected for the technical track of the Cambridge AI Safety Hub's Alignment Fellowship.",
     link: "https://caish.org/",
   },
   {

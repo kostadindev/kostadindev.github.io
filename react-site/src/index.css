@@ -1,151 +1,126 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens (shadcn/ui, new-york, neutral). Everything visual comes from
+ * here: colours, radius, font and the type scale. Only --primary is custom:
+ * the site's orange. --primary is the dark orange (#C2410C, 5.2:1 on white) so
+ * it is safe for link text; --accent-mark is the bright orange (#E8590C) for
+ * non-text marks only (selected bar, carousel dots).
+ */
 :root {
-  /* Loop — design tokens */
-  --ink: #17181C;
-  --ink-soft: #5C5B54;
-  --paper: #FFFDFB;
-  --panel: #FFF6F0;
-  --well: #FBF4EF;
-  --orange: #E8590C;       /* primary / human signal */
-  --orange-dark: #C4470A;
-  --orange-tint: rgba(232, 89, 12, 0.08);
-  --agent: #D97757;        /* agent signal — signature diagram only */
-  --hairline: #DBD8CF;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #C2410C;
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.47 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --accent-mark: #E8590C;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
 }
 
-html {
-  scroll-behavior: smooth;
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: #FB923C;
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --accent-mark: #FB923C;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
 }
 
-body {
-  margin: 0;
-  background: var(--paper);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@theme inline {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* The type scale: 32 name, 22 section title, 18 item title, 16 body, 14 meta.
+     Tailwind's xs is raised to 14px so shadcn's text-xs badges never go below it. */
+  --text-xs: 0.875rem;
+  --text-xs--line-height: 1.25rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.75rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-2xl: 1.375rem;
+  --text-2xl--line-height: 1.875rem;
+  --text-3xl: 2rem;
+  --text-3xl--line-height: 2.5rem;
+
+  /* One content column for the navbar, every section and the footer. */
+  --container-page: 60rem;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-mark: var(--accent-mark);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
 }
 
-/* Mono utility — eyebrows, labels, IDs, data */
-.mono {
-  font-family: 'IBM Plex Mono', monospace;
-  letter-spacing: 0.04em;
-}
-
-/* Scroll reveal animations */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger children */
-.reveal-stagger > * {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0ms; }
-.reveal-stagger.visible > *:nth-child(2) { transition-delay: 80ms; }
-.reveal-stagger.visible > *:nth-child(3) { transition-delay: 160ms; }
-.reveal-stagger.visible > *:nth-child(4) { transition-delay: 240ms; }
-.reveal-stagger.visible > *:nth-child(5) { transition-delay: 320ms; }
-.reveal-stagger.visible > *:nth-child(6) { transition-delay: 400ms; }
-.reveal-stagger.visible > *:nth-child(7) { transition-delay: 480ms; }
-.reveal-stagger.visible > *:nth-child(8) { transition-delay: 560ms; }
-
-.reveal-stagger.visible > * {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Signature — routing edge pulse (human ↔ agent → orchestration) */
-@keyframes edge-flow {
-  0%   { stroke-dashoffset: 28; }
-  100% { stroke-dashoffset: 0; }
-}
-
-.edge-line {
-  stroke-dasharray: 4 6;
-  animation: edge-flow 1.4s linear infinite;
-}
-
-@keyframes node-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.9; }
-  50%      { transform: scale(1.12); opacity: 0.4; }
-}
-
-.node-ping {
-  transform-origin: center;
-  animation: node-pulse 2.4s ease-in-out infinite;
-}
-
-/* Hero name — resolve on load */
-@keyframes name-resolve {
-  0%   { opacity: 0; letter-spacing: 0.18em; filter: blur(6px); }
-  100% { opacity: 1; letter-spacing: -0.02em; filter: blur(0); }
-}
-
-.name-resolve {
-  animation: name-resolve 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-/* Hero routing diagram — one-time orchestrated load:
-   candidates fade in → edges route → orchestration → the ad hoc team pops. */
-@keyframes rd-fade-in {
-  from { opacity: 0; transform: translateY(9px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes rd-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-@keyframes rd-pop-in {
-  0%   { opacity: 0; transform: scale(0.9); }
-  70%  { transform: scale(1.03); }
-  100% { opacity: 1; transform: scale(1); }
-}
-.rd-in   { opacity: 0; transform-box: fill-box; animation: rd-fade-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.rd-edge { opacity: 0; animation: rd-fade 0.5s ease-out both; }
-.rd-pop  { opacity: 0; transform-box: fill-box; transform-origin: center; animation: rd-pop-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.rd-d1 { animation-delay: 0.15s; }
-.rd-d2 { animation-delay: 0.30s; }
-.rd-d3 { animation-delay: 0.60s; }
-.rd-d4 { animation-delay: 0.85s; }
-.rd-d5 { animation-delay: 1.10s; }
-.rd-d6 { animation-delay: 1.30s; }
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(23, 24, 28, 0.18);
-  border-radius: 0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(23, 24, 28, 0.32);
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchored section titles clear of the sticky header. */
+    scroll-padding-top: 4.5rem;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  code {
+    @apply font-mono text-sm;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .edge-line, .node-ping, .name-resolve,
-  .rd-in, .rd-edge, .rd-pop,
-  .reveal, .reveal-stagger > * {
-    animation: none !important;
-    transition: none !important;
+  html {
+    scroll-behavior: auto;
   }
-  .reveal, .reveal-stagger > *,
-  .rd-in, .rd-edge, .rd-pop { opacity: 1; transform: none; }
 }

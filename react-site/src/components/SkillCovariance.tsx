@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 
 /**
  * Thesis Σ — the skill covariance that drives inference.
@@ -58,7 +57,7 @@ function fmt(v: number) {
 
 export default function SkillCovariance() {
   return (
-    <Box sx={{ width: '100%', p: { xs: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
+    <div className="flex w-full justify-center p-3 md:p-4">
       <svg
         viewBox={`0 0 ${W} ${H}`}
         width="100%"
@@ -75,22 +74,22 @@ export default function SkillCovariance() {
         </defs>
 
         {/* header */}
-        <text x={0} y={13} fontFamily="'IBM Plex Mono', monospace" fontSize="12" fill={INK}>
+        <text x={0} y={13} fontSize="12" fill={INK}>
           skill.covariance
         </text>
-        <text x={0} y={27} fontFamily="'IBM Plex Mono', monospace" fontSize="9" fill={MUTED}>
+        <text x={0} y={27} fontSize="9" fill={MUTED}>
           observe one &#183; its neighbours move too
         </text>
 
         {/* diverging legend */}
-        <text x={W - 138} y={14} fontFamily="'IBM Plex Mono', monospace" fontSize="9" fill={MUTED}>
+        <text x={W - 138} y={14} fontSize="9" fill={MUTED}>
           &#961;
         </text>
-        <text x={W - 126} y={14} fontFamily="'IBM Plex Mono', monospace" fontSize="9" fill={MUTED}>
+        <text x={W - 126} y={14} fontSize="9" fill={MUTED}>
           &#8722;1
         </text>
         <rect x={W - 104} y={6} width="76" height="9" rx="2" fill="url(#cov-div)" stroke="#E4E0D8" strokeWidth="0.5" />
-        <text x={W} y={14} textAnchor="end" fontFamily="'IBM Plex Mono', monospace" fontSize="9" fill={MUTED}>
+        <text x={W} y={14} textAnchor="end" fontSize="9" fill={MUTED}>
           +1
         </text>
 
@@ -101,7 +100,7 @@ export default function SkillCovariance() {
             x={at(c) + CELL / 2}
             y={PAD_T - 9}
             textAnchor="middle"
-            fontFamily="'IBM Plex Mono', monospace"
+           
             fontSize="9.5"
             fontWeight={c === 0 ? 600 : 400}
             fill={c === 0 ? ORANGE : MUTED}
@@ -133,7 +132,7 @@ export default function SkillCovariance() {
                   x={at(c) + CELL / 2}
                   y={rowTop(r) + CELL / 2 + 3.5}
                   textAnchor="middle"
-                  fontFamily="'IBM Plex Mono', monospace"
+                 
                   fontSize="10"
                   fill={strong ? '#fff' : INK}
                   opacity={strong ? 0.96 : Math.abs(v) < 0.08 ? 0.45 : 0.72}
@@ -158,7 +157,7 @@ export default function SkillCovariance() {
               x={PAD_L - 11}
               y={rowTop(r) + CELL / 2 + 3.5}
               textAnchor="end"
-              fontFamily="'IBM Plex Mono', monospace"
+             
               fontSize="9.5"
               fontWeight={observed ? 600 : 400}
               fill={observed ? ORANGE : MUTED}
@@ -168,6 +167,6 @@ export default function SkillCovariance() {
           );
         })}
       </svg>
-    </Box>
+    </div>
   );
 }

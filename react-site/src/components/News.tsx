@@ -1,48 +1,42 @@
 import { useState } from 'react';
-import { Box, Container, Typography, Stack, Link, Pagination, Tooltip } from '@mui/material';
-import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
-import SlideshowOutlinedIcon from '@mui/icons-material/SlideshowOutlined';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
+import { Separator } from '@/components/ui/separator';
 import { news } from '../data/content';
-import SectionHeader from './SectionHeader';
+import Highlight from './Highlight';
+import { LinkIcon } from './icons';
+import SectionHeader, { Section } from './SectionHeader';
+import { Body, ItemTitle, Meta } from './typography';
 
 const PAGE_SIZE = 5;
 
-const ICON_LABELS: Record<string, React.ReactNode> = {
-  'report': <DescriptionOutlinedIcon sx={{ fontSize: '1rem', verticalAlign: 'middle' }} />,
-  'slide': <SlideshowOutlinedIcon sx={{ fontSize: '1rem', verticalAlign: 'middle' }} />,
-};
-
+/** Renders *italic* and [label](url) in a news description. A label that names
+ *  a link type (report, slide) is shown as that icon. */
 function renderDescription(text: string) {
-  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*[^*]+\*)/g);
-  return parts.map((part, i) => {
+  return text.split(/(\[[^\]]+\]\([^)]+\)|\*[^*]+\*)/g).map((part, i) => {
     const italic = part.match(/^\*([^*]+)\*$/);
-    if (italic) {
+    if (italic) return <em key={i}>{italic[1]}</em>;
+    const link = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
+    if (link) {
+      const label = link[1];
+      const isIcon = ['report', 'slide'].includes(label.toLowerCase());
       return (
-        <Box key={i} component="em" sx={{ fontStyle: 'italic' }}>
-          {italic[1]}
-        </Box>
-      );
-    }
-    const match = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
-    if (match) {
-      const label = match[1];
-      const icon = ICON_LABELS[label.toLowerCase()];
-      return (
-        <Tooltip key={i} title={label} arrow>
-          <Link
-            href={match[2]}
-            target="_blank"
-            rel="noopener"
-            sx={{
-              color: 'primary.main',
-              textDecoration: 'none',
-              fontWeight: 600,
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            {icon ?? label}
-          </Link>
-        </Tooltip>
+        <Highlight key={i} href={link[2]} className={isIcon ? 'inline-flex align-middle' : undefined}>
+          {isIcon ? (
+            <>
+              <LinkIcon type={label.toLowerCase()} className="size-4" />
+              <span className="sr-only">{label}</span>
+            </>
+          ) : (
+            label
+          )}
+        </Highlight>
       );
     }
     return part;
@@ -52,84 +46,59 @@ function renderDescription(text: string) {
 export default function News() {
   const [page, setPage] = useState(1);
   const pageCount = Math.ceil(news.length / PAGE_SIZE);
-  const paginatedNews = news.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const items = news.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const go = (p: number) => (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (p >= 1 && p <= pageCount) setPage(p);
+  };
 
   return (
-    <Box id="news" sx={{ py: { xs: 4.5, md: 6 } }}>
-      <Container maxWidth="lg">
-        <SectionHeader index="01" label="Recent" title="News" />
+    <Section id="news">
+      <SectionHeader id="news-title" title="News" />
 
-        <Stack spacing={0} divider={<Box sx={{ borderBottom: '1px solid', borderColor: 'rgba(0,0,0,0.05)' }} />} className="reveal">
-          {paginatedNews.map((item) => (
-            <Stack
-              key={item.title}
-              direction="row"
-              spacing={2}
-              alignItems="baseline"
-              sx={{ py: 1 }}
-            >
-              <Stack sx={{ minWidth: 110, flexShrink: 0 }}>
-                <Typography
-                  variant="caption"
-                  sx={{
-                    color: 'primary.dark',
-                    fontWeight: 600,
-                    whiteSpace: 'nowrap',
-                    fontSize: '0.75rem',
-                  }}
-                >
-                  {item.date}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  sx={{
-                    color: 'text.secondary',
-                    whiteSpace: 'nowrap',
-                    fontSize: '0.7rem',
-                  }}
-                >
-                  {item.location}
-                </Typography>
-              </Stack>
-              <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.4 }}>
-                <Link
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener"
-                  sx={{
-                    color: 'text.primary',
-                    textDecoration: 'none',
-                    fontWeight: 600,
-                    '&:hover': { textDecoration: 'underline' },
-                  }}
-                >
-                  {item.title}
-                </Link>
-                {' — '}
-                {renderDescription(item.description)}
-              </Typography>
-            </Stack>
-          ))}
-        </Stack>
+      <ul>
+        {items.map((item, i) => (
+          <li key={item.title}>
+            {i > 0 && <Separator className="my-4" />}
+            <div className="grid gap-1 sm:grid-cols-[9rem_1fr] sm:gap-6">
+              <div>
+                <p className="text-sm">
+                  <Highlight>{item.date}</Highlight>
+                </p>
+                <Meta>{item.location}</Meta>
+              </div>
+              <div>
+                <ItemTitle>
+                  <a href={item.link} target="_blank" rel="noopener" className="underline-offset-4 hover:underline">
+                    {item.title}
+                  </a>
+                </ItemTitle>
+                <Body muted>{renderDescription(item.description)}</Body>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
 
-        {pageCount > 1 && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-            <Pagination
-              count={pageCount}
-              page={page}
-              onChange={(_, value) => setPage(value)}
-              color="standard"
-              sx={{
-                '& .Mui-selected': {
-                  bgcolor: 'primary.main',
-                  color: 'white',
-                  '&:hover': { bgcolor: 'primary.dark' },
-                },
-              }}
-            />
-          </Box>
-        )}
-      </Container>
-    </Box>
+      {pageCount > 1 && (
+        <Pagination className="mt-8">
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious href="#news" onClick={go(page - 1)} aria-disabled={page === 1} />
+            </PaginationItem>
+            {Array.from({ length: pageCount }, (_, k) => k + 1).map((p) => (
+              <PaginationItem key={p}>
+                <PaginationLink href="#news" isActive={p === page} onClick={go(p)}>
+                  {p}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem>
+              <PaginationNext href="#news" onClick={go(page + 1)} aria-disabled={page === pageCount} />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      )}
+    </Section>
   );
 }

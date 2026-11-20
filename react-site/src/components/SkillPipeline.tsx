@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 
 /**
  * The skillinfer pipeline (thesis ch.4, restyled to the site).
@@ -83,20 +82,20 @@ function Stage({
       <circle cx={RAIL} cy={cy} r={11} fill={accent} />
       <text
         x={RAIL} y={cy + 3.5} textAnchor="middle"
-        fontFamily="'IBM Plex Mono', monospace" fontSize="11" fontWeight="700" fill="#fff"
+        fontSize="11" fontWeight="700" fill="#fff"
       >
         {n}
       </text>
 
       <text
         x={LABEL_X} y={cy - 3}
-        fontFamily="'IBM Plex Mono', monospace" fontSize="11" letterSpacing="0.07em" fill={accent}
+        fontSize="11" fill={accent}
       >
         {label}
       </text>
       <text
         x={LABEL_X} y={cy + 11}
-        fontFamily="'IBM Plex Mono', monospace" fontSize="9" fill={MUTED}
+        fontSize="9" fill={MUTED}
       >
         {note}
       </text>
@@ -111,7 +110,7 @@ export default function SkillPipeline() {
   const post = [0.9, 0.44, 0.86, 0.5, 0.66];
 
   return (
-    <Box sx={{ width: '100%', p: { xs: 1.5, md: 2 }, display: 'flex', justifyContent: 'center' }}>
+    <div className="flex w-full justify-center p-3 md:p-4">
       <svg
         viewBox={`0 0 ${W} ${H}`}
         width="100%"
@@ -119,10 +118,10 @@ export default function SkillPipeline() {
         role="img"
         aria-label="The skillinfer pipeline: a prior over skills, observe a task, transfer belief along the covariance, form a posterior, then route an ad hoc team"
       >
-        <text x={0} y={12} fontFamily="'IBM Plex Mono', monospace" fontSize="12" fill={INK}>
+        <text x={0} y={12} fontSize="12" fill={INK}>
           skillinfer.pipeline
         </text>
-        <text x={0} y={25} fontFamily="'IBM Plex Mono', monospace" fontSize="9" fill={MUTED}>
+        <text x={0} y={25} fontSize="9" fill={MUTED}>
           one noisy observation updates the whole profile
         </text>
 
@@ -137,7 +136,7 @@ export default function SkillPipeline() {
             x={VIZ_X} y={rowY(1) + 16} width={104} height={38} rx={6}
             fill={CARD} stroke={HAIRLINE} strokeWidth="1"
           />
-          <text x={VIZ_X + 10} y={rowY(1) + 30} fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" fill={MUTED}>
+          <text x={VIZ_X + 10} y={rowY(1) + 30} fontSize="8.5" fill={MUTED}>
             task
           </text>
           <line x1={VIZ_X + 10} y1={rowY(1) + 38} x2={VIZ_X + 90} y2={rowY(1) + 38} stroke={TRACK} strokeWidth="3.5" strokeLinecap="round" />
@@ -149,7 +148,7 @@ export default function SkillPipeline() {
           <rect x={VIZ_X + 140} y={rowY(1) + 24} width={62} height={22} rx={11} fill={ORANGE} />
           <text
             x={VIZ_X + 171} y={rowY(1) + 39} textAnchor="middle"
-            fontFamily="'IBM Plex Mono', monospace" fontSize="11" fontWeight="600" fill="#fff"
+            fontSize="11" fontWeight="600" fill="#fff"
           >
             y = .84
           </text>
@@ -182,19 +181,19 @@ export default function SkillPipeline() {
                 )}
                 <text
                   x={ox + 3 * g + 10} y={oy + 26}
-                  fontFamily="'Space Grotesk', sans-serif" fontSize="22" fontWeight="600" fill={INK}
+                  fontSize="22" fontWeight="600" fill={INK}
                 >
                   &#931;
                 </text>
                 <text
                   x={ox + 3 * g + 34} y={oy + 16}
-                  fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" fill={ORANGE}
+                  fontSize="8.5" fill={ORANGE}
                 >
                   + correlated
                 </text>
                 <text
                   x={ox + 3 * g + 34} y={oy + 30}
-                  fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" fill={BLUE}
+                  fontSize="8.5" fill={BLUE}
                 >
                   &#8722; anti-correlated
                 </text>
@@ -224,19 +223,19 @@ export default function SkillPipeline() {
                 <circle cx={cx + 18} cy={cy + 33} r={7.5} fill={AGENT} />
                 <text
                   x={cx + 40} y={cy + 20}
-                  fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" fill={ORANGE}
+                  fontSize="8.5" fill={ORANGE}
                 >
                   human
                 </text>
                 <text
                   x={cx + 40} y={cy + 34}
-                  fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" fill={AGENT}
+                  fontSize="8.5" fill={AGENT}
                 >
                   agent
                 </text>
                 <text
                   x={cx + 100} y={cy + 27}
-                  fontFamily="'IBM Plex Mono', monospace" fontSize="8.5" fill={MUTED}
+                  fontSize="8.5" fill={MUTED}
                 >
                   matched to the task
                 </text>
@@ -251,6 +250,6 @@ export default function SkillPipeline() {
           </marker>
         </defs>
       </svg>
-    </Box>
+    </div>
   );
 }

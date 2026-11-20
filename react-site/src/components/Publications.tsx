@@ -1,83 +1,50 @@
-import { Box, Container, Typography, Card, CardContent, Chip, Stack, Button } from '@mui/material';
-import ArticleIcon from '@mui/icons-material/Article';
+import { FileText } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { publications } from '../data/content';
-import SectionHeader from './SectionHeader';
+import SectionHeader, { Section } from './SectionHeader';
+import { Meta } from './typography';
 
 export default function Publications() {
   return (
-    <Box id="publications" sx={{ py: { xs: 4.5, md: 6 } }}>
-      <Container maxWidth="lg">
-        <SectionHeader index="03" label="Peer-reviewed" title="Publications" />
+    <Section id="publications">
+      <SectionHeader id="publications-title" title="Publications" />
 
-        <Stack spacing={3} className="reveal-stagger">
-          {publications.map((pub) => (
-            <Card
-              key={pub.title}
-              elevation={0}
-              sx={{
-                bgcolor: 'background.paper',
-                border: '1px solid',
-                borderColor: 'rgba(0,0,0,0.06)',
-                '&:hover': {
-                  borderColor: 'primary.light',
-                  boxShadow: '0 8px 32px rgba(232, 89, 12, 0.08)',
-                },
-              }}
-            >
-              <CardContent sx={{ p: { xs: 3, md: 4 } }}>
-                <Stack direction="row" spacing={1} sx={{ mb: 2 }}>
-                  {pub.tags.map((tag) => (
-                    <Chip
-                      key={tag}
-                      label={tag}
-                      size="small"
-                      sx={{
-                        bgcolor: 'rgba(232, 89, 12, 0.08)',
-                        color: 'primary.dark',
-                      }}
-                    />
-                  ))}
-                </Stack>
-
-                <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                  {pub.title}
-                </Typography>
-
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 2, lineHeight: 1.7 }}>
-                  {pub.description}
-                </Typography>
-
-                <Typography variant="caption" color="text.secondary" display="block">
-                  {pub.authors}
-                </Typography>
-                <Typography variant="caption" color="text.secondary" display="block" fontStyle="italic" sx={{ mb: 1 }}>
-                  * All authors contributed equally
-                </Typography>
-                <Typography variant="caption" color="text.secondary" display="block" sx={{ mb: 3 }}>
-                  {pub.journal} ({pub.year})
-                </Typography>
-
-                <Button
-                  variant="outlined"
-                  startIcon={<ArticleIcon />}
-                  href={pub.doi}
-                  target="_blank"
-                  sx={{
-                    borderColor: 'rgba(0,0,0,0.15)',
-                    color: 'text.primary',
-                    '&:hover': {
-                      borderColor: 'primary.main',
-                      bgcolor: 'rgba(232, 89, 12, 0.04)',
-                    },
-                  }}
-                >
-                  View Publication
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </Stack>
-      </Container>
-    </Box>
+      <div className="grid gap-6">
+        {publications.map((pub) => (
+          <Card key={pub.title}>
+            <CardHeader>
+              <div className="flex flex-wrap gap-1.5 pb-1">
+                {pub.tags.map((tag) => (
+                  <Badge key={tag} variant="outline">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+              <CardTitle className="text-lg leading-snug">
+                <h3>{pub.title}</h3>
+              </CardTitle>
+              <CardDescription className="text-base leading-7">{pub.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">{pub.authors}</p>
+              <Meta className="italic">* All authors contributed equally</Meta>
+              <Meta>
+                {pub.journal} ({pub.year})
+              </Meta>
+            </CardContent>
+            <CardFooter>
+              <Button asChild variant="outline">
+                <a href={pub.doi} target="_blank" rel="noopener">
+                  <FileText />
+                  View publication
+                </a>
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
+      </div>
+    </Section>
   );
 }

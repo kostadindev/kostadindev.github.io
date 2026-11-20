@@ -197,7 +197,6 @@ export default function TravelMap() {
                     textAnchor="middle"
                     y={-8}
                     style={{
-                      fontFamily: 'Inter, sans-serif',
                       fontSize: 7,
                       fontWeight: 600,
                       fill: '#444',
